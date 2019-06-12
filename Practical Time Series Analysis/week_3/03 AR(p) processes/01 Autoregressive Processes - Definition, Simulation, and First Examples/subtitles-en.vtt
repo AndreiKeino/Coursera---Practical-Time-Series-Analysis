@@ -1,0 +1,608 @@
+WEBVTT
+
+1
+00:00:01.370 --> 00:00:04.530
+Welcome back to
+Practical Time Series Analysis.
+
+2
+00:00:04.530 --> 00:00:08.799
+In these lectures, we're looking at
+some of the fundamental building blocks,
+
+3
+00:00:08.799 --> 00:00:12.752
+some of the fundamental stochastic
+processes that give rise to the sorts of
+
+4
+00:00:12.752 --> 00:00:16.540
+time series we're likely to encounter
+in our professional practice.
+
+5
+00:00:16.540 --> 00:00:20.127
+We've already seen moving
+average processes, and
+
+6
+00:00:20.127 --> 00:00:23.150
+now we explore autoregressive processes.
+
+7
+00:00:24.940 --> 00:00:29.855
+When you're done with this lecture, you
+should be able to describe to a friend or
+
+8
+00:00:29.855 --> 00:00:34.651
+a colleague what an autoregressive
+process is, what it's seeking to model.
+
+9
+00:00:34.651 --> 00:00:37.308
+You should be able to simulate with AR or
+
+10
+00:00:37.308 --> 00:00:40.790
+similar environment
+an autoregressive process.
+
+11
+00:00:40.790 --> 00:00:45.320
+You should be able to discuss
+qualitatively what the ACF of some
+
+12
+00:00:45.320 --> 00:00:48.739
+simple autoregressive
+processes look like and
+
+13
+00:00:48.739 --> 00:00:54.220
+we'll tie the autoregressive process
+back to our concept of a random walk.
+
+14
+00:00:54.220 --> 00:00:59.110
+Just to recall the notational
+environment that we're in,
+
+15
+00:00:59.110 --> 00:01:04.193
+for a moving average process,
+we start with white noise, and
+
+16
+00:01:04.193 --> 00:01:09.376
+we then take a linear combination
+of several preceding terms in
+
+17
+00:01:09.376 --> 00:01:14.600
+time of white noise, and
+build our new state X sub t from those.
+
+18
+00:01:15.650 --> 00:01:18.445
+We're going to do something
+that looks similar, but
+
+19
+00:01:18.445 --> 00:01:22.030
+is actually rather different with
+the auto regressive process.
+
+20
+00:01:22.030 --> 00:01:25.550
+We'll see what we mean by
+looking similar in a moment.
+
+21
+00:01:25.550 --> 00:01:29.792
+Right now let's say that X sub t is
+going to be some sort of a piece that we
+
+22
+00:01:29.792 --> 00:01:34.118
+can't model very well, an innovation,
+a random shock to a system.
+
+23
+00:01:34.118 --> 00:01:38.300
+Plus a term that depends upon
+the history of the system.
+
+24
+00:01:38.300 --> 00:01:43.130
+In other words,
+the several states preceding.
+
+25
+00:01:43.130 --> 00:01:50.630
+When we look at history what we mean
+is take xt- 1 down through xt- p.
+
+26
+00:01:50.630 --> 00:01:53.325
+We're going to look at these
+several history terms.
+
+27
+00:01:53.325 --> 00:01:58.390
+We'll form, again, a linear combination
+by multiplying by coefficients.
+
+28
+00:01:58.390 --> 00:02:03.823
+And we'll then put in the piece that
+we don't know quite how to model,
+
+29
+00:02:03.823 --> 00:02:09.090
+this random term Zt, in order to
+create our new state of our system.
+
+30
+00:02:09.090 --> 00:02:13.330
+The random walk is almost
+trivially seem to be of this sort.
+
+31
+00:02:13.330 --> 00:02:19.705
+The state of the system at time t looks
+like what it looked like one period ago,
+
+32
+00:02:19.705 --> 00:02:25.099
+so the coefficient in front of
+the Xt- 1 can be just taken as a 1,
+
+33
+00:02:25.099 --> 00:02:26.493
+plus some Z of t.
+
+34
+00:02:26.493 --> 00:02:29.826
+We present this right now
+just as a quick caution that
+
+35
+00:02:29.826 --> 00:02:35.210
+the auto-regressive processes
+won't necessarily be stationary.
+
+36
+00:02:35.210 --> 00:02:39.691
+In fact, we'll try to come up with
+some basic conditions that tell us
+
+37
+00:02:39.691 --> 00:02:43.030
+when an auto-regressive
+process is stationary.
+
+38
+00:02:43.030 --> 00:02:48.662
+Moving onto simulation, and we can't
+stress enough how important it is for
+
+39
+00:02:48.662 --> 00:02:51.430
+you to run many simulations.
+
+40
+00:02:51.430 --> 00:02:55.308
+Look at the resulting traces,
+trajectories, realizations,
+
+41
+00:02:55.308 --> 00:02:57.619
+to look at the resulting time series.
+
+42
+00:02:57.619 --> 00:03:00.260
+And also look at the ACF
+that you're generating.
+
+43
+00:03:01.260 --> 00:03:02.658
+So we'll set a random seed so
+
+44
+00:03:02.658 --> 00:03:06.220
+that everybody will have the same
+data when they run their simulations.
+
+45
+00:03:06.220 --> 00:03:10.106
+We'll take 1000 terms with Phi = 0.4.
+
+46
+00:03:10.106 --> 00:03:13.750
+There;s a little bookkeeping to be done.
+
+47
+00:03:13.750 --> 00:03:19.812
+We'll set up with z as a family of
+independent high ID random variables.
+
+48
+00:03:19.812 --> 00:03:21.623
+We're going to say x equals null so
+
+49
+00:03:21.623 --> 00:03:26.280
+that we have the variable named x that
+we're going to now start filling.
+
+50
+00:03:26.280 --> 00:03:28.998
+We'll take our first x to be z1, and
+
+51
+00:03:28.998 --> 00:03:33.930
+more importantly, how do we start
+building states in our system?
+
+52
+00:03:33.930 --> 00:03:38.378
+x at time t will look like
+some noise component,
+
+53
+00:03:38.378 --> 00:03:44.390
+plus phi xt-1, and
+we'll fill in slots from time 2 to time n.
+
+54
+00:03:46.775 --> 00:03:50.213
+A little bit of housekeeping or
+bookkeeping on plotting,
+
+55
+00:03:50.213 --> 00:03:54.310
+we'll create a time series
+object as we've done before.
+
+56
+00:03:54.310 --> 00:03:57.810
+We'll set up our plots so
+that there are two rows and one column.
+
+57
+00:03:57.810 --> 00:04:03.539
+We'll plot the time series and
+we'll plot its estimated ACF.
+
+58
+00:04:05.592 --> 00:04:10.970
+When phi = 0.4,
+there is some dependence upon neighbors.
+
+59
+00:04:10.970 --> 00:04:15.520
+You can look, and at this point,
+we should have the intuition to see that
+
+60
+00:04:15.520 --> 00:04:19.490
+this is not just noise, but
+that there are some correlations.
+
+61
+00:04:19.490 --> 00:04:23.560
+It's hard to get a quantitative
+measure of that just be looking at
+
+62
+00:04:23.560 --> 00:04:25.510
+a time series like this.
+
+63
+00:04:25.510 --> 00:04:30.273
+So we're led to the ACF where we look at
+correlations at different lag spacings.
+
+64
+00:04:30.273 --> 00:04:33.449
+And we can see that after two or
+three periods,
+
+65
+00:04:33.449 --> 00:04:37.198
+the correlations seem to be
+getting down to noise, but
+
+66
+00:04:37.198 --> 00:04:41.859
+we do have a fairly health relationship
+over a couple side periods.
+
+67
+00:04:44.973 --> 00:04:50.454
+If we bring phi up to 1,
+we're just moving past stationarity and
+
+68
+00:04:50.454 --> 00:04:55.837
+also we'll discuss that later and
+also you can see that the ACF,
+
+69
+00:04:55.837 --> 00:04:59.630
+here there is some
+various decay in the ACF.
+
+70
+00:04:59.630 --> 00:05:05.177
+But the ACF would stay theoretically
+right constant up there at 1.
+
+71
+00:05:05.177 --> 00:05:07.040
+There's strong dependence on history.
+
+72
+00:05:14.361 --> 00:05:19.441
+Let's look at an AR(2) process,
+an auto regressive process of order 2,
+
+73
+00:05:19.441 --> 00:05:22.870
+let's go back and look at the formula.
+
+74
+00:05:22.870 --> 00:05:24.488
+We've got some random piece.
+
+75
+00:05:24.488 --> 00:05:28.570
+And I'm taking 0.7 and
+0.2 here as coefficients.
+
+76
+00:05:28.570 --> 00:05:32.897
+But again, you should be running these
+codes and varying the coefficients.
+
+77
+00:05:32.897 --> 00:05:39.155
+And making observations on how the time
+series looks, and how the ACF looks.
+
+78
+00:05:39.155 --> 00:05:41.475
+We're trying to increase
+our sophistication.
+
+79
+00:05:41.475 --> 00:05:45.185
+So now we'll call arma.sim.
+
+80
+00:05:45.185 --> 00:05:48.962
+This is a routine available
+to us in the stance package.
+
+81
+00:05:48.962 --> 00:05:52.980
+It's going to want a list of coefficients.
+
+82
+00:05:52.980 --> 00:05:55.706
+And arima.sim, as the name suggests,
+
+83
+00:05:55.706 --> 00:06:00.610
+will give you auto regressive
+integrated moving average simulations.
+
+84
+00:06:00.610 --> 00:06:03.920
+We haven't really talked about i yet.
+
+85
+00:06:03.920 --> 00:06:07.476
+But we can put in autoregressive terms or
+moving average terms and
+
+86
+00:06:07.476 --> 00:06:11.950
+you can see we're putting our 0.7 and
+0.2 in for the autoregressive piece.
+
+87
+00:06:11.950 --> 00:06:15.140
+And then we'll do the same
+sort of plotting that we do.
+
+88
+00:06:18.726 --> 00:06:23.177
+You can look at the time series up here
+and look at the ACF down here, and
+
+89
+00:06:23.177 --> 00:06:28.311
+see that the correlations, you can see
+that very strongly in different pieces,
+
+90
+00:06:28.311 --> 00:06:32.160
+the correlations are going to
+stick around for some time.
+
+91
+00:06:32.160 --> 00:06:36.917
+The correlations decay at a slower rate
+now, than they did just a moment ago.
+
+92
+00:06:41.775 --> 00:06:45.355
+We like our time series to be
+stationary for several reasons.
+
+93
+00:06:45.355 --> 00:06:46.670
+There are conditions, and
+
+94
+00:06:46.670 --> 00:06:50.875
+we'll develop conditions involving
+the unit circle in a little bit.
+
+95
+00:06:50.875 --> 00:06:54.013
+Right now the geometry suggested
+is more of a triangle.
+
+96
+00:06:54.013 --> 00:06:57.538
+And in order for
+an AR(2) process to be stationary,
+
+97
+00:06:57.538 --> 00:07:02.760
+we'll state here without proof that phi
+2 should be between negative 1 and 1.
+
+98
+00:07:02.760 --> 00:07:08.137
+And there's a relationship between phi 2
+and phi 1 that must be satisfied as well.
+
+99
+00:07:12.600 --> 00:07:15.507
+We'll simulate an AR(2) process.
+
+100
+00:07:15.507 --> 00:07:18.960
+As we move here there's
+a very small difference.
+
+101
+00:07:18.960 --> 00:07:19.998
+We're going to have phi1 be 0.5.
+
+102
+00:07:19.998 --> 00:07:25.095
+We'll let phi2 be negative now and
+look at the time series in the ACF.
+
+103
+00:07:25.095 --> 00:07:28.586
+We'll call arima.sim as before, but
+
+104
+00:07:28.586 --> 00:07:33.359
+now we're going to put phi1 and
+phi2 in as variables.
+
+105
+00:07:33.359 --> 00:07:35.070
+That's, perhaps, obvious in that line.
+
+106
+00:07:35.070 --> 00:07:38.996
+A little bit more interestingly,
+when we do our plotting,
+
+107
+00:07:38.996 --> 00:07:43.644
+we can put those variables right into
+our plot command by using Paste.
+
+108
+00:07:43.644 --> 00:07:47.200
+So Paste is going to create a nice
+characterated feed to main,
+
+109
+00:07:47.200 --> 00:07:49.360
+the title of our plot.
+
+110
+00:07:49.360 --> 00:07:54.228
+We'll give it a character string and
+then we'll separate by comma, but now we
+
+111
+00:07:54.228 --> 00:07:59.271
+can actually put in phi1 and phi2 just
+as variables into the plotting command.
+
+112
+00:07:59.271 --> 00:08:03.860
+That'll save you a lot of time and
+a lot of trouble by going back and
+
+113
+00:08:03.860 --> 00:08:08.800
+hoping that you find every phi1 and
+phi2 as an argument or as a label.
+
+114
+00:08:11.440 --> 00:08:15.909
+When we look now, we can see that the time
+series is jumping around quite a bit.
+
+115
+00:08:15.909 --> 00:08:18.570
+In fact, by phi2 being negative,
+
+116
+00:08:18.570 --> 00:08:23.840
+we're actually introducing negative
+correlations into our ACF.
+
+117
+00:08:23.840 --> 00:08:28.295
+So you can see the correlation of
+neighbors one step away is positive.
+
+118
+00:08:28.295 --> 00:08:30.920
+2 and 3 negative.
+
+119
+00:08:30.920 --> 00:08:34.022
+And then it's very hard to tell
+if you don't have a formula, but
+
+120
+00:08:34.022 --> 00:08:36.846
+it looks like we get into noise
+pretty quickly after that.
+
+121
+00:08:40.352 --> 00:08:46.340
+In this introductory lecture, we've
+defined what an autoregressive process is.
+
+122
+00:08:46.340 --> 00:08:48.482
+We've seen how to write it down.
+
+123
+00:08:48.482 --> 00:08:49.615
+We've explored simulations.
+
+124
+00:08:49.615 --> 00:08:55.365
+We've begun discussing
+qualitative features of the ACF,
+
+125
+00:08:55.365 --> 00:09:00.542
+but again, not to be pedantic or
+redundant about it.
+
+126
+00:09:00.542 --> 00:09:05.345
+Can't stress enough that running these
+simulations yourself will give you a lot
+
+127
+00:09:05.345 --> 00:09:09.880
+of insight into how these processes
+behave, so try to run as many as you can.

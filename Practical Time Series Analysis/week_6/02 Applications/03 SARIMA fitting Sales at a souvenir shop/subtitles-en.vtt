@@ -1,0 +1,853 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.996
+Hello, everyone. This is Tural Sadigov.
+
+2
+00:00:02.996 --> 00:00:07.155
+And in this lecture, we will continue our SARIMA fitting process
+
+3
+00:00:07.155 --> 00:00:11.800
+and this time we're going to look at the sales data at a souvenir shop in Australia.
+
+4
+00:00:11.800 --> 00:00:15.929
+Objectives is to fit SARIMA models to the dataset about
+
+5
+00:00:15.929 --> 00:00:21.239
+the sales at that souvenir shop and this data is from Time Series Data Library.
+
+6
+00:00:21.239 --> 00:00:27.196
+And then the second objective is to forecast the future values of the same time series.
+
+7
+00:00:27.196 --> 00:00:29.530
+And our modeling process is the same.
+
+8
+00:00:29.530 --> 00:00:31.230
+We're going to look at the time plot;
+
+9
+00:00:31.230 --> 00:00:32.990
+if they need transformation,
+
+10
+00:00:32.990 --> 00:00:34.530
+we're going to transform the data.
+
+11
+00:00:34.530 --> 00:00:37.562
+If we need differencing - seasonal or non-seasonal,
+
+12
+00:00:37.562 --> 00:00:39.060
+we're going to do differencing.
+
+13
+00:00:39.060 --> 00:00:44.619
+And then we're going to look at ACF and PACF to determine our orders.
+
+14
+00:00:44.619 --> 00:00:49.200
+Now, there were orders for autoregressive terms, moving average terms,
+
+15
+00:00:49.200 --> 00:00:55.979
+seasonal auto regressive terms and seasonal moving average terms.
+
+16
+00:00:55.979 --> 00:01:02.017
+Once we have some idea of a lot about our orders PQ,
+
+17
+00:01:02.017 --> 00:01:05.727
+we're going to look at a few different models as we did before.
+
+18
+00:01:05.727 --> 00:01:11.379
+We're going to use the parsimony principle and choose the smallest AIC value.
+
+19
+00:01:11.379 --> 00:01:12.730
+At the end, of course,
+
+20
+00:01:12.730 --> 00:01:15.099
+we're going to do the residual analysis.
+
+21
+00:01:15.099 --> 00:01:16.659
+And let me just remind you,
+
+22
+00:01:16.659 --> 00:01:20.859
+the parsimony principle that we adapted in this lecture or in
+
+23
+00:01:20.859 --> 00:01:25.265
+this lesson is that the sum of our parameters,
+
+24
+00:01:25.265 --> 00:01:27.422
+p + d + q + P + D + Q,
+
+25
+00:01:27.422 --> 00:01:31.923
+all of them should be less than or equal to 6.
+
+26
+00:01:31.923 --> 00:01:34.555
+And Time Series Data Library,
+
+27
+00:01:34.555 --> 00:01:35.650
+as we said before,
+
+28
+00:01:35.650 --> 00:01:40.045
+is created by professor of statistics, Rob Hyndman.
+
+29
+00:01:40.045 --> 00:01:45.659
+He's a professor at Monash University in Australia.
+
+30
+00:01:45.659 --> 00:01:53.288
+So this dataset is a monthly sales for a souvenir shop in Queensland, Australia.
+
+31
+00:01:53.288 --> 00:01:58.394
+And it is recorded from January 1987 'til December 1993.
+
+32
+00:01:58.394 --> 00:02:03.480
+And if you look at the time plot of the monthly sales,
+
+33
+00:02:03.480 --> 00:02:05.916
+we see the following.
+
+34
+00:02:05.916 --> 00:02:10.045
+We see that some kind of seasonality going on, right?
+
+35
+00:02:10.045 --> 00:02:16.879
+Is that every year there's this high - every year there's this high - high value.
+
+36
+00:02:16.879 --> 00:02:21.710
+And every year it seems like the variations kind of increases.
+
+37
+00:02:21.710 --> 00:02:25.530
+So there's a change in variation, there is seasonality.
+
+38
+00:02:25.530 --> 00:02:29.020
+In fact, if you - if you carefully look at this,
+
+39
+00:02:29.020 --> 00:02:33.599
+we can almost see a non-seasonal trend as well.
+
+40
+00:02:33.599 --> 00:02:36.699
+All values are almost increasing.
+
+41
+00:02:36.699 --> 00:02:41.039
+Okay. So we can look at our ACF and PACF.
+
+42
+00:02:41.039 --> 00:02:44.639
+ACF will already tell us that if there is a seasonality or not.
+
+43
+00:02:44.639 --> 00:02:48.000
+We can see autocorrelation at lag 12,
+
+44
+00:02:48.000 --> 00:02:50.360
+lag 24, 36 and so forth.
+
+45
+00:02:50.360 --> 00:02:54.375
+Seasonality is definitely existent in this data.
+
+46
+00:02:54.375 --> 00:02:56.969
+Since there is already a trend and
+
+47
+00:02:56.969 --> 00:03:01.904
+different variation - though we will have to do seasonal differencing,
+
+48
+00:03:01.904 --> 00:03:05.620
+non-seasonal differencing - but even before all of these,
+
+49
+00:03:05.620 --> 00:03:08.304
+since the variation is increasing,
+
+50
+00:03:08.304 --> 00:03:11.430
+let's do a transformation first to stabilize the variance.
+
+51
+00:03:11.430 --> 00:03:12.939
+Because at the end of the day,
+
+52
+00:03:12.939 --> 00:03:16.980
+when we fit our SARIMA model to a dataset,
+
+53
+00:03:16.980 --> 00:03:20.264
+we expect our dataset to be a stationary dataset.
+
+54
+00:03:20.264 --> 00:03:23.990
+At this point, it's definitely not stationary.
+
+55
+00:03:23.990 --> 00:03:28.974
+Okay. So we're going to take the log transform - that's what we usually do,
+
+56
+00:03:28.974 --> 00:03:32.564
+we take the log transform - and once we have the log transform,
+
+57
+00:03:32.564 --> 00:03:36.675
+we will need non-seasonal and seasonal differencing.
+
+58
+00:03:36.675 --> 00:03:38.770
+So d is going to be 1,
+
+59
+00:03:38.770 --> 00:03:40.169
+D is going to be 1 and of course,
+
+60
+00:03:40.169 --> 00:03:42.990
+the span of the seasonality is 12 months,
+
+61
+00:03:42.990 --> 00:03:44.514
+so this is going to be 12.
+
+62
+00:03:44.514 --> 00:03:49.105
+So basically, this is the operator we're going to apply to our dataset;
+
+63
+00:03:49.105 --> 00:03:52.789
+logarithm, differencing and the seasonal differencing.
+
+64
+00:03:52.789 --> 00:03:54.444
+Okay. So let's look at it.
+
+65
+00:03:54.444 --> 00:03:56.795
+This is our Dataset Time Series.
+
+66
+00:03:56.795 --> 00:04:00.375
+Once I take the log transform, this is what we obtain.
+
+67
+00:04:00.375 --> 00:04:02.879
+Somehow we stabilize our variance,
+
+68
+00:04:02.879 --> 00:04:07.455
+even though there is definitely a trend and seasonal trend that's left there.
+
+69
+00:04:07.455 --> 00:04:10.909
+First, we take non-seasonal differencing,
+
+70
+00:04:10.909 --> 00:04:13.085
+so that would get rid of that trend.
+
+71
+00:04:13.085 --> 00:04:15.329
+As you can see, there is no trend anymore,
+
+72
+00:04:15.329 --> 00:04:16.949
+but there is seasonal trend.
+
+73
+00:04:16.949 --> 00:04:21.180
+The seasonality still is there.
+
+74
+00:04:21.180 --> 00:04:22.546
+And once we take non - I'm sorry,
+
+75
+00:04:22.546 --> 00:04:26.620
+once we take a seasonal differencing and then we obtain this green plot,
+
+76
+00:04:26.620 --> 00:04:31.019
+which we will assume that it is now a stationary dataset.
+
+77
+00:04:31.019 --> 00:04:35.430
+Now one can say that actually the variance at
+
+78
+00:04:35.430 --> 00:04:40.404
+the beginning of this time series is definitely different from variance at the end,
+
+79
+00:04:40.404 --> 00:04:45.269
+but at this point, we will assume that this is a stationary time series.
+
+80
+00:04:45.269 --> 00:04:48.449
+If I look at ACF and PACF of
+
+81
+00:04:48.449 --> 00:04:53.235
+our transformed and non-seasonal and seasonal difference dataset,
+
+82
+00:04:53.235 --> 00:04:54.870
+we see the following;
+
+83
+00:04:54.870 --> 00:05:00.420
+we have one significant autocorrelation at lag 1 that will tell
+
+84
+00:05:00.420 --> 00:05:06.480
+me that the q - the order of the moving average term is either 0 or 1.
+
+85
+00:05:06.480 --> 00:05:08.454
+Probably 1, but we'll see.
+
+86
+00:05:08.454 --> 00:05:13.779
+We don't see any significant autocorrelation in other lags that's closer to 0.
+
+87
+00:05:13.779 --> 00:05:17.060
+So Q is for us going to be either between 0 and 1.
+
+88
+00:05:17.060 --> 00:05:19.004
+If I look at seasonal lags,
+
+89
+00:05:19.004 --> 00:05:20.925
+this is almost significant,
+
+90
+00:05:20.925 --> 00:05:22.154
+but not that significant.
+
+91
+00:05:22.154 --> 00:05:24.610
+But I see a significant lag at 36,
+
+92
+00:05:24.610 --> 00:05:26.404
+there's significant lag at 22.
+
+93
+00:05:26.404 --> 00:05:31.680
+So we'll just try few different - this is actually 34.
+
+94
+00:05:31.680 --> 00:05:40.014
+But we're going to try a few different values for seasonal moving average term.
+
+95
+00:05:40.014 --> 00:05:41.550
+If I look at PACF,
+
+96
+00:05:41.550 --> 00:05:45.444
+which will tell me usually the order of autoregressive terms
+
+97
+00:05:45.444 --> 00:05:50.019
+and/or seasonal autoregressive terms,
+
+98
+00:05:50.019 --> 00:05:52.930
+we have a significant lag at 1;
+
+99
+00:05:52.930 --> 00:05:56.495
+so our capital P can be 0 or 1.
+
+100
+00:05:56.495 --> 00:06:00.579
+But if I look at seasonal lags 12,
+
+101
+00:06:00.579 --> 00:06:04.360
+24 - there is no significant autocorrelations.
+
+102
+00:06:04.360 --> 00:06:06.370
+So we are going to assume maybe that capital P is
+
+103
+00:06:06.370 --> 00:06:09.625
+either 0 or 1 and we'll look at those values.
+
+104
+00:06:09.625 --> 00:06:12.850
+So order specification; you have q values,
+
+105
+00:06:12.850 --> 00:06:16.019
+capital Q, p and capital P values.
+
+106
+00:06:16.019 --> 00:06:19.810
+So we look at few different values of P-Q, of course.
+
+107
+00:06:19.810 --> 00:06:21.910
+Remember the parsimony principle,
+
+108
+00:06:21.910 --> 00:06:25.944
+that these values should add up to six or less.
+
+109
+00:06:25.944 --> 00:06:27.964
+If I look at AIC values,
+
+110
+00:06:27.964 --> 00:06:30.939
+the minimum in this slide
+
+111
+00:06:30.939 --> 00:06:33.435
+- there's one more slide that we're going to look at - in this slide,
+
+112
+00:06:33.435 --> 00:06:38.069
+the minimum value is actually negative 34.54 as this model.
+
+113
+00:06:38.069 --> 00:06:39.915
+But if you look at the next slide,
+
+114
+00:06:39.915 --> 00:06:44.380
+then we see that there's another minimum value and this is negative 34.98,
+
+115
+00:06:44.380 --> 00:06:46.504
+which is a minimum of all of these values.
+
+116
+00:06:46.504 --> 00:06:48.495
+It's the model we are going to adapt,
+
+117
+00:06:48.495 --> 00:06:50.704
+we're going to fit to our time series.
+
+118
+00:06:50.704 --> 00:06:54.185
+This is going to be 1 1 0 0 1 1 12.
+
+119
+00:06:54.185 --> 00:06:55.420
+And let me just note,
+
+120
+00:06:55.420 --> 00:07:01.404
+the smallest SSE value corresponds to a different model.
+
+121
+00:07:01.404 --> 00:07:08.160
+So if I look at the residuals from the SARIMA model (1,1,0,0,1,1)12,
+
+122
+00:07:08.160 --> 00:07:11.725
+this is my Standardized Residuals. It looks white.
+
+123
+00:07:11.725 --> 00:07:18.029
+There is no significant autocorrelation, sample autocorrelation.
+
+124
+00:07:18.029 --> 00:07:19.404
+If I look at Q-Q plot,
+
+125
+00:07:19.404 --> 00:07:20.805
+the middle part is linear,
+
+126
+00:07:20.805 --> 00:07:24.390
+but then there is a systematic departure at the tails.
+
+127
+00:07:24.390 --> 00:07:28.194
+But if I look at the p values from Ljung.box statistics,
+
+128
+00:07:28.194 --> 00:07:34.053
+it tells me that there is non-significant autocorrelation left in the residuals.
+
+129
+00:07:34.053 --> 00:07:37.670
+So if we use SARIMA routine or ARIMA routine in our -
+
+130
+00:07:37.670 --> 00:07:42.384
+we'll get this coefficients for autoregressive term.
+
+131
+00:07:42.384 --> 00:07:46.660
+This is because we have 1, the order 1,
+
+132
+00:07:46.660 --> 00:07:49.715
+for the autoregressive terms and we have order 1,
+
+133
+00:07:49.715 --> 00:07:51.361
+seasonal moving average terms.
+
+134
+00:07:51.361 --> 00:07:53.125
+These are our estimates,
+
+135
+00:07:53.125 --> 00:07:55.699
+standard areas for these estimates.
+
+136
+00:07:55.699 --> 00:07:57.133
+And if I look at p values,
+
+137
+00:07:57.133 --> 00:07:58.584
+p values are so small;
+
+138
+00:07:58.584 --> 00:08:02.980
+which means that both of these coefficients are significant.
+
+139
+00:08:02.980 --> 00:08:06.165
+So let's actually model our Time Series.
+
+140
+00:08:06.165 --> 00:08:09.477
+X_t is the sales at the souvenir shop,
+
+141
+00:08:09.477 --> 00:08:11.610
+but what we modeled is a logarithm of it.
+
+142
+00:08:11.610 --> 00:08:14.230
+So the logarithm, we call it Y_t.
+
+143
+00:08:14.230 --> 00:08:20.220
+Y_t became the SARIMA (1,1,0,0,1,1)12.
+
+144
+00:08:20.220 --> 00:08:23.509
+So I have one difference;
+
+145
+00:08:23.509 --> 00:08:27.320
+the one is non-seasonal differencing. That's one_minus_p.
+
+146
+00:08:27.320 --> 00:08:33.490
+One seasonal differencing, that's one_minus_p_to_the_12th.
+
+147
+00:08:33.490 --> 00:08:36.445
+And there's one autoregressive term,
+
+148
+00:08:36.445 --> 00:08:38.289
+which is one_minus_p_B, that's
+
+149
+00:08:38.289 --> 00:08:42.745
+our polynomial and the one is the degree of that polynomial, basically.
+
+150
+00:08:42.745 --> 00:08:45.940
+There is no seasonal autoregressive terms.
+
+151
+00:08:45.940 --> 00:08:47.418
+On the right-hand side,
+
+152
+00:08:47.418 --> 00:08:49.615
+we do not have any moving average terms,
+
+153
+00:08:49.615 --> 00:08:51.708
+but we'll have seasonal moving averages terms -
+
+154
+00:08:51.708 --> 00:08:54.993
+that's why we have one_plus_teta_B_to_the_12th.
+
+155
+00:08:54.993 --> 00:08:56.470
+If we expanded it,
+
+156
+00:08:56.470 --> 00:09:01.090
+we get a model for Y_t from our SARIMA routine.
+
+157
+00:09:01.090 --> 00:09:04.580
+The previous slide, we obtained phi hat and theta hat.
+
+158
+00:09:04.580 --> 00:09:09.855
+These are our estimates - point estimates for these coefficients.
+
+159
+00:09:09.855 --> 00:09:12.579
+If you put them in, this becomes our model.
+
+160
+00:09:12.579 --> 00:09:16.600
+So this is the model for the logarithm of the sales data.
+
+161
+00:09:16.600 --> 00:09:20.934
+And here Z_t is approximately normal.
+
+162
+00:09:20.934 --> 00:09:25.970
+As a model, it's normal with a variance 0.03.
+
+163
+00:09:25.970 --> 00:09:29.259
+If we look at the forecast routine,
+
+164
+00:09:29.259 --> 00:09:32.419
+basically this is the forecast for the logarithm.
+
+165
+00:09:32.419 --> 00:09:34.289
+It gives us the forecast.
+
+166
+00:09:34.289 --> 00:09:39.634
+This first shaded area - this is 80 percent confidence interval.
+
+167
+00:09:39.634 --> 00:09:44.434
+The second shaded area - this is 95 percent confidence interval.
+
+168
+00:09:44.434 --> 00:09:48.894
+In fact, if you look at the forecast model for the next year,
+
+169
+00:09:48.894 --> 00:09:52.298
+we have the confidence interval endpoints - the limit points for
+
+170
+00:09:52.298 --> 00:09:58.149
+the 80 percent confidence interval and 95 percent confidence interval.
+
+171
+00:09:58.149 --> 00:10:01.139
+We also have the point estimations.
+
+172
+00:10:01.139 --> 00:10:04.480
+Now this is the data we looked at.
+
+173
+00:10:04.480 --> 00:10:07.120
+This is the time series we started with.
+
+174
+00:10:07.120 --> 00:10:08.605
+This is the forecast,
+
+175
+00:10:08.605 --> 00:10:10.690
+which is stretched out - that's the - for next year.
+
+176
+00:10:10.690 --> 00:10:13.725
+So this ends at, let's say, 85.
+
+177
+00:10:13.725 --> 00:10:16.509
+This starts at 85 and goes up.
+
+178
+00:10:16.509 --> 00:10:17.850
+And if you combine them,
+
+179
+00:10:17.850 --> 00:10:20.245
+this is the monthly sales data until here.
+
+180
+00:10:20.245 --> 00:10:22.149
+And then this last period,
+
+181
+00:10:22.149 --> 00:10:24.520
+that last part is our forecast.
+
+182
+00:10:24.520 --> 00:10:30.220
+Now I'd like to note the following.
+
+183
+00:10:30.220 --> 00:10:37.021
+If you look at ACF of the transformed and differenced seasonality,
+
+184
+00:10:37.021 --> 00:10:38.830
+non-seasonality differenced data set,
+
+185
+00:10:38.830 --> 00:10:40.565
+this is what we had.
+
+186
+00:10:40.565 --> 00:10:45.820
+And we said that ACF tells me that I have only one significant autocorrelation,
+
+187
+00:10:45.820 --> 00:10:50.394
+so that might tell me that the Q order of moving average term is actually 1.
+
+188
+00:10:50.394 --> 00:10:52.850
+Then one might say wait a minute,
+
+189
+00:10:52.850 --> 00:10:55.024
+I do have - well,
+
+190
+00:10:55.024 --> 00:10:58.759
+even though these two lags are not
+
+191
+00:10:58.759 --> 00:11:03.072
+significant because they are less than dash lines, they're almost significant.
+
+192
+00:11:03.072 --> 00:11:08.269
+So one might try different values of q - little q - up to three.
+
+193
+00:11:08.269 --> 00:11:10.250
+If you do that,
+
+194
+00:11:10.250 --> 00:11:12.875
+we obtain another model,
+
+195
+00:11:12.875 --> 00:11:16.985
+which is SARIMA (0,1,3,0,1,1).
+
+196
+00:11:16.985 --> 00:11:19.850
+In this case, we do not have autoregressive terms,
+
+197
+00:11:19.850 --> 00:11:23.470
+but instead we have three moving average terms.
+
+198
+00:11:23.470 --> 00:11:27.914
+In fact, AIC value and SSE values of
+
+199
+00:11:27.914 --> 00:11:32.889
+this new model is actually smaller than our previous model.
+
+200
+00:11:32.889 --> 00:11:36.795
+So if you think that those two lines are actually significant,
+
+201
+00:11:36.795 --> 00:11:43.279
+you might want to fit SARIMA (0,1,3,0,1,1) instead of our model that we fit.
+
+202
+00:11:43.279 --> 00:11:48.830
+And if you look at the P value from Ljung.box statistics, it's actually bigger.
+
+203
+00:11:48.830 --> 00:11:51.995
+And if you look at the residual analysis for this new model,
+
+204
+00:11:51.995 --> 00:11:54.605
+you see that P values are very high.
+
+205
+00:11:54.605 --> 00:11:58.304
+No significant sample autocorrelation function.
+
+206
+00:11:58.304 --> 00:12:05.599
+The residual looks white and our residuals are almost normal,
+
+207
+00:12:05.599 --> 00:12:09.634
+but there's a systematic departure on the left tail.
+
+208
+00:12:09.634 --> 00:12:11.291
+Okay. So what have we learned?
+
+209
+00:12:11.291 --> 00:12:14.060
+We have learned how to fit SARIMA models to the dataset about
+
+210
+00:12:14.060 --> 00:12:18.338
+the sales at the souvenir shop in Australia.
+
+211
+00:12:18.338 --> 00:12:22.659
+This dataset was from a Time Series Data Library.
+
+212
+00:12:22.659 --> 00:12:24.620
+And we learned how to forecast, again,
+
+213
+00:12:24.620 --> 00:12:28.000
+future values of this examined Time Series.

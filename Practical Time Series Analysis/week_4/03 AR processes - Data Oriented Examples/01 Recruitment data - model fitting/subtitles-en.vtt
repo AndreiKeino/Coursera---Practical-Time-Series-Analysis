@@ -1,0 +1,567 @@
+WEBVTT
+
+1
+00:00:00.480 --> 00:00:04.390
+Hello everyone, in this lecture we will
+be talking about parameter estimation,
+
+2
+00:00:04.390 --> 00:00:06.190
+specifically recruitment data.
+
+3
+00:00:07.640 --> 00:00:12.370
+So objective is to fit an auto-regressive
+process to the recruitment data,
+
+4
+00:00:12.370 --> 00:00:16.770
+which is number of new fish for
+a period of 453 months,
+
+5
+00:00:16.770 --> 00:00:22.050
+ranging over 1950s till 1987,
+and we'll be using Yule-Walker
+
+6
+00:00:22.050 --> 00:00:26.490
+equations in matrix form to estimate
+the parameters of the fitted model.
+
+7
+00:00:27.810 --> 00:00:32.220
+So there's data which is called a rec
+recruitment, it's about the number of
+
+8
+00:00:32.220 --> 00:00:37.930
+the fish, it is monthly time series,
+and the sources are astsa package,
+
+9
+00:00:37.930 --> 00:00:42.720
+and this is related to the book which
+is called Time Series Analysis and
+
+10
+00:00:42.720 --> 00:00:47.660
+It's Applications, with R examples,
+this is by Shumway and Stoffer.
+
+11
+00:00:49.660 --> 00:00:51.350
+If you plot the data,
+I wish we were going to do,
+
+12
+00:00:51.350 --> 00:00:55.460
+I will show you the code in a minute, but
+if you plot the data this is what we get,
+
+13
+00:00:55.460 --> 00:00:57.980
+this is the recruitment time series.
+
+14
+00:00:57.980 --> 00:01:02.162
+And if I look at ACF and PACF,
+auto-correlation function, and
+
+15
+00:01:02.162 --> 00:01:04.800
+partial auto-correlation function.
+
+16
+00:01:04.800 --> 00:01:08.180
+So if you look at the altered correlation
+function, there's some kind of decaying,
+
+17
+00:01:08.180 --> 00:01:11.220
+but also some cyclic behavior, right?
+
+18
+00:01:11.220 --> 00:01:15.160
+And but when you look at the partial
+auto-correlation function, we see maybe
+
+19
+00:01:15.160 --> 00:01:20.830
+two significant lags, lag two and
+then maybe nothing significant afterwards.
+
+20
+00:01:20.830 --> 00:01:23.166
+So that kind of gives us an idea,
+
+21
+00:01:23.166 --> 00:01:28.810
+that maybe AR(2) process might be
+suitable for the recruitment data set.
+
+22
+00:01:29.970 --> 00:01:32.910
+So we're going to use this parsimony
+principle, in other words,
+
+23
+00:01:32.910 --> 00:01:36.990
+we're going to choose the simplest
+explanation, that fits the evidence.
+
+24
+00:01:36.990 --> 00:01:41.580
+So in that case, we're going to take the
+simplest of the competing theories to be
+
+25
+00:01:41.580 --> 00:01:44.280
+preferred, in this case we had one theory.
+
+26
+00:01:44.280 --> 00:01:50.199
+We say that PACF somehow gives
+us plausible, auto-regressive
+
+27
+00:01:50.199 --> 00:01:54.310
+of order two models that can be fitted
+into this data, set and we're going to of
+
+28
+00:01:54.310 --> 00:01:59.610
+course use the Yule-Walker equations in
+matrix form to estimate the parameters.
+
+29
+00:02:01.120 --> 00:02:03.090
+So, we're going to look at the code but
+
+30
+00:02:03.090 --> 00:02:07.460
+let me just give you idea that we're first
+going to basically subtract the mean,
+
+31
+00:02:07.460 --> 00:02:12.060
+from Xt, so be shifted,
+so that we have new zero.
+
+32
+00:02:12.060 --> 00:02:16.274
+Our order's going to be 2,
+remember Yule-Walker equations,
+
+33
+00:02:16.274 --> 00:02:18.648
+which was base the R phi equals b, and
+
+34
+00:02:18.648 --> 00:02:24.130
+we are trying to get this phi here,
+which is the coefficients in our model.
+
+35
+00:02:24.130 --> 00:02:28.760
+R and b, we can get it from using
+the sample auto-correlation coefficients.
+
+36
+00:02:28.760 --> 00:02:33.810
+In other words, we just take the ACF of
+the process that we are looking at, in
+
+37
+00:02:33.810 --> 00:02:38.710
+this case ar process that we are looking
+at is actually the recruitment data,
+
+38
+00:02:38.710 --> 00:02:39.770
+which is shifted.
+
+39
+00:02:39.770 --> 00:02:45.210
+So we look at the ACF of ar process, we do
+not want to plot this, but we would like
+
+40
+00:02:45.210 --> 00:02:50.960
+to look at the ACFs, and
+then we assign then to the r.
+
+41
+00:02:50.960 --> 00:02:54.053
+So R as a vector will have our ACFs, and
+
+42
+00:02:54.053 --> 00:03:00.049
+we're going to put those R into our
+matrix, and this is going to matrix R,
+
+43
+00:03:00.049 --> 00:03:04.887
+but realize the following,
+if you actually look at Ri,j,
+
+44
+00:03:04.887 --> 00:03:10.149
+you can actually update them by
+looking at the index i-j value.
+
+45
+00:03:10.149 --> 00:03:14.480
+In other words, for example,
+if you look at r1, 2, r1, 2 is here,
+
+46
+00:03:14.480 --> 00:03:17.836
+1 minus is two is negative one,
+absolute value is one.
+
+47
+00:03:17.836 --> 00:03:23.100
+R1, 2 is r1,
+r2,1 is also a one indies metric matrix.
+
+48
+00:03:23.100 --> 00:03:28.037
+So that's how we update our matrix R,
+doing the tool for look nested loops,
+
+49
+00:03:28.037 --> 00:03:30.678
+making sure that, i, is not equal to j.
+
+50
+00:03:30.678 --> 00:03:35.277
+Well, then, i, is equal to j,
+you basically have to diagonal elements,
+
+51
+00:03:35.277 --> 00:03:36.883
+which is our old ones, and
+
+52
+00:03:36.883 --> 00:03:40.910
+the rest of it we just update using
+our absolute value of i minus j.
+
+53
+00:03:42.370 --> 00:03:47.140
+The right-hand side which is the column b,
+is the transpose of r,
+
+54
+00:03:47.140 --> 00:03:49.490
+and this is basically
+finding the transpose of r.
+
+55
+00:03:49.490 --> 00:03:52.910
+And then we solve for phi, right?
+
+56
+00:03:52.910 --> 00:03:56.708
+How do we solve for b, if Rx equal to b,
+then all we have to do,
+
+57
+00:03:56.708 --> 00:04:02.200
+we have to say solve Rb, and the solution
+we're going to put it into the phi hat.
+
+58
+00:04:02.200 --> 00:04:07.060
+So this is the solving Rb,
+rx equal to b equation, and
+
+59
+00:04:07.060 --> 00:04:11.840
+our model is going to be, basically,
+the following, we found Phi, right?
+
+60
+00:04:11.840 --> 00:04:17.720
+We know our mean, and the calculate
+Phi zero using this expression,
+
+61
+00:04:17.720 --> 00:04:20.910
+and we plug them in, and
+that becomes our fitted model.
+
+62
+00:04:20.910 --> 00:04:25.700
+Let's look at the code,
+this is our studio on other platform for
+
+63
+00:04:25.700 --> 00:04:28.830
+r, and here we have basic the r code,
+
+64
+00:04:28.830 --> 00:04:32.610
+which is also available to you in
+the reading section of this lesson.
+
+65
+00:04:33.850 --> 00:04:37.190
+So, you still get the reading you
+are trying to extract this code,
+
+66
+00:04:37.190 --> 00:04:41.210
+you can copy it in your program
+either all or our studio.
+
+67
+00:04:41.210 --> 00:04:43.360
+The console is gong to be right here, and
+
+68
+00:04:43.360 --> 00:04:45.970
+the out is going to be shown
+on the right hand side.
+
+69
+00:04:45.970 --> 00:04:49.640
+So let's go step by step,
+let's say I'm here, if I say run,
+
+70
+00:04:49.640 --> 00:04:52.800
+it runs my data equals to rec.
+
+71
+00:04:52.800 --> 00:04:57.810
+So I take the rec and I attach it to
+the my data, them I'm in the next line,
+
+72
+00:04:57.810 --> 00:05:02.935
+let's run the plot, so this is basically
+plotting the recruitment data,
+
+73
+00:05:02.935 --> 00:05:05.635
+I can actually zoom in here,
+on my data set.
+
+74
+00:05:05.635 --> 00:05:08.525
+So this is our time series,
+this is the time plot,
+
+75
+00:05:08.525 --> 00:05:13.725
+it starts from 1950 it goes on till 1987,
+it has some kind of cyclic behavior,
+
+76
+00:05:13.725 --> 00:05:18.650
+which we are kind of ignoring,
+then we are doing this model fitting for
+
+77
+00:05:18.650 --> 00:05:22.820
+auto-aggressive processes, and
+let's run it again, okay, and
+
+78
+00:05:22.820 --> 00:05:28.990
+then we go to the next line, we run, this
+time it's going to partition our screen.
+
+79
+00:05:28.990 --> 00:05:33.420
+We get the ACF, this is the ACF
+that we showed in the presentation,
+
+80
+00:05:33.420 --> 00:05:36.960
+this is the PACF, and when we look at
+it on the right hand side, we see that,
+
+81
+00:05:36.960 --> 00:05:39.904
+all right, there's some cyclic behavior,
+in the ACF, but
+
+82
+00:05:39.904 --> 00:05:44.860
+PACF so
+that maybe AR(2) might be a good fit.
+
+83
+00:05:44.860 --> 00:05:50.680
+So if you say p is equal to 2,
+this is going to be r order,
+
+84
+00:05:50.680 --> 00:05:55.790
+and then we calculate r,
+by basically taking the ACFR process, and
+
+85
+00:05:55.790 --> 00:06:01.460
+looking at the AC part of it, and
+if we obtain our r, let's print our out.
+
+86
+00:06:01.460 --> 00:06:06.220
+R values, basically this is r1,
+and r2, okay.
+
+87
+00:06:06.220 --> 00:06:13.900
+And then we run again, this is matrix r
+defined, it's not two by two, actually.
+
+88
+00:06:13.900 --> 00:06:17.958
+This is, we cannot fix this, this is,
+
+89
+00:06:17.958 --> 00:06:22.610
+p by p.
+
+90
+00:06:22.610 --> 00:06:23.870
+In this case it is two by two,
+
+91
+00:06:23.870 --> 00:06:28.460
+but in general this is p by p matrix,
+and we run it.
+
+92
+00:06:28.460 --> 00:06:34.430
+So we are here, you run, so
+we have our r, and we update the r
+
+93
+00:06:34.430 --> 00:06:39.520
+by using r apps with value r minus j, and
+if you print r, as you can see this is
+
+94
+00:06:43.800 --> 00:06:48.080
+r0, r1, r1, r0, r0,
+which is auto-correlation coefficient.
+
+95
+00:06:48.080 --> 00:06:51.600
+Sample other correlation coefficient
+like zero, it's always 1, so
+
+96
+00:06:51.600 --> 00:06:54.340
+if you have 1 on the diagonal,
+and we have r 1s here.
+
+97
+00:06:54.340 --> 00:06:59.860
+All right let's get matrix b,
+which is basically transpose of r.
+
+98
+00:06:59.860 --> 00:07:02.338
+This is basically r1 and r2.
+
+99
+00:07:02.338 --> 00:07:07.130
+And now here it's time to solve,
+we solve for phi one hat.
+
+100
+00:07:07.130 --> 00:07:10.600
+So phi one hat is our
+approximation to phis.
+
+101
+00:07:10.600 --> 00:07:11.870
+I'm sorry this is phi hat, and
+
+102
+00:07:11.870 --> 00:07:15.090
+this phi hat is approximation to the phis,
+this is phi one hat,
+
+103
+00:07:15.090 --> 00:07:19.830
+this is phi two hat, and let's obtain
+the constant, and the variance.
+
+104
+00:07:19.830 --> 00:07:26.990
+So this is auto co-variance function
+of the process at lag zero,
+
+105
+00:07:26.990 --> 00:07:32.644
+which is the variance, and you look at the
+variance hat, the approximate variance,
+
+106
+00:07:32.644 --> 00:07:37.369
+and we obtain 94.1731.
+
+107
+00:07:37.369 --> 00:07:41.840
+And now it's time to calculate
+the constant, and constant is
+
+108
+00:07:41.840 --> 00:07:46.860
+calculated using the formula we obtained,
+so if you use your hack becomes 7.033.
+
+109
+00:07:46.860 --> 00:07:53.009
+In other words, in our model
+the constant is going to be 7.033,
+
+110
+00:07:53.009 --> 00:07:57.780
+coefficients are here and
+the variance of the noise,
+
+111
+00:07:57.780 --> 00:08:01.609
+the random noise is 94 0.17131.
+
+112
+00:08:01.609 --> 00:08:06.272
+All right so we obtain that p,
+the order is going to be 2, and
+
+113
+00:08:06.272 --> 00:08:11.483
+our fitted model, which is phi 0,
+phi 1 hat, phi 2 hat, and Zt,
+
+114
+00:08:11.483 --> 00:08:16.996
+Zt is our random noise with mean 0 and
+the variance 94.17131.
+
+115
+00:08:16.996 --> 00:08:17.720
+So what have you learned?
+
+116
+00:08:17.720 --> 00:08:21.200
+You have learned to fitting
+auto-regressive process for
+
+117
+00:08:21.200 --> 00:08:24.960
+order two to recruitment data
+set from astsa package, and
+
+118
+00:08:24.960 --> 00:08:28.130
+we did this using Yule-Walker
+equations in matrix form.

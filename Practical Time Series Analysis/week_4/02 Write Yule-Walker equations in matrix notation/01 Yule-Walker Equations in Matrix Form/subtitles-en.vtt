@@ -1,0 +1,558 @@
+WEBVTT
+
+1
+00:00:00.220 --> 00:00:01.460
+Hello everybody,
+
+2
+00:00:01.460 --> 00:00:06.020
+in this lecture we'll talk about
+Yule-Walker equations in matrix form.
+
+3
+00:00:06.020 --> 00:00:12.250
+Our objective is to rewrite the
+YULE-Walker equations we have already seen
+
+4
+00:00:13.490 --> 00:00:18.240
+In a matrix form for
+auto regressive processes of order p.
+
+5
+00:00:20.060 --> 00:00:26.140
+So let me remind you ARP
+processes are where the Xt
+
+6
+00:00:27.210 --> 00:00:33.860
+is regressed on the t previous values
+starting from t- 1 until t- p.
+
+7
+00:00:33.860 --> 00:00:39.560
+Right, so that phi determines
+the order of the process,
+
+8
+00:00:39.560 --> 00:00:43.400
+phi 0 is a constant that might
+come there in our process.
+
+9
+00:00:43.400 --> 00:00:48.500
+And Zt is our innovations,
+random disturbance, or white noise which
+
+10
+00:00:48.500 --> 00:00:54.260
+is normal with some sigma
+standard deviation.
+
+11
+00:00:54.260 --> 00:00:59.770
+So what we would like to do is
+to somehow use your equation
+
+12
+00:00:59.770 --> 00:01:05.260
+in matrix form to estimate this
+parameters but this comes a little later.
+
+13
+00:01:05.260 --> 00:01:09.345
+For that reason,
+we need your equations in matrix form.
+
+14
+00:01:11.237 --> 00:01:13.302
+Let me just note the following,
+
+15
+00:01:13.302 --> 00:01:19.080
+if you actually take expectation of
+this model right here, this P model.
+
+16
+00:01:19.080 --> 00:01:22.930
+If you take expectation,
+assuming the model is stationary, so
+
+17
+00:01:22.930 --> 00:01:26.250
+this is stationary RP process.
+
+18
+00:01:26.250 --> 00:01:28.420
+Expectation of XT is mu.
+
+19
+00:01:28.420 --> 00:01:30.830
+Expectation of XP is mu.
+
+20
+00:01:30.830 --> 00:01:33.260
+Expectation of X minus 2 is mu.
+
+21
+00:01:33.260 --> 00:01:38.900
+An expectation of xt minus p is mu,
+expectation of the random
+
+22
+00:01:38.900 --> 00:01:42.430
+noise is zero from this,
+you can actually find mu, right?
+
+23
+00:01:42.430 --> 00:01:46.030
+Mu can be calculated in terms of these
+coefficients, but that's not what I would
+
+24
+00:01:46.030 --> 00:01:50.220
+like to do, I would like to subtract
+these two equations side by side.
+
+25
+00:01:50.220 --> 00:01:55.870
+For example, if I subtract xt minus mu
+this phi 0 will go away and then I will
+
+26
+00:01:55.870 --> 00:02:01.690
+plot view 1 that will plot view 2 and this
+is basically the expression we obtain.
+
+27
+00:02:01.690 --> 00:02:06.900
+Realize the following if I define Xt
+minus mu as a new random variable,
+
+28
+00:02:06.900 --> 00:02:11.610
+call it Xt/t, it's basically
+the previous random variable shifted.
+
+29
+00:02:11.610 --> 00:02:15.940
+To the right or
+left depending on the sign of mu but
+
+30
+00:02:15.940 --> 00:02:20.180
+interesting thing is that expectation
+of tilda t now is actually 0.
+
+31
+00:02:20.180 --> 00:02:24.790
+In other words,
+if I replaced this by x tilda t,
+
+32
+00:02:24.790 --> 00:02:31.570
+then I get this ARP processes without
+a constant, which would have 0 mean.
+
+33
+00:02:33.910 --> 00:02:34.720
+So in other words,
+
+34
+00:02:34.720 --> 00:02:39.744
+we're going to basically work
+on AR[p] process with mu = 0.
+
+35
+00:02:39.744 --> 00:02:44.860
+And in examples wherein mu
+is not [INAUDIBLE] Xt and
+
+36
+00:02:44.860 --> 00:02:49.205
+we will try to fit the model AR(p)
+model with expectations here.
+
+37
+00:02:49.205 --> 00:02:53.685
+Okay, so this is our model,
+our model is Xt regressed on the p values,
+
+38
+00:02:53.685 --> 00:02:56.380
+previous p lags, plus some random noise.
+
+39
+00:02:56.380 --> 00:02:58.560
+Remember Yule-Walker equations.
+
+40
+00:02:58.560 --> 00:03:03.380
+Yule-Walker equations questions for
+this process will be 0K equal
+
+41
+00:03:03.380 --> 00:03:08.420
+to a different equation for
+0k minus 1 unto RK minus P and
+
+42
+00:03:08.420 --> 00:03:11.720
+this is always true for
+K greater or equal to 1.
+
+43
+00:03:11.720 --> 00:03:15.970
+And then remember that rho 0
+at correlation is always 1 or
+
+44
+00:03:17.000 --> 00:03:21.230
+the itself right every random available
+auto correlation with the self is one.
+
+45
+00:03:21.230 --> 00:03:26.650
+And for the negative values we can
+basically write one negative K and
+
+46
+00:03:26.650 --> 00:03:28.310
+calculate negative K.
+
+47
+00:03:28.310 --> 00:03:32.250
+So let's write this the correct way for
+
+48
+00:03:32.250 --> 00:03:35.540
+different values of K from one to P,
+all of them.
+
+49
+00:03:35.540 --> 00:03:40.990
+So we're going to have P equations here,
+sSo this is our Yule Walker equation.
+
+50
+00:03:40.990 --> 00:03:45.900
+I plug k equal to 1,
+this becomes row 1, this becomes row 0,
+
+51
+00:03:45.900 --> 00:03:50.222
+this becomes row -1,
+this becomes row 1- p, right?
+
+52
+00:03:50.222 --> 00:03:52.570
+-1, -2, 1- p,
+all these negative values here.
+
+53
+00:03:52.570 --> 00:03:55.276
+If I plug 2 in,
+This is rho 1 this is rho 0,
+
+54
+00:03:55.276 --> 00:03:59.246
+then I will have all seven negative
+values, rho 3 and so forth.
+
+55
+00:03:59.246 --> 00:04:05.200
+So we basically rewrite this Yule-Walker
+equation for every value of k from 1 to p.
+
+56
+00:04:05.200 --> 00:04:12.020
+So we get p equations but then we remember
+the following, rho k is rho -k, right?
+
+57
+00:04:12.020 --> 00:04:14.490
+So rho -1 is rho 1, rho -2 is rho 2,
+
+58
+00:04:14.490 --> 00:04:19.710
+so every rows with negative indices,
+row negative 1, row negative 2.
+
+59
+00:04:19.710 --> 00:04:24.250
+We can replace them with row 1, row 2,
+and so forth, so let's do that.
+
+60
+00:04:24.250 --> 00:04:29.360
+So if I put row negative k to row k,
+for every possible value of k
+
+61
+00:04:29.360 --> 00:04:33.280
+in that system of equations,
+we will obtain the following system.
+
+62
+00:04:33.280 --> 00:04:36.471
+In other words, row negative 1
+now is gone, we have row 1 for
+
+63
+00:04:36.471 --> 00:04:42.100
+when -2 is gone we have row 2 and
+rho -1 here is going to be we have rho 1.
+
+64
+00:04:42.100 --> 00:04:50.150
+This one was rho 1- p, now it is rho p- 1,
+so we get this new system of equations.
+
+65
+00:04:50.150 --> 00:04:51.700
+And we write it
+
+66
+00:04:52.800 --> 00:04:57.640
+by realizing that they're all 0 the auto
+correlation of lack 0 is always 1.
+
+67
+00:04:57.640 --> 00:05:02.510
+So basically, rho 0 is 1, so
+this is just phi 1, this is just phi 2,
+
+68
+00:05:02.510 --> 00:05:03.880
+this is just phi 3.
+
+69
+00:05:03.880 --> 00:05:07.855
+Basically the diagonal we
+get rid of our rho 0s and
+
+70
+00:05:07.855 --> 00:05:13.555
+we get these system of equations and
+we can write this in a matrix form.
+
+71
+00:05:13.555 --> 00:05:18.505
+Realized this is the r coefficient matrix,
+so this is our coefficient matrix,
+
+72
+00:05:18.505 --> 00:05:21.402
+we'll call that r coefficient matrix and
+
+73
+00:05:21.402 --> 00:05:26.302
+this is our coefficients of the process,
+phi 1, phi 2, phi p.
+
+74
+00:05:26.302 --> 00:05:30.442
+And on the left-hand side,
+we have rows from 1 to p.
+
+75
+00:05:30.442 --> 00:05:38.320
+Okay, so in other words, I can write
+this as b = R f R being A p by p matrix.
+
+76
+00:05:38.320 --> 00:05:42.760
+Phi is p by 1 matrix, b is p by 1 matrix.
+
+77
+00:05:42.760 --> 00:05:46.080
+So if I would like to solve this,
+remember at the end of today,
+
+78
+00:05:46.080 --> 00:05:49.480
+I would like to get this coefficient.
+
+79
+00:05:49.480 --> 00:05:51.770
+If I would like to write this,
+
+80
+00:05:51.770 --> 00:05:57.250
+I Trying to find inverse of R if it
+exists, it turns out that it exists.
+
+81
+00:05:57.250 --> 00:06:01.380
+R is a very nice matrix
+inverse of R exists.
+
+82
+00:06:01.380 --> 00:06:03.360
+If we multiply inverse from both sides,
+
+83
+00:06:03.360 --> 00:06:09.380
+we get phi which is the coefficients of
+my system equal to R inverse times B.
+
+84
+00:06:11.320 --> 00:06:16.560
+Now when we are actually trying to fit ARP
+
+85
+00:06:16.560 --> 00:06:21.465
+process to actual time series data set,
+of course we do not have.
+
+86
+00:06:21.465 --> 00:06:24.224
+We do not have autocorrelation function,
+
+87
+00:06:24.224 --> 00:06:27.410
+we actually have sample
+autocorrelation function.
+
+88
+00:06:27.410 --> 00:06:30.130
+So how do we update the whole process?
+
+89
+00:06:30.130 --> 00:06:33.680
+Well, every time you see roles,
+we replace them with Rs and
+
+90
+00:06:33.680 --> 00:06:35.930
+we try to find phi's, right?
+
+91
+00:06:35.930 --> 00:06:40.550
+So instead of role rows here I have r1,
+r2.
+
+92
+00:06:40.550 --> 00:06:44.230
+I call this b hat, instead of r matrix,
+we call this r hat.
+
+93
+00:06:44.230 --> 00:06:45.770
+This is approximation and
+
+94
+00:06:45.770 --> 00:06:50.700
+instead of phi, all of these should
+have hats in here, we get phi hat.
+
+95
+00:06:50.700 --> 00:06:56.590
+And then we estimate phi hat by finding
+inverse of not the original r but r hat.
+
+96
+00:06:58.890 --> 00:07:01.940
+Okay, so let me just mention
+that these Matrices R and
+
+97
+00:07:01.940 --> 00:07:04.700
+R Hat--both of these
+are symmetric matrices.
+
+98
+00:07:04.700 --> 00:07:07.750
+They are positive semidefinite matrices.
+
+99
+00:07:07.750 --> 00:07:08.380
+In other words,
+
+100
+00:07:08.380 --> 00:07:13.660
+all eigenvalues are nonnegative and
+their inverses actually exist.
+
+101
+00:07:13.660 --> 00:07:17.780
+In other words, if you look at
+this equation, b equal to r or
+
+102
+00:07:17.780 --> 00:07:22.670
+b had equal to r had, had, we can actually
+solve this, there's a unique solution.
+
+103
+00:07:25.100 --> 00:07:30.581
+So let me give you an example, so
+we will estimate of the following model.
+
+104
+00:07:30.581 --> 00:07:34.651
+Assume that we have this AR2
+process with the no mean,
+
+105
+00:07:34.651 --> 00:07:38.580
+zero mean and
+we would like to find first r1 and r2.
+
+106
+00:07:38.580 --> 00:07:43.670
+This is example autocorrelation,
+we can find them using acf working in R.
+
+107
+00:07:43.670 --> 00:07:48.310
+And then all we have to do is basically
+solve the system of equations for
+
+108
+00:07:48.310 --> 00:07:53.740
+phi 1 hat and phi 2 hat both of these will
+be an estimation for phi 1 and phi 2.
+
+109
+00:07:53.740 --> 00:07:58.700
+If we have AR(3) process,
+basically if we are doing the same thing,
+
+110
+00:07:58.700 --> 00:08:00.360
+we have three coefficients now.
+
+111
+00:08:00.360 --> 00:08:04.020
+We're going to have three by
+three systems, this is our r hat,
+
+112
+00:08:04.020 --> 00:08:09.650
+this is phi hat, and this our r, b hat
+matrix and we were trying to solve this.
+
+113
+00:08:09.650 --> 00:08:13.290
+And this matrix has an inverse,
+we'll be able to find phi 1, phi 2,
+
+114
+00:08:13.290 --> 00:08:17.310
+phi 3 hats here, so what have we learned?
+
+115
+00:08:17.310 --> 00:08:21.210
+We have learned the matrix form of the
+Yule-Walker equations, which is b = r phi.
+
+116
+00:08:21.210 --> 00:08:25.660
+And we have learned how to
+estimate the coefficients
+
+117
+00:08:25.660 --> 00:08:29.060
+of AR processes using
+Yule-Walket equations

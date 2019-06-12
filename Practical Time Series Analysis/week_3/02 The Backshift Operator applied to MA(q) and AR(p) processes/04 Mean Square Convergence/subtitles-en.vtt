@@ -1,0 +1,522 @@
+WEBVTT
+
+1
+00:00:00.600 --> 00:00:07.425
+In this optional lecture,I will talk
+about mean square convergence.Objectives
+
+2
+00:00:07.425 --> 00:00:12.787
+are to learn mean square convergence and
+formulate necessary and
+
+3
+00:00:12.787 --> 00:00:18.258
+sufficient condition for
+invertibility of MA(1)) process.
+
+4
+00:00:18.258 --> 00:00:21.789
+So, let's first define what
+mean-square convergence is.
+
+5
+00:00:21.789 --> 00:00:24.110
+So, we have a stochastic process, right?
+
+6
+00:00:24.110 --> 00:00:27.880
+A sequence of random variables and
+I'd like to say these random variables
+
+7
+00:00:29.210 --> 00:00:33.855
+are converging to some common
+random variable and call it x.
+
+8
+00:00:33.855 --> 00:00:37.775
+But what do we mean with this
+convergence if we have random variables.
+
+9
+00:00:37.775 --> 00:00:42.585
+Well we defined there are few definitions
+of conversions of random variables what
+
+10
+00:00:42.585 --> 00:00:45.605
+we're going to concentrate on
+is the mean squared convergence.
+
+11
+00:00:45.605 --> 00:00:50.785
+In other words,
+we're going to say Xn converges to some
+
+12
+00:00:50.785 --> 00:00:56.971
+random variable X as n increases,
+if I look at their differences.
+
+13
+00:00:58.283 --> 00:01:00.960
+Squared and I take the expectation of it.
+
+14
+00:01:00.960 --> 00:01:04.000
+So this is mean, and this is squared.
+
+15
+00:01:04.000 --> 00:01:06.840
+This is mean squared, some number.
+
+16
+00:01:06.840 --> 00:01:10.990
+And if this some number goes to
+zero as n increases, which means,
+
+17
+00:01:10.990 --> 00:01:14.170
+as it increases, this random
+variable is a different square.
+
+18
+00:01:16.020 --> 00:01:20.428
+Expectation of the different square is
+actually getting smaller and smaller and
+
+19
+00:01:20.428 --> 00:01:21.020
+smaller.
+
+20
+00:01:21.020 --> 00:01:27.015
+Then we call xn convergence
+to x in mean square sense.
+
+21
+00:01:27.015 --> 00:01:31.015
+In previous lectures,
+we inverted ma1 model.
+
+22
+00:01:31.015 --> 00:01:35.335
+Which is this guy here xt
+= zt + beta z t-1 into
+
+23
+00:01:35.335 --> 00:01:40.316
+an infinity model and
+we write zt as infinite sum here.
+
+24
+00:01:40.316 --> 00:01:44.887
+So what we would like to say, we would
+like to make sure this right hand-side is
+
+25
+00:01:44.887 --> 00:01:47.057
+convergent in mean-square sense.
+
+26
+00:01:47.057 --> 00:01:52.614
+So how do we say that we have to get
+the partial sums and make sure that
+
+27
+00:01:52.614 --> 00:01:59.281
+partial sums of this infinite sum actually
+converges to Zt in mean square sets.
+
+28
+00:01:59.281 --> 00:02:03.430
+Let's remember the auto covariance
+function of MA(1) processes.
+
+29
+00:02:04.635 --> 00:02:09.518
+MA(1) processes of the covariance
+function would be 0 after lag 1.
+
+30
+00:02:09.518 --> 00:02:13.874
+At lag 0,
+it is 1 + beta squared times sigma square,
+
+31
+00:02:13.874 --> 00:02:17.755
+at k1 at lag 1,
+it is beta Sigma square, and for
+
+32
+00:02:17.755 --> 00:02:24.035
+negative values this is an even function,
+so Gamma k same as Gamma negative k.
+
+33
+00:02:24.035 --> 00:02:30.190
+So we're going to use these two guys here,
+the Gamma 0 and Gamma 1.
+
+34
+00:02:30.190 --> 00:02:36.840
+Okay, let's find Betas so that the partial
+sum then notice there is a n here now.
+
+35
+00:02:36.840 --> 00:02:38.820
+We cut the infinite sum at sum n.
+
+36
+00:02:38.820 --> 00:02:42.660
+And we have to make sure that
+partial sum converges to Zt
+
+37
+00:02:42.660 --> 00:02:45.380
+as n increases in the mean-square sense.
+
+38
+00:02:45.380 --> 00:02:49.770
+In other words,
+We have to make sure this partial sum,
+
+39
+00:02:49.770 --> 00:02:54.450
+this expression here,
+is the partial sum until n minus Zt and
+
+40
+00:02:54.450 --> 00:02:58.110
+we square it and we take their mean,
+their expectation.
+
+41
+00:02:58.110 --> 00:03:00.417
+This is the mean squared.
+
+42
+00:03:00.417 --> 00:03:05.344
+And we have to gain, we should find
+betas where this expectation actually
+
+43
+00:03:05.344 --> 00:03:08.710
+drops to zero as n gets larger and larger.
+
+44
+00:03:08.710 --> 00:03:10.940
+So we have to do some
+analytical work here.
+
+45
+00:03:10.940 --> 00:03:12.390
+Let's go slowly.
+
+46
+00:03:12.390 --> 00:03:14.794
+We take the square.
+
+47
+00:03:14.794 --> 00:03:17.640
+This is one big lump sum, big, big term.
+
+48
+00:03:17.640 --> 00:03:20.430
+Think of that as one big term and
+this is another term.
+
+49
+00:03:20.430 --> 00:03:23.870
+The square of the first term,
+square of the second term and
+
+50
+00:03:23.870 --> 00:03:27.240
+this is two times their multiplication.
+
+51
+00:03:27.240 --> 00:03:28.740
+This is usual a- b² formula.
+
+52
+00:03:30.220 --> 00:03:33.460
+But then, we have to take the sum squared.
+
+53
+00:03:33.460 --> 00:03:38.725
+And if you take the square of a sum,
+you get the sum of squares.
+
+54
+00:03:38.725 --> 00:03:42.566
+This is basically square of the each term,
+but
+
+55
+00:03:42.566 --> 00:03:47.510
+then we have to have pair-wise
+multiplications times 2.
+
+56
+00:03:47.510 --> 00:03:50.830
+Now, one thing you have to
+note here is that when we
+
+57
+00:03:50.830 --> 00:03:55.860
+look at the pair by multiplication,
+we shouldn't look at more than one
+
+58
+00:03:55.860 --> 00:03:59.970
+because we know we know all the covariance
+function drops to 0 after lag 2.
+
+59
+00:03:59.970 --> 00:04:06.832
+So we only have xt minus k with the next
+guy only as k goes from 0 to n minus 1.
+
+60
+00:04:06.832 --> 00:04:09.126
+And if you multiply the coefficients,
+
+61
+00:04:09.126 --> 00:04:12.891
+we're going to have some odd
+coefficient on top of negative beta.
+
+62
+00:04:12.891 --> 00:04:19.838
+In this term, zt is uncorrelated with
+almost of them except the first guy,
+
+63
+00:04:19.838 --> 00:04:26.040
+which is xt, and
+expectation of z squared is sigma square.
+
+64
+00:04:26.040 --> 00:04:28.700
+Here you take expectation to inside,
+right?
+
+65
+00:04:28.700 --> 00:04:31.110
+The expectation is a linear operator,
+
+66
+00:04:31.110 --> 00:04:33.990
+expectation of x squares will give
+you expectation of x squares.
+
+67
+00:04:33.990 --> 00:04:38.684
+This is going to be common for everybody,
+
+68
+00:04:38.684 --> 00:04:42.674
+this is basically the variance.
+
+69
+00:04:42.674 --> 00:04:47.300
+Covariance at lag 0 on a variance and
+we have beta to the k.
+
+70
+00:04:47.300 --> 00:04:50.510
+In this then we take
+expectation to inside,
+
+71
+00:04:50.510 --> 00:04:53.930
+we're going to have expectation
+of this multiplication.
+
+72
+00:04:53.930 --> 00:04:58.801
+This expression we can put xt back into
+the game, xt is zt + beta zt squared.
+
+73
+00:04:58.801 --> 00:05:03.035
+This is zt squared + beta, zt -1.
+
+74
+00:05:03.035 --> 00:05:05.574
+And both of them are multiplied by zt.
+
+75
+00:05:05.574 --> 00:05:08.396
+Now, this expectation of x squared,
+
+76
+00:05:08.396 --> 00:05:12.810
+this is literally gamma 0 so
+we can pull this out.
+
+77
+00:05:12.810 --> 00:05:19.400
+This expression here, expectation of xt-
+k, xt- k + 1, this is literally gamma 1.
+
+78
+00:05:19.400 --> 00:05:22.095
+We can pull this out.
+
+79
+00:05:22.095 --> 00:05:24.739
+Expectation of z is going to
+be another gamma square so
+
+80
+00:05:24.739 --> 00:05:26.960
+we're going to have -2 gamma square here.
+
+81
+00:05:26.960 --> 00:05:29.835
+But these guys are uncorrelated.
+
+82
+00:05:29.835 --> 00:05:32.550
+So expectation of this will drop to 0.
+
+83
+00:05:32.550 --> 00:05:35.685
+So we have negative 2 gamma square
+with that other gamma square,
+
+84
+00:05:35.685 --> 00:05:37.745
+we're going to have negative gamma square.
+
+85
+00:05:37.745 --> 00:05:41.921
+You put gamma 0 back into here which
+is 1 plus beta square gamma square,
+
+86
+00:05:41.921 --> 00:05:43.240
+sigma square.
+
+87
+00:05:43.240 --> 00:05:48.110
+They put gamma 1 back into the game
+which is beta sigma square and
+
+88
+00:05:48.110 --> 00:05:51.100
+we basically simplify this expression.
+
+89
+00:05:51.100 --> 00:05:52.840
+A lot of terms will get canceled.
+
+90
+00:05:52.840 --> 00:05:56.840
+And we obtain that expectation
+of the different square here.
+
+91
+00:05:56.840 --> 00:06:03.560
+The mean square is actually sigma square
+times beta to the 2n plus 2, right?
+
+92
+00:06:03.560 --> 00:06:07.200
+This n is the number of
+the elements in the partial sum.
+
+93
+00:06:09.180 --> 00:06:09.980
+So what do we want for you?
+
+94
+00:06:09.980 --> 00:06:13.710
+We want this mean square to go
+to the zero as it gets larger.
+
+95
+00:06:13.710 --> 00:06:19.350
+In other words, we mean this
+expiration which we calculated to be
+
+96
+00:06:19.350 --> 00:06:21.570
+sigma squared beta to the 2n plus 2.
+
+97
+00:06:21.570 --> 00:06:25.400
+You want this guy to drop
+to zero as it gets larger.
+
+98
+00:06:25.400 --> 00:06:27.160
+Sigma is constant.
+
+99
+00:06:27.160 --> 00:06:28.430
+Which means beta.
+
+100
+00:06:29.500 --> 00:06:32.978
+Absolute value of beta must be less than
+one, so that this can go up to zero.
+
+101
+00:06:32.978 --> 00:06:36.771
+The conclusion is that we
+can do this inversion,
+
+102
+00:06:36.771 --> 00:06:41.858
+we can inverse and make new process
+into AR infinity process, but
+
+103
+00:06:41.858 --> 00:06:47.409
+we have to make sure that this series
+is convergent and that convergence
+
+104
+00:06:47.409 --> 00:06:52.519
+only is the case when magnitude of
+beta is actually less than one.
+
+105
+00:06:52.519 --> 00:06:57.486
+Now remember magnitude of the beta is less
+than one means negative one over beta
+
+106
+00:06:57.486 --> 00:06:59.150
+is greater than one.
+
+107
+00:06:59.150 --> 00:07:02.742
+This guy is the zero of the polynomial.
+
+108
+00:07:02.742 --> 00:07:07.190
+So the zero of this polynomial
+literally lies outside of the input so
+
+109
+00:07:07.190 --> 00:07:08.758
+what have you learned?
+
+110
+00:07:08.758 --> 00:07:12.219
+You have learned the definition of
+the mean square convergence and
+
+111
+00:07:12.219 --> 00:07:14.011
+you have learned the necessary and
+
+112
+00:07:14.011 --> 00:07:17.494
+sufficient condition for
+invertibility of MA(1) processes.

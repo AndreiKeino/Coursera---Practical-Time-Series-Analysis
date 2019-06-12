@@ -1,0 +1,590 @@
+WEBVTT
+
+1
+00:00:01.610 --> 00:00:04.640
+Welcome back to
+Practical Time Series Analysis.
+
+2
+00:00:06.040 --> 00:00:09.500
+We've looked in previous
+lectures at mixed models,
+
+3
+00:00:09.500 --> 00:00:14.360
+the so-called ARMA models,
+Auto-Regressive Moving Average.
+
+4
+00:00:14.360 --> 00:00:18.810
+We've learned to work with
+the difference polynomials in order to
+
+5
+00:00:18.810 --> 00:00:24.000
+move between infinite order moving
+average, infinite order auto regressive,
+
+6
+00:00:24.000 --> 00:00:28.230
+or order PQ ARMA models.
+
+7
+00:00:28.230 --> 00:00:29.792
+It's time to look at a dataset.
+
+8
+00:00:33.616 --> 00:00:38.636
+When you're done with this lecture,
+you should be able to use R to estimate
+
+9
+00:00:38.636 --> 00:00:43.657
+coefficients in an ARMA model, have
+a decent understanding of what this is
+
+10
+00:00:43.657 --> 00:00:48.678
+all about, and use a criterion such as
+the AKAIKE information criterion or
+
+11
+00:00:48.678 --> 00:00:52.290
+some other related criterion
+to select a good model.
+
+12
+00:00:55.472 --> 00:00:56.984
+What is an ARMA model?
+
+13
+00:00:56.984 --> 00:01:02.299
+If we want to understand the state of
+the system at time t, we'll build it up as
+
+14
+00:01:02.299 --> 00:01:07.383
+some noise coming in from the environment
+plus an auto regressive part.
+
+15
+00:01:07.383 --> 00:01:10.975
+So this would be a weighted average
+of past values of the system,
+
+16
+00:01:10.975 --> 00:01:13.090
+plus a moving average part.
+
+17
+00:01:13.090 --> 00:01:18.140
+A weighted average of past influences
+on the system through noise.
+
+18
+00:01:20.872 --> 00:01:25.500
+The dataset we would like to use is built
+into R, it's called Discoveries, and
+
+19
+00:01:25.500 --> 00:01:28.060
+it looks at scientific inventions.
+
+20
+00:01:28.060 --> 00:01:32.460
+From the middle 1800s to the middle
+of 1900s, how many inventions and
+
+21
+00:01:32.460 --> 00:01:34.736
+discoveries did you get in a given year?
+
+22
+00:01:37.895 --> 00:01:40.220
+We'll do the usual sort of plotting.
+
+23
+00:01:40.220 --> 00:01:45.540
+We'll plot the time series sequentially,
+and we'll also use stripchart.
+
+24
+00:01:45.540 --> 00:01:50.552
+This is a nice routine to use
+when you have discrete data.
+
+25
+00:01:50.552 --> 00:01:51.997
+Rather than a histogram,
+
+26
+00:01:51.997 --> 00:01:55.750
+strip chart will break the data out
+by location a little bit better.
+
+27
+00:01:58.010 --> 00:02:00.750
+You can see the time series on the left.
+
+28
+00:02:02.370 --> 00:02:06.902
+And it does bounce around a bit, but
+there seems to be some structure here.
+
+29
+00:02:06.902 --> 00:02:09.179
+It doesn't appear to be just noise.
+
+30
+00:02:10.230 --> 00:02:15.263
+If we look aggregated at the sort of
+distribution for the number discoveries,
+
+31
+00:02:15.263 --> 00:02:18.782
+you might think about that
+as a Poisson distribution.
+
+32
+00:02:18.782 --> 00:02:22.980
+Or if you have a different discreet
+distribution, you believe applies and
+
+33
+00:02:22.980 --> 00:02:25.521
+you'd like to fit,
+you can chase that down.
+
+34
+00:02:25.521 --> 00:02:29.677
+What we're going to do is try
+to build an ARMA model here.
+
+35
+00:02:29.677 --> 00:02:34.508
+In Shumway and Stoffer's book,
+Time Series Analysis and Its Applications,
+
+36
+00:02:34.508 --> 00:02:40.710
+there is a table that you'll actually see
+in various places on the Internet as well.
+
+37
+00:02:40.710 --> 00:02:45.510
+And it summarizes nicely how we like
+to think about our model building.
+
+38
+00:02:45.510 --> 00:02:47.110
+You can obtain the book for
+
+39
+00:02:47.110 --> 00:02:50.800
+free on the Internet as well,
+it's a terrific resource.
+
+40
+00:02:50.800 --> 00:02:54.600
+If you have an auto-regressive model,
+just pure auto-regressive,
+
+41
+00:02:54.600 --> 00:02:58.420
+then we've seen this before when
+we did our theoretical work.
+
+42
+00:02:58.420 --> 00:03:02.694
+The ACF, the auto-correlation function,
+will tail off, but
+
+43
+00:03:02.694 --> 00:03:06.032
+the PACF will cut off rather
+abruptly after lag p.
+
+44
+00:03:06.032 --> 00:03:08.740
+So that can help us to
+determine the order there.
+
+45
+00:03:09.870 --> 00:03:15.250
+Similarly, for a moving average model,
+the ACF is going to cut off
+
+46
+00:03:15.250 --> 00:03:20.070
+rather sharply after q, but
+the PACF will tail off.
+
+47
+00:03:21.080 --> 00:03:27.449
+Finally, if you have a mix model, both
+of these plats will appear to tail off.
+
+48
+00:03:27.449 --> 00:03:31.860
+Now when we do mathematics,
+we like have strict inequalities,
+
+49
+00:03:31.860 --> 00:03:35.712
+we like to have results that are clear and
+unambiguous.
+
+50
+00:03:35.712 --> 00:03:41.822
+If you have a time series, especially
+if it's a little bit on the short side,
+
+51
+00:03:41.822 --> 00:03:46.146
+and especially if it has noise,
+these bits of advice,
+
+52
+00:03:46.146 --> 00:03:51.410
+let's say, are harder to apply in
+practice than one might think.
+
+53
+00:03:52.410 --> 00:03:56.860
+So, tails off, intuitively we would
+believe that tails off means something
+
+54
+00:03:56.860 --> 00:03:59.070
+like exponential decay.
+
+55
+00:03:59.070 --> 00:04:03.700
+Cuts off after lag p, okay, so
+that's going to be more abrupt.
+
+56
+00:04:03.700 --> 00:04:07.710
+But if your system is noisy, telling
+the difference between something tailing
+
+57
+00:04:07.710 --> 00:04:12.410
+off and cutting off may not
+be as easy as you think.
+
+58
+00:04:12.410 --> 00:04:15.390
+So let's see what our plots look like.
+
+59
+00:04:16.730 --> 00:04:18.570
+We'll make the usual calls.
+
+60
+00:04:18.570 --> 00:04:21.994
+The ACF on discoveries and
+
+61
+00:04:21.994 --> 00:04:27.756
+the PACF on discoveries, and there you go.
+
+62
+00:04:31.850 --> 00:04:38.570
+There appear to be two, maybe three
+spikes above noise over here on the ACF.
+
+63
+00:04:39.870 --> 00:04:45.370
+That doesn't look like a very
+abrupt cutting off to me,
+
+64
+00:04:45.370 --> 00:04:47.340
+seems more like tailing off.
+
+65
+00:04:47.340 --> 00:04:48.920
+But again,
+there's some noise in the system.
+
+66
+00:04:48.920 --> 00:04:50.110
+It's a little bit hard to tell.
+
+67
+00:04:51.250 --> 00:04:59.290
+The PACF seems to tail off,
+so hard to say here.
+
+68
+00:04:59.290 --> 00:05:06.100
+I am seeing one, two maybe if you're
+generous, spikes above noise on the PACF.
+
+69
+00:05:06.100 --> 00:05:08.835
+And it looks like we have
+three spikes above noise here.
+
+70
+00:05:08.835 --> 00:05:14.330
+So it's probably a good idea in a case
+like this to try several competing models.
+
+71
+00:05:14.330 --> 00:05:17.480
+We'll put in different orders of p and q.
+
+72
+00:05:17.480 --> 00:05:23.170
+We have ways to assess relative quality
+of models, the AIC for instance.
+
+73
+00:05:23.170 --> 00:05:28.010
+And we'll do that for a reasonable number
+
+74
+00:05:28.010 --> 00:05:32.301
+of model types or candidate models.
+
+75
+00:05:32.301 --> 00:05:37.484
+So as we explore our ARMA models,
+let's let q go from 0 to 3,
+
+76
+00:05:37.484 --> 00:05:41.200
+and p go from 0 to 3 and see what we get.
+
+77
+00:05:41.200 --> 00:05:43.220
+We'll assess quality of
+the different models.
+
+78
+00:05:46.280 --> 00:05:49.035
+When I did this, it's a little tedious,
+
+79
+00:05:49.035 --> 00:05:52.276
+the full results are available
+in the readings.
+
+80
+00:05:52.276 --> 00:05:55.870
+But you should take five minutes and
+do this yourself.
+
+81
+00:05:55.870 --> 00:06:01.010
+You can either write a loop if you're so
+inclined, or just make continual calls to
+
+82
+00:06:01.010 --> 00:06:04.640
+ARMA, letting p and q both go from 0 to 3.
+
+83
+00:06:04.640 --> 00:06:06.802
+There just aren't that many of them.
+
+84
+00:06:06.802 --> 00:06:12.028
+When we do that, the AIC,
+if you wish to interrogate your model,
+
+85
+00:06:12.028 --> 00:06:18.480
+you can extract the AKAIKE information
+criterion with the AIC call.
+
+86
+00:06:18.480 --> 00:06:22.666
+The best one is 440.2 or
+
+87
+00:06:22.666 --> 00:06:26.820
+so, with a 1,0,1 model.
+
+88
+00:06:26.820 --> 00:06:32.316
+We can do very marginally better
+with a more complicated model,
+
+89
+00:06:32.316 --> 00:06:35.891
+but these numbers are really very close.
+
+90
+00:06:35.891 --> 00:06:40.502
+Then you have to ask yourself whether
+the extra complexity in model
+
+91
+00:06:40.502 --> 00:06:43.970
+is justified by the very
+small difference in AIC.
+
+92
+00:06:48.260 --> 00:06:52.758
+When I make a full call to
+ARMA with the order 1,0,1,
+
+93
+00:06:52.758 --> 00:06:56.412
+you can see the coefficients
+that we obtain and
+
+94
+00:06:56.412 --> 00:07:00.549
+you can see the output that
+we get from the ARMA call.
+
+95
+00:07:04.988 --> 00:07:07.420
+Now, there are automatic
+routines available.
+
+96
+00:07:08.610 --> 00:07:14.468
+If you have low orders of p and q,
+you may just want to do it all yourself.
+
+97
+00:07:14.468 --> 00:07:19.130
+But if you're rushed or lazy, auto.arima
+will come to the rescue for you.
+
+98
+00:07:20.760 --> 00:07:24.730
+The only little rub
+here is that auto.arima
+
+99
+00:07:24.730 --> 00:07:27.028
+is going to make an approximation.
+
+100
+00:07:27.028 --> 00:07:29.890
+If your time series gets long,
+
+101
+00:07:29.890 --> 00:07:33.680
+then the internal calculations
+starts to take a bit of time.
+
+102
+00:07:33.680 --> 00:07:38.230
+So, you can unpack this
+little zen co-on down here
+
+103
+00:07:38.230 --> 00:07:40.470
+to tell whether we're going to
+use an approximation or,
+
+104
+00:07:40.470 --> 00:07:44.960
+rather, whether auto.arima will use
+an approximation on our dataset.
+
+105
+00:07:49.505 --> 00:07:54.524
+Auto.arima lives in the forecast library,
+so we'll make a call there.
+
+106
+00:07:54.524 --> 00:08:00.920
+And we didn't see any evidence of trend,
+so we're going to let d equal 0.
+
+107
+00:08:00.920 --> 00:08:04.966
+I ran it with approximation=FALSE,
+and auto.arima,
+
+108
+00:08:04.966 --> 00:08:09.950
+like say 2,0,0 model,
+a second order auto-regressive model.
+
+109
+00:08:11.350 --> 00:08:18.066
+You can see that there are various ways
+implied by the output to auto.arima
+
+110
+00:08:18.066 --> 00:08:23.950
+that it will allow the user to make
+a choice on various selection criteria.
+
+111
+00:08:25.140 --> 00:08:27.626
+So there's the AIC, the corrected AIC and
+
+112
+00:08:27.626 --> 00:08:31.293
+the Bayesian Information Criterion
+are all available to you.
+
+113
+00:08:35.590 --> 00:08:38.324
+You may specify these in the call.
+
+114
+00:08:42.351 --> 00:08:45.840
+And this screen will show
+you how it might do that.
+
+115
+00:08:45.840 --> 00:08:52.170
+You can set a flag ic=bic or
+aic or the corrected aic.
+
+116
+00:08:53.860 --> 00:08:58.210
+When you send it forward with
+the Bayesian information criterion,
+
+117
+00:08:58.210 --> 00:09:00.280
+you return a 1,0,1 model.
+
+118
+00:09:00.280 --> 00:09:06.160
+The AIC returns a 3,0,0, and so on.
+
+119
+00:09:10.920 --> 00:09:15.040
+At this point, we're able to estimate
+coefficients in an ARMA model.
+
+120
+00:09:15.040 --> 00:09:21.504
+We can do this with setting calls to
+ARMA ourselves with orders p and q.
+
+121
+00:09:21.504 --> 00:09:26.507
+Or if you prefer, you can use you
+can use the auto.arima routine.
+
+122
+00:09:26.507 --> 00:09:30.060
+Within auto.arima,
+you can specify your selection criterion.
+
+123
+00:09:30.060 --> 00:09:32.514
+So, you get a little flexibility that way.
+
+124
+00:09:32.514 --> 00:09:35.919
+And then you'll use this to try
+to build a parsimonious model,
+
+125
+00:09:35.919 --> 00:09:37.535
+to understand your dataset.

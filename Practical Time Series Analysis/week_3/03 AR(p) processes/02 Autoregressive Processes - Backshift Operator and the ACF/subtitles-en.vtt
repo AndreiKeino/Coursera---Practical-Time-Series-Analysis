@@ -1,0 +1,672 @@
+WEBVTT
+
+1
+00:00:01.300 --> 00:00:05.070
+Welcome back to practical
+time series analysis.
+
+2
+00:00:05.070 --> 00:00:09.867
+We've been looking at simple stochastic
+processes that can be used to generate
+
+3
+00:00:09.867 --> 00:00:13.960
+the kinds of data that we see in science,
+business, engineering.
+
+4
+00:00:15.100 --> 00:00:19.300
+We've looked at moving average
+processes and in the last lecture or
+
+5
+00:00:19.300 --> 00:00:22.530
+two we're looking at
+autoregressive processes.
+
+6
+00:00:22.530 --> 00:00:27.512
+These are processes where the state of the
+system depends upon some sort of noise, or
+
+7
+00:00:27.512 --> 00:00:31.952
+innovation, or shock, together with
+some recent history of the system.
+
+8
+00:00:36.090 --> 00:00:41.870
+In this lecture, we'll work on expressing
+an autoregressive process of order p.
+
+9
+00:00:41.870 --> 00:00:46.380
+As a corresponding infinite
+order moving average process.
+
+10
+00:00:46.380 --> 00:00:49.630
+That sounds like we are about
+to make things more complicated.
+
+11
+00:00:49.630 --> 00:00:53.570
+But it's actually going to work for
+us beautifully as a simplification.
+
+12
+00:00:53.570 --> 00:00:59.000
+We'll use this to find the ACF
+fo an auto regressive process.
+
+13
+00:00:59.000 --> 00:01:04.150
+And we'll drill down and
+the order aggressive process of order 1.
+
+14
+00:01:04.150 --> 00:01:07.200
+And look at how
+the autocovariance structure,
+
+15
+00:01:07.200 --> 00:01:10.490
+the autocorrelation
+structure depends upon phi.
+
+16
+00:01:13.310 --> 00:01:19.470
+A little reminder, we take a series of
+white noise running variables Z sub c.
+
+17
+00:01:19.470 --> 00:01:21.250
+We'll take the mean of zero and
+
+18
+00:01:21.250 --> 00:01:24.660
+sigma squared is how we'll
+denote the common variance.
+
+19
+00:01:24.660 --> 00:01:29.907
+The auto regressive
+process looks like Z of T
+
+20
+00:01:29.907 --> 00:01:36.952
+time T plus the linear combination
+of states going back several lags.
+
+21
+00:01:36.952 --> 00:01:42.250
+The Backshift Operator we've seen
+is a way to express given a current
+
+22
+00:01:42.250 --> 00:01:47.630
+position a longer are so I guess
+suppresses look back by a position.
+
+23
+00:01:47.630 --> 00:01:54.140
+So B times X sub t is going to give
+you the system t to times t-1.
+
+24
+00:01:54.140 --> 00:02:00.003
+If we apply B squared to Xt would
+that the system t, t-2 etc.
+
+25
+00:02:00.003 --> 00:02:05.731
+So if we're going to form an expression
+for the auto regressive process,
+
+26
+00:02:05.731 --> 00:02:10.990
+we can say x of t looks like noise
+plus five one times shift on x of t.
+
+27
+00:02:10.990 --> 00:02:16.280
+There's your x of t minus one all the way
+down and we'll do it for several states.
+
+28
+00:02:19.680 --> 00:02:21.490
+How's this going to help us?
+
+29
+00:02:21.490 --> 00:02:24.820
+Certainly we can start writing
+things more compactly.
+
+30
+00:02:24.820 --> 00:02:29.400
+A polynomial that we'll
+encounter often capital fi of b
+
+31
+00:02:29.400 --> 00:02:34.790
+is just how we would write the noise if
+we want to express noise as an operator
+
+32
+00:02:34.790 --> 00:02:39.740
+on x t and this actually is
+going to be useful for us.
+
+33
+00:02:39.740 --> 00:02:45.290
+We could write Xt as 1 / 1- this
+polynomial term right here.
+
+34
+00:02:46.700 --> 00:02:51.080
+And then we make the important point
+that we're going to try to express that
+
+35
+00:02:51.080 --> 00:02:54.780
+as an infinite order moving average.
+
+36
+00:02:54.780 --> 00:03:00.892
+So we'll have the time delays and
+suitable coefficient operating on Zt.
+
+37
+00:03:03.646 --> 00:03:08.640
+If that's a little too obstruct, let's
+take a p equals 1 first order example.
+
+38
+00:03:09.830 --> 00:03:13.040
+Current state at time t
+is going to look like
+
+39
+00:03:13.040 --> 00:03:16.834
+some noise plus pi times
+the state at time t- 1.
+
+40
+00:03:18.150 --> 00:03:23.070
+But we can just apply this to t-1,
+this theta times t-1.
+
+41
+00:03:23.070 --> 00:03:28.010
+So Xt is Z sub t +, now we'll take phi and
+
+42
+00:03:28.010 --> 00:03:33.770
+we're going to expand t sub t-1,
+the state of the system one period ago.
+
+43
+00:03:33.770 --> 00:03:35.680
+As noise one period ago.
+
+44
+00:03:35.680 --> 00:03:39.350
+Plus phi times C to
+the system two periods ago.
+
+45
+00:03:41.160 --> 00:03:45.980
+Nothing's stopping us we're doing
+the same process for x sub t minus two.
+
+46
+00:03:45.980 --> 00:03:50.860
+So we'll get to see that the system looks
+like noise plus phi times noise one
+
+47
+00:03:50.860 --> 00:03:56.300
+period ago plus phi squared
+times noise two periods ago.
+
+48
+00:03:56.300 --> 00:03:59.950
+And, of course, we're going to have to
+accommodate the state of the system
+
+49
+00:03:59.950 --> 00:04:02.000
+three periods ago,
+when we do our expansion.
+
+50
+00:04:03.290 --> 00:04:07.220
+I've only gone down for a few steps but
+I think you can see the pattern.
+
+51
+00:04:07.220 --> 00:04:10.340
+This might be a little easier to see
+if we use the operative notation
+
+52
+00:04:12.380 --> 00:04:14.190
+when we do the operator approach.
+
+53
+00:04:14.190 --> 00:04:18.460
+We'll take system state at time
+t looks like noise plus phi
+
+54
+00:04:18.460 --> 00:04:21.650
+times the state one time period ago.
+
+55
+00:04:21.650 --> 00:04:25.440
+And now we're going to treat our operator
+almost like it was a number, and
+
+56
+00:04:25.440 --> 00:04:28.390
+we're just going to do algebra on it.
+
+57
+00:04:28.390 --> 00:04:33.830
+X sub t is 1 over 1- this term here,
+times Z sub t.
+
+58
+00:04:35.070 --> 00:04:40.270
+And let's expand to that around the way
+we would through geometric series.
+
+59
+00:04:40.270 --> 00:04:42.880
+I've got 1 over 1- pi times B.
+
+60
+00:04:42.880 --> 00:04:51.068
+And I'll take that as pi B +
+pi squared B squared, etc.
+
+61
+00:04:54.198 --> 00:04:57.530
+And of course,
+this is the formula that we'd be use.
+
+62
+00:04:57.530 --> 00:05:02.040
+1 over 1 minus a is the infinite sum 1 and
+
+63
+00:05:02.040 --> 00:05:05.660
+then we'll keep raising our number
+to great and greater powers.
+
+64
+00:05:05.660 --> 00:05:08.864
+We're treating 5 times
+b as the number a here.
+
+65
+00:05:12.470 --> 00:05:14.140
+So why did we do all this?
+
+66
+00:05:15.310 --> 00:05:19.660
+Because now our results are,
+one would say almost trivial.
+
+67
+00:05:19.660 --> 00:05:25.060
+The expected value of an order
+aggressive process of order P will
+
+68
+00:05:25.060 --> 00:05:29.220
+look at the expected value of
+state of the system times t.
+
+69
+00:05:29.220 --> 00:05:35.500
+That's the expected value of
+these sum here of operators and
+
+70
+00:05:35.500 --> 00:05:39.160
+proficients are reading on Z's of t.
+
+71
+00:05:39.160 --> 00:05:44.070
+The expect value of course will
+distribute over the sum will pull our
+
+72
+00:05:44.070 --> 00:05:50.060
+coefficient through the expected value
+operator and will also take the B's.
+
+73
+00:05:50.060 --> 00:05:55.157
+And we'll apply them to the Z sub
+t to the noise to get B time Z
+
+74
+00:05:55.157 --> 00:06:01.310
+sub t is noise period to go B squared
+Z sub t is noise two periods ago etc.
+
+75
+00:06:01.310 --> 00:06:07.160
+We are left with the expected
+value of X sub t looks like.
+
+76
+00:06:07.160 --> 00:06:10.260
+The expected value of
+the noise at the current time.
+
+77
+00:06:10.260 --> 00:06:14.890
+Constant time's expected value
+the noise one period ago etcetera.
+
+78
+00:06:14.890 --> 00:06:16.500
+That's an infinite sum.
+
+79
+00:06:16.500 --> 00:06:19.240
+But all these expected
+value terms evaluate to 0.
+
+80
+00:06:19.240 --> 00:06:26.110
+So the expected value of our auto
+regressive process in fact is 0.
+
+81
+00:06:26.110 --> 00:06:31.150
+The variances the same
+approach basically the same.
+
+82
+00:06:31.150 --> 00:06:35.600
+Manipulation except when we take the
+variance and we apply it through our sum,
+
+83
+00:06:36.820 --> 00:06:40.730
+we'll have the variance operated
+distribute over terms in our sum.
+
+84
+00:06:40.730 --> 00:06:46.680
+That's true and I've taken liberty of
+applying the time shift operator as well.
+
+85
+00:06:46.680 --> 00:06:51.260
+But constants come through the variance
+operator as constants squared.
+
+86
+00:06:51.260 --> 00:06:55.520
+So theta 1 will come through as theta 1
+squared, theta 2 is theta 2 squared, etc.
+
+87
+00:06:57.640 --> 00:07:01.990
+The variances are constant,
+I'll call it sigma sub z here,
+
+88
+00:07:01.990 --> 00:07:07.560
+squared Just to remind us that this is
+variance of the noise random variable.
+
+89
+00:07:07.560 --> 00:07:11.120
+And each of these will produce
+a sigma squared term, so
+
+90
+00:07:11.120 --> 00:07:12.870
+I'm going to pull those out.
+
+91
+00:07:12.870 --> 00:07:16.480
+And we're left with sigma
+squared times this sum.
+
+92
+00:07:17.710 --> 00:07:21.610
+Evidently we have the necessarily
+condition for stationarity.
+
+93
+00:07:21.610 --> 00:07:24.400
+We would like that variance
+to be constant, and so
+
+94
+00:07:24.400 --> 00:07:27.020
+we need that infinite sum to converge.
+
+95
+00:07:30.270 --> 00:07:33.320
+Moving to the autocovariance, and
+
+96
+00:07:33.320 --> 00:07:35.270
+we'll get to the autocorrelation
+in just a moment.
+
+97
+00:07:36.620 --> 00:07:41.510
+We can take the autocovariance
+looking as that constant
+
+98
+00:07:41.510 --> 00:07:45.260
+variance and
+then we have a sum of terms like this.
+
+99
+00:07:45.260 --> 00:07:50.230
+Remember we're only going to get
+contributions where the variables overlap.
+
+100
+00:07:51.450 --> 00:07:57.111
+Four and A are a P process then,
+we'll get sigma of K looking like constant
+
+101
+00:07:57.111 --> 00:08:02.132
+term we're taking the order Q up
+to infinity so the only thing that
+
+102
+00:08:02.132 --> 00:08:07.828
+really changes moving from here to here
+Is the infinite limit up top here.
+
+103
+00:08:11.340 --> 00:08:15.950
+It turns out that this gives us a very
+simple formula for the autocorrelation.
+
+104
+00:08:17.140 --> 00:08:19.360
+We're going to get a fair
+amount of cancelling and
+
+105
+00:08:19.360 --> 00:08:21.090
+we'll have terms that look like this.
+
+106
+00:08:23.050 --> 00:08:24.150
+Let's see some examples.
+
+107
+00:08:26.630 --> 00:08:32.000
+If we have an AR(1) I have phi
+here as a generic coefficient.
+
+108
+00:08:32.000 --> 00:08:38.687
+When we apply our formulas, then the theta
+i becomes 5 raised to the ith power.
+
+109
+00:08:38.687 --> 00:08:43.260
+Theta i + k becomes phi
+raised to the i + kth power.
+
+110
+00:08:43.260 --> 00:08:44.540
+Our sum is on i.
+
+111
+00:08:44.540 --> 00:08:46.890
+That's the variable at
+the site of our sum.
+
+112
+00:08:46.890 --> 00:08:53.290
+The K is constant, so I'm going to pull pi
+raised to the Kth power out of the sum.
+
+113
+00:08:53.290 --> 00:08:55.180
+You can see that right here.
+
+114
+00:08:55.180 --> 00:09:00.510
+Leaving us inside of the sum with pi
+raised to the I times pi raised to the I.
+
+115
+00:09:02.030 --> 00:09:07.280
+So we have a simple formula for
+the autocode variance
+
+116
+00:09:07.280 --> 00:09:12.050
+We have an even simpler formula for
+the auto correlation.
+
+117
+00:09:12.050 --> 00:09:13.800
+Its just phi raise to the kth power.
+
+118
+00:09:17.210 --> 00:09:22.299
+Now if we have our coefficients
+looking like 0.9 and
+
+119
+00:09:22.299 --> 00:09:26.640
+0.2 we can see that when our coefficient
+is 0.9 I've called it out for
+
+120
+00:09:26.640 --> 00:09:29.340
+this graph, this is the phi for
+the proceeding graph.
+
+121
+00:09:30.410 --> 00:09:32.980
+We'll have something that
+to case rather slowly.
+
+122
+00:09:34.420 --> 00:09:37.900
+You can imagine as
+the coefficient approaches one,
+
+123
+00:09:37.900 --> 00:09:40.910
+that the decay will become slower and
+slower.
+
+124
+00:09:42.430 --> 00:09:47.270
+If we have alpha point two,
+that's rather a lone number.
+
+125
+00:09:47.270 --> 00:09:50.060
+The correlations are going to
+dot off really quickly.
+
+126
+00:09:51.350 --> 00:09:53.190
+What happens if we have
+negative correlations?
+
+127
+00:09:55.340 --> 00:10:02.480
+If our coefficient is negative as we
+raise it to succeeding powers, we'll see
+
+128
+00:10:02.480 --> 00:10:08.340
+that our auto-correlation function becomes
+negative, positive, negative, positive.
+
+129
+00:10:08.340 --> 00:10:10.960
+Here the correlate or
+the coefficient is point 3.
+
+130
+00:10:10.960 --> 00:10:13.500
+So you get rather rapid decay.
+
+131
+00:10:13.500 --> 00:10:15.920
+When the coefficient is -.8,
+
+132
+00:10:15.920 --> 00:10:20.395
+the alternating character
+looks very pronounced.
+
+133
+00:10:20.395 --> 00:10:22.235
+And the decay is slower.
+
+134
+00:10:25.225 --> 00:10:29.505
+What we've learned in this
+lecture is that an AR(p) process
+
+135
+00:10:29.505 --> 00:10:33.415
+can be expressed as an infinite
+order moving average process.
+
+136
+00:10:33.415 --> 00:10:38.295
+This has the advantage of making some
+theoretical results very easy to show.
+
+137
+00:10:38.295 --> 00:10:43.790
+We're able to find the ACF Of
+a what a regressive processes way.
+
+138
+00:10:43.790 --> 00:10:48.450
+And we've seen how
+the coefficient phi is going to
+
+139
+00:10:48.450 --> 00:10:53.230
+determine the ACF for
+first order auto regressive process.

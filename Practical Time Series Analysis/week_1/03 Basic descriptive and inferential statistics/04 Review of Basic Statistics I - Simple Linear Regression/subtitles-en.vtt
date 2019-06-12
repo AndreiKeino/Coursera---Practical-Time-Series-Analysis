@@ -1,0 +1,389 @@
+WEBVTT
+
+1
+00:00:00.410 --> 00:00:04.740
+Welcome to practical time series analysis.
+
+2
+00:00:04.740 --> 00:00:07.125
+In these introductory lectures,
+
+3
+00:00:07.125 --> 00:00:10.230
+we're reviewing some basic statistical concepts.
+
+4
+00:00:10.230 --> 00:00:12.330
+In this particular lecture,
+
+5
+00:00:12.330 --> 00:00:19.160
+we'll look at linear regression or ordinary least squares as people call it.
+
+6
+00:00:19.180 --> 00:00:24.685
+In this lecture, we'll learn how to plot time series data
+
+7
+00:00:24.685 --> 00:00:29.730
+and we'll learn how to fit a linear model to a set of ordered pairs.
+
+8
+00:00:29.730 --> 00:00:31.995
+If your background in statistics is strong,
+
+9
+00:00:31.995 --> 00:00:35.470
+you can move very quickly through these lectures.
+
+10
+00:00:35.470 --> 00:00:39.835
+R comes complete with a variety of datasets.
+
+11
+00:00:39.835 --> 00:00:42.800
+If you'd like a little narrative summary explaining
+
+12
+00:00:42.800 --> 00:00:46.465
+your dataset you can use the help command. We've done that here.
+
+13
+00:00:46.465 --> 00:00:48.890
+We looked at the command help on
+
+14
+00:00:48.890 --> 00:00:54.413
+the CO2 dataset and I've put some of the output right here for you,
+
+15
+00:00:54.413 --> 00:01:01.930
+atmospheric concentrations of carbon dioxide over a set of years.
+
+16
+00:01:01.930 --> 00:01:03.845
+When we plot our data set,
+
+17
+00:01:03.845 --> 00:01:07.040
+you can see that a linear model is not going to
+
+18
+00:01:07.040 --> 00:01:11.645
+capture all of the interesting behavior in this data set.
+
+19
+00:01:11.645 --> 00:01:16.400
+First of all, there is a rising trend to the set of data but it doesn't look like
+
+20
+00:01:16.400 --> 00:01:23.110
+a straight line is really our best object for this dataset as far as trend goes.
+
+21
+00:01:23.110 --> 00:01:24.590
+Even worse, there is
+
+22
+00:01:24.590 --> 00:01:32.590
+this oscillatory piece that a straight line is just not going to capture it all.
+
+23
+00:01:32.590 --> 00:01:39.675
+The idea behind linear regression is that you have a response variable,
+
+24
+00:01:39.675 --> 00:01:42.795
+here that will be carbon dioxide concentration,
+
+25
+00:01:42.795 --> 00:01:45.660
+and you feel that it depends at least
+
+26
+00:01:45.660 --> 00:01:48.965
+somewhat on the explanatory variable in a linear way.
+
+27
+00:01:48.965 --> 00:01:54.930
+Our particular dataset shows the deficiencies of this approach and in fact our time
+
+28
+00:01:54.930 --> 00:01:57.880
+series cores allow us to move beyond
+
+29
+00:01:57.880 --> 00:02:02.925
+the simple linear regression to more sophisticated techniques.
+
+30
+00:02:02.925 --> 00:02:09.825
+The response variable is thought to be a linear model plus some noise.
+
+31
+00:02:09.825 --> 00:02:12.935
+This noise term does a lot of work for us.
+
+32
+00:02:12.935 --> 00:02:17.310
+If you just want to fit a straight line to a set of data, that's fine.
+
+33
+00:02:17.310 --> 00:02:20.630
+The ordinary least squares approach will always do that for you.
+
+34
+00:02:20.630 --> 00:02:23.483
+If you want to start drawing inferences though,
+
+35
+00:02:23.483 --> 00:02:26.140
+you need to invoke some distributional assumptions
+
+36
+00:02:26.140 --> 00:02:29.935
+and this error term is our way of doing that.
+
+37
+00:02:29.935 --> 00:02:33.550
+The error term can come about in a variety of ways.
+
+38
+00:02:33.550 --> 00:02:35.430
+You might have measurement error,
+
+39
+00:02:35.430 --> 00:02:41.360
+you might not have all of the important variables in your model.
+
+40
+00:02:41.360 --> 00:02:45.845
+There are a number of ways that we can produce error in a model.
+
+41
+00:02:45.845 --> 00:02:49.745
+Now, if you want to do some inference there are some,
+
+42
+00:02:49.745 --> 00:02:54.080
+what I would think of as, vanilla assumptions.
+
+43
+00:02:54.080 --> 00:02:59.885
+The errors in the simplest case would be normally distributed in an average zero.
+
+44
+00:02:59.885 --> 00:03:02.480
+They'd have the same variance.
+
+45
+00:03:02.480 --> 00:03:06.680
+And when you do regression in a more mature way than we'll do in
+
+46
+00:03:06.680 --> 00:03:11.870
+this lecture you learn how to critique these assumptions.
+
+47
+00:03:11.870 --> 00:03:14.600
+Also, we'll assume that the errors in
+
+48
+00:03:14.600 --> 00:03:21.190
+simple ordinary least squares will assume that the errors are independent.
+
+49
+00:03:21.190 --> 00:03:26.280
+Now that in a time series course makes the modeling a little bit boring.
+
+50
+00:03:26.280 --> 00:03:29.525
+But again, we're just starting here.
+
+51
+00:03:29.525 --> 00:03:33.910
+The basic idea behind ordinary least squares is to get
+
+52
+00:03:33.910 --> 00:03:37.780
+your observed data point and compare it to
+
+53
+00:03:37.780 --> 00:03:42.545
+what your choice of slope and intercept would predict.
+
+54
+00:03:42.545 --> 00:03:45.170
+So I can throw any numbers I like in for
+
+55
+00:03:45.170 --> 00:03:49.450
+a slope and intercept and that'll give me a prediction.
+
+56
+00:03:49.450 --> 00:03:51.620
+If I look at what I've observed and compare it to
+
+57
+00:03:51.620 --> 00:03:54.220
+that prediction then what we're going to
+
+58
+00:03:54.220 --> 00:04:00.575
+do is square our terms and come up with an aggregate error.
+
+59
+00:04:00.575 --> 00:04:03.700
+The idea behind ordinary least squares of course,
+
+60
+00:04:03.700 --> 00:04:09.125
+is that we'll make this aggregate error as small as mathematically possible.
+
+61
+00:04:09.125 --> 00:04:13.630
+It really only takes a little bit of calculus in order to do this.
+
+62
+00:04:13.630 --> 00:04:17.788
+Rather than work with the calculations by hand,
+
+63
+00:04:17.788 --> 00:04:21.575
+we'll let R do the calculation for us.
+
+64
+00:04:21.575 --> 00:04:26.114
+The LM, command, linear model command, will take CO2,
+
+65
+00:04:26.114 --> 00:04:32.473
+it knows to come into your time series and extract the variable of interest here,
+
+66
+00:04:32.473 --> 00:04:36.855
+CO2 concentrations, will take CO2 on.
+
+67
+00:04:36.855 --> 00:04:42.000
+Now the CO2 time series has a time part to it.
+
+68
+00:04:42.000 --> 00:04:46.430
+You can think of it as response together with time and in
+
+69
+00:04:46.430 --> 00:04:51.780
+order to extract the time part we'll use the little command here called time.
+
+70
+00:04:51.780 --> 00:04:56.330
+I've put parentheses around this line in order to have
+
+71
+00:04:56.330 --> 00:05:01.710
+the output appear on the screen and I've copied and pasted in this slide for you.
+
+72
+00:05:01.710 --> 00:05:03.770
+You can see that the intercept,
+
+73
+00:05:03.770 --> 00:05:12.925
+the best intercept is something like negative 2000 and the best slope is 1.3 or so.
+
+74
+00:05:12.925 --> 00:05:16.350
+Now take this number here with a little bit of caution.
+
+75
+00:05:16.350 --> 00:05:19.475
+We're not saying that at time zero, the intercept,
+
+76
+00:05:19.475 --> 00:05:24.315
+the carbon dioxide concentration would be negative 2000.
+
+77
+00:05:24.315 --> 00:05:26.965
+That's sort of a meaningless thing to say.
+
+78
+00:05:26.965 --> 00:05:29.345
+But given our dataset,
+
+79
+00:05:29.345 --> 00:05:32.225
+the best intercept for that cloud,
+
+80
+00:05:32.225 --> 00:05:36.230
+that scatterplot, really would be negative 2000.
+
+81
+00:05:36.230 --> 00:05:39.245
+We will not extrapolate back that far.
+
+82
+00:05:39.245 --> 00:05:44.530
+Our model utility would have broken down long before then.
+
+83
+00:05:44.690 --> 00:05:49.330
+If you'd like to plot your line and include
+
+84
+00:05:49.330 --> 00:05:52.765
+the data I've just reproduced the plot command here.
+
+85
+00:05:52.765 --> 00:05:56.485
+And I'm going to use the command now a b line.
+
+86
+00:05:56.485 --> 00:05:58.660
+So this is intercept slope line.
+
+87
+00:05:58.660 --> 00:06:02.645
+So I'll do that on the model that we developed.
+
+88
+00:06:02.645 --> 00:06:10.270
+If you do that then you'll see your original data set increasing in time,
+
+89
+00:06:10.270 --> 00:06:15.130
+though a straight line is not the best model there probably even to capture the trend,
+
+90
+00:06:15.130 --> 00:06:20.470
+increasing in time but also with an oscillatory part.
+
+91
+00:06:20.470 --> 00:06:24.490
+In the next lecture we'll look at our errors and
+
+92
+00:06:24.490 --> 00:06:28.020
+try to say something meaningful about the errors.
+
+93
+00:06:28.020 --> 00:06:31.120
+But for right now we've been able to fit the best,
+
+94
+00:06:31.120 --> 00:06:35.425
+arithmetically best, straight line to this dataset.
+
+95
+00:06:35.425 --> 00:06:40.330
+At this point given a set of x and y values you should be able to
+
+96
+00:06:40.330 --> 00:06:45.245
+plot your data and fit a linear model to your set of ordered pairs.
+
+97
+00:06:45.245 --> 00:06:49.990
+We will critique the modeling process in the next lecture.

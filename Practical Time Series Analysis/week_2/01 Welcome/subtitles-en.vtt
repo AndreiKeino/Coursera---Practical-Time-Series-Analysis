@@ -1,0 +1,97 @@
+WEBVTT
+
+1
+00:00:00.220 --> 00:00:04.379
+Welcome back to Practical Time Series Analysis,
+
+2
+00:00:04.379 --> 00:00:06.785
+and welcome to week two.
+
+3
+00:00:06.785 --> 00:00:11.685
+Now that we have many of our mathematical and statistical preliminaries out of the way,
+
+4
+00:00:11.685 --> 00:00:15.285
+we can start engaging actual time series themselves.
+
+5
+00:00:15.285 --> 00:00:19.500
+So, what we'll do this week is learn how to take advantage of
+
+6
+00:00:19.500 --> 00:00:22.590
+the tremendous insights and intuition we can get
+
+7
+00:00:22.590 --> 00:00:26.365
+just by doing a simple XY plot for a time series,
+
+8
+00:00:26.365 --> 00:00:31.230
+looking for trends, seasonality, and other patterns.
+
+9
+00:00:31.230 --> 00:00:35.280
+We'll begin learning how to analyze time series with
+
+10
+00:00:35.280 --> 00:00:41.500
+the many functions available to us through R. In particular,
+
+11
+00:00:41.500 --> 00:00:45.300
+we'll start looking at the Autocorrelation Function.
+
+12
+00:00:45.300 --> 00:00:49.980
+Now, if you just have a sequence of unrelated data points,
+
+13
+00:00:49.980 --> 00:00:51.935
+in essence, if you just have noise,
+
+14
+00:00:51.935 --> 00:00:54.290
+well, you're not going to see much structure there.
+
+15
+00:00:54.290 --> 00:00:57.850
+But very often, times series do exhibit
+
+16
+00:00:57.850 --> 00:01:03.560
+a relationship between neighbors that we can describe with the Autocorrelation Function.
+
+17
+00:01:03.560 --> 00:01:09.250
+And this week, we'll learn how to obtain those and how to start using those.
+
+18
+00:01:09.250 --> 00:01:15.335
+We can also get a lot of insight into the processes that generate time series,
+
+19
+00:01:15.335 --> 00:01:18.065
+your so-called Stochastic processes.
+
+20
+00:01:18.065 --> 00:01:21.990
+If we can write some software simulations ourselves,
+
+21
+00:01:21.990 --> 00:01:23.730
+and we begin in week two,
+
+22
+00:01:23.730 --> 00:01:27.310
+writing very simple but nonetheless useful,
+
+23
+00:01:27.310 --> 00:01:32.470
+simulated data, a simulated time series.
+
+24
+00:01:32.470 --> 00:01:34.670
+So, welcome to week two.

@@ -1,0 +1,657 @@
+WEBVTT
+
+1
+00:00:01.460 --> 00:00:04.510
+Welcome back to
+Practical Time Series Analysis.
+
+2
+00:00:05.860 --> 00:00:12.010
+We're looking at stochastic processes and
+their realizations called time series.
+
+3
+00:00:12.010 --> 00:00:17.020
+And in these lectures, we're looking at
+them through the lens of stationarity.
+
+4
+00:00:17.020 --> 00:00:22.980
+Stationarity is a crucial concept for
+us and it's a very important idea
+
+5
+00:00:22.980 --> 00:00:28.420
+that allows us to try to say something
+meaningful about the stochastic process,
+
+6
+00:00:28.420 --> 00:00:33.410
+a complicated mathematical object
+based upon a single realization or
+
+7
+00:00:33.410 --> 00:00:34.580
+a time series.
+
+8
+00:00:34.580 --> 00:00:37.250
+Perhaps a day that's set
+that you have acquired.
+
+9
+00:00:37.250 --> 00:00:39.830
+This is something you
+can't do with a coin.
+
+10
+00:00:39.830 --> 00:00:45.390
+If you have a coin and
+you observe tails on one toss,
+
+11
+00:00:45.390 --> 00:00:48.960
+you can't really say anything
+meaningful about the coin or
+
+12
+00:00:48.960 --> 00:00:51.600
+at least the distribution of heads and
+tails.
+
+13
+00:00:51.600 --> 00:00:55.420
+All you can really say is that yes,
+this coin can give a tails but
+
+14
+00:00:55.420 --> 00:00:57.870
+you can't say anything beyond that.
+
+15
+00:00:57.870 --> 00:01:00.870
+So, stationarity really helps
+us to get some good work done.
+
+16
+00:01:02.380 --> 00:01:07.790
+We're looking at stationarity through some
+very simple examples as we get started.
+
+17
+00:01:07.790 --> 00:01:09.900
+These are more mathematically oriented.
+
+18
+00:01:09.900 --> 00:01:14.580
+And as we move through the course,
+we move more into data sets.
+
+19
+00:01:14.580 --> 00:01:17.270
+Right now,
+we're thinking about white noise.
+
+20
+00:01:17.270 --> 00:01:20.440
+White noise will be trivially stationary.
+
+21
+00:01:20.440 --> 00:01:24.080
+Random walks,
+which will not be stationary.
+
+22
+00:01:24.080 --> 00:01:27.390
+And we'll look at an introduction
+to moving averages.
+
+23
+00:01:27.390 --> 00:01:30.903
+These will be stationary processes.
+
+24
+00:01:30.903 --> 00:01:33.630
+Recall the definition.
+
+25
+00:01:33.630 --> 00:01:38.291
+Process is weakly stationary if
+the mean function as we look up and
+
+26
+00:01:38.291 --> 00:01:43.630
+down the stochastic process and look
+at the average going on of each point,
+
+27
+00:01:43.630 --> 00:01:46.650
+the mean function is constant.
+
+28
+00:01:46.650 --> 00:01:49.412
+It is the same everywhere we look.
+
+29
+00:01:49.412 --> 00:01:56.490
+The ACF, the autocovariance function,
+but depends just upon lag spacing.
+
+30
+00:01:56.490 --> 00:01:59.660
+Again, it doesn't matter where
+you are along the process.
+
+31
+00:01:59.660 --> 00:02:02.970
+If you have two random variables and
+you would like to know their covariance,
+
+32
+00:02:02.970 --> 00:02:05.730
+all you need to know is how
+far away they're separated.
+
+33
+00:02:05.730 --> 00:02:08.012
+Not where they are along the process.
+
+34
+00:02:10.672 --> 00:02:13.850
+As promised, white noise is stationary.
+
+35
+00:02:15.120 --> 00:02:19.380
+If you think of a random variable family,
+let's say a set,
+
+36
+00:02:19.380 --> 00:02:23.930
+a sequence of IID random variables,
+they might be normally distributed but
+
+37
+00:02:23.930 --> 00:02:25.680
+really they don't have to be.
+
+38
+00:02:25.680 --> 00:02:28.250
+All we care about at the moment
+is that they're independent,
+
+39
+00:02:28.250 --> 00:02:32.900
+identically distributed with mean of 0 and
+constant variance.
+
+40
+00:02:34.330 --> 00:02:40.090
+Then the mean function,
+as a function of index t is 0 everywhere,
+
+41
+00:02:40.090 --> 00:02:42.380
+so of course it's constant.
+
+42
+00:02:42.380 --> 00:02:47.430
+If you look at the autocovariance
+function, gamma of t1 and t2, then we find
+
+43
+00:02:47.430 --> 00:02:53.280
+that that's essentially a delta function,
+it's 0 when t1 and t2 do not agree.
+
+44
+00:02:53.280 --> 00:02:57.304
+In other words, when you have two
+different random variables and
+
+45
+00:02:57.304 --> 00:03:01.709
+as sigma squared, it reduces
+the variance when the subscripts agree.
+
+46
+00:03:01.709 --> 00:03:07.115
+So, almost trivially you could
+say white noise is stationary.
+
+47
+00:03:09.459 --> 00:03:12.340
+Random walks on the other
+hand are not stationary.
+
+48
+00:03:13.605 --> 00:03:18.345
+Let's build a random walk off of
+a family of IID random variables.
+
+49
+00:03:19.545 --> 00:03:24.245
+I'm using mu and sigma squared for
+the mean, and the variance for
+
+50
+00:03:24.245 --> 00:03:26.390
+each one of the random variables.
+
+51
+00:03:26.390 --> 00:03:31.790
+Mu could be 0, but in general,
+we'll go with a generic mu.
+
+52
+00:03:31.790 --> 00:03:35.110
+We build a walk in t steps as
+
+53
+00:03:35.110 --> 00:03:39.480
+your first position will be just where
+you got to off of your first variable.
+
+54
+00:03:40.700 --> 00:03:45.810
+Your second position is where you get
+to by adding your first position and
+
+55
+00:03:45.810 --> 00:03:49.771
+now taking another step of
+size to be determined by Z2.
+
+56
+00:03:49.771 --> 00:03:55.400
+And we continue in that way, moving to
+the left or the right in random amounts.
+
+57
+00:03:56.550 --> 00:04:00.650
+Your position at any time,
+t then, is just the sum,
+
+58
+00:04:00.650 --> 00:04:04.670
+the aggregate of all
+the individual steps you took.
+
+59
+00:04:04.670 --> 00:04:08.050
+A journey is really just the sum
+of its individual steps.
+
+60
+00:04:10.870 --> 00:04:16.360
+When we explore the expected value
+as a function of index t here for
+
+61
+00:04:16.360 --> 00:04:18.858
+our position x.
+
+62
+00:04:18.858 --> 00:04:22.910
+Then and it can encourage enough
+to think about expected value,
+
+63
+00:04:22.910 --> 00:04:28.140
+not really as a number associated with
+random variable but more as an operator
+
+64
+00:04:28.140 --> 00:04:32.820
+that will make many variable manipulations
+much, much simpler to comprehend.
+
+65
+00:04:32.820 --> 00:04:38.190
+Then we take an expected value of sum
+of these independent random variables.
+
+66
+00:04:38.190 --> 00:04:41.630
+The expected value operator
+moves through the sum.
+
+67
+00:04:41.630 --> 00:04:44.601
+That is an appropriate independence
+that just happens with random variables
+
+68
+00:04:44.601 --> 00:04:45.930
+generically.
+
+69
+00:04:45.930 --> 00:04:50.450
+And we find that the expected value
+of position looks like t times Mu.
+
+70
+00:04:51.880 --> 00:04:57.780
+In other words if mu is not zero,
+the expected value is growing with time.
+
+71
+00:04:59.220 --> 00:05:00.599
+Same for the variance.
+
+72
+00:05:00.599 --> 00:05:05.852
+Since the X sub t is built on a family
+of independent increments here,
+
+73
+00:05:05.852 --> 00:05:12.400
+the Z of t, then that will allow the
+variance upper to move through the sum.
+
+74
+00:05:12.400 --> 00:05:16.200
+In general, it won't, now that there's
+a dependency structure among Z.
+
+75
+00:05:16.200 --> 00:05:20.910
+But here, we started with independent
+identically distributed random variable.
+
+76
+00:05:20.910 --> 00:05:23.750
+So, the variance operator moves
+to the summation, no problem.
+
+77
+00:05:24.770 --> 00:05:27.720
+Variance grows with time.
+
+78
+00:05:27.720 --> 00:05:30.700
+Variance is increasingly
+linearly with time.
+
+79
+00:05:31.950 --> 00:05:36.200
+To have a meaningful process, we won't
+take sigma squared equals to zero.
+
+80
+00:05:36.200 --> 00:05:39.800
+So, you are seeing that
+the variance is not constant.
+
+81
+00:05:39.800 --> 00:05:43.420
+If the variance isn't constant,
+your process is not stationary.
+
+82
+00:05:47.370 --> 00:05:50.980
+Another one of the canonical
+stochastic processes
+
+83
+00:05:50.980 --> 00:05:54.930
+has to do with taking
+a family of random variables.
+
+84
+00:05:54.930 --> 00:05:58.730
+We'll work with IID, independent
+identically distributed Z sub t.
+
+85
+00:06:00.060 --> 00:06:04.090
+We'll give them zero mean and
+constant variance.
+
+86
+00:06:04.090 --> 00:06:10.760
+We'll define a moving average process of
+order q as this called as X of t is equal
+
+87
+00:06:10.760 --> 00:06:16.970
+to a linear combination
+of the underlying Z's.
+
+88
+00:06:16.970 --> 00:06:22.300
+You can center your notation
+by looking at Z of t and
+
+89
+00:06:22.300 --> 00:06:26.100
+then moving up and down along Z of t.
+
+90
+00:06:26.100 --> 00:06:29.350
+But we'll follow the notation,
+the convention that says
+
+91
+00:06:29.350 --> 00:06:34.480
+that X is a function of index
+t is equal to the noise at t
+
+92
+00:06:34.480 --> 00:06:40.160
+plus the noise at t-1 and we're giving
+a certain weighting as we move through.
+
+93
+00:06:40.160 --> 00:06:44.960
+There are different sets of beta that
+people like for different processes.
+
+94
+00:06:44.960 --> 00:06:47.557
+You might have an image and
+you might be smoothing it or
+
+95
+00:06:47.557 --> 00:06:49.295
+you might be doing edge detection.
+
+96
+00:06:49.295 --> 00:06:51.739
+There are varieties of
+reasons people have for
+
+97
+00:06:51.739 --> 00:06:54.960
+doing things like moving
+average processes.
+
+98
+00:06:54.960 --> 00:06:58.180
+We're not making the claim that
+you see moving average processes
+
+99
+00:06:58.180 --> 00:07:01.590
+just by themselves in
+nature all that often.
+
+100
+00:07:01.590 --> 00:07:05.720
+It's a little bit hard to come up with
+an example of a naturally occurring
+
+101
+00:07:05.720 --> 00:07:09.960
+moving average process just
+in its simple form like this.
+
+102
+00:07:09.960 --> 00:07:15.350
+But the procedure of taking components and
+weighting them and adding together
+
+103
+00:07:15.350 --> 00:07:20.440
+is really very basic, very common,
+and so it's important to study this.
+
+104
+00:07:20.440 --> 00:07:23.725
+We'll also see a relationship
+later between moving average and
+
+105
+00:07:23.725 --> 00:07:27.210
+auto-regressive processes
+that'll make this worthwhile.
+
+106
+00:07:27.210 --> 00:07:31.328
+We can do some nice theoretical things
+with moving average processes to make our
+
+107
+00:07:31.328 --> 00:07:32.130
+lives easier.
+
+108
+00:07:36.987 --> 00:07:39.040
+We should look at a picture.
+
+109
+00:07:39.040 --> 00:07:45.910
+White noise process up on top, no real
+structure to speak of, it's just noise.
+
+110
+00:07:45.910 --> 00:07:52.286
+Now, down below, we've created a moving
+average process, where we let Q = 3.
+
+111
+00:07:52.286 --> 00:07:54.010
+I did a simple moving average.
+
+112
+00:07:54.010 --> 00:07:57.310
+So, we're just taking our components,
+adding them together, and
+
+113
+00:07:57.310 --> 00:07:59.013
+dividing by the number of components.
+
+114
+00:07:59.013 --> 00:08:03.674
+So, with Q = 3,
+we're dividing 4(Q+1) components
+
+115
+00:08:03.674 --> 00:08:09.050
+where we're just taking
+an average of four components.
+
+116
+00:08:09.050 --> 00:08:12.120
+You can see that we're losing some
+of our higher frequencies and
+
+117
+00:08:12.120 --> 00:08:14.340
+gaining some low frequencies.
+
+118
+00:08:14.340 --> 00:08:19.340
+What we're doing is seeing
+structure between neighbors.
+
+119
+00:08:19.340 --> 00:08:22.860
+If your random variables
+are close together,
+
+120
+00:08:22.860 --> 00:08:25.479
+there is actually going to be
+a dependency structure now.
+
+121
+00:08:26.740 --> 00:08:28.310
+That's with Q = 3.
+
+122
+00:08:28.310 --> 00:08:31.551
+I'm going to show you now and
+
+123
+00:08:31.551 --> 00:08:37.640
+we hope that it'll just layover perfectly,
+Q = 9.
+
+124
+00:08:37.640 --> 00:08:39.890
+So, let me move back.
+
+125
+00:08:41.370 --> 00:08:43.588
+There's Q = 3.
+
+126
+00:08:43.588 --> 00:08:49.448
+When I go to Q = 9,
+we induce still longer scale correlations,
+
+127
+00:08:49.448 --> 00:08:53.780
+relationships between neighbors.
+
+128
+00:08:53.780 --> 00:08:57.310
+We're smoothing even more, and
+I guess this just makes sense.
+
+129
+00:08:57.310 --> 00:08:59.838
+We're including nine numbers,
+or ten actually,
+
+130
+00:08:59.838 --> 00:09:01.908
+numbers in our average rather than nine.
+
+131
+00:09:05.129 --> 00:09:10.826
+In this video, we've looked at some very
+basic examples of stochastic processes and
+
+132
+00:09:10.826 --> 00:09:14.200
+we've studied their stationarity.
+
+133
+00:09:14.200 --> 00:09:18.260
+White noise is stationary,
+perhaps trivially so.
+
+134
+00:09:18.260 --> 00:09:22.380
+Random walks, even if there's zero mean,
+are not stationary.
+
+135
+00:09:22.380 --> 00:09:24.410
+The variance grows with time.
+
+136
+00:09:24.410 --> 00:09:27.470
+And we started looking at moving averages.
+
+137
+00:09:27.470 --> 00:09:32.120
+In the next lecture, we'll actually
+explore the autocoveriance structure
+
+138
+00:09:32.120 --> 00:09:35.230
+of the moving average process and
+look at its stationarity.

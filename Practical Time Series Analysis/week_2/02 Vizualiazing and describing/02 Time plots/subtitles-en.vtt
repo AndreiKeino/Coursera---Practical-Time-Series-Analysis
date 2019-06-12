@@ -1,0 +1,592 @@
+WEBVTT
+
+1
+00:00:01.010 --> 00:00:03.470
+In this video lecture,
+we'll talk about some time plots.
+
+2
+00:00:05.030 --> 00:00:07.430
+So what are the objectives
+of this video lecture?
+
+3
+00:00:07.430 --> 00:00:09.870
+We will see some examples
+of time series and
+
+4
+00:00:09.870 --> 00:00:13.390
+we'll try to produce some
+meaningful time plots.
+
+5
+00:00:13.390 --> 00:00:14.980
+Those are the objectives of this lecture.
+
+6
+00:00:16.220 --> 00:00:21.480
+We will look at a few time series
+data from the package astsa,
+
+7
+00:00:21.480 --> 00:00:25.930
+to be specific, we'll look at
+the following data set that's titled jj,
+
+8
+00:00:25.930 --> 00:00:28.220
+flu and so forth on astsa.
+
+9
+00:00:28.220 --> 00:00:31.620
+I'm going to talk about
+each one of them in detail.
+
+10
+00:00:31.620 --> 00:00:36.900
+So first data said the time
+shares we want to look at is
+
+11
+00:00:36.900 --> 00:00:42.030
+the time series about the Johnson and
+Johnson Quarterly Earnings.
+
+12
+00:00:42.030 --> 00:00:46.320
+If the Johnson and Johnson is a US
+company and we're going to look at
+
+13
+00:00:46.320 --> 00:00:50.000
+the quarterly earnings for
+84 quarters starting from 1964,
+
+14
+00:00:50.000 --> 00:00:54.490
+the first quarter to 1980,
+the last quarter.
+
+15
+00:00:54.490 --> 00:00:58.280
+And it's titled jj in the package ASA.
+
+16
+00:00:59.470 --> 00:01:02.780
+At this point I'll assume that
+you have already installed
+
+17
+00:01:02.780 --> 00:01:05.140
+package called ASOS Toyer Machine.
+
+18
+00:01:05.140 --> 00:01:09.190
+If you have not done refer to
+one of the videos where Bill
+
+19
+00:01:09.190 --> 00:01:12.740
+is talking about installing those
+packages on to your own machine.
+
+20
+00:01:12.740 --> 00:01:15.830
+I'm just going to use
+that package also now.
+
+21
+00:01:15.830 --> 00:01:21.900
+So I'm just going to use require Astsa so
+that I can use it.
+
+22
+00:01:21.900 --> 00:01:27.360
+Now that I have asta in my shell,
+I'm going to look at this documentation
+
+23
+00:01:28.450 --> 00:01:32.380
+and the documentation says
+that this includes data and
+
+24
+00:01:32.380 --> 00:01:37.140
+scripts that accompany to the book by and
+Stoffer.
+
+25
+00:01:37.140 --> 00:01:41.330
+We'll be looking at the quarterly
+earnings of Johnson and Johnson.
+
+26
+00:01:41.330 --> 00:01:43.560
+The data set, the timesheet is called jj.
+
+27
+00:01:43.560 --> 00:01:47.730
+If I just say help(jj), documentation
+says that this is Johnson and
+
+28
+00:01:47.730 --> 00:01:50.960
+Johnson quarterly earnings per share.
+
+29
+00:01:50.960 --> 00:01:55.944
+It's collected 21 years
+starting from 1960 to 1980.
+
+30
+00:01:57.140 --> 00:02:01.920
+It is already a time sense object.
+
+31
+00:02:01.920 --> 00:02:07.040
+Which means I do not use
+to use this TS routine or
+
+32
+00:02:07.040 --> 00:02:09.190
+TS operator to make
+the data a time series.
+
+33
+00:02:10.380 --> 00:02:12.090
+So, it is already a time series.
+
+34
+00:02:12.090 --> 00:02:15.570
+It already starts upon 1960.
+
+35
+00:02:15.570 --> 00:02:20.990
+So all I have to do is basically
+put some meaningful title and
+
+36
+00:02:20.990 --> 00:02:25.640
+x label and y label into my plot command.
+
+37
+00:02:27.620 --> 00:02:32.870
+So basically here what I have is that I'm
+going to plot jj, since jj is already
+
+38
+00:02:32.870 --> 00:02:38.240
+a time series object,
+I do not need to write this plot.ts.
+
+39
+00:02:38.240 --> 00:02:39.410
+And I'm going to use type o,
+
+40
+00:02:39.410 --> 00:02:44.540
+which means every point in the time series
+will have a little circle on it and
+
+41
+00:02:44.540 --> 00:02:49.340
+the title I put is the Johnson&Johnson
+quarterly earnings per share,
+
+42
+00:02:49.340 --> 00:02:53.080
+this is a string that goes into the main,
+that becomes a title.
+
+43
+00:02:53.080 --> 00:02:56.690
+For the y axis label we put,
+let's say earnings, and
+
+44
+00:02:56.690 --> 00:03:00.900
+x label If I once come in,
+I will obtain this time plot.
+
+45
+00:03:00.900 --> 00:03:04.730
+And I have nice title, y label, x label.
+
+46
+00:03:04.730 --> 00:03:07.710
+This first step in analysis
+of a time series is basically
+
+47
+00:03:07.710 --> 00:03:08.910
+to produce the point plot,
+
+48
+00:03:08.910 --> 00:03:12.990
+because by just looking at the time plot,
+it gives you an idea of what's going on.
+
+49
+00:03:12.990 --> 00:03:18.200
+By just looking at this time plot,
+I would say there's some kind of trend
+
+50
+00:03:18.200 --> 00:03:22.040
+Throughout the years, so definitely
+there's an increase throughout the years.
+
+51
+00:03:22.040 --> 00:03:24.930
+I can see the trend, but
+I can also see fluctuations,
+
+52
+00:03:24.930 --> 00:03:28.570
+the seasonal variations on that trend.
+
+53
+00:03:28.570 --> 00:03:31.040
+So there is a seasonal
+effect in this time series.
+
+54
+00:03:31.040 --> 00:03:34.750
+There is some kind of a trend, but one
+other thing I realize is the following.
+
+55
+00:03:35.820 --> 00:03:40.170
+At the beginning,
+my time series data At the beginning
+
+56
+00:03:40.170 --> 00:03:44.650
+the variation is not that much.But
+the leg room I have a higher variations.
+
+57
+00:03:45.670 --> 00:03:50.420
+Now later on we will see that if
+we have a transitional affect or
+
+58
+00:03:50.420 --> 00:03:54.685
+if you have a different variation
+different parts of the time series.
+
+59
+00:03:54.685 --> 00:03:59.700
+It actually violates so-called stationary
+principle, which I will talk about
+
+60
+00:03:59.700 --> 00:04:04.580
+next For now, we'll produce the time plot,
+we have an idea what's going on.
+
+61
+00:04:05.900 --> 00:04:09.510
+Next time series is about pneumonia and
+influenza.
+
+62
+00:04:09.510 --> 00:04:17.300
+That's in the US from 1968 to 1978,
+so this is a 11 year period.
+
+63
+00:04:17.300 --> 00:04:21.570
+And they basically recorded
+the monthly deaths per 10,000 people.
+
+64
+00:04:23.810 --> 00:04:28.640
+So this data is called flu
+with ASA at the time series.
+
+65
+00:04:28.640 --> 00:04:29.930
+Let's look at the time plot.
+
+66
+00:04:29.930 --> 00:04:34.330
+Before I do that I am
+going to say health flu so
+
+67
+00:04:34.330 --> 00:04:38.320
+that I can get an idea of I can get
+the documentation about this flu.
+
+68
+00:04:38.320 --> 00:04:41.950
+It actually says the monthly Pneumonia and
+
+69
+00:04:41.950 --> 00:04:46.040
+influenza deaths in
+the US from 1968 to 1978.
+
+70
+00:04:46.040 --> 00:04:52.559
+And it is per, that's number of deaths
+per 10,000 people monthly for 11 years.
+
+71
+00:04:53.670 --> 00:04:57.260
+It is already a time
+series object which means
+
+72
+00:04:57.260 --> 00:05:00.980
+I do not have to deal with
+ts operator here either.
+
+73
+00:05:00.980 --> 00:05:02.627
+And it starts from 1968.
+
+74
+00:05:02.627 --> 00:05:04.491
+It ends at 1979.
+
+75
+00:05:04.491 --> 00:05:07.840
+Flu, The plot flu data.
+
+76
+00:05:07.840 --> 00:05:10.140
+And I put the sum title.
+
+77
+00:05:10.140 --> 00:05:12.300
+And a y label, an x label.
+
+78
+00:05:12.300 --> 00:05:15.600
+And we obtained the following time plot.
+
+79
+00:05:15.600 --> 00:05:20.850
+In this time plot, we see that there
+is some kind of seasonality going on.
+
+80
+00:05:20.850 --> 00:05:23.919
+There is a peak every after year or so.
+
+81
+00:05:23.919 --> 00:05:28.480
+And that kind of shows that
+there is some kind of systality
+
+82
+00:05:28.480 --> 00:05:33.422
+going on in this data which is
+definitely not a stationary time
+
+83
+00:05:33.422 --> 00:05:37.532
+series which I will talk
+about in the next lecture.
+
+84
+00:05:37.532 --> 00:05:42.540
+But if you look at the over all trend,
+there might be a trend that
+
+85
+00:05:42.540 --> 00:05:47.277
+overall number of tasks going
+down which might hard to see.
+
+86
+00:05:47.277 --> 00:05:50.990
+But okay, so
+this is the time plot for flu data.
+
+87
+00:05:52.670 --> 00:05:56.040
+The next time stretch we're going
+to look at is called globtemp.
+
+88
+00:05:56.040 --> 00:05:58.700
+It is about land-ocean temperature.
+
+89
+00:05:58.700 --> 00:06:05.190
+The global mean land-ocean temperature and
+they're recorded how much land-ocean
+
+90
+00:06:05.190 --> 00:06:09.720
+global temperature, mean temperature,
+is deviating from some base temperature.
+
+91
+00:06:09.720 --> 00:06:14.070
+And that base temperature is taking
+the average from 1951 til 1980.
+
+92
+00:06:14.070 --> 00:06:16.510
+So that's our average.
+
+93
+00:06:16.510 --> 00:06:19.180
+That's our base temperature.
+
+94
+00:06:19.180 --> 00:06:22.390
+And we'll look at the deviations
+from that temperature and
+
+95
+00:06:22.390 --> 00:06:27.060
+data is collected from 1880 til 2015.
+
+96
+00:06:27.060 --> 00:06:29.770
+And the source is actually NASA.
+
+97
+00:06:29.770 --> 00:06:35.390
+So I say plot globtemp and
+I put a title and
+
+98
+00:06:35.390 --> 00:06:38.685
+the y label, an x label and I plot it.
+
+99
+00:06:38.685 --> 00:06:42.260
+I see time plot.
+
+100
+00:06:42.260 --> 00:06:45.640
+Basically from this time plot
+my first impression is that
+
+101
+00:06:45.640 --> 00:06:47.490
+there is some kind of trend.
+
+102
+00:06:47.490 --> 00:06:51.840
+So temperature deviations are going up.
+
+103
+00:06:51.840 --> 00:06:55.870
+And even though there is a trend, there's
+some kind of seasonality on that trend
+
+104
+00:06:55.870 --> 00:07:00.570
+as well, probably,
+because of the seasons of the year.
+
+105
+00:07:00.570 --> 00:07:04.475
+Next time series is the land
+only temperature deviations, so
+
+106
+00:07:04.475 --> 00:07:05.912
+this idea is the same.
+
+107
+00:07:05.912 --> 00:07:08.315
+It is between 1880 to 2015.
+
+108
+00:07:08.315 --> 00:07:13.239
+It is a game temperature deviations
+which is measured in centigrade from
+
+109
+00:07:13.239 --> 00:07:15.300
+the base temperature.
+
+110
+00:07:15.300 --> 00:07:17.330
+But this is for lab only.
+
+111
+00:07:17.330 --> 00:07:23.270
+So go ahead at this point try to obtain
+your own meaningful time plot for
+
+112
+00:07:23.270 --> 00:07:27.680
+the data set called global temp L in ASA.
+
+113
+00:07:27.680 --> 00:07:31.670
+The last time series that we'll look
+in this lecture is called Star.
+
+114
+00:07:31.670 --> 00:07:37.607
+It is about the magnitude of a star
+at midnight which is collected for
+
+115
+00:07:37.607 --> 00:07:40.010
+600 consecutive days.
+
+116
+00:07:40.010 --> 00:07:45.272
+This data is from ASA packet, but
+if you look at the documentation using
+
+117
+00:07:45.272 --> 00:07:50.534
+the health star, it is actually from
+the book by Whittaker and Robinson
+
+118
+00:07:50.534 --> 00:07:56.345
+called The Calculus of Observations,
+a Treatise on Numerical Mathematics.
+
+119
+00:07:56.345 --> 00:08:01.532
+So we plot star data,
+and y label and x label,
+
+120
+00:08:01.532 --> 00:08:06.722
+and we opting following,
+time plot which definitely
+
+121
+00:08:06.722 --> 00:08:11.820
+shows us there is some kind
+of seasonality going on.
+
+122
+00:08:11.820 --> 00:08:15.650
+We can see some periodicity
+in this time plot.
+
+123
+00:08:17.010 --> 00:08:19.010
+So what have you learned in this lecture?
+
+124
+00:08:19.010 --> 00:08:22.530
+You have learned that time series exist
+in a variety of areas starting from
+
+125
+00:08:22.530 --> 00:08:25.440
+financial world,
+ended up with astrophysics.
+
+126
+00:08:25.440 --> 00:08:28.440
+And you have learned how to
+produce meaningful time plots.

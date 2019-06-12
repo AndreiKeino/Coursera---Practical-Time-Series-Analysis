@@ -1,0 +1,163 @@
+WEBVTT
+
+1
+00:00:00.200 --> 00:00:03.213
+In this video lecture,
+we will be talking about stationarity.
+
+2
+00:00:05.314 --> 00:00:07.481
+Objectives is the following.
+
+3
+00:00:07.481 --> 00:00:14.769
+We would like to get some intuition
+about weak stationary time series.
+
+4
+00:00:14.769 --> 00:00:19.420
+So stationary time series is what we're
+going to be building our modules on.
+
+5
+00:00:19.420 --> 00:00:24.296
+And what we want in a time series,
+is to be stationary.
+
+6
+00:00:24.296 --> 00:00:25.300
+What it means is the following.
+
+7
+00:00:25.300 --> 00:00:28.519
+We do not want any systematic
+change in the properties and
+
+8
+00:00:28.519 --> 00:00:30.406
+the behavior of the time series.
+
+9
+00:00:30.406 --> 00:00:35.960
+For example, we do not want to have any
+systematic change in the mean, right?
+
+10
+00:00:35.960 --> 00:00:37.340
+So no systematic change in the mean.
+
+11
+00:00:37.340 --> 00:00:42.060
+In other words, we do not want to see
+a trend in a stationary time series.
+
+12
+00:00:42.060 --> 00:00:46.280
+We do not want to see a systematic
+change in variation, right?
+
+13
+00:00:46.280 --> 00:00:50.055
+So in one of the datasets we looked
+at on the Johnson & Johnson,
+
+14
+00:00:50.055 --> 00:00:53.206
+we saw that there was a change
+even in the variation.
+
+15
+00:00:53.206 --> 00:00:54.860
+Now for a stationary time series,
+
+16
+00:00:54.860 --> 00:00:58.170
+we don't want any systematic
+change in the variation.
+
+17
+00:00:58.170 --> 00:01:01.700
+And we do not want any
+periodic fluctuations as well.
+
+18
+00:01:03.550 --> 00:01:07.769
+So basically, the properties of one
+section of a data in a time series
+
+19
+00:01:07.769 --> 00:01:11.642
+are much like the properties of
+the other sections of the data.
+
+20
+00:01:11.642 --> 00:01:15.227
+To be honest,
+usually stationarity's a property of
+
+21
+00:01:15.227 --> 00:01:18.743
+a stochastic process of a model,
+not a time series.
+
+22
+00:01:18.743 --> 00:01:23.293
+But we say stationary time series
+if you think that it can be modeled
+
+23
+00:01:23.293 --> 00:01:27.450
+with stationary models,
+stationary stochastic process.
+
+24
+00:01:29.680 --> 00:01:33.711
+If we have a non-stationary time series,
+which we usually have.
+
+25
+00:01:33.711 --> 00:01:36.533
+What we do,
+we basically do some transformations and
+
+26
+00:01:36.533 --> 00:01:40.230
+we get the stationary time series
+after the transformations.
+
+27
+00:01:40.230 --> 00:01:44.374
+Once we have a stationary time series,
+we model it and
+
+28
+00:01:44.374 --> 00:01:49.177
+then we go back and
+we model our non-stationary time series.
+
+29
+00:01:49.177 --> 00:01:51.800
+So we use the transformations
+as a middle step.
+
+30
+00:01:52.980 --> 00:01:54.860
+So what have you learned in this lecture?
+
+31
+00:01:54.860 --> 00:01:57.831
+You have learned that in
+a weak stationary time series,
+
+32
+00:01:57.831 --> 00:02:00.115
+there is no systematic change in the mean.
+
+33
+00:02:00.115 --> 00:02:01.790
+In other words, there is no trend.
+
+34
+00:02:01.790 --> 00:02:05.600
+There is no systematic change in variance
+and there is no periodic variations.

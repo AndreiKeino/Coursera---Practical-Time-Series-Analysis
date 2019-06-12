@@ -1,0 +1,119 @@
+WEBVTT
+
+1
+00:00:00.480 --> 00:00:02.730
+Hello everyone, this is Tural Sadigov,
+
+2
+00:00:02.730 --> 00:00:07.610
+in this lecture we'll be talking about
+Introduction to Time Series Analysis.
+
+3
+00:00:07.610 --> 00:00:12.345
+So objective of this lecture
+is to define a time series and
+
+4
+00:00:12.345 --> 00:00:16.399
+get familiar with this package called,
+astsa.
+
+5
+00:00:16.399 --> 00:00:20.480
+So time series is basically a data
+set that's collected through time.
+
+6
+00:00:20.480 --> 00:00:25.010
+Now, since we are doing sampling
+with adjacent points in time,
+
+7
+00:00:25.010 --> 00:00:31.200
+we naturally introduce a correlation into
+the system which means the classical,
+
+8
+00:00:31.200 --> 00:00:35.020
+statistical inference might
+not work in this setting.
+
+9
+00:00:35.020 --> 00:00:36.860
+Time series are all over the places.
+
+10
+00:00:36.860 --> 00:00:41.994
+We will be looking at time series
+from economics and financial area.
+
+11
+00:00:41.994 --> 00:00:46.798
+We'll look at the physical time series,
+marketing time series,
+
+12
+00:00:46.798 --> 00:00:49.302
+demographic time series and etc.
+
+13
+00:00:49.302 --> 00:00:54.234
+In the next lecture I will produce some
+time thoughts of some specific time
+
+14
+00:00:54.234 --> 00:00:58.250
+series that's taken from
+the package called astsa.
+
+15
+00:00:58.250 --> 00:01:02.520
+It's a package developed by Shumway and
+
+16
+00:01:02.520 --> 00:01:05.850
+Stoffer, and
+it contains data sets and scripts.
+
+17
+00:01:05.850 --> 00:01:11.560
+And they use that package accompany to
+their book called Time Series Analysis and
+
+18
+00:01:11.560 --> 00:01:13.780
+Its Application: With R Examples.
+
+19
+00:01:13.780 --> 00:01:17.159
+And I have also included the PDF,
+
+20
+00:01:17.159 --> 00:01:22.957
+the link to the PDF of
+the documentation of this package.
+
+21
+00:01:22.957 --> 00:01:26.623
+So what we have learned in this lecture,
+we have learned that the definition of
+
+22
+00:01:26.623 --> 00:01:30.020
+time series, which is basically
+data collected through time.
+
+23
+00:01:30.020 --> 00:01:31.369
+In the next lectures,
+
+24
+00:01:31.369 --> 00:01:35.760
+upcoming lectures we will define
+it slightly in a different way.
+
+25
+00:01:35.760 --> 00:01:38.230
+And we have learned
+the package titled astsa.

@@ -1,0 +1,356 @@
+WEBVTT
+
+1
+00:00:00.250 --> 00:00:01.200
+Hello, everyone.
+
+2
+00:00:01.200 --> 00:00:06.050
+In this lecture, we will estimate
+model parameters of AR(3) Simulation.
+
+3
+00:00:07.900 --> 00:00:11.506
+Objective is to estimate
+model parameters of simulated
+
+4
+00:00:11.506 --> 00:00:16.810
+AR(3) process using Yule-Walker
+equations in matrix form.
+
+5
+00:00:16.810 --> 00:00:21.667
+Exactly what we did in a previous lecture,
+but this time it's not AR (2),
+
+6
+00:00:21.667 --> 00:00:22.799
+it's AR (3).
+
+7
+00:00:22.799 --> 00:00:27.636
+Now let's look at AR (3), not 2,
+AR (3) process with mean 0.
+
+8
+00:00:27.636 --> 00:00:30.650
+Now we have three terms instead of two.
+
+9
+00:00:30.650 --> 00:00:34.936
+And in this simulation,
+we're going to take p1 as 1 over 3,
+
+10
+00:00:34.936 --> 00:00:39.390
+p2 as 1 over 2 and
+p3 is going to be 7 over 100.
+
+11
+00:00:39.390 --> 00:00:43.248
+And c1 is going to 4.
+
+12
+00:00:43.248 --> 00:00:46.580
+Remember the Yule-Walker
+equations in the matrix forum.
+
+13
+00:00:46.580 --> 00:00:48.740
+In this case,
+we'll be at three-by-three systems.
+
+14
+00:00:48.740 --> 00:00:52.620
+This is our r matrix, this is our b,
+the left hand side, and
+
+15
+00:00:52.620 --> 00:00:55.070
+this is the coefficients that
+we are trying to estimate.
+
+16
+00:00:55.070 --> 00:01:00.600
+We will solve, we will find inverse of it,
+multiply to the left.
+
+17
+00:01:00.600 --> 00:01:04.438
+And remember Yule-Walker estimator for
+
+18
+00:01:04.438 --> 00:01:09.593
+sigma square is basically
+autocovariance at lag zero.
+
+19
+00:01:09.593 --> 00:01:12.659
+1 minus the dot product
+of the coefficients and
+
+20
+00:01:12.659 --> 00:01:15.220
+the autocorrelation onto lag p.
+
+21
+00:01:15.220 --> 00:01:19.155
+In other words,
+the sum of the pi ri, from 1 to p.
+
+22
+00:01:20.500 --> 00:01:21.230
+Please go ahead and
+
+23
+00:01:21.230 --> 00:01:25.860
+open up a notebook called AR(3)
+simulation parameter estimation.
+
+24
+00:01:25.860 --> 00:01:30.400
+And its name here in the notebook is
+Yule-Walker Estimation AR(3) Simulation.
+
+25
+00:01:30.400 --> 00:01:31.172
+So what are we doing?
+
+26
+00:01:31.172 --> 00:01:36.101
+We are trying to estimate the model
+parameters of an some simulations.
+
+27
+00:01:36.101 --> 00:01:40.159
+So we have to simulate first,
+this is just like before.
+
+28
+00:01:40.159 --> 00:01:42.173
+We have set the c to 2017 so
+
+29
+00:01:42.173 --> 00:01:46.209
+we can reproduce exactly what
+we are producing this video.
+
+30
+00:01:46.209 --> 00:01:49.268
+Sigma's four, this is our phi,
+the coefficients.
+
+31
+00:01:49.268 --> 00:01:53.994
+And this time we should
+take 100,000 data points.
+
+32
+00:01:53.994 --> 00:01:55.670
+Let's run the cell.
+
+33
+00:01:55.670 --> 00:01:58.930
+Let's go to next code block.
+
+34
+00:01:58.930 --> 00:02:04.409
+We are simulating AR(3) process,
+again we are using arima.sim.
+
+35
+00:02:04.409 --> 00:02:06.305
+And this time, we have three coefficients.
+
+36
+00:02:06.305 --> 00:02:12.440
+So it automatically understands that this
+is the autoregressive process of order 3.
+
+37
+00:02:12.440 --> 00:02:15.615
+And n is 100,000.
+
+38
+00:02:15.615 --> 00:02:21.450
+So we are simulating time series
+with 100,000 data points in it.
+
+39
+00:02:21.450 --> 00:02:22.110
+Let's run.
+
+40
+00:02:23.590 --> 00:02:27.120
+So next one,
+we define our autocorrelation,
+
+41
+00:02:28.320 --> 00:02:32.390
+coefficients from 1 to 3, so r1, r2, r3.
+
+42
+00:02:34.320 --> 00:02:37.789
+Okay, this is our r1,
+this is r2, this is r3.
+
+43
+00:02:37.789 --> 00:02:42.813
+And we define our matrix r and
+then we update r accordingly so
+
+44
+00:02:42.813 --> 00:02:46.660
+we get the r from
+the Yule-Walker equation.
+
+45
+00:02:46.660 --> 00:02:51.239
+And then r becomes basically once in
+the main diagonal and it's very symmetric,
+
+46
+00:02:51.239 --> 00:02:53.610
+is positive so we have a definite matrix.
+
+47
+00:02:54.640 --> 00:02:57.060
+This is a base of r1s and this is r2.
+
+48
+00:02:58.790 --> 00:03:06.520
+We define r matrix vector b
+Basically by putting rs as a column.
+
+49
+00:03:09.210 --> 00:03:12.500
+So this is our b, r1, r2, r3.
+
+50
+00:03:12.500 --> 00:03:16.417
+And we solve rx = b and
+
+51
+00:03:16.417 --> 00:03:22.091
+we are getting phi-hat here.
+
+52
+00:03:22.091 --> 00:03:27.701
+And the phi-hat becomes basically 0.34,
+0.33,
+
+53
+00:03:27.701 --> 00:03:32.300
+almost 0.5 and this is almost like 0.07,
+
+54
+00:03:32.300 --> 00:03:36.130
+which is very close to the actual model.
+
+55
+00:03:37.590 --> 00:03:41.030
+And let's estimate sigma or variance.
+
+56
+00:03:42.480 --> 00:03:49.900
+And the variance is around 15.97,
+which is very close to 16.
+
+57
+00:03:49.900 --> 00:03:56.650
+And next code block is basically
+partitioning the output screen.
+
+58
+00:03:58.150 --> 00:04:03.520
+And then putting time plot in
+a CFN [INAUDIBLE] into three rows.
+
+59
+00:04:03.520 --> 00:04:06.510
+If we do that, here we go.
+
+60
+00:04:06.510 --> 00:04:12.632
+So this is our ar3 process,
+100,000 data points.
+
+61
+00:04:12.632 --> 00:04:18.868
+And this is autocorrelation
+function which decays eventually.
+
+62
+00:04:18.868 --> 00:04:21.350
+There's some exponential decay here.
+
+63
+00:04:21.350 --> 00:04:26.280
+And partial autocorrelation function
+has three significant correlations,
+
+64
+00:04:26.280 --> 00:04:31.930
+lag1, lag2, lag3, and cuts off after lag3,
+just like we expected.
+
+65
+00:04:31.930 --> 00:04:36.459
+Results, we started with
+100,000 data points.
+
+66
+00:04:36.459 --> 00:04:39.447
+Phi1 is estimated at 0.338.
+
+67
+00:04:39.447 --> 00:04:42.660
+This is phi2, this is phi3,
+which is very close.
+
+68
+00:04:42.660 --> 00:04:44.310
+The actual model is right here.
+
+69
+00:04:44.310 --> 00:04:49.441
+This is where we started our
+simulation and a fitted model is
+
+70
+00:04:49.441 --> 00:04:55.509
+right here where innoations has
+variance which is very close to 16.
+
+71
+00:04:55.509 --> 00:04:59.550
+And this is our time plot ACF and PACF.
+
+72
+00:05:01.130 --> 00:05:01.890
+So what have you learned?
+
+73
+00:05:01.890 --> 00:05:06.886
+We have learned how to estimate
+model parameters of ARP processes.
+
+74
+00:05:06.886 --> 00:05:11.650
+This time it was AR(3) processes using
+Yule-Walker equations in a matrix form.
+
+75
+00:05:11.650 --> 00:05:12.900
+In the next lecture,
+
+76
+00:05:12.900 --> 00:05:17.470
+we will actually look at the real time
+series data [INAUDIBLE] simulation.
+
+77
+00:05:17.470 --> 00:05:22.869
+And we'll try to fit autoregressive
+processes into that dataset

@@ -1,0 +1,374 @@
+WEBVTT
+
+1
+00:00:00.410 --> 00:00:03.270
+Hello Everyone, I am [INAUDIBLE] Sarikov.
+
+2
+00:00:03.270 --> 00:00:11.720
+In this video lecture we will learn how
+to use concatenation operator in R.
+
+3
+00:00:11.720 --> 00:00:16.930
+We will learn how to find 5 number
+summary of a data set in R.
+
+4
+00:00:16.930 --> 00:00:23.110
+And learn how to find sample mean and
+sample standard deviation of a data set.
+
+5
+00:00:24.410 --> 00:00:31.280
+Here I have R up and running, and
+this is basically our R command shell.
+
+6
+00:00:31.280 --> 00:00:37.760
+One thing we can do is basically clear
+up the console, our console here.
+
+7
+00:00:37.760 --> 00:00:43.030
+If I say clear out, and
+then I have whole R console cleaned.
+
+8
+00:00:43.030 --> 00:00:45.510
+Now I can start entering my commands.
+
+9
+00:00:45.510 --> 00:00:47.560
+Let me just mention now, that in R,
+
+10
+00:00:47.560 --> 00:00:53.620
+if you start with number sign it
+means that we are commenting here.
+
+11
+00:00:53.620 --> 00:00:59.370
+So we are commenting and
+it just ignores that command.
+
+12
+00:00:59.370 --> 00:01:04.946
+So in this lecture we're going to first
+start using concatenation operator for
+
+13
+00:01:04.946 --> 00:01:09.580
+entering data set in R.
+
+14
+00:01:09.580 --> 00:01:10.590
+So how do we do that?
+
+15
+00:01:10.590 --> 00:01:13.360
+Let's say I have the following data set.
+
+16
+00:01:13.360 --> 00:01:19.020
+I have a data set, which basically
+
+17
+00:01:19.020 --> 00:01:23.900
+contains 5 numbers, 35,
+
+18
+00:01:23.900 --> 00:01:28.790
+8, 10, 23, and 42.
+
+19
+00:01:28.790 --> 00:01:34.320
+Now how can we enter this data
+set to our variable in R?
+
+20
+00:01:34.320 --> 00:01:36.890
+First, you have to define
+the name of the variable.
+
+21
+00:01:36.890 --> 00:01:41.440
+We try to be as descriptive as
+possible when we define our variables.
+
+22
+00:01:41.440 --> 00:01:42.580
+Let's see, we see data.1.
+
+23
+00:01:42.580 --> 00:01:46.381
+So these are in data.1,
+so this are data.1.
+
+24
+00:01:46.381 --> 00:01:49.210
+And we use concatenation operator,
+and it starts with C.
+
+25
+00:01:50.580 --> 00:01:54.440
+And we have to enter our numbers
+in here using comma in between.
+
+26
+00:01:54.440 --> 00:01:56.820
+So we can say 35, 8, 10, 23, and 42.
+
+27
+00:01:56.820 --> 00:02:01.744
+And once we do that,
+then we store our data
+
+28
+00:02:01.744 --> 00:02:06.861
+set into a data.1, data.1 variable.
+
+29
+00:02:06.861 --> 00:02:14.130
+See, if i just write data.1,
+it will show me this part numbers,
+
+30
+00:02:14.130 --> 00:02:18.520
+in that data set and
+the 1 is just index of the first guy here.
+
+31
+00:02:18.520 --> 00:02:25.590
+Or I can just say print(data.1) and
+then I will get the same data set.
+
+32
+00:02:26.700 --> 00:02:28.620
+So this is how we use concatenation.
+
+33
+00:02:28.620 --> 00:02:30.430
+By the way, we can use our
+
+34
+00:02:31.610 --> 00:02:36.420
+fourth arrow key in our keyboard
+to go to previous commands.
+
+35
+00:02:36.420 --> 00:02:43.890
+So if I go back to data.1, the
+concatenation operator, if I, for example,
+
+36
+00:02:45.040 --> 00:02:50.560
+increase spaces in between these numbers,
+let's see what happens.
+
+37
+00:02:51.600 --> 00:02:54.560
+If I just go back and
+look at the date, print data.1.
+
+38
+00:02:54.560 --> 00:02:59.593
+Well, nothing has changed, so,
+basically when you have spaces
+
+39
+00:02:59.593 --> 00:03:04.480
+in between when you use concatenation,
+it ignores spaces.
+
+40
+00:03:04.480 --> 00:03:10.410
+But if I just go back and, for
+example, forget about this comma here.
+
+41
+00:03:10.410 --> 00:03:14.670
+So I have 35, 8, 10, 23, but
+I have forgot the comma here.
+
+42
+00:03:14.670 --> 00:03:19.050
+And come back, well,
+then this is all unexpected numeric.
+
+43
+00:03:19.050 --> 00:03:22.590
+There is an unexpected numeric constant.
+
+44
+00:03:22.590 --> 00:03:27.730
+And it doesn't understand 23 or
+42, so we cannot do that.
+
+45
+00:03:27.730 --> 00:03:30.150
+So this is how we use
+concatenation operator.
+
+46
+00:03:30.150 --> 00:03:34.340
+Now that we have our data sets, we then
+go back and try to fix that with comma.
+
+47
+00:03:34.340 --> 00:03:36.450
+Okay, now that we have our data set,
+
+48
+00:03:36.450 --> 00:03:41.420
+which is data.1,
+we can do something statistics on it.
+
+49
+00:03:41.420 --> 00:03:46.330
+For example, we can find 5
+number summary of this data set.
+
+50
+00:03:46.330 --> 00:03:49.740
+So how do we do this,
+we can just say summary and
+
+51
+00:03:49.740 --> 00:03:54.260
+so every time we put a function in r,
+we have to have a parenthesis.
+
+52
+00:03:54.260 --> 00:03:58.610
+And then argument goes into that function,
+argument here is a data set for
+
+53
+00:03:58.610 --> 00:03:59.570
+that function.
+
+54
+00:03:59.570 --> 00:04:04.550
+If I do that and push Enter,
+it gives me 5 number summary.
+
+55
+00:04:04.550 --> 00:04:10.260
+Well, in fact it gives me 6 numbers but
+it includes a mean here as well.
+
+56
+00:04:10.260 --> 00:04:14.250
+So the usual 5 number summary
+is the mean of data set,
+
+57
+00:04:14.250 --> 00:04:19.520
+first quartile, median, third quartile and
+the maximum of the data set.
+
+58
+00:04:19.520 --> 00:04:24.330
+But here I also have the mean
+of the data set, all right.
+
+59
+00:04:24.330 --> 00:04:28.060
+But if you want to just find
+a mean of this data set directly,
+
+60
+00:04:28.060 --> 00:04:31.230
+and the command and function is the mean.
+
+61
+00:04:31.230 --> 00:04:34.110
+And the argument again is the data.1,
+
+62
+00:04:34.110 --> 00:04:40.104
+because we want to find sample mean of
+our data set and this is what we get.
+
+63
+00:04:40.104 --> 00:04:45.190
+Let me mention now that the definition
+of the sample mean is the basically
+
+64
+00:04:45.190 --> 00:04:53.400
+sum of these numbers in this data set
+over number of points in the data set.
+
+65
+00:04:53.400 --> 00:04:58.690
+For example,
+if I just do the sum of data.1,
+
+66
+00:04:58.690 --> 00:05:02.280
+then I will actually get
+the sum of all these numbers.
+
+67
+00:05:02.280 --> 00:05:07.000
+And if I divide that by 5, which means I
+should get sample average, sample mean,
+
+68
+00:05:07.000 --> 00:05:09.800
+which is the same number, okay.
+
+69
+00:05:09.800 --> 00:05:11.430
+And then one last thing
+I would like to mention,
+
+70
+00:05:11.430 --> 00:05:15.780
+is the standard deviation,
+actually sample standard deviation.
+
+71
+00:05:15.780 --> 00:05:19.802
+If you watch,
+you'll find sample standard deviation,
+
+72
+00:05:19.802 --> 00:05:22.917
+we use a command sd for
+standard deviation.
+
+73
+00:05:22.917 --> 00:05:28.390
+People data.1, and
+we find our standard deviation.
+
+74
+00:05:29.690 --> 00:05:32.480
+So what have you learned in this lecture?
+
+75
+00:05:32.480 --> 00:05:36.430
+You have learned how to enter a data set
+in R using the concatenation operator.
+
+76
+00:05:36.430 --> 00:05:39.890
+You learned how to find 5
+number summary of a data set in
+
+77
+00:05:39.890 --> 00:05:41.470
+R using a summary function.
+
+78
+00:05:41.470 --> 00:05:45.346
+And also you have learned how to find
+sample mean and sample standard deviation
+
+79
+00:05:45.346 --> 00:05:50.640
+of a data set in R using this functions
+called mean and standard deviation.

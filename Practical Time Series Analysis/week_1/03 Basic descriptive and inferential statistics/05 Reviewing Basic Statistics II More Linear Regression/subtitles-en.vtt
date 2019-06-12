@@ -1,0 +1,462 @@
+WEBVTT
+
+1
+00:00:01.331 --> 00:00:05.199
+Welcome back to practical
+times series analysis.
+
+2
+00:00:05.199 --> 00:00:09.534
+In this set of lectures, we're reviewing
+some basic statistical concepts with
+
+3
+00:00:09.534 --> 00:00:11.329
+the focus on linear regression.
+
+4
+00:00:14.646 --> 00:00:18.979
+In the preceding lecture, we saw how we
+plot time series data especially when it
+
+5
+00:00:18.979 --> 00:00:20.929
+comes to us as a time series object.
+
+6
+00:00:22.200 --> 00:00:26.530
+We thought a little bit about
+ordinary lease squares and
+
+7
+00:00:26.530 --> 00:00:29.610
+how to fit a straight
+line to a set of data.
+
+8
+00:00:29.610 --> 00:00:33.500
+We move forward in this video by
+assessing the normality of a data set.
+
+9
+00:00:34.530 --> 00:00:39.490
+If you recall, some of the standard
+assumptions in regression
+
+10
+00:00:39.490 --> 00:00:44.910
+which are more important when we start
+discussing inferential techniques
+
+11
+00:00:44.910 --> 00:00:47.980
+like hypothesis test and
+confidence interval.
+
+12
+00:00:47.980 --> 00:00:53.130
+Some distributional assumptions would be
+that your errors are normally distributed
+
+13
+00:00:53.130 --> 00:00:55.750
+with constant variance, mean of zero.
+
+14
+00:00:55.750 --> 00:00:57.328
+And also that they are independent.
+
+15
+00:00:57.328 --> 00:01:02.420
+When we plot a straight line as
+
+16
+00:01:02.420 --> 00:01:08.580
+we did with the carbon dioxide
+data available to SS CO2 in R.
+
+17
+00:01:08.580 --> 00:01:14.220
+Then with a couple quick calls,
+we were able to put the AD line on
+
+18
+00:01:14.220 --> 00:01:19.720
+our time series plot and
+some things are immediately obvious.
+
+19
+00:01:20.800 --> 00:01:27.180
+The data themselves are exhibiting
+an oscillatory trends, some seasonality.
+
+20
+00:01:27.180 --> 00:01:33.160
+But also there's a departure from
+straight line over on the left and
+
+21
+00:01:33.160 --> 00:01:34.770
+over on the right.
+
+22
+00:01:34.770 --> 00:01:36.900
+There maybe some curvature to this data.
+
+23
+00:01:36.900 --> 00:01:38.839
+Perhaps the straight line
+isn't the best model.
+
+24
+00:01:41.560 --> 00:01:45.340
+When we look at a set of
+plots here on the residuals,
+
+25
+00:01:45.340 --> 00:01:46.990
+we'll be able to assess normality.
+
+26
+00:01:48.870 --> 00:01:51.900
+A simple plotting command
+that we should all know
+
+27
+00:01:51.900 --> 00:01:56.130
+is we're going to set some parameters for
+our plot.
+
+28
+00:01:56.130 --> 00:02:04.070
+We're going to set it up, organize on row,
+with one row and three columns of figures.
+
+29
+00:02:05.850 --> 00:02:08.970
+We inseregate our model
+with the command resid.
+
+30
+00:02:08.970 --> 00:02:12.988
+We credited our linear model
+in the last lecture and
+
+31
+00:02:12.988 --> 00:02:16.570
+now we store the result in CO2.residuals.
+
+32
+00:02:16.570 --> 00:02:20.010
+So we've created an array
+of our residuals.
+
+33
+00:02:20.010 --> 00:02:23.910
+The deviations from the actual
+measured data points.
+
+34
+00:02:23.910 --> 00:02:28.430
+We would call those y sub i and
+the fitted data points,
+
+35
+00:02:28.430 --> 00:02:30.810
+we would call those y sub i hat.
+
+36
+00:02:33.200 --> 00:02:37.920
+As we look at the histogram,
+we can see that it's roughly symmetric and
+
+37
+00:02:37.920 --> 00:02:39.170
+mount shaped.
+
+38
+00:02:39.170 --> 00:02:42.930
+But it seems to depart from
+a normal distribution,
+
+39
+00:02:42.930 --> 00:02:46.400
+especially as I observe this
+one as I look at the tails.
+
+40
+00:02:46.400 --> 00:02:51.830
+We would like a somewhat less
+subjective way of looking at this.
+
+41
+00:02:51.830 --> 00:02:56.840
+Also, if you have an abundance of data,
+you have hundreds of data points.
+
+42
+00:02:56.840 --> 00:03:01.920
+A histogram is a valid approach for
+looking at structure your data.
+
+43
+00:03:01.920 --> 00:03:04.022
+If you only have 10 or 15 data points,
+
+44
+00:03:04.022 --> 00:03:10.730
+a histogram not the best way to go,
+we could we could probably do better.
+
+45
+00:03:10.730 --> 00:03:14.360
+In particular if we're assessing
+normality, we can do what's called
+
+46
+00:03:14.360 --> 00:03:19.090
+a normal probability plot and that's
+shown in the center figure right here.
+
+47
+00:03:20.470 --> 00:03:24.720
+The fastest way to think
+about normal probability plot
+
+48
+00:03:24.720 --> 00:03:28.560
+is that is a plot prepared by a software,
+R in our case.
+
+49
+00:03:29.580 --> 00:03:35.290
+Invoke with a command qqnorm called on our
+array and I put a title on the plot here.
+
+50
+00:03:36.330 --> 00:03:39.919
+But when I plot a qq plot for
+an over probability plot.
+
+51
+00:03:41.120 --> 00:03:47.910
+If our residuals are normally distributed,
+we would expect to see most of our data
+
+52
+00:03:47.910 --> 00:03:54.460
+essentially looking linear, like a
+straight line you could fit on this plot.
+
+53
+00:03:54.460 --> 00:03:59.190
+Here, I see some systematic
+departures from the lower and
+
+54
+00:03:59.190 --> 00:04:05.200
+upper tail and so it lets me question
+the normal assumption a bit.
+
+55
+00:04:06.900 --> 00:04:12.750
+Digging a little bit deeper, what a normal
+probability plot is going to do is to say.
+
+56
+00:04:12.750 --> 00:04:17.300
+if I have a certain data set, a certain
+number of points, where would I expect,
+
+57
+00:04:17.300 --> 00:04:20.080
+especially if I standardize,
+subtract off the mean and
+
+58
+00:04:20.080 --> 00:04:21.698
+divide by the standard deviation.
+
+59
+00:04:21.698 --> 00:04:25.120
+Where would I expect to
+see the first residual?
+
+60
+00:04:25.120 --> 00:04:30.120
+Where would I expect to see second
+residual in a dataset of a certain size
+
+61
+00:04:30.120 --> 00:04:32.070
+of through the last one?
+
+62
+00:04:32.070 --> 00:04:36.080
+I can pair that to where I
+actually have my first residual,
+
+63
+00:04:36.080 --> 00:04:39.000
+the first data point that
+I'm assessing normality on.
+
+64
+00:04:39.000 --> 00:04:41.630
+And were really was the second
+
+65
+00:04:41.630 --> 00:04:45.060
+is it where you expected if it was
+coming from a normal distribution?
+
+66
+00:04:45.060 --> 00:04:46.940
+Or are you systematically away?
+
+67
+00:04:46.940 --> 00:04:50.640
+We would expect to see a little
+scatter in [INAUDIBLE] but
+
+68
+00:04:50.640 --> 00:04:54.750
+here this seems more
+systematic than random.
+
+69
+00:04:54.750 --> 00:04:58.660
+So the residuals here seem to be
+
+70
+00:04:58.660 --> 00:05:02.900
+roughly normally distributed but
+not exactly normally distributed.
+
+71
+00:05:04.300 --> 00:05:09.390
+Some of our assumptions are robust
+to violating that assumption.
+
+72
+00:05:09.390 --> 00:05:14.533
+And so one might not worry too much in
+a large data set with a plot like this.
+
+73
+00:05:16.309 --> 00:05:20.890
+When we look at the third plot,
+we've plotted our residuals on time.
+
+74
+00:05:20.890 --> 00:05:27.070
+In linear regression, this is a very
+common fundamental plot that people do.
+
+75
+00:05:27.070 --> 00:05:28.490
+They have a model.
+
+76
+00:05:28.490 --> 00:05:32.790
+They look at departures from the model
+assumptions through the residuals.
+
+77
+00:05:32.790 --> 00:05:37.440
+And we look at them in time to
+see if any patterns emerge.
+
+78
+00:05:37.440 --> 00:05:39.690
+Here, there's a very obvious pattern,
+
+79
+00:05:39.690 --> 00:05:45.790
+that our residuals are higher than we'd
+expect on the left and on the right.
+
+80
+00:05:45.790 --> 00:05:50.170
+So in other words, our data points are
+systematically above the straight line on
+
+81
+00:05:50.170 --> 00:05:53.350
+the left and on the right, that's
+the curvature we were talking about.
+
+82
+00:05:54.560 --> 00:05:58.380
+It's hard on such a small tight plot
+
+83
+00:05:58.380 --> 00:06:01.670
+to get a sense of the oscillatory
+nature of our data.
+
+84
+00:06:01.670 --> 00:06:05.739
+So what I've done on the next plot
+is to zoom in on our residuals.
+
+85
+00:06:07.660 --> 00:06:13.200
+Instead of looking across a few decades,
+now we're just looking across a few years.
+
+86
+00:06:13.200 --> 00:06:14.110
+At this point,
+
+87
+00:06:14.110 --> 00:06:19.000
+it would be very hard to convince anybody
+that your residuals were independent.
+
+88
+00:06:19.000 --> 00:06:23.960
+There's an apparent time
+structure in your residuals.
+
+89
+00:06:23.960 --> 00:06:28.590
+From a linear regression sense,
+that might not be desirable but
+
+90
+00:06:28.590 --> 00:06:30.230
+we're plotting time series data.
+
+91
+00:06:30.230 --> 00:06:34.625
+For us, the structure of these residuals
+is actually quite interesting.
+
+92
+00:06:37.537 --> 00:06:38.497
+In this lecture,
+
+93
+00:06:38.497 --> 00:06:42.980
+in addition to reviewing some basic
+concepts from linear regression.
+
+94
+00:06:42.980 --> 00:06:47.710
+We learned how to assess the normality
+of residuals with qq plot or
+
+95
+00:06:47.710 --> 00:06:49.810
+a normal probability plot.
+
+96
+00:06:49.810 --> 00:06:54.880
+As we move forward, we'll review some
+more concepts from linear regression and
+
+97
+00:06:54.880 --> 00:06:59.010
+review some additional concepts
+in statistical inference.

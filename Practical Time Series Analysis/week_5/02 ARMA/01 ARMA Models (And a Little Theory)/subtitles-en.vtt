@@ -1,0 +1,453 @@
+WEBVTT
+
+1
+00:00:00.380 --> 00:00:04.860
+Welcome back to practical time series analysis.
+
+2
+00:00:04.860 --> 00:00:10.880
+We've studied moving average models and we've studied auto regressive models.
+
+3
+00:00:10.880 --> 00:00:14.785
+We know how to estimate coefficients, draw inferences,
+
+4
+00:00:14.785 --> 00:00:16.414
+for instance with the ACF,
+
+5
+00:00:16.414 --> 00:00:19.664
+for the PACF, we've done a bit with them.
+
+6
+00:00:19.664 --> 00:00:26.054
+At this point we bring them together into a mixed model the so-called ARMA model.
+
+7
+00:00:26.054 --> 00:00:29.839
+We'll see how to describe physical processes with these models,
+
+8
+00:00:29.839 --> 00:00:31.839
+how to do simulations,
+
+9
+00:00:31.839 --> 00:00:34.810
+and also for theoretical reasons and
+
+10
+00:00:34.810 --> 00:00:38.799
+analytical reasons how to take a mixed model and pull it
+
+11
+00:00:38.799 --> 00:00:46.204
+back to either an AR model or a MA model.
+
+12
+00:00:46.204 --> 00:00:47.570
+So, after this lecture,
+
+13
+00:00:47.570 --> 00:00:51.669
+you'll be able to build more useful models of your time series.
+
+14
+00:00:51.669 --> 00:00:55.850
+Will learn how to do simulations and we'll do some of
+
+15
+00:00:55.850 --> 00:01:01.609
+these technical swaps between the mix in the AR in the MA models.
+
+16
+00:01:01.609 --> 00:01:04.969
+As I said, it's a bit more mathy in this lecture,
+
+17
+00:01:04.969 --> 00:01:06.650
+a little bit more theoretical,
+
+18
+00:01:06.650 --> 00:01:08.564
+but if you hang in there,
+
+19
+00:01:08.564 --> 00:01:13.855
+will understand how to do these things in some simple cases.
+
+20
+00:01:13.855 --> 00:01:17.090
+Here's our basic formula.
+
+21
+00:01:17.090 --> 00:01:20.874
+If you want to bring together a moving average in an auto regressive part,
+
+22
+00:01:20.874 --> 00:01:24.780
+you can think of it as your time series,
+
+23
+00:01:24.780 --> 00:01:31.564
+the element at the Tth position is going to be built on some noise, as usual,
+
+24
+00:01:31.564 --> 00:01:36.379
+plus an AutoReggressivePart where we bring in terms of
+
+25
+00:01:36.379 --> 00:01:38.510
+the time series and take a weighted average of
+
+26
+00:01:38.510 --> 00:01:42.034
+previous terms plus the moving average part,
+
+27
+00:01:42.034 --> 00:01:48.920
+where our time series is subject to noise at each one of its stages and we will build
+
+28
+00:01:48.920 --> 00:01:58.094
+our new value out here as a weighted average of noise at the previous locations.
+
+29
+00:01:58.094 --> 00:02:04.299
+We found that using backwards difference operators and building polynomials,
+
+30
+00:02:04.299 --> 00:02:05.319
+in fact from them,
+
+31
+00:02:05.319 --> 00:02:07.810
+was a very useful thing to do.
+
+32
+00:02:07.810 --> 00:02:12.939
+Not only does this help us to express our equations rather succinctly,
+
+33
+00:02:12.939 --> 00:02:18.175
+rather compactly but also we develop an algebra with these operators
+
+34
+00:02:18.175 --> 00:02:25.270
+that allow us to come up with some rather simple theoretical results.
+
+35
+00:02:25.270 --> 00:02:29.530
+So, for instance, if we look at the polynomial operator here,
+
+36
+00:02:29.530 --> 00:02:33.790
+the backwards difference operator operating on X of T,
+
+37
+00:02:33.790 --> 00:02:38.215
+then we will recover X of T because of the one.
+
+38
+00:02:38.215 --> 00:02:41.259
+We will subtract off a constant times
+
+39
+00:02:41.259 --> 00:02:47.075
+the difference operator right here bringing us back to X of T minus one.
+
+40
+00:02:47.075 --> 00:02:49.704
+This would bring us back to X of T minus two,
+
+41
+00:02:49.704 --> 00:02:52.840
+all the way back through X of T minus P and
+
+42
+00:02:52.840 --> 00:02:57.694
+analogously with the backwards difference on the moving average.
+
+43
+00:02:57.694 --> 00:03:02.670
+When we present the ARMA with the mixed process,
+
+44
+00:03:02.670 --> 00:03:09.629
+we'll take this as a operator polynomial acting on a noise term as equal
+
+45
+00:03:09.629 --> 00:03:18.500
+to a difference polynomial acting on our values.
+
+46
+00:03:18.550 --> 00:03:22.395
+So, a quick goal here will be,
+
+47
+00:03:22.395 --> 00:03:24.090
+if you have a mixed process,
+
+48
+00:03:24.090 --> 00:03:28.185
+can you bring it back to an infinite order moving average process?
+
+49
+00:03:28.185 --> 00:03:32.009
+Because we have results of moving average processes, for instance,
+
+50
+00:03:32.009 --> 00:03:41.330
+we can express the auto correlation function of a moving average process.
+
+51
+00:03:41.330 --> 00:03:45.245
+The operator notation makes this really quite simple.
+
+52
+00:03:45.245 --> 00:03:48.860
+Treat these as polynomials and so we have the
+
+53
+00:03:48.860 --> 00:03:54.050
+polynomial acting on noise equal to the polynomial acting on series values.
+
+54
+00:03:54.050 --> 00:03:57.919
+If you would like to obtain X of T as a moving average,
+
+55
+00:03:57.919 --> 00:04:03.020
+then you can divide both sides by phi of T or phi of B rather,
+
+56
+00:04:03.020 --> 00:04:04.639
+but then the interesting question is,
+
+57
+00:04:04.639 --> 00:04:07.507
+how in the world do you handle a term like that?
+
+58
+00:04:07.507 --> 00:04:13.339
+How do you take a difference of these two polynomials?
+
+59
+00:04:13.339 --> 00:04:17.129
+Same thing would be true if you have a mixed process and you want to
+
+60
+00:04:17.129 --> 00:04:22.014
+express it as an infinite order Autoregressive process.
+
+61
+00:04:22.014 --> 00:04:29.615
+The method is going to again be to work with these polynomials.
+
+62
+00:04:29.615 --> 00:04:31.264
+There is a lot going on here,
+
+63
+00:04:31.264 --> 00:04:37.725
+but the notation really makes it quite simple and elegant to work with.
+
+64
+00:04:37.725 --> 00:04:43.593
+We'll say that noise at time T looks like this operator acting on X of T
+
+65
+00:04:43.593 --> 00:04:50.569
+and so now we have an infinite order perhaps infinite order autoregressive process.
+
+66
+00:04:50.569 --> 00:04:58.140
+Again, how are we going to deal with that ratio of polynomials?
+
+67
+00:04:58.140 --> 00:05:02.470
+I think the best way to get at this is with an example,
+
+68
+00:05:02.470 --> 00:05:10.310
+I have X of T over here on the left looking like a 0.7 times the state of the series one
+
+69
+00:05:10.310 --> 00:05:18.139
+time ago plus noise at the current time and then 0.2 times noise one period ago.
+
+70
+00:05:18.139 --> 00:05:22.694
+So I've got moving average part and autoregressive part.
+
+71
+00:05:22.694 --> 00:05:24.389
+I'd like to simulate that,
+
+72
+00:05:24.389 --> 00:05:29.954
+so I'll set a seed and I'll use the routine arima.sim.
+
+73
+00:05:29.954 --> 00:05:36.495
+This is going to allow us to get both the auto regressive and the moving average part.
+
+74
+00:05:36.495 --> 00:05:44.720
+I need to tell it the order of the process and I also need to feed in these coefficients.
+
+75
+00:05:44.720 --> 00:05:48.980
+So I'll pop in 0.7 and a 0.2 here for the ARP's and the MAP's.
+
+76
+00:05:48.980 --> 00:05:58.919
+I'm taking quite a long series so that when we do our estimation they'll be spot on.
+
+77
+00:05:58.919 --> 00:06:03.160
+So a little bit of code,
+
+78
+00:06:03.160 --> 00:06:06.180
+we'll do the usual sort of plotting,
+
+79
+00:06:06.180 --> 00:06:11.839
+will plot the time series or at least the first 400 or so terms of the series,
+
+80
+00:06:11.839 --> 00:06:22.410
+will look at the ACF and we'll look at the PACF.
+
+81
+00:06:22.410 --> 00:06:24.060
+When we do this, you can see that there is
+
+82
+00:06:24.060 --> 00:06:27.899
+structure there this is certainly not just noise.
+
+83
+00:06:27.899 --> 00:06:35.774
+The auto-correlation function trends down here consistent with well,
+
+84
+00:06:35.774 --> 00:06:39.704
+either a trend or a moving average process.
+
+85
+00:06:39.704 --> 00:06:51.660
+The PACF seems to have three pieces right here like this before we get down it's a noise.
+
+86
+00:06:51.660 --> 00:06:54.480
+Let's work with these polynomials.
+
+87
+00:06:54.480 --> 00:06:59.910
+If you bring the X of T terms over and to the left in the noise terms and to the right,
+
+88
+00:06:59.910 --> 00:07:03.620
+we wind up with this simple polynomial expression
+
+89
+00:07:03.620 --> 00:07:08.350
+and here we're just defining our notation again.
+
+90
+00:07:09.079 --> 00:07:14.434
+The slide is a little busy but what are we trying to do?
+
+91
+00:07:14.434 --> 00:07:16.870
+We're trying to express the ratio of
+
+92
+00:07:16.870 --> 00:07:21.250
+these polynomials here and we can do that by taking one minus
+
+93
+00:07:21.250 --> 00:07:29.629
+0.7 B and multiplying by the inverse of one point or one plus 0.2 B.
+
+94
+00:07:29.629 --> 00:07:33.459
+We've got these B's right here and that might
+
+95
+00:07:33.459 --> 00:07:37.540
+stump you a little and so you think back on the geometric series,
+
+96
+00:07:37.540 --> 00:07:41.060
+we keep coming back to the geometric series in our course.
+
+97
+00:07:41.060 --> 00:07:45.879
+So we'll express the operator as I've got one plus 0.2
+
+98
+00:07:45.879 --> 00:07:51.134
+times B or one over let's say one plus 0.2 B.
+
+99
+00:07:51.134 --> 00:07:56.543
+So I can express that as this infinite series right here,
+
+100
+00:07:56.543 --> 00:08:00.300
+and then I'll multiply the one through.
+
+101
+00:08:00.300 --> 00:08:09.723
+I multiply the -0.7 B through a group like terms and I'll come up with a polynomial,
+
+102
+00:08:09.723 --> 00:08:18.589
+it is infinite order but the terms are decaying pretty quickly.
+
+103
+00:08:18.589 --> 00:08:20.014
+If you consult the reading,
+
+104
+00:08:20.014 --> 00:08:23.990
+we spend some more time with this process on
+
+105
+00:08:23.990 --> 00:08:28.819
+manipulating the polynomials and we also refer back to the ACF and
+
+106
+00:08:28.819 --> 00:08:33.320
+the PACF to see how the result that we obtain with
+
+107
+00:08:33.320 --> 00:08:40.080
+our algebra or analysis is consistent with what we observed in our graphs.
+
+108
+00:08:40.080 --> 00:08:45.445
+So this point, you should have some appreciation for the ARMA or mixed process,
+
+109
+00:08:45.445 --> 00:08:50.039
+you should feel comfortable simulating at least conceptually,
+
+110
+00:08:50.039 --> 00:08:54.779
+you should feel that you would know how to move between the M.A.
+
+111
+00:08:54.779 --> 00:08:59.009
+and the AR parts and the mixed process.
+
+112
+00:08:59.009 --> 00:09:03.164
+It's true that the technical details can get a little bit complicated,
+
+113
+00:09:03.164 --> 00:09:07.100
+but at least conceptually we understand what we're doing.

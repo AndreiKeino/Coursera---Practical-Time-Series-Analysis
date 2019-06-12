@@ -1,0 +1,717 @@
+WEBVTT
+
+1
+00:00:01.390 --> 00:00:02.880
+Hello everyone, this is Thor Sadigov.
+
+2
+00:00:02.880 --> 00:00:06.700
+We're going to continue our
+discussion of the SARIMA processes.
+
+3
+00:00:06.700 --> 00:00:11.960
+In particular, in this video I'm going
+to show you one specific SARIMA model,
+
+4
+00:00:11.960 --> 00:00:16.470
+and we're going to simulate that
+SARIMA model and look at its ACF,
+
+5
+00:00:16.470 --> 00:00:18.270
+auto correlation function.
+
+6
+00:00:18.270 --> 00:00:22.290
+And then we're going to try to make
+sense of that Autocorrelation function.
+
+7
+00:00:22.290 --> 00:00:28.520
+In other words, we're going to try to find
+ACF of this specific model theoretically.
+
+8
+00:00:28.520 --> 00:00:33.820
+So the objectives is to examine the ACF
+of a SARIMA model in simulation.
+
+9
+00:00:33.820 --> 00:00:37.000
+And examine the ACF of
+a SARIMA model in theory.
+
+10
+00:00:37.000 --> 00:00:41.167
+So this is the SARIMA model,
+(0,0,1,0,0,1)12.
+
+11
+00:00:41.167 --> 00:00:45.331
+So seasonality, this panel,
+the seasonality is 12.
+
+12
+00:00:45.331 --> 00:00:49.990
+We do not have any non-seasonal or
+seasonal differencing.
+
+13
+00:00:49.990 --> 00:00:55.760
+And we do not have any non-seasonal or
+seasonal autoregressive terms.
+
+14
+00:00:55.760 --> 00:01:00.350
+So only terms we are going to have
+are going to be non-seasonal and
+
+15
+00:01:00.350 --> 00:01:02.520
+seasonal moving average terms.
+
+16
+00:01:02.520 --> 00:01:05.720
+In other words,
+our model is that Xt is equal to
+
+17
+00:01:05.720 --> 00:01:09.200
+is of this polynomial applied on Zt.
+
+18
+00:01:09.200 --> 00:01:14.260
+If we expand this polynomial,
+we obtain that Xt basically
+
+19
+00:01:14.260 --> 00:01:18.850
+depends on Zt, Zt- 1, Zt- 12,
+and interestingly Zt- 13 right?
+
+20
+00:01:20.290 --> 00:01:22.480
+So first let's simulate this.
+
+21
+00:01:22.480 --> 00:01:27.424
+So I'm going to choose theta 1 as 0.7 and
+capsule theta 1 0.6.
+
+22
+00:01:27.424 --> 00:01:30.529
+So, basically I'm going to have 0.7 here,
+0.6 here, and
+
+23
+00:01:30.529 --> 00:01:32.780
+their multiplication 0.42 here.
+
+24
+00:01:32.780 --> 00:01:37.636
+This is our SARIMA(0,0,1,0,0,1)12 model.
+
+25
+00:01:37.636 --> 00:01:45.850
+I have simulated this and our code is
+provided to you in this lesson this week.
+
+26
+00:01:45.850 --> 00:01:50.920
+So once we simulated, I have looked at
+the simulation basically the time series.
+
+27
+00:01:50.920 --> 00:01:54.670
+So this is the time series for
+1,000 data points.
+
+28
+00:01:54.670 --> 00:01:58.004
+Simulation is done for 1,000 data points.
+
+29
+00:01:58.004 --> 00:02:00.150
+You might not see
+the seasonality right away.
+
+30
+00:02:00.150 --> 00:02:03.330
+But if you zoom into let's
+say first 100 data point,
+
+31
+00:02:03.330 --> 00:02:07.336
+you can see some kind of seasonality
+going on after every 12 points.
+
+32
+00:02:07.336 --> 00:02:11.472
+So this is probably starting at 0, 1,
+
+33
+00:02:11.472 --> 00:02:16.462
+this 12, the time 12 and
+this is time 24 and
+
+34
+00:02:16.462 --> 00:02:21.300
+this is time 36, and 48 and so forth.
+
+35
+00:02:21.300 --> 00:02:24.216
+Okay, so
+there is definitely seasonality going on.
+
+36
+00:02:24.216 --> 00:02:28.092
+And I looked at the ACF
+of this time serious and
+
+37
+00:02:28.092 --> 00:02:34.418
+I see it basically shows me the pikes
+at lag one, which is what I expected.
+
+38
+00:02:34.418 --> 00:02:41.060
+It did have a moving average term, order
+one, so I do expect a spike at lag one.
+
+39
+00:02:41.060 --> 00:02:47.152
+And then, it already had seasonal
+moving average term in order one.
+
+40
+00:02:47.152 --> 00:02:51.238
+So I expect also one spike at lag 12,
+
+41
+00:02:51.238 --> 00:02:56.990
+which is basically by
+the sound of my seasonality.
+
+42
+00:02:56.990 --> 00:03:01.989
+And since the my Xt already
+depended on Zt- 13,
+
+43
+00:03:01.989 --> 00:03:05.300
+I also expect this spike at lag 13.
+
+44
+00:03:05.300 --> 00:03:10.310
+So what is interesting in this case
+is that I also have spike at lag 11,
+
+45
+00:03:10.310 --> 00:03:14.240
+which was not appearing
+from the model itself.
+
+46
+00:03:14.240 --> 00:03:18.810
+So now I want to show you why do we
+actually have a spike at lag 11.
+
+47
+00:03:18.810 --> 00:03:21.890
+And why do we have
+auto-correlation at lag 11.
+
+48
+00:03:21.890 --> 00:03:23.950
+So, this is our example.
+
+49
+00:03:23.950 --> 00:03:26.214
+This is SARIMA model, and we expanded it.
+
+50
+00:03:26.214 --> 00:03:30.036
+It depends on Zt, Zt-1, Zt-12 and Zt-13.
+
+51
+00:03:30.036 --> 00:03:34.290
+As you can see,
+it does not depend on Zt-11.
+
+52
+00:03:34.290 --> 00:03:38.410
+But still it does have other
+correlation of lag 11, let's show that.
+
+53
+00:03:38.410 --> 00:03:42.480
+So let's start trying to understand
+the autocovariance function, gamma k.
+
+54
+00:03:42.480 --> 00:03:45.850
+So gamma 0 is basically
+covariance with itself,
+
+55
+00:03:45.850 --> 00:03:48.690
+its the variance of Xt, this is my Xt.
+
+56
+00:03:48.690 --> 00:03:51.440
+Remember the Zts are all IID,
+
+57
+00:03:51.440 --> 00:03:54.880
+they are independent identical
+distributed random variables.
+
+58
+00:03:54.880 --> 00:03:58.630
+In other words, if I take the variance,
+I can take the variance of each term.
+
+59
+00:03:58.630 --> 00:04:01.890
+So this is the variance
+of sigma z-squared.
+
+60
+00:04:01.890 --> 00:04:04.291
+This is the variance of the noise.
+
+61
+00:04:04.291 --> 00:04:07.306
+And this is going to have theta 1 squared,
+this is theta 1ne squared,
+
+62
+00:04:07.306 --> 00:04:08.930
+this is the square of the both of them.
+
+63
+00:04:08.930 --> 00:04:15.220
+If I combine them, and I can factor it
+out, gamma 0, the autocovariance at lag 0.
+
+64
+00:04:15.220 --> 00:04:18.294
+In other words, the variance of my model,
+
+65
+00:04:18.294 --> 00:04:23.260
+unconditional variance is
+actually this expression.
+
+66
+00:04:24.340 --> 00:04:25.570
+Let's try to find gamma 1.
+
+67
+00:04:25.570 --> 00:04:28.650
+So gamma 1 is basically
+autocovariance at lag 1.
+
+68
+00:04:28.650 --> 00:04:31.328
+So I have to find covariance with XtXt-1.
+
+69
+00:04:31.328 --> 00:04:33.958
+We have written Xt here and Xt-1 here.
+
+70
+00:04:33.958 --> 00:04:35.880
+So if I want to find covariance,
+
+71
+00:04:35.880 --> 00:04:41.240
+I remember that I'm going to use the fact
+the Zt is all independent from each other.
+
+72
+00:04:41.240 --> 00:04:44.262
+In particular, they're all correlated.
+
+73
+00:04:44.262 --> 00:04:46.470
+I just want to find common terms.
+
+74
+00:04:46.470 --> 00:04:49.180
+I see that there's Zt-1 is common.
+
+75
+00:04:49.180 --> 00:04:51.871
+I see that Zt-13's common.
+
+76
+00:04:51.871 --> 00:04:57.931
+So if I just take those two terms, other
+cross terms will give me covariance 0,
+
+77
+00:04:57.931 --> 00:05:01.303
+because these are IID, random variables.
+
+78
+00:05:01.303 --> 00:05:06.742
+Theta 1 Zt-1, these two cross terms will
+
+79
+00:05:06.742 --> 00:05:13.515
+give me theta 1 sigma z squared,
+and Zt- 13 terms.
+
+80
+00:05:13.515 --> 00:05:17.363
+If I combine them, I have one theta 1 but
+have capital Theta 1.
+
+81
+00:05:17.363 --> 00:05:20.380
+So I'm going to have theta 1,
+capital Theta 1 squared.
+
+82
+00:05:20.380 --> 00:05:24.120
+If I put them together and
+factor out, this becomes my gamma 1.
+
+83
+00:05:24.120 --> 00:05:26.104
+So once we have gamma 1, gamma 0,
+
+84
+00:05:26.104 --> 00:05:29.490
+we can actually write
+autocorrelation function at lag one.
+
+85
+00:05:29.490 --> 00:05:32.698
+So we can talk about rho 1,
+so what is my rho 1?
+
+86
+00:05:32.698 --> 00:05:34.864
+This is gamma 1, this is gamma 0,
+
+87
+00:05:34.864 --> 00:05:39.980
+if I divide them to each other I see that
+these capital Theta terms will cancel out.
+
+88
+00:05:39.980 --> 00:05:43.762
+I will obtain theta 1
+over 1 + theta 1 squared.
+
+89
+00:05:43.762 --> 00:05:46.820
+So it's definitely not 0
+if theta 1 is not 0, right?
+
+90
+00:05:46.820 --> 00:05:50.733
+So I do have autocorellation at log 1,
+this is exactly what I was expecting.
+
+91
+00:05:50.733 --> 00:05:54.197
+Now side note here is that
+one can actually show that
+
+92
+00:05:54.197 --> 00:05:57.996
+this expression is actually less than or
+equal to half.
+
+93
+00:05:57.996 --> 00:06:02.844
+Because if you put them together nicely,
+not [INAUDIBLE] multiply by 2, multiply by
+
+94
+00:06:02.844 --> 00:06:07.484
+1 over theta 1 squared this basically
+will give you (theta 1- 1) squared,
+
+95
+00:06:07.484 --> 00:06:09.440
+which is always non-negative.
+
+96
+00:06:09.440 --> 00:06:16.450
+So, autocorrelation function at lag 1 is
+always non-zero if theta 1 is non-zero.
+
+97
+00:06:16.450 --> 00:06:19.887
+But always less than 0.5,
+as a side note, right?
+
+98
+00:06:19.887 --> 00:06:21.708
+So, you're going to come
+back to to the ACF, and
+
+99
+00:06:21.708 --> 00:06:24.300
+we're actually going to confirm
+from the simulation this as well.
+
+100
+00:06:24.300 --> 00:06:25.556
+Let's find gamma(2).
+
+101
+00:06:25.556 --> 00:06:27.640
+So, autocovariance at lag 2.
+
+102
+00:06:27.640 --> 00:06:32.071
+So I have gamma 2 which
+covariance of Xt with Xt- 2.
+
+103
+00:06:32.071 --> 00:06:34.830
+This is Xt, this is Xt- 2.
+
+104
+00:06:34.830 --> 00:06:39.080
+I try to find common terms and
+there is no common terms.
+
+105
+00:06:39.080 --> 00:06:44.040
+And since these are all independent,
+in particular they're uncorrelated,
+
+106
+00:06:44.040 --> 00:06:46.230
+gamma 2 is actually going to be 0.
+
+107
+00:06:46.230 --> 00:06:48.778
+If gamma 2 is 0, then rho 2,
+
+108
+00:06:48.778 --> 00:06:53.197
+the autocorrelation function at lag 2,
+is also 0.
+
+109
+00:06:53.197 --> 00:06:59.277
+So in the same way, one can show that
+all autocorrelation function at lag i,
+
+110
+00:06:59.277 --> 00:07:02.792
+where i from 2 to 10, all of them are a 0,
+
+111
+00:07:02.792 --> 00:07:07.120
+just the same way that we
+show that rho 2 was 0.
+
+112
+00:07:07.120 --> 00:07:13.460
+Now let's look at autocovariance function
+at autocorrelation function at lag 11.
+
+113
+00:07:13.460 --> 00:07:20.172
+Okay, so gamma 11,
+this a covariance of Xt with Xt-11.
+
+114
+00:07:20.172 --> 00:07:25.641
+This is the Xt, this is our model and
+this is Xt-11, right?
+
+115
+00:07:25.641 --> 00:07:32.860
+What happens is that, once you put t-11
+the second term here will give you Zt-12.
+
+116
+00:07:32.860 --> 00:07:36.650
+Which would be a common term with Xt.
+
+117
+00:07:36.650 --> 00:07:40.220
+So at this point, even though most
+of the terms are uncorrelated,
+
+118
+00:07:40.220 --> 00:07:43.890
+we have a term cross term
+which are correlated.
+
+119
+00:07:43.890 --> 00:07:46.800
+This is Zt- 12, this is Zt- 12.
+
+120
+00:07:46.800 --> 00:07:49.220
+From the covariance of these two terms,
+
+121
+00:07:49.220 --> 00:07:54.250
+we obtain that gamma(11) is actually
+theta 1, Theta 1, gamma square z.
+
+122
+00:07:55.680 --> 00:08:01.110
+Now, which means that covariance,
+autocovariance at lag 11 is now 0,
+
+123
+00:08:01.110 --> 00:08:04.200
+if theta 1 and Theta 1 is not 0.
+
+124
+00:08:04.200 --> 00:08:08.730
+And if l look at the rho 11, which is
+gamma 11 over gamma 0, if I divide them,
+
+125
+00:08:08.730 --> 00:08:12.530
+I obtain the following expression,
+which is definitely
+
+126
+00:08:12.530 --> 00:08:17.350
+not 0 as long as theta 1 and
+capital Theta 1 is not 0.
+
+127
+00:08:17.350 --> 00:08:22.930
+Again as a side note,
+one can show that these first two guys
+
+128
+00:08:22.930 --> 00:08:28.680
+theta 1 over 1 + theta 1 squared, just
+like before is less than or equal to half.
+
+129
+00:08:28.680 --> 00:08:31.615
+Capital Theta1 over 1 + theta1 squared,
+
+130
+00:08:31.615 --> 00:08:34.864
+these two guys also are less than or
+equal to half.
+
+131
+00:08:34.864 --> 00:08:40.022
+So this whole expression always is
+less than or equal to 1 over 4.
+
+132
+00:08:40.022 --> 00:08:46.660
+It is strictly positive as long as
+theta1 and capital Theta1 is not 0.
+
+133
+00:08:46.660 --> 00:08:50.500
+Okay, so let's go back to the simulation
+and let's actually confirm this.
+
+134
+00:08:50.500 --> 00:08:54.300
+So we did expect of
+the correlation at lag 1 and
+
+135
+00:08:54.300 --> 00:08:56.180
+we did expect that to be less than half.
+
+136
+00:08:56.180 --> 00:08:57.220
+This is less than half.
+
+137
+00:08:57.220 --> 00:08:58.824
+This is 0.5 here.
+
+138
+00:08:58.824 --> 00:09:02.676
+We do not expect much later on.
+
+139
+00:09:02.676 --> 00:09:05.703
+This theoretical, all of these are 0.
+
+140
+00:09:05.703 --> 00:09:10.768
+And then we expect to a spike at lag 11,
+which was supposed to be now 0 and
+
+141
+00:09:10.768 --> 00:09:13.810
+less than 0.25, which is the case.
+
+142
+00:09:13.810 --> 00:09:17.370
+So same way we can actually find
+autocorrelation at lag 12 and
+
+143
+00:09:17.370 --> 00:09:21.365
+lag 13 and then theoretically
+everything else would be 0.
+
+144
+00:09:22.600 --> 00:09:24.172
+So this is going to be our guide.
+
+145
+00:09:24.172 --> 00:09:29.400
+We're going to look at actual real
+life data sets in the next lecture.
+
+146
+00:09:29.400 --> 00:09:31.980
+And we're going to look at the ACF.
+
+147
+00:09:31.980 --> 00:09:37.550
+So if I see a spikes ACF
+in the first few lags,
+
+148
+00:09:37.550 --> 00:09:41.710
+so that will suggest some
+moving average terms for me.
+
+149
+00:09:41.710 --> 00:09:46.460
+But if I see spikes at the seasonal lags,
+
+150
+00:09:46.460 --> 00:09:49.960
+like 12 for example,
+if the seasonality was 12,
+
+151
+00:09:49.960 --> 00:09:54.940
+this would suggest seasonal
+moving average terms to me.
+
+152
+00:09:54.940 --> 00:09:55.930
+Okay, so what have we learned?
+
+153
+00:09:55.930 --> 00:10:00.500
+We have learned autocorrelation function
+of a SARIMA model in simulation.
+
+154
+00:10:00.500 --> 00:10:04.340
+We have also learned an autocorrelation
+function of a SARIMA model in theory.

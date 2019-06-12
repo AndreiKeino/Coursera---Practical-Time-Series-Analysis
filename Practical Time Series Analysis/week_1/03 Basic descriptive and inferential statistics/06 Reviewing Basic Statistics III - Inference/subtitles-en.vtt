@@ -1,0 +1,809 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.120
+Welcome back to practical time series analysis.
+
+2
+00:00:04.120 --> 00:00:06.280
+In these introductory lectures,
+
+3
+00:00:06.280 --> 00:00:08.625
+we're reviewing basic statistics.
+
+4
+00:00:08.625 --> 00:00:10.548
+In this lecture in particular,
+
+5
+00:00:10.548 --> 00:00:13.740
+we'll look at some inferential statistics.
+
+6
+00:00:13.740 --> 00:00:16.050
+Now if your statistical background is strong,
+
+7
+00:00:16.050 --> 00:00:18.585
+and if you're very comfortable in the R environment,
+
+8
+00:00:18.585 --> 00:00:21.630
+you can move through these lectures very quickly.
+
+9
+00:00:21.630 --> 00:00:23.820
+They're really meant for people who either haven't done
+
+10
+00:00:23.820 --> 00:00:27.645
+statistics in any meaningful way in quite some time,
+
+11
+00:00:27.645 --> 00:00:34.745
+or who are just new to R. Our objectives.
+
+12
+00:00:34.745 --> 00:00:37.610
+We do say this is basic inferential statistics.
+
+13
+00:00:37.610 --> 00:00:40.310
+Our objectives are to review some basics.
+
+14
+00:00:40.310 --> 00:00:43.280
+Learn how to develop graphical intuition in new data set,
+
+15
+00:00:43.280 --> 00:00:46.155
+based upon the commands available in R.
+
+16
+00:00:46.155 --> 00:00:50.930
+And learn how to perform a simple hypothesis test.
+
+17
+00:00:50.930 --> 00:00:56.205
+The data set we'll be using is a famous traditional data set.
+
+18
+00:00:56.205 --> 00:00:59.320
+It's the Gossett Data on sleep.
+
+19
+00:00:59.320 --> 00:01:05.720
+So, he's reporting on results that other researchers actually had already published,
+
+20
+00:01:05.720 --> 00:01:08.290
+and using it to develop his techniques.
+
+21
+00:01:08.290 --> 00:01:11.618
+But the basic data set looks at two soporific drugs,
+
+22
+00:01:11.618 --> 00:01:16.550
+these are drugs meant to induce extra sleep in a patient.
+
+23
+00:01:16.550 --> 00:01:20.300
+And there are 10 people in play in this data set.
+
+24
+00:01:20.300 --> 00:01:23.600
+There are two drugs and we're looking at the increase over
+
+25
+00:01:23.600 --> 00:01:28.930
+control for each of these 10 individuals with each drug.
+
+26
+00:01:28.930 --> 00:01:35.255
+The formative data frame is 20 observations and we have three variables here.
+
+27
+00:01:35.255 --> 00:01:38.615
+So, 20 observations, these are 10 people,
+
+28
+00:01:38.615 --> 00:01:42.930
+and so we're looking at the effect of each of two drugs here.
+
+29
+00:01:42.930 --> 00:01:45.565
+So we've got extra group and ID.
+
+30
+00:01:45.565 --> 00:01:48.485
+Extra is going to be the extra amount of sleep.
+
+31
+00:01:48.485 --> 00:01:51.515
+Group will tell you which drug is in play,
+
+32
+00:01:51.515 --> 00:01:54.380
+and ID tells you which patient.
+
+33
+00:01:54.380 --> 00:01:59.055
+Of course, always plot your data.
+
+34
+00:01:59.055 --> 00:02:02.340
+The plot command is a rather powerful one,
+
+35
+00:02:02.340 --> 00:02:05.495
+and it will make decisions based upon the kind of data
+
+36
+00:02:05.495 --> 00:02:09.300
+you're presenting it as to what kind of plot it's going to return.
+
+37
+00:02:09.300 --> 00:02:13.065
+We're going to plot the extra sleep on group.
+
+38
+00:02:13.065 --> 00:02:18.105
+So, think of that as drug and main of course is going to put a title on a graph.
+
+39
+00:02:18.105 --> 00:02:22.105
+We'll look at extra sleep in Gossett Data by group.
+
+40
+00:02:22.105 --> 00:02:24.515
+Now, after that we'll do a couple other things.
+
+41
+00:02:24.515 --> 00:02:28.660
+I want to have the data available to me very easily in a variable.
+
+42
+00:02:28.660 --> 00:02:30.635
+So, I'm gonna say extra dot one,
+
+43
+00:02:30.635 --> 00:02:34.670
+is the extra sleep for those in group one.
+
+44
+00:02:34.670 --> 00:02:40.500
+So we're testing group identically equal to one or group identically equal to two,
+
+45
+00:02:40.500 --> 00:02:45.920
+as we assign our numbers to each of these two vectors.
+
+46
+00:02:45.920 --> 00:02:48.762
+When we look at the graph,
+
+47
+00:02:48.762 --> 00:02:50.420
+we've got extra sleep.
+
+48
+00:02:50.420 --> 00:02:53.385
+it looks like the second group,
+
+49
+00:02:53.385 --> 00:02:57.805
+the second drug has a pretty clear advantage over the first.
+
+50
+00:02:57.805 --> 00:03:02.880
+I don't see a huge difference in heterogeneity here, there is some,
+
+51
+00:03:02.880 --> 00:03:07.770
+but I think what's most pronounced in this graph is that,
+
+52
+00:03:07.770 --> 00:03:13.035
+now this bar here in a box plot of course is telling you the median not the mean,
+
+53
+00:03:13.035 --> 00:03:17.675
+but the median certainly seems to be higher in the second group.
+
+54
+00:03:17.675 --> 00:03:19.555
+Now that's a visual impression,
+
+55
+00:03:19.555 --> 00:03:24.835
+and what we'll do now is try to follow it up with a standard statistical test.
+
+56
+00:03:24.835 --> 00:03:27.495
+As we test our hypothesis,
+
+57
+00:03:27.495 --> 00:03:30.550
+we'll use the command t. test,
+
+58
+00:03:30.550 --> 00:03:34.740
+we'll put in extra one and extra two as our data.
+
+59
+00:03:34.740 --> 00:03:36.375
+You can do tests,
+
+60
+00:03:36.375 --> 00:03:40.650
+you'll recall from elementary stats with independent samples,
+
+61
+00:03:40.650 --> 00:03:42.435
+and there are different ways to go within
+
+62
+00:03:42.435 --> 00:03:45.680
+independent samples depending upon your variability.
+
+63
+00:03:45.680 --> 00:03:48.900
+Right now instead, we're going to treat these data as
+
+64
+00:03:48.900 --> 00:03:52.890
+paired because remember there are only 10 people in the study,
+
+65
+00:03:52.890 --> 00:03:54.965
+and there are two different drugs.
+
+66
+00:03:54.965 --> 00:03:59.550
+We're going to do a two sided test rather than a one sided test,
+
+67
+00:03:59.550 --> 00:04:02.055
+because coming in I had no theory,
+
+68
+00:04:02.055 --> 00:04:07.010
+no intuition that one drug would be better than the other.
+
+69
+00:04:07.010 --> 00:04:09.120
+Our results look like this.
+
+70
+00:04:09.120 --> 00:04:14.630
+We'll obtain a t value of negative four or so.
+
+71
+00:04:14.630 --> 00:04:18.055
+That's a fairly hefty t value.
+
+72
+00:04:18.055 --> 00:04:21.015
+Now, if that were a z value from a normal distribution,
+
+73
+00:04:21.015 --> 00:04:23.350
+it would be quite quite large.
+
+74
+00:04:23.350 --> 00:04:25.620
+How large it is with a T distribution,
+
+75
+00:04:25.620 --> 00:04:27.775
+depends upon your sample size.
+
+76
+00:04:27.775 --> 00:04:30.810
+Our degrees of freedom in a pair of T-test like this with
+
+77
+00:04:30.810 --> 00:04:35.040
+ten individuals remember is nine and minus one,
+
+78
+00:04:35.040 --> 00:04:39.650
+and the p value we obtain is less than the standard nickel.
+
+79
+00:04:39.650 --> 00:04:42.015
+Less than point zero five.
+
+80
+00:04:42.015 --> 00:04:44.205
+It's even less than point zero one.
+
+81
+00:04:44.205 --> 00:04:48.673
+And I think many people would say that these data are highly significant.
+
+82
+00:04:48.673 --> 00:04:51.120
+R agrees and is going to go with
+
+83
+00:04:51.120 --> 00:04:59.035
+the Alternative hypothesis that the there is a difference between the two drugs.
+
+84
+00:04:59.035 --> 00:05:03.085
+It's also good to report a confidence interval.
+
+85
+00:05:03.085 --> 00:05:08.020
+And another approach to a test like this would be to calculate a confidence interval and
+
+86
+00:05:08.020 --> 00:05:13.440
+see if it includes zero as a plausible value. It does not.
+
+87
+00:05:13.440 --> 00:05:16.930
+So, the 95 percent confidence interval
+
+88
+00:05:16.930 --> 00:05:24.140
+here is between around negative two and a half to a negative point seven.
+
+89
+00:05:26.470 --> 00:05:30.480
+Now, if it's been a little while since you've done
+
+90
+00:05:30.480 --> 00:05:33.600
+a confidence interval or a hypothesis test,
+
+91
+00:05:33.600 --> 00:05:36.605
+let's go back and remember what this is all about.
+
+92
+00:05:36.605 --> 00:05:42.570
+In a standard hypothesis test we have a null hypothesis and an alternative hypothesis,
+
+93
+00:05:42.570 --> 00:05:45.570
+traditionally labeled H sub zero, and H sub one.
+
+94
+00:05:45.570 --> 00:05:50.025
+The null hypothesis will be no difference,
+
+95
+00:05:50.025 --> 00:05:54.290
+just that the mean response is going to be the same for both drugs.
+
+96
+00:05:54.290 --> 00:06:01.245
+The alternative since we're doing two tail tests will be that it's not the same.
+
+97
+00:06:01.245 --> 00:06:05.080
+Alpha is what people,
+
+98
+00:06:05.080 --> 00:06:08.104
+or researchers often set up before they conduct the tests,
+
+99
+00:06:08.104 --> 00:06:10.720
+probability of a type one error.
+
+100
+00:06:10.720 --> 00:06:15.075
+The probability that we're going to reject a true null hypothesis is
+
+101
+00:06:15.075 --> 00:06:17.110
+fairly standard to say that alpha equal to
+
+102
+00:06:17.110 --> 00:06:21.010
+the two values point zero five or point zero one.
+
+103
+00:06:21.010 --> 00:06:23.530
+The t value that we calculated here,
+
+104
+00:06:23.530 --> 00:06:27.280
+is we're going to look at the average of
+
+105
+00:06:27.280 --> 00:06:30.055
+the differences which is the same
+
+106
+00:06:30.055 --> 00:06:33.930
+if you follow the language as the difference of the averages.
+
+107
+00:06:33.930 --> 00:06:36.130
+So, we're looking at the bar here.
+
+108
+00:06:36.130 --> 00:06:38.465
+Essentially, we're just taking the average,
+
+109
+00:06:38.465 --> 00:06:41.110
+the mean value with the first group,
+
+110
+00:06:41.110 --> 00:06:43.630
+and subtracting off the average on the second.
+
+111
+00:06:43.630 --> 00:06:45.845
+It's a very intuitive thing to do.
+
+112
+00:06:45.845 --> 00:06:50.280
+We'll compare that to our null hypothesis value of zero.
+
+113
+00:06:50.280 --> 00:06:53.590
+Downstairs we're going to look at variability.
+
+114
+00:06:53.590 --> 00:06:58.540
+So, we're looking at the variability of the averages here not of individuals.
+
+115
+00:06:58.540 --> 00:07:02.170
+We're going to take s sub d. So,
+
+116
+00:07:02.170 --> 00:07:07.840
+this is the sample standard deviation of the differences.
+
+117
+00:07:07.840 --> 00:07:09.910
+Now, be careful, if you take
+
+118
+00:07:09.910 --> 00:07:13.330
+the differences for these 10 individuals between the two drugs,
+
+119
+00:07:13.330 --> 00:07:17.575
+take their response on the first drug and subtract off the response in the second,
+
+120
+00:07:17.575 --> 00:07:19.315
+and do that for all 10,
+
+121
+00:07:19.315 --> 00:07:21.955
+and then take the standard deviation of that,
+
+122
+00:07:21.955 --> 00:07:25.255
+that's the standard deviation of the differences.
+
+123
+00:07:25.255 --> 00:07:28.090
+That's not going to be the same number generally speaking,
+
+124
+00:07:28.090 --> 00:07:31.105
+as if you take the standard deviation of the first data set,
+
+125
+00:07:31.105 --> 00:07:34.015
+and subtract off the standard deviation of the second.
+
+126
+00:07:34.015 --> 00:07:36.445
+We just have to be a little bit careful here.
+
+127
+00:07:36.445 --> 00:07:41.345
+But the standard test is to look at the standard error down here,
+
+128
+00:07:41.345 --> 00:07:44.165
+standard deviation divided by the square of N,
+
+129
+00:07:44.165 --> 00:07:47.245
+to give us a measure of variability.
+
+130
+00:07:47.245 --> 00:07:49.000
+And that's how we calculate,
+
+131
+00:07:49.000 --> 00:07:50.640
+you can follow through the numbers,
+
+132
+00:07:50.640 --> 00:07:53.875
+negative for t value.
+
+133
+00:07:53.875 --> 00:07:56.485
+So as we just said,
+
+134
+00:07:56.485 --> 00:07:59.100
+d bar is the average of the differences,
+
+135
+00:07:59.100 --> 00:08:02.285
+or the difference of the averages however you like,
+
+136
+00:08:02.285 --> 00:08:07.645
+and Sd is the standard deviation of the differences from the sample.
+
+137
+00:08:07.645 --> 00:08:10.080
+Now R also got a p-value.
+
+138
+00:08:10.080 --> 00:08:11.470
+So what's the p-value?
+
+139
+00:08:11.470 --> 00:08:17.225
+It's the likelihood of seeing data this extreme under the null hypothesis.
+
+140
+00:08:17.225 --> 00:08:20.675
+And, what we'll do here is look at twice,
+
+141
+00:08:20.675 --> 00:08:23.725
+it was a two tailed test, twice.
+
+142
+00:08:23.725 --> 00:08:26.395
+Now the t distribution is the one in play for us,
+
+143
+00:08:26.395 --> 00:08:28.270
+that's that letter t right there.
+
+144
+00:08:28.270 --> 00:08:31.130
+And p is just short for probability.
+
+145
+00:08:31.130 --> 00:08:34.990
+So, what we're trying to do is get some tail areas here.
+
+146
+00:08:34.990 --> 00:08:38.300
+So, we're going to take twice the tail area,
+
+147
+00:08:38.300 --> 00:08:41.030
+I'll look down at the left tail,
+
+148
+00:08:41.030 --> 00:08:43.300
+I'll pop my negative four in there.
+
+149
+00:08:43.300 --> 00:08:47.360
+Nine degrees of freedom and calculate a p-value.
+
+150
+00:08:47.360 --> 00:08:49.725
+If your p value is small,
+
+151
+00:08:49.725 --> 00:08:54.893
+you'll reject your null hypothesis and our p value is really quite small.
+
+152
+00:08:54.893 --> 00:08:59.516
+So we rejected the null hypothesis.
+
+153
+00:08:59.516 --> 00:09:02.630
+In general, if you have a hypothesis test,
+
+154
+00:09:02.630 --> 00:09:05.170
+different books have different details here,
+
+155
+00:09:05.170 --> 00:09:06.950
+but it's all they all rhyme.
+
+156
+00:09:06.950 --> 00:09:09.065
+They're all basically telling the same thing.
+
+157
+00:09:09.065 --> 00:09:12.105
+You're going to state clearly what your variables are
+
+158
+00:09:12.105 --> 00:09:15.425
+so that everybody knows including you what you're talking about.
+
+159
+00:09:15.425 --> 00:09:19.340
+State your null and a whole alternative hypotheses,
+
+160
+00:09:19.340 --> 00:09:25.330
+and then divide, decide upon rather a level of significance.
+
+161
+00:09:25.330 --> 00:09:30.395
+Once you've got that basic framework down those organizing principles,
+
+162
+00:09:30.395 --> 00:09:31.630
+go ahead and look at your data,
+
+163
+00:09:31.630 --> 00:09:33.440
+compute a test statistic,
+
+164
+00:09:33.440 --> 00:09:39.155
+and you'll run across very often z's and z's chi square as an f's.
+
+165
+00:09:39.155 --> 00:09:43.055
+These are kind of the big four in an elementary statistics course.
+
+166
+00:09:43.055 --> 00:09:47.100
+You'll find the p value corresponding to your test statistic,
+
+167
+00:09:47.100 --> 00:09:49.880
+and then you'll form a conclusion,
+
+168
+00:09:49.880 --> 00:09:55.655
+you'll reject or not reject typically.
+
+169
+00:09:55.655 --> 00:10:00.075
+Confidence intervals are,
+
+170
+00:10:00.075 --> 00:10:04.620
+there is a difference between the word confidence and probability.
+
+171
+00:10:04.620 --> 00:10:10.035
+Many people get very sticky on this and say that once an event has occurred,
+
+172
+00:10:10.035 --> 00:10:12.390
+you really can't talk about probability anymore.
+
+173
+00:10:12.390 --> 00:10:14.940
+Instead you must talk about confidence.
+
+174
+00:10:14.940 --> 00:10:17.790
+The basic idea is we're trying to give
+
+175
+00:10:17.790 --> 00:10:22.215
+a good indication of where we believe the actual meaning would be,
+
+176
+00:10:22.215 --> 00:10:25.080
+here it's going to be a mean difference.
+
+177
+00:10:25.080 --> 00:10:30.825
+The common form that you'll see for many confidence intervals is estimate.
+
+178
+00:10:30.825 --> 00:10:34.065
+That was our D Bar here, plus and minus,
+
+179
+00:10:34.065 --> 00:10:38.725
+some sort of table value multiplied by an estimated standard error.
+
+180
+00:10:38.725 --> 00:10:41.640
+It's not hard to really demonstrate where this comes from.
+
+181
+00:10:41.640 --> 00:10:43.103
+In our particular case,
+
+182
+00:10:43.103 --> 00:10:44.265
+we'll look at d bar,
+
+183
+00:10:44.265 --> 00:10:45.975
+plus and minus the T value,
+
+184
+00:10:45.975 --> 00:10:50.200
+times our standard error.
+
+185
+00:10:50.200 --> 00:10:54.825
+We already saw that R will print this out for you.
+
+186
+00:10:54.825 --> 00:10:58.098
+If you like to follow along and do a hand calculation yourself,
+
+187
+00:10:58.098 --> 00:10:59.900
+we've got the numbers right here.
+
+188
+00:10:59.900 --> 00:11:04.150
+It's just a direct substitution.
+
+189
+00:11:05.580 --> 00:11:10.700
+Standard error is just a shorthand notation
+
+190
+00:11:10.700 --> 00:11:14.710
+for the standard deviation of a sampling distribution.
+
+191
+00:11:14.710 --> 00:11:17.150
+And since we're dealing with means not individuals,
+
+192
+00:11:17.150 --> 00:11:20.410
+standard error is the right term to use.
+
+193
+00:11:20.410 --> 00:11:25.635
+Also, statistics are things that you compute from data.
+
+194
+00:11:25.635 --> 00:11:30.624
+Parameters are usually the things that you're trying to draw inferences on,
+
+195
+00:11:30.624 --> 00:11:33.015
+and it's a numerical descriptor about
+
+196
+00:11:33.015 --> 00:11:39.110
+either a theoretical distribution or an actual population.
+
+197
+00:11:39.110 --> 00:11:42.795
+And we can discuss type one and type two errors.
+
+198
+00:11:42.795 --> 00:11:47.030
+A lot of this is done in some more detail in the reading.
+
+199
+00:11:47.030 --> 00:11:51.590
+In this lecture you've learned how to use R to develop
+
+200
+00:11:51.590 --> 00:11:56.401
+graphical intuition into a data set as you're trying to answer a question,
+
+201
+00:11:56.401 --> 00:12:00.040
+and we've learned how to perform a statistical hypothesis,
+
+202
+00:12:00.040 --> 00:12:06.000
+we've reviewed the concept from basic statistics and shown how to do it in R.

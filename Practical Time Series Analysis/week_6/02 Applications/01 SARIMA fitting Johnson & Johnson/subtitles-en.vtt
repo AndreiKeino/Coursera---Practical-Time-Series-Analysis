@@ -1,0 +1,1013 @@
+WEBVTT
+
+1
+00:00:00.210 --> 00:00:00.976
+Hello, everyone.
+
+2
+00:00:00.976 --> 00:00:05.610
+In this lecture, we'll start fitting
+SARIMA processes to real-world datasets,
+
+3
+00:00:05.610 --> 00:00:09.408
+and the first dataset we're going
+to look at is something familiar.
+
+4
+00:00:09.408 --> 00:00:16.220
+We're going to look at quarterly
+earnings per Johnson & Johnson share.
+
+5
+00:00:16.220 --> 00:00:21.067
+Objectives are to fit SARIMA models to
+quarterly earnings of Johnson & Johnson
+
+6
+00:00:21.067 --> 00:00:25.260
+shares, and to forecast future
+values of the examined time series,
+
+7
+00:00:25.260 --> 00:00:29.196
+in this case would be the earnings
+of Johnson & Johnson shares.
+
+8
+00:00:29.196 --> 00:00:34.088
+All right, so when we do the modeling,
+we're going to look at a few steps here,
+
+9
+00:00:34.088 --> 00:00:38.400
+and some of those steps we'll
+have already talked about before.
+
+10
+00:00:38.400 --> 00:00:43.390
+So the first thing we're going to do
+as always is to look at the time plot.
+
+11
+00:00:43.390 --> 00:00:45.590
+We're going to look at the time
+plot of the data set and
+
+12
+00:00:45.590 --> 00:00:48.180
+try to see If there is an outlier.
+
+13
+00:00:48.180 --> 00:00:52.185
+If there is a change in the trend,
+a change in the variance and so forth.
+
+14
+00:00:52.185 --> 00:00:56.916
+And if we need, we're going to
+transform the data set, right?
+
+15
+00:00:56.916 --> 00:01:01.343
+So transformation will help us, for
+example, try to stabilize the variance.
+
+16
+00:01:01.343 --> 00:01:07.811
+And then if you need to remove
+the trend or seasonal trend.
+
+17
+00:01:07.811 --> 00:01:12.551
+We're going to do differencing so we can
+do just non-seasonal differencing, or
+
+18
+00:01:12.551 --> 00:01:15.520
+seasonal differencing, or
+both at the same time.
+
+19
+00:01:16.780 --> 00:01:21.040
+As we go through, we're also going
+to use Ljung-Box test to check
+
+20
+00:01:21.040 --> 00:01:25.520
+if there is an autocorrelation
+between the previous lags.
+
+21
+00:01:25.520 --> 00:01:28.316
+We're going to use ACF
+as one of our tools.
+
+22
+00:01:28.316 --> 00:01:32.116
+And in the ACF,
+if there is closers spikes,
+
+23
+00:01:32.116 --> 00:01:35.524
+then that will suggest MA order for us.
+
+24
+00:01:35.524 --> 00:01:40.855
+If there is spikes around seasonal
+lags that will give us SMA order,
+
+25
+00:01:40.855 --> 00:01:44.794
+in other words,
+seasonal moving average order.
+
+26
+00:01:44.794 --> 00:01:48.806
+We're going to look at PACF,
+partial autocorrelation function.
+
+27
+00:01:48.806 --> 00:01:52.787
+Closer spikes will suggest
+autoregressive order and
+
+28
+00:01:52.787 --> 00:01:59.078
+the spikes around the seasonal lags will
+suggest seasonal autoregressive orders.
+
+29
+00:02:01.860 --> 00:02:05.373
+Then we're going to look
+at a few different models.
+
+30
+00:02:05.373 --> 00:02:10.377
+We're going to compare their
+information criterion,
+
+31
+00:02:10.377 --> 00:02:14.740
+and we're going to choose
+the model with a minimum AIC.
+
+32
+00:02:15.840 --> 00:02:20.659
+Now as we do all of these, we're going
+to keep in mind the parsimony principle
+
+33
+00:02:20.659 --> 00:02:22.973
+which I highlighted the green here.
+
+34
+00:02:22.973 --> 00:02:25.230
+I'm going to talk about
+this in the next slide.
+
+35
+00:02:25.230 --> 00:02:27.630
+We have already talked
+about this a little bit.
+
+36
+00:02:27.630 --> 00:02:30.750
+We are trying to find the simplest
+model that fits the data.
+
+37
+00:02:30.750 --> 00:02:36.740
+In this lecture I'm going to quantify
+what I mean with the parsimony principle.
+
+38
+00:02:36.740 --> 00:02:41.154
+And once we have our model using
+the parsimony principle and
+
+39
+00:02:41.154 --> 00:02:44.774
+comparing the AICs and
+choose the minimum AICs,
+
+40
+00:02:44.774 --> 00:02:48.320
+we're going to look at the residuals,
+right?
+
+41
+00:02:48.320 --> 00:02:51.768
+We're going to look at the time plot
+of the residuals, ACF and PACF of
+
+42
+00:02:51.768 --> 00:02:55.762
+the residuals and we're going to look
+at the Ljung-Box test of the residuals.
+
+43
+00:02:55.762 --> 00:02:58.800
+So we will expect to get a white noise.
+
+44
+00:02:58.800 --> 00:03:03.566
+And this residual analysis, these last
+two steps will tell us if there is white
+
+45
+00:03:03.566 --> 00:03:06.180
+noise or non white noise in the residuals.
+
+46
+00:03:07.430 --> 00:03:09.810
+Now the parsimony principle,
+we're going to use the following.
+
+47
+00:03:09.810 --> 00:03:15.598
+If you have a SARIMA, which is p,d,q,
+capital P, capital D, capital Q, s.
+
+48
+00:03:15.598 --> 00:03:20.844
+S is the span of the seasonality,
+p is order of autoregressive process,
+
+49
+00:03:20.844 --> 00:03:25.319
+d is the order of differencing,
+non-seasonal difference.
+
+50
+00:03:25.319 --> 00:03:30.172
+D is seasonal differencing,
+q is order of moving average process.
+
+51
+00:03:30.172 --> 00:03:35.028
+Q is order of seasonal
+moving average process and
+
+52
+00:03:35.028 --> 00:03:40.260
+P is the order of seasonal
+autoregressive process.
+
+53
+00:03:40.260 --> 00:03:45.700
+And if I add them up, I do not want
+to have that complicated model I do.
+
+54
+00:03:45.700 --> 00:03:49.092
+We do not want to overfit the time series.
+
+55
+00:03:49.092 --> 00:03:54.063
+So we're going to basically use
+this parsimony principle that these
+
+56
+00:03:54.063 --> 00:03:58.700
+parameters should add up to
+something less than or equal to six.
+
+57
+00:04:00.630 --> 00:04:04.332
+So let's start looking at the Johnson and
+Johnson data set again,
+
+58
+00:04:04.332 --> 00:04:09.638
+this is the quarterly earnings for Johnson
+& Johnson shares, from 1960 until 1980.
+
+59
+00:04:09.638 --> 00:04:13.928
+The source is the astsa package,
+that is basically
+
+60
+00:04:13.928 --> 00:04:18.965
+a package accompanying the book
+by Shumway and Stoffer.
+
+61
+00:04:18.965 --> 00:04:21.367
+The book is Time Series Analysis and
+its Applications.
+
+62
+00:04:21.367 --> 00:04:23.078
+And let's remind that,
+
+63
+00:04:23.078 --> 00:04:29.120
+let's remember that the Johnson & Johnson
+quarterly data is a quarterly time series.
+
+64
+00:04:30.640 --> 00:04:32.810
+As before we looked at the time plot.
+
+65
+00:04:32.810 --> 00:04:36.704
+As you can see from the time plot there
+is definitely a trend going up and
+
+66
+00:04:36.704 --> 00:04:39.089
+as trend goes up the variance is changing.
+
+67
+00:04:39.089 --> 00:04:43.670
+We have a higher variance here,
+lower variance here.
+
+68
+00:04:43.670 --> 00:04:47.040
+That tells me I have what is
+called heteroschocasticity,
+
+69
+00:04:47.040 --> 00:04:50.080
+as variance is increasing in this case,
+changing.
+
+70
+00:04:50.080 --> 00:04:54.210
+We also have a seasonality,
+by the nature of the data.
+
+71
+00:04:54.210 --> 00:04:59.670
+It's a quarterly earnings, and every
+quarter we might see some cyclic behavior.
+
+72
+00:05:00.904 --> 00:05:04.153
+So what we do first,
+we'll have to transform, right?
+
+73
+00:05:04.153 --> 00:05:05.480
+We talked about this before.
+
+74
+00:05:05.480 --> 00:05:08.589
+The transformation is going to,
+basically, the logarithm.
+
+75
+00:05:08.589 --> 00:05:14.000
+So we take the logarithm of
+the data to stabilize the variance.
+
+76
+00:05:14.000 --> 00:05:16.940
+And to remove the trend,
+we take the difference.
+
+77
+00:05:16.940 --> 00:05:19.069
+So difference of
+the logarithm of the dataset.
+
+78
+00:05:19.069 --> 00:05:26.156
+This is also effectively called log-return
+in specifically financial time series.
+
+79
+00:05:26.156 --> 00:05:33.380
+So rt is difference of the logarithms,
+in other words logarithm of the division.
+
+80
+00:05:33.380 --> 00:05:36.313
+This is a side note,
+we are not modelling rt.
+
+81
+00:05:36.313 --> 00:05:41.736
+We are basically modelling
+the logarithm of the transformation.
+
+82
+00:05:41.736 --> 00:05:45.113
+This is basically time series
+of the log returns, and
+
+83
+00:05:45.113 --> 00:05:47.973
+we Help to see a stationary
+time series here.
+
+84
+00:05:47.973 --> 00:05:51.579
+We can see that variance is different in
+the middle part of the data rather than
+
+85
+00:05:51.579 --> 00:05:54.185
+the end point, but
+if you're going to ignore that, and
+
+86
+00:05:54.185 --> 00:05:57.670
+you're going to say okay maybe restabilize
+by taking a lower [INAUDIBLE].
+
+87
+00:05:57.670 --> 00:06:04.306
+And I look at ACF and PACF, as you can see
+we do have a strong auto correlation with
+
+88
+00:06:04.306 --> 00:06:09.374
+lag four, lag eight and
+that is because of the seasonality.
+
+89
+00:06:09.374 --> 00:06:13.375
+So what we want to do we would like to
+take the seasonal differencing in this
+
+90
+00:06:13.375 --> 00:06:15.320
+case the capital D is going to be 1.
+
+91
+00:06:15.320 --> 00:06:20.010
+In R this is basically the transformed and
+difference data,
+
+92
+00:06:20.010 --> 00:06:22.610
+we take the difference with lag 4.
+
+93
+00:06:22.610 --> 00:06:27.914
+This becomes seasonal differencing,
+and if we plot the data set,
+
+94
+00:06:27.914 --> 00:06:33.421
+now our data set jj is differenced
+seasonally and non-seasonally.
+
+95
+00:06:33.421 --> 00:06:37.794
+Actually, the lower item of the jj is
+differenced seasonally and non-seasonally.
+
+96
+00:06:37.794 --> 00:06:44.653
+And we have some stationary,
+Time series here.
+
+97
+00:06:44.653 --> 00:06:45.770
+So what we're going to do.
+
+98
+00:06:45.770 --> 00:06:48.640
+We're going to look at,
+as we said, the Ljung-Box test.
+
+99
+00:06:48.640 --> 00:06:53.168
+So Ljung-Box test is
+basically a Box.test in R.
+
+100
+00:06:53.168 --> 00:06:57.195
+And we're going to take the lag
+as the logarithm of the data.
+
+101
+00:06:57.195 --> 00:06:58.846
+This is the common adoption.
+
+102
+00:06:58.846 --> 00:07:03.542
+And then we'll look at the p value and
+p value is very, very small.
+
+103
+00:07:03.542 --> 00:07:08.581
+So if the P value is small then we reject
+the null hypothesis that there is no
+
+104
+00:07:08.581 --> 00:07:13.623
+auto correlation between previous lags so
+there is some auto correlation
+
+105
+00:07:13.623 --> 00:07:18.529
+between previous lags and we're going
+to find them using ACF and PACF.
+
+106
+00:07:18.529 --> 00:07:19.430
+So let's look at ACF.
+
+107
+00:07:19.430 --> 00:07:25.510
+This is the ACF of the resulted data and
+this is the PACF of the resulted data.
+
+108
+00:07:25.510 --> 00:07:31.318
+ACF if I look at the closer spikes here,
+I have a spike at Lag 1 and
+
+109
+00:07:31.318 --> 00:07:35.631
+then it dies off, so
+this suggest MA1 models.
+
+110
+00:07:35.631 --> 00:07:40.659
+So the order of moving average
+terms would be one, but
+
+111
+00:07:40.659 --> 00:07:45.700
+if I look at lags,
+the seasonal lags, which is four.
+
+112
+00:07:45.700 --> 00:07:49.755
+In this case, it's period one,
+but the lag is four.
+
+113
+00:07:49.755 --> 00:07:51.881
+It is almost significant.
+
+114
+00:07:51.881 --> 00:07:54.646
+Not really significant because it's below.
+
+115
+00:07:54.646 --> 00:07:58.150
+It does not cross this dashed line.
+
+116
+00:07:58.150 --> 00:08:00.527
+But it's almost significant,
+so we're going to assume that.
+
+117
+00:08:00.527 --> 00:08:06.051
+So we might have some
+seasonal correlation, and
+
+118
+00:08:06.051 --> 00:08:11.439
+so this will tell us that
+maybe we have Order 1,
+
+119
+00:08:11.439 --> 00:08:15.560
+seasonal moving average term.
+
+120
+00:08:15.560 --> 00:08:20.200
+If I look at PACF, I see that PACF,
+there's a significant lag at 1,
+
+121
+00:08:20.200 --> 00:08:22.125
+again, then this dies off.
+
+122
+00:08:22.125 --> 00:08:27.918
+This will tell me, suggest me that maybe
+order of auto-regressive term is one,
+
+123
+00:08:27.918 --> 00:08:32.432
+and I see the other significant
+other correlation at lag four,
+
+124
+00:08:32.432 --> 00:08:38.340
+that it will tell me maybe the order of
+the seasonal auto-regressive term is one.
+
+125
+00:08:38.340 --> 00:08:40.045
+And then the other correlation dies off.
+
+126
+00:08:40.045 --> 00:08:44.773
+Okay, so ACF told us that q is either 1 or
+maybe it's 0,
+
+127
+00:08:44.773 --> 00:08:49.318
+we get to look at both of them,
+and capital Q is 0, 1.
+
+128
+00:08:49.318 --> 00:08:54.840
+Partial auto-correlation told us that p is
+maybe 0 and 1, and capital P is 0 and 1.
+
+129
+00:08:54.840 --> 00:09:00.095
+So we'll look at this SARIMA model's p,
+1, q, capital P, 1, Q, 4.
+
+130
+00:09:00.095 --> 00:09:02.246
+4 is my span of the seasonality.
+
+131
+00:09:02.246 --> 00:09:06.492
+And these are the models for
+logarithm of the data,
+
+132
+00:09:06.492 --> 00:09:09.949
+and immediately just determine that PQ,
+
+133
+00:09:09.949 --> 00:09:14.680
+capital P capital Q,
+is going to be either zero or one.
+
+134
+00:09:14.680 --> 00:09:19.350
+We're going to use ARIMA routine from R,
+basically, we have the order.
+
+135
+00:09:19.350 --> 00:09:21.926
+This is the order for non-seasonal part.
+
+136
+00:09:21.926 --> 00:09:25.020
+And then we have a seasonal
+part including the period.
+
+137
+00:09:27.120 --> 00:09:32.865
+And we carry out this for
+all these possible values of p,d,
+
+138
+00:09:32.865 --> 00:09:37.485
+p, q, P, Q and we basically print them.
+
+139
+00:09:37.485 --> 00:09:44.569
+So these first six numbers
+are my orders p, d, q, P, D, Q.
+
+140
+00:09:44.569 --> 00:09:46.560
+This is s which is 4 for all of them.
+
+141
+00:09:46.560 --> 00:09:48.589
+Then we look at AIC values.
+
+142
+00:09:48.589 --> 00:09:51.818
+This is Akaike Information Criterion.
+
+143
+00:09:51.818 --> 00:09:57.060
+We also looked at the sum of
+the squares errors, this is SSE.
+
+144
+00:09:57.060 --> 00:10:03.170
+And we look at the p-value from
+the Ljung-Box test for the residuals.
+
+145
+00:10:03.170 --> 00:10:08.914
+So we do not want auto correlations
+left in the residuals.
+
+146
+00:10:08.914 --> 00:10:15.550
+So if you want high p-VALUE and
+we want smallest AIC and smallest SSE.
+
+147
+00:10:15.550 --> 00:10:19.810
+Our principle is going to be
+choosing the smallest AIC.
+
+148
+00:10:19.810 --> 00:10:24.417
+And I highlighted here
+the AIC is -150,9134,
+
+149
+00:10:24.417 --> 00:10:29.317
+even though the smallest SSE in
+this In this output is here,
+
+150
+00:10:29.317 --> 00:10:32.658
+which corresponds to different model.
+
+151
+00:10:32.658 --> 00:10:36.578
+But we're ging to go with the smallest
+AIC, because of negative,
+
+152
+00:10:36.578 --> 00:10:38.124
+this is the smallest AIC.
+
+153
+00:10:38.124 --> 00:10:45.600
+So the model that we'll agree on is
+going to basically 0, 1, 1, 1, 1, 0, 4.
+
+154
+00:10:45.600 --> 00:10:52.030
+And you can see from the p-value, p-value
+is high, so we cannot reject the null
+
+155
+00:10:52.030 --> 00:10:56.170
+hypothesis, there is no auto-correlation
+in the residuals in this case.
+
+156
+00:10:57.810 --> 00:11:01.917
+So our model is SARIMA ( 0,1,1,1,1 0)4.
+
+157
+00:11:01.917 --> 00:11:05.570
+Remember Xt is going to
+be model as our earnings,
+
+158
+00:11:05.570 --> 00:11:08.430
+but what we found this model is for Yt.
+
+159
+00:11:08.430 --> 00:11:12.973
+So we transformed Xt, and
+we have logarithm of Xt called Yt, and
+
+160
+00:11:12.973 --> 00:11:17.432
+we fit the SARIMA model using
+SARIMA routine or ARIMA routine,
+
+161
+00:11:17.432 --> 00:11:23.262
+the routine that we discussed, and
+we obtain the following result here.
+
+162
+00:11:23.262 --> 00:11:28.229
+These are ma1 because if there's ma1 here
+
+163
+00:11:28.229 --> 00:11:32.129
+this is the coefficient for ma1.
+
+164
+00:11:32.129 --> 00:11:36.532
+This is seasonal autoregressive order,
+this is corresponding to this one.
+
+165
+00:11:36.532 --> 00:11:37.829
+This is our coefficient.
+
+166
+00:11:37.829 --> 00:11:40.931
+This is standard errors and
+the p values are so small, so
+
+167
+00:11:40.931 --> 00:11:43.780
+both of these coefficients
+are very significant.
+
+168
+00:11:46.189 --> 00:11:50.140
+We could also use SARIMA
+routine from asta package.
+
+169
+00:11:50.140 --> 00:11:51.218
+Instead of using ARIMA,
+
+170
+00:11:51.218 --> 00:11:54.001
+SARIMA routine would basically
+take the logarithm of the data.
+
+171
+00:11:54.001 --> 00:11:57.970
+This is the transformation,
+and we put the order,
+
+172
+00:11:57.970 --> 00:12:02.880
+the parameters of our model and
+at the end, this is the period.
+
+173
+00:12:04.120 --> 00:12:09.904
+That will give us the results that we
+obtained with also this residual analysis.
+
+174
+00:12:09.904 --> 00:12:12.485
+This is our time plot of the residuals.
+
+175
+00:12:12.485 --> 00:12:15.270
+No evidence that this is not white noise.
+
+176
+00:12:15.270 --> 00:12:17.379
+We see almost a straight line here.
+
+177
+00:12:17.379 --> 00:12:18.875
+There are normal.
+
+178
+00:12:18.875 --> 00:12:22.612
+And we have no significant
+autocorrelation coefficients.
+
+179
+00:12:22.612 --> 00:12:27.595
+And all of our p values from Ljung-Box
+statistics tells me that there is
+
+180
+00:12:27.595 --> 00:12:31.430
+nothing left as an autocorrelation
+in the residuals.
+
+181
+00:12:33.430 --> 00:12:38.023
+Okay, so if I want to rewrite the model,
+then remember, Xt is our earning.
+
+182
+00:12:38.023 --> 00:12:42.709
+So Yt is the logarithm of Xt,
+and then Yt is the SARIMA.
+
+183
+00:12:42.709 --> 00:12:46.276
+We have 1- B,
+this is non-seasonal differencing.
+
+184
+00:12:46.276 --> 00:12:50.094
+1- B to the 4,
+this is seasonal differencing.
+
+185
+00:12:50.094 --> 00:12:53.750
+Four is my span of the seasonality.
+
+186
+00:12:53.750 --> 00:12:55.650
+One minus phi b to the 4.
+
+187
+00:12:55.650 --> 00:13:01.344
+This is because I have
+seasonal auto-regressive term.
+
+188
+00:13:01.344 --> 00:13:04.260
+There is no non-seasonal
+auto-regressive term.
+
+189
+00:13:04.260 --> 00:13:09.120
+And the right hand side I have my
+noise applied by this polynomial which
+
+190
+00:13:09.120 --> 00:13:13.980
+is coming from a non-seasonal
+moving average.
+
+191
+00:13:13.980 --> 00:13:17.072
+If I expand these,
+then Yt will become the following.
+
+192
+00:13:17.072 --> 00:13:18.840
+I have my phi.
+
+193
+00:13:19.870 --> 00:13:21.507
+So what is this, so I have my theta.
+
+194
+00:13:21.507 --> 00:13:23.665
+The first number is my theta and
+
+195
+00:13:23.665 --> 00:13:27.901
+the second number is auto-regressive
+part which is my phi.
+
+196
+00:13:27.901 --> 00:13:31.613
+So if I plug them in,
+I obtain the following model.
+
+197
+00:13:31.613 --> 00:13:36.564
+This is my fitted model to
+the logarithm of the earnings,
+
+198
+00:13:36.564 --> 00:13:39.710
+and here y is the logarithm of x t.
+
+199
+00:13:39.710 --> 00:13:44.334
+And the Z t, which is my noise,
+is normal, with expectation 0 and
+
+200
+00:13:44.334 --> 00:13:46.407
+the variance 0.0079.
+
+201
+00:13:48.355 --> 00:13:50.352
+We can also forecast, at this point.
+
+202
+00:13:50.352 --> 00:13:55.791
+We can use the forecast from
+the forecast package if I write
+
+203
+00:13:55.791 --> 00:14:02.895
+plot forecast of the model that I've
+specified, we obtain the forecast for
+
+204
+00:14:02.895 --> 00:14:07.781
+the next two cycles,
+the next two years basically.
+
+205
+00:14:07.781 --> 00:14:10.724
+This is next 1981 and this is 1982.
+
+206
+00:14:14.842 --> 00:14:19.885
+If I actually write forecast model into
+the R it will tell me point estimation.
+
+207
+00:14:19.885 --> 00:14:25.920
+Also the confidence interval,
+80% confidence interval and
+
+208
+00:14:25.920 --> 00:14:31.630
+95% confidence interval for
+my forecast next two years.
+
+209
+00:14:31.630 --> 00:14:34.079
+So this 1981, 1982.
+
+210
+00:14:36.405 --> 00:14:37.317
+So what have we learned?
+
+211
+00:14:37.317 --> 00:14:41.189
+We have learned how to fit SARIMA models
+to quarterly earnings of Johnson &
+
+212
+00:14:41.189 --> 00:14:42.055
+Johnson share.
+
+213
+00:14:42.055 --> 00:14:46.342
+We also learned how to forecast
+future values of a time series.

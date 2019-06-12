@@ -1,0 +1,686 @@
+WEBVTT
+
+1
+00:00:00.420 --> 00:00:02.480
+This lecture is about random walk.
+
+2
+00:00:02.480 --> 00:00:04.370
+Objectives are the following.
+
+3
+00:00:04.370 --> 00:00:05.787
+We will get familiar
+with random walk model.
+
+4
+00:00:05.787 --> 00:00:10.848
+We will simulate a random walk model in R.
+
+5
+00:00:10.848 --> 00:00:14.237
+We will obtain the correlogram
+of a random walk, and
+
+6
+00:00:14.237 --> 00:00:17.170
+we will see a difference
+operator in action.
+
+7
+00:00:19.440 --> 00:00:20.440
+The model is the following.
+
+8
+00:00:21.990 --> 00:00:25.769
+Xt is equal to Xt minus 1 plus Zt.
+
+9
+00:00:25.769 --> 00:00:28.338
+So here's how you can interpret this.
+
+10
+00:00:28.338 --> 00:00:34.010
+Xt can be location of your
+particle at this moment.
+
+11
+00:00:34.010 --> 00:00:37.788
+And Xt minus 1 will be location
+of that particle one step before.
+
+12
+00:00:37.788 --> 00:00:43.879
+In other words, it can be location of
+a particle one minute ago or one day ago.
+
+13
+00:00:43.879 --> 00:00:48.124
+And Zt is just sound residual,
+sound white noise.
+
+14
+00:00:48.124 --> 00:00:51.090
+The random walk works as following.
+
+15
+00:00:51.090 --> 00:00:53.840
+Wherever you are,
+we just add a little bit of noise to it,
+
+16
+00:00:53.840 --> 00:00:55.190
+now you're in the next step.
+
+17
+00:00:55.190 --> 00:00:57.489
+You add a little bit of noise to it,
+now you're in the next step.
+
+18
+00:00:58.510 --> 00:01:03.064
+There's another interpretation where
+you can think Xt is the price of
+
+19
+00:01:03.064 --> 00:01:04.298
+a stock today, and
+
+20
+00:01:04.298 --> 00:01:09.026
+Xt minus y was the price of a stock
+yesterday, and Zt is the random noise.
+
+21
+00:01:09.026 --> 00:01:14.280
+So stock is changing from the yesterday's
+price by adding some random noise into it.
+
+22
+00:01:16.160 --> 00:01:20.215
+And this random noise,
+which is white noise or residual,
+
+23
+00:01:20.215 --> 00:01:25.866
+that's just a normal random variable
+with some expectation and some variance.
+
+24
+00:01:29.964 --> 00:01:33.920
+We can assume that maybe
+we are starting at point 0.
+
+25
+00:01:33.920 --> 00:01:35.936
+At times 0, we are at 0.
+
+26
+00:01:35.936 --> 00:01:40.404
+Which means that time 1 X1 would be X0,
+which is 0,
+
+27
+00:01:40.404 --> 00:01:43.524
+plus the Z1, so X1 is actually Z1.
+
+28
+00:01:43.524 --> 00:01:49.050
+And the next times step we are X2,
+which has to be X1 plus the Z2.
+
+29
+00:01:49.050 --> 00:01:53.105
+But X1 is Z1 so it becomes Z1 plus the Z2.
+
+30
+00:01:53.105 --> 00:01:54.120
+That's how you go.
+
+31
+00:01:54.120 --> 00:02:00.820
+So X3 will become X2, which is Z1 plus
+Z2 plus additional noise, which is Z3.
+
+32
+00:02:00.820 --> 00:02:04.410
+So as you go in this random work,
+you accumulate the noises.
+
+33
+00:02:04.410 --> 00:02:11.229
+So at set T, XT, you basically have
+the sum of all noises until time T.
+
+34
+00:02:14.354 --> 00:02:19.161
+If you look at expectation of Xt,
+well it is expectation of sum.
+
+35
+00:02:19.161 --> 00:02:23.360
+And expectation of sum is the same
+thing as the sum of expectations.
+
+36
+00:02:23.360 --> 00:02:30.101
+And since all of Zis are have
+the same mean mu, you will get mu t.
+
+37
+00:02:30.101 --> 00:02:32.470
+So expectation is mu t.
+
+38
+00:02:32.470 --> 00:02:36.806
+Expectation of this stochastic
+process is changing by the location.
+
+39
+00:02:36.806 --> 00:02:40.860
+It is definitely not a stationary process.
+
+40
+00:02:40.860 --> 00:02:47.180
+And variants of Xt is variants of the sum,
+which I wrote as the sum of the variants.
+
+41
+00:02:47.180 --> 00:02:51.973
+This is only true if the random variables,
+the are independent.
+
+42
+00:02:51.973 --> 00:02:56.408
+So we assume that in our model, that
+noises are independent from each other,
+
+43
+00:02:56.408 --> 00:03:00.366
+which would mean that variance of
+the sum is the sum of the variances,
+
+44
+00:03:00.366 --> 00:03:02.428
+which will give us signal square t.
+
+45
+00:03:02.428 --> 00:03:06.140
+So there's systematic change in mean.
+
+46
+00:03:06.140 --> 00:03:07.890
+There is systematic change in variance.
+
+47
+00:03:07.890 --> 00:03:10.835
+This is definitely
+a non-stationary time series, or
+
+48
+00:03:10.835 --> 00:03:13.081
+a non-stationary stochastic process.
+
+49
+00:03:14.450 --> 00:03:16.270
+So let's do a simulation,
+in this simulation,
+
+50
+00:03:16.270 --> 00:03:17.910
+we're going to start from X1 not X0.
+
+51
+00:03:19.350 --> 00:03:23.222
+X1 is 0 and
+our random variable is standard,
+
+52
+00:03:23.222 --> 00:03:27.111
+our noise is a standard
+normal distribution.
+
+53
+00:03:27.111 --> 00:03:32.976
+And we're going to simulate it using a for
+loop and we're going to plot it and
+
+54
+00:03:32.976 --> 00:03:38.962
+we're going to look at the correlation
+function of it for the simulation.
+
+55
+00:03:38.962 --> 00:03:42.977
+So I'm going to say x=NULL, okay.
+
+56
+00:03:42.977 --> 00:03:47.838
+And that x1, my starting point,
+is actually 0.
+
+57
+00:03:47.838 --> 00:03:52.474
+Then for later on, I have to start from
+my previous step add some noise to it.
+
+58
+00:03:52.474 --> 00:03:54.863
+So I'm going to use for loop.
+
+59
+00:03:54.863 --> 00:03:57.160
+The syntax is for parentheses.
+
+60
+00:03:57.160 --> 00:04:04.370
+We do the index i which is n,
+starting from 2 until let's say 1,000.
+
+61
+00:04:04.370 --> 00:04:06.801
+We going to generate 1,000 data points.
+
+62
+00:04:06.801 --> 00:04:09.910
+I'm going to do the brackets.
+
+63
+00:04:09.910 --> 00:04:11.970
+Open bracket and
+I'm going to close the bracket.
+
+64
+00:04:11.970 --> 00:04:17.972
+Everything in the bracket will have
+a loop, will be inside the loop basically.
+
+65
+00:04:17.972 --> 00:04:23.254
+And I'm going to say
+x[i]=x[i-1]+ some noise, and
+
+66
+00:04:23.254 --> 00:04:28.440
+the noise we assume to be
+standard normal distribution.
+
+67
+00:04:28.440 --> 00:04:31.110
+So I'm going to say rnorm,
+just 1 data point,
+
+68
+00:04:31.110 --> 00:04:34.610
+because I want to add one noise to it.
+
+69
+00:04:34.610 --> 00:04:38.080
+And then we generated our beta set.
+
+70
+00:04:38.080 --> 00:04:43.483
+If I say print(x),
+we see that we have thousand,
+
+71
+00:04:43.483 --> 00:04:46.256
+thousand, data points.
+
+72
+00:04:46.256 --> 00:04:49.060
+But it does not have a time
+series structure on it.
+
+73
+00:04:49.060 --> 00:04:52.190
+So let me just go ahead and
+clear the console.
+
+74
+00:04:53.330 --> 00:04:58.610
+And x is a data set, but it doesn't
+have a time state structure on it.
+
+75
+00:04:58.610 --> 00:05:02.987
+So I'm going to define a random walk and
+I'm going to say ts.
+
+76
+00:05:02.987 --> 00:05:07.850
+And ts is going to basically transform
+the data set to a time series.
+
+77
+00:05:07.850 --> 00:05:09.420
+I'm going to put x in it.
+
+78
+00:05:09.420 --> 00:05:14.370
+And then I have a random walk,
+which is basically, time series.
+
+79
+00:05:14.370 --> 00:05:15.620
+Now let's plot this.
+
+80
+00:05:15.620 --> 00:05:20.100
+Let's plot random_walk.
+
+81
+00:05:20.100 --> 00:05:21.730
+Let's out some title to it.
+
+82
+00:05:21.730 --> 00:05:26.670
+Title would be a random walk.
+
+83
+00:05:27.960 --> 00:05:32.070
+Into the y label, let's put nothing.
+
+84
+00:05:32.070 --> 00:05:37.406
+And the x label,
+let's say this is basically days.
+
+85
+00:05:37.406 --> 00:05:38.870
+And let's put some color into it.
+
+86
+00:05:38.870 --> 00:05:46.240
+We can put a blue color to it, and we
+can increase the width of our line by 2.
+
+87
+00:05:46.240 --> 00:05:50.303
+And once I do that,
+we obtain the following.
+
+88
+00:05:50.303 --> 00:05:51.949
+A random walk.
+
+89
+00:05:51.949 --> 00:05:57.804
+This is a very,
+very typical time plot for a random walk.
+
+90
+00:05:57.804 --> 00:06:02.040
+Now, random walk we just said,
+is not a stationary time series.
+
+91
+00:06:02.040 --> 00:06:06.710
+It would not make sense to
+actually find acf of it,
+
+92
+00:06:06.710 --> 00:06:12.061
+because acf, we define acf for
+stationary time series.
+
+93
+00:06:12.061 --> 00:06:15.920
+But let's just do it
+because we can just do it.
+
+94
+00:06:15.920 --> 00:06:18.620
+Let's just try to find the acf in r.
+
+95
+00:06:20.880 --> 00:06:27.710
+If I say acf(random_walk),
+we obtain the following plot.
+
+96
+00:06:27.710 --> 00:06:32.620
+As you see, there's a high correlation,
+
+97
+00:06:32.620 --> 00:06:37.180
+even 30 laps back,
+which just again shows that there is
+
+98
+00:06:37.180 --> 00:06:41.080
+a high correlation in this data set and
+there is no stationality.
+
+99
+00:06:42.240 --> 00:06:45.710
+Now let's deviate from the topic,
+random walk, and
+
+100
+00:06:45.710 --> 00:06:50.040
+say there is a trend,
+definitely trending here.
+
+101
+00:06:50.040 --> 00:06:51.050
+Goes up and down.
+
+102
+00:06:52.150 --> 00:06:53.550
+Can you remove that trend?
+
+103
+00:06:53.550 --> 00:06:54.930
+It turns out that yes we can.
+
+104
+00:06:54.930 --> 00:06:56.406
+Look at here, look what we have here.
+
+105
+00:06:56.406 --> 00:07:02.180
+Xt is Xt-1 + Zt, I'm going to take
+this Xt-1 to the left hand side.
+
+106
+00:07:02.180 --> 00:07:06.045
+So basically we have Xt- Xt-1 = Zt.
+
+107
+00:07:06.045 --> 00:07:10.523
+Let's define Xt- Xt-1 as delta.
+
+108
+00:07:13.719 --> 00:07:17.482
+Well, this is not exactly delta,
+this is a difference operator.
+
+109
+00:07:17.482 --> 00:07:18.497
+So let's call it delta Xt.
+
+110
+00:07:18.497 --> 00:07:20.619
+So this is our difference operator.
+
+111
+00:07:20.619 --> 00:07:24.932
+So difference operator applied to the Xt,
+DXt.
+
+112
+00:07:24.932 --> 00:07:28.778
+This is a new time series,
+which is equal to Zt.
+
+113
+00:07:28.778 --> 00:07:30.830
+I remember Zt is a random noise.
+
+114
+00:07:30.830 --> 00:07:33.460
+Zt is a purely random process.
+
+115
+00:07:33.460 --> 00:07:38.990
+Which means that my difference data
+delta Xt is purely random processed,
+
+116
+00:07:38.990 --> 00:07:44.280
+which is a stationary time series,
+which is stationary statistic process.
+
+117
+00:07:44.280 --> 00:07:48.160
+So it means that if we have a random walk,
+simulation for
+
+118
+00:07:48.160 --> 00:07:53.140
+a random walk,
+if we can take difference and
+
+119
+00:07:53.140 --> 00:07:56.030
+look at the difference,
+the difference is going to be stationary.
+
+120
+00:07:56.030 --> 00:07:59.470
+Let's confirm that using R.
+
+121
+00:07:59.470 --> 00:08:03.559
+What we begin to do,
+we going to use difference operators.
+
+122
+00:08:03.559 --> 00:08:07.360
+I diff and I write the random walk.
+
+123
+00:08:07.360 --> 00:08:11.002
+That will give me difference of like 1.
+
+124
+00:08:11.002 --> 00:08:14.509
+So it's going to give me x2 minus x1,
+x3 minus x2,
+
+125
+00:08:14.509 --> 00:08:18.195
+x4 minus x3 dot dot dot
+dot x1000 minus x900.
+
+126
+00:08:18.195 --> 00:08:22.143
+So this will actually
+give me 999 data points.
+
+127
+00:08:22.143 --> 00:08:27.170
+We are missing one point at the beginning,
+but that's all right.
+
+128
+00:08:27.170 --> 00:08:31.280
+Once I do that, I have another time
+series, which is just differences.
+
+129
+00:08:31.280 --> 00:08:33.743
+For example, I can try to just plot it.
+
+130
+00:08:35.701 --> 00:08:39.850
+Let me not just put any title on it.
+
+131
+00:08:39.850 --> 00:08:44.880
+By plotting this, I should get a purely
+random process because where you saw
+
+132
+00:08:44.880 --> 00:08:49.689
+that by just taking xt minus 1 to
+the left hand side the difference is Zt.
+
+133
+00:08:49.689 --> 00:08:51.510
+It is purely [INAUDIBLE] process.
+
+134
+00:08:51.510 --> 00:08:55.343
+Let's plot this, And
+
+135
+00:08:55.343 --> 00:08:59.720
+you get what looks like white noise.
+
+136
+00:09:02.550 --> 00:09:06.620
+Now we can also look at
+a acf of the difference.
+
+137
+00:09:06.620 --> 00:09:10.190
+So, I write acf of the difference
+of the random walk.
+
+138
+00:09:10.190 --> 00:09:16.599
+And I look at the difference,
+I get an acf, which I have seen before.
+
+139
+00:09:16.599 --> 00:09:21.480
+This is acf of the purely random process
+we generated a few lectures back.
+
+140
+00:09:23.490 --> 00:09:26.410
+So we just apply difference
+operator to remove the trend.
+
+141
+00:09:26.410 --> 00:09:29.997
+There was some kind of trend going on,
+we removed the trend.
+
+142
+00:09:29.997 --> 00:09:32.614
+By just applying the difference operator,
+
+143
+00:09:32.614 --> 00:09:36.020
+it'll get the pot of ACF of
+the differenced time series.
+
+144
+00:09:36.020 --> 00:09:37.770
+So what have we learned?
+
+145
+00:09:37.770 --> 00:09:40.450
+We have learned a random walk model.
+
+146
+00:09:40.450 --> 00:09:43.400
+We learned how to simulate
+a random walk in R.
+
+147
+00:09:43.400 --> 00:09:46.000
+And we learned how to get
+a stationary time series.
+
+148
+00:09:46.000 --> 00:09:51.160
+In fact, the purely random process
+[INAUDIBLE] Random Walk using
+
+149
+00:09:51.160 --> 00:09:52.130
+difference operator.

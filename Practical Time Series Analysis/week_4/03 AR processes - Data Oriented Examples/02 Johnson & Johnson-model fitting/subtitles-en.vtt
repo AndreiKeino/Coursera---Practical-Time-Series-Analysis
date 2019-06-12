@@ -1,0 +1,563 @@
+WEBVTT
+
+1
+00:00:01.941 --> 00:00:02.922
+Hello everyone.
+
+2
+00:00:02.922 --> 00:00:06.160
+In this lecture we will be doing
+another parameter estimation.
+
+3
+00:00:06.160 --> 00:00:11.360
+This time it's going to data set called,
+Johnson&Johnson from astsa package.
+
+4
+00:00:11.360 --> 00:00:16.365
+The objectives is, to fit an AR(p)
+model to Quarterly earnings
+
+5
+00:00:16.365 --> 00:00:21.557
+in dollars per Johnson &
+Johnson share from 1960-1980.
+
+6
+00:00:21.557 --> 00:00:26.481
+And meanwhile, we're going to use
+Yule-Walker equations in matrix from,
+
+7
+00:00:26.481 --> 00:00:29.600
+to estimate the parameters
+of the fitted model.
+
+8
+00:00:29.600 --> 00:00:32.949
+Johnson & Johnson is
+from the package "astsa".
+
+9
+00:00:32.949 --> 00:00:38.901
+It is about the quarterly
+earnings in dollars from 1960-80.
+
+10
+00:00:38.901 --> 00:00:43.780
+It is also available in
+the data sets that comes in R.
+
+11
+00:00:43.780 --> 00:00:49.010
+And it is, of course,
+the origin is from the book, "The
+
+12
+00:00:49.010 --> 00:00:54.040
+Time Series Analysis and its Applications
+with R examples" by Schumway and Stoffer.
+
+13
+00:00:55.660 --> 00:00:57.480
+If we plot the data,
+which we're going to do.
+
+14
+00:00:57.480 --> 00:01:04.190
+So the code is available in notebook,
+Jupiter notebook Johnson & Johnson.
+
+15
+00:01:04.190 --> 00:01:07.660
+So if you haven't opened up yet,
+we will open this up at this point.
+
+16
+00:01:07.660 --> 00:01:11.782
+We will be working on
+that code in a minute.
+
+17
+00:01:11.782 --> 00:01:14.758
+But for now,
+let me show you the code, the plot.
+
+18
+00:01:14.758 --> 00:01:21.290
+This is the time plot of the Johnson &
+Johnson and earnings, quarterly earnings.
+
+19
+00:01:21.290 --> 00:01:25.190
+As you can see,
+there's definitely a trend going up,
+
+20
+00:01:25.190 --> 00:01:29.070
+there's kind of a trend,
+the mean level is going up.
+
+21
+00:01:29.070 --> 00:01:35.940
+And as it goes up, from 1960 til 1980,
+the variations also increases.
+
+22
+00:01:35.940 --> 00:01:38.720
+As you can see,
+there's a difference in variations,
+
+23
+00:01:38.720 --> 00:01:40.820
+systematic difference in variation.
+
+24
+00:01:40.820 --> 00:01:44.260
+There's systematic difference in trend.
+
+25
+00:01:44.260 --> 00:01:49.935
+Which means this dataset is
+definitely not as stationary dataset,
+
+26
+00:01:49.935 --> 00:01:56.206
+in other words we cannot just fit some
+stationary AR model to this dataset,
+
+27
+00:01:56.206 --> 00:02:01.699
+what we need to do in this case is
+some have transform the dataset.
+
+28
+00:02:01.699 --> 00:02:04.700
+So let me give you the one
+famous transformation,
+
+29
+00:02:04.700 --> 00:02:07.353
+it's called log return of the time series.
+
+30
+00:02:07.353 --> 00:02:13.133
+So if Xt is a time series,
+if you look at the division Xt/Xt- 1 and
+
+31
+00:02:13.133 --> 00:02:18.110
+take the logarithm of this,
+this is called a log return.
+
+32
+00:02:18.110 --> 00:02:21.850
+In other words,
+if you look at log(Xt)- log( Xt- 1).
+
+33
+00:02:21.850 --> 00:02:27.200
+That difference is usually
+stationary times series.
+
+34
+00:02:27.200 --> 00:02:29.890
+Spatially and financial times series.
+
+35
+00:02:29.890 --> 00:02:32.290
+In r we can obtain this difference,
+
+36
+00:02:32.290 --> 00:02:35.740
+by basically taking the log
+of the dataset first.
+
+37
+00:02:35.740 --> 00:02:38.125
+And then taking their differences.
+
+38
+00:02:38.125 --> 00:02:43.357
+If you look at the ACF and
+PACF, ACF is alternating and
+
+39
+00:02:43.357 --> 00:02:49.870
+decaying and then PACF shows
+significant log at 4 there zero log,
+
+40
+00:02:49.870 --> 00:02:54.893
+I'm sorry, Zero log 1,
+log 2, log 3, log 4.
+
+41
+00:02:54.893 --> 00:02:58.780
+And this is after that log,
+there's no significant logs available.
+
+42
+00:02:58.780 --> 00:03:03.827
+So this give an idea that
+maybe we can try to attempt to
+
+43
+00:03:03.827 --> 00:03:08.663
+fit the Johnson&Johnson using AR(4) model.
+
+44
+00:03:10.178 --> 00:03:12.680
+So remember the parsimony principle,
+
+45
+00:03:12.680 --> 00:03:17.758
+we're going to try to choose the simplest
+explanation that fits the evidence,
+
+46
+00:03:17.758 --> 00:03:21.954
+and in this case we're going to
+use PACF which gives us AR(4).
+
+47
+00:03:21.954 --> 00:03:25.484
+And we're going to do estimations
+using your Yuke-Walker equations,
+
+48
+00:03:25.484 --> 00:03:27.940
+just like before in the matrix form.
+
+49
+00:03:27.940 --> 00:03:29.360
+Let's look at the code.
+
+50
+00:03:29.360 --> 00:03:34.540
+This is Johnson & Johnson model
+fitting from the Jupiter notebook,
+
+51
+00:03:34.540 --> 00:03:38.030
+it is available to you, so
+I encourage you to open up and
+
+52
+00:03:38.030 --> 00:03:41.500
+work on this code as we
+go through in the video.
+
+53
+00:03:41.500 --> 00:03:47.530
+So, the first expression is going to
+give us a time plot with the title,
+
+54
+00:03:47.530 --> 00:03:50.230
+and the color, and the line width of 3.
+
+55
+00:03:50.230 --> 00:03:56.940
+So if I run this cell, we obtain
+a time plot that we just talked about.
+
+56
+00:03:56.940 --> 00:04:03.125
+The next cell in the Jupiter notebook,
+next cell is about the low returns.
+
+57
+00:04:03.125 --> 00:04:06.029
+So if you take the logarithm
+of the Johnson & Johnson data,
+
+58
+00:04:06.029 --> 00:04:08.831
+if you take their difference,
+that becomes log return.
+
+59
+00:04:08.831 --> 00:04:13.786
+But remember, if you would like
+to use log equations to estimate
+
+60
+00:04:13.786 --> 00:04:18.485
+the parameters, we have to shift
+the dataset so we get mu0.
+
+61
+00:04:18.485 --> 00:04:22.719
+So this is what we're doing here,
+we're taking the log return and
+
+62
+00:04:22.719 --> 00:04:27.858
+it's mu mean, and be shifted so we will
+have this dataset which we will call JJJ,
+
+63
+00:04:27.858 --> 00:04:31.875
+Johnson & Johnson log
+return means zero dataset.
+
+64
+00:04:31.875 --> 00:04:39.740
+This will run that, now we have that
+dataset inside Jj.log.return.mu.zero.
+
+65
+00:04:39.740 --> 00:04:42.972
+Here, we partition or the output, so
+
+66
+00:04:42.972 --> 00:04:48.931
+that we look at the time plot of the new
+data set and its ACF and its PACF.
+
+67
+00:04:48.931 --> 00:04:54.488
+Let's look at that, as you can see we
+have our time plot here ACF, PACF.
+
+68
+00:04:54.488 --> 00:04:56.349
+We talked about it, and
+
+69
+00:04:56.349 --> 00:05:00.918
+PACF here suggested you should
+maybe think of AR4 model.
+
+70
+00:05:03.030 --> 00:05:09.993
+So P is going to be a four, so if you'll
+look at this next cell which is R is null,
+
+71
+00:05:09.993 --> 00:05:15.182
+so we define R and
+then via assign ACFs to R, and we print R.
+
+72
+00:05:15.182 --> 00:05:19.792
+And R is going to be the following,
+since we have p = 4,
+
+73
+00:05:19.792 --> 00:05:23.630
+we have r1, until r1, r2, r3, and r4.
+
+74
+00:05:23.630 --> 00:05:30.320
+We define our matrix the capital R, which
+is a matrix 4 by 4 matrix, p by p matrix.
+
+75
+00:05:30.320 --> 00:05:32.330
+And the update is entries.
+
+76
+00:05:32.330 --> 00:05:34.920
+Basically diagonal will stay 1,
+that's what it means.
+
+77
+00:05:34.920 --> 00:05:38.990
+This is everything in this
+matrix is actually one.
+
+78
+00:05:38.990 --> 00:05:43.880
+But if you're going to update
+non-diagonal entries, and
+
+79
+00:05:43.880 --> 00:05:46.000
+you are going to print R to see what R is.
+
+80
+00:05:46.000 --> 00:05:48.650
+If you do that,
+we obtain the following matrix.
+
+81
+00:05:48.650 --> 00:05:49.880
+The is our R.
+
+82
+00:05:49.880 --> 00:05:53.600
+We have diagonal, main diagonal,
+and we have symmetric.
+
+83
+00:05:53.600 --> 00:05:55.860
+This is R1, this is R2 and so forth.
+
+84
+00:05:57.020 --> 00:06:00.040
+Let's define out matrix b vector,
+
+85
+00:06:00.040 --> 00:06:02.790
+be column vector,
+which is the transpose of R.
+
+86
+00:06:02.790 --> 00:06:06.370
+Here we had the R here, and
+we just have its transpose here.
+
+87
+00:06:07.490 --> 00:06:12.263
+We solve RB, so
+this is where we use equations and
+
+88
+00:06:12.263 --> 00:06:18.230
+estimate our coefficients phi, and
+estimation is denoted by phi hat,
+
+89
+00:06:18.230 --> 00:06:21.427
+if it did that, we obtain our phi hat.
+
+90
+00:06:21.427 --> 00:06:26.643
+This is phi 1 hat, phi 2 hat,
+phi 3 hat, phi 4 hat.
+
+91
+00:06:26.643 --> 00:06:31.077
+Here we are trying to estimate
+a variance and the variance,
+
+92
+00:06:31.077 --> 00:06:36.133
+is needed the article variance
+sample article variance function,
+
+93
+00:06:36.133 --> 00:06:40.937
+at log zero for that reason we
+take a c function type covariance.
+
+94
+00:06:40.937 --> 00:06:44.886
+And they become the first guide,
+because that is C 0, and
+
+95
+00:06:44.886 --> 00:06:50.170
+we use that C 0 in the formulation of
+a variance and redefine variance hat.
+
+96
+00:06:50.170 --> 00:06:54.593
+That's an estimate for
+the variance, and the estimate for
+
+97
+00:06:54.593 --> 00:06:57.436
+the variance becomes 0.0141.
+
+98
+00:06:57.436 --> 00:06:59.889
+First one here is C 0.
+
+99
+00:06:59.889 --> 00:07:04.163
+And then it's time to find
+the coefficient, I'm sorry,
+
+100
+00:07:04.163 --> 00:07:10.023
+the constant phi 0 and we call it
+phi0.hat, and that becomes 0.0797.
+
+101
+00:07:10.023 --> 00:07:13.732
+In other words, the last cell tells us,
+this cat is for
+
+102
+00:07:13.732 --> 00:07:16.000
+printing everything together.
+
+103
+00:07:16.000 --> 00:07:20.400
+We have a constant, coefficients,
+and the variance here estimated.
+
+104
+00:07:20.400 --> 00:07:22.430
+So, what do we get?
+
+105
+00:07:22.430 --> 00:07:26.990
+We obtain that order, the count of fitted
+is four and then fitted model, for Rt,
+
+106
+00:07:26.990 --> 00:07:29.095
+what is Rt.
+
+107
+00:07:29.095 --> 00:07:30.700
+Well Rt is the log of return.
+
+108
+00:07:30.700 --> 00:07:33.707
+It's the log of the division
+of Xt to X9- 1.
+
+109
+00:07:33.707 --> 00:07:41.152
+The log of return of RT obeys auto
+regressive a process of all the four.
+
+110
+00:07:41.152 --> 00:07:46.025
+And this is the fitted model,
+this our constant hut,
+
+111
+00:07:46.025 --> 00:07:50.475
+phi 1 hat, phi 2 hat,
+phi 3 hat and phi 4 hat.
+
+112
+00:07:50.475 --> 00:07:56.814
+And Zt which is the noise is normal
+distributed with mean 0 and variance hat,
+
+113
+00:07:56.814 --> 00:08:01.910
+estimates for
+the variance being 0.0141 and so forth.
+
+114
+00:08:01.910 --> 00:08:02.800
+So what have we learned?
+
+115
+00:08:02.800 --> 00:08:09.490
+We have learned how to fit
+an AR4 model To log return
+
+116
+00:08:09.490 --> 00:08:14.110
+not itself but the low return of the
+Johnson and Johnson quarterly earnings.
+
+117
+00:08:14.110 --> 00:08:17.120
+And this data originally
+come from astsa package, and
+
+118
+00:08:17.120 --> 00:08:20.530
+we did this by using Yule-Walker
+equations in matrix form.

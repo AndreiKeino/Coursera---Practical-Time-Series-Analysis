@@ -1,0 +1,505 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.240
+Hello everyone, this is Tural Sadigov.
+
+2
+00:00:02.240 --> 00:00:04.620
+In this lecture, we will continue fitting
+
+3
+00:00:04.620 --> 00:00:09.615
+SARIMA models into different real-world datasets.
+
+4
+00:00:09.615 --> 00:00:11.220
+In this lecture specifically,
+
+5
+00:00:11.220 --> 00:00:16.574
+we're going to look at time series from agriculture.
+
+6
+00:00:16.574 --> 00:00:22.440
+So objective is to fit SARIMA model or different SARIMA models to
+
+7
+00:00:22.440 --> 00:00:24.600
+milk production data from
+
+8
+00:00:24.600 --> 00:00:31.250
+Time Series Data Library and forecast future realities of the examined time series.
+
+9
+00:00:31.250 --> 00:00:32.694
+So just like before,
+
+10
+00:00:32.694 --> 00:00:35.670
+we're going to go a few steps into modeling.
+
+11
+00:00:35.670 --> 00:00:37.545
+In other words, we're going to look at the time plot,
+
+12
+00:00:37.545 --> 00:00:39.340
+we're going to transform if we need it,
+
+13
+00:00:39.340 --> 00:00:41.189
+we're going to look at differencing,
+
+14
+00:00:41.189 --> 00:00:46.635
+and we're gonna use ACF and PACF to determine the order of our models,
+
+15
+00:00:46.635 --> 00:00:49.274
+and then we're gonna try a few different models,
+
+16
+00:00:49.274 --> 00:00:56.205
+keeping in mind the parsimony principle which we highlighted last lecture,
+
+17
+00:00:56.205 --> 00:01:00.179
+and we're going to choose the minimum AIC.
+
+18
+00:01:00.179 --> 00:01:03.185
+At the end, we're going to look at our residuals,
+
+19
+00:01:03.185 --> 00:01:05.992
+we're going to look at the time plot ACF, PACF,
+
+20
+00:01:05.992 --> 00:01:09.359
+and we're going to look at the Ljung-Box test to
+
+21
+00:01:09.359 --> 00:01:13.829
+see if there is any autocorrelation left in the residuals.
+
+22
+00:01:13.829 --> 00:01:16.890
+And the parsimony principle that we agreed on is
+
+23
+00:01:16.890 --> 00:01:20.799
+that if we add our parameters in a SARIMA model,
+
+24
+00:01:20.799 --> 00:01:24.340
+we want it to be less than or equal to six.
+
+25
+00:01:24.340 --> 00:01:29.625
+Now, Time Series Data Library is created by Rob Hyndman.
+
+26
+00:01:29.625 --> 00:01:33.980
+He's a professor of statistics at Monash University in Australia,
+
+27
+00:01:33.980 --> 00:01:40.314
+and the web link is provided to The Times Series Data Library.
+
+28
+00:01:40.314 --> 00:01:44.099
+We're going to look at monthly milk production from agriculture.
+
+29
+00:01:44.099 --> 00:01:48.549
+It is basically monthly milk production pounds per cow.
+
+30
+00:01:48.549 --> 00:01:52.049
+Data is from 1962 till 1975.
+
+31
+00:01:52.049 --> 00:01:55.375
+Then the source is Cryer.
+
+32
+00:01:55.375 --> 00:01:57.810
+So, if we plot the data,
+
+33
+00:01:57.810 --> 00:02:02.834
+actually we can see that there is definitely a trend
+
+34
+00:02:02.834 --> 00:02:07.484
+going up and there's definitely a periodicity seasonality in the data.
+
+35
+00:02:07.484 --> 00:02:10.245
+If we zoom into the first two years, let's say,
+
+36
+00:02:10.245 --> 00:02:14.115
+we can definitely see that there is seasonality in our data,
+
+37
+00:02:14.115 --> 00:02:17.444
+and the span of the season is twelve months.
+
+38
+00:02:17.444 --> 00:02:20.004
+If I look at a ACF and PACF,
+
+39
+00:02:20.004 --> 00:02:25.133
+ACF already suggests that is some cyclic behavior going on,
+
+40
+00:02:25.133 --> 00:02:27.414
+so we will have to do some differencing.
+
+41
+00:02:27.414 --> 00:02:32.389
+So what we do, we look at the non-seasonal differencing because we have a trend,
+
+42
+00:02:32.389 --> 00:02:33.789
+and we have a seasonal differencing.
+
+43
+00:02:33.789 --> 00:02:36.314
+So we don't need to transform the data,
+
+44
+00:02:36.314 --> 00:02:39.629
+but we still have to do the differencing,
+
+45
+00:02:39.629 --> 00:02:43.800
+and if we do want seasonal and one non-seasonal differencing,
+
+46
+00:02:43.800 --> 00:02:45.753
+we obtain the following data.
+
+47
+00:02:45.753 --> 00:02:49.995
+Now, this data must be a stationary data.
+
+48
+00:02:49.995 --> 00:02:55.405
+Stationary data means there shouldn't be any change in the trend or variance,
+
+49
+00:02:55.405 --> 00:02:56.580
+but in this case,
+
+50
+00:02:56.580 --> 00:03:01.629
+we see a little spike around here – there are two spikes.
+
+51
+00:03:01.629 --> 00:03:04.275
+Assuming that those were outliers,
+
+52
+00:03:04.275 --> 00:03:08.610
+we're going to assume that this is a stationary time series,
+
+53
+00:03:08.610 --> 00:03:12.215
+and we're going to try to fit a SARIMA model.
+
+54
+00:03:12.215 --> 00:03:19.955
+Now ACF of the difference data and PACF of the difference data is given right here.
+
+55
+00:03:19.955 --> 00:03:23.159
+So, as we can see that ACF has
+
+56
+00:03:23.159 --> 00:03:29.414
+no spike in a closer lags but there is a spike on the seasonal lag,
+
+57
+00:03:29.414 --> 00:03:32.490
+which means we do not expect any moving average term but
+
+58
+00:03:32.490 --> 00:03:35.835
+we expect a seasonal moving average term,
+
+59
+00:03:35.835 --> 00:03:46.469
+maybe seasonal order would be up to three because we have a significant spike at lag 12,
+
+60
+00:03:46.469 --> 00:03:50.599
+at lag 24, and at lag 36.
+
+61
+00:03:50.599 --> 00:03:52.075
+Now, if you look at PACF,
+
+62
+00:03:52.075 --> 00:03:57.000
+again there is no autocorrelation in the beginning lags – in
+
+63
+00:03:57.000 --> 00:04:02.504
+these lags here – which would suggest that we do not expect any autoregressive terms,
+
+64
+00:04:02.504 --> 00:04:07.530
+but there are spikes on lag 12 and lag 24,
+
+65
+00:04:07.530 --> 00:04:13.050
+and then that might suggest that maybe we might have to two,
+
+66
+00:04:13.050 --> 00:04:17.850
+order up to two of the seasonal autoregressive terms.
+
+67
+00:04:17.850 --> 00:04:21.264
+So, ACF will tell us that q is zero,
+
+68
+00:04:21.264 --> 00:04:24.485
+but the Q, the capital Q can be up to three.
+
+69
+00:04:24.485 --> 00:04:26.444
+PACF tell us that p is zero,
+
+70
+00:04:26.444 --> 00:04:28.949
+but capital P can be up to two.
+
+71
+00:04:28.949 --> 00:04:30.927
+And we run our command,
+
+72
+00:04:30.927 --> 00:04:34.529
+but keeping in mind the parsimonious principle which means that
+
+73
+00:04:34.529 --> 00:04:38.783
+some of the parameters will be have to be less than or equal to six.
+
+74
+00:04:38.783 --> 00:04:43.480
+As you can see, even the last model,
+
+75
+00:04:43.480 --> 00:04:45.199
+if you add this parameters,
+
+76
+00:04:45.199 --> 00:04:46.939
+you will get exactly six.
+
+77
+00:04:46.939 --> 00:04:54.710
+And we are trying to find the smallest AIC value – smallest AIC value is 923.3288.
+
+78
+00:04:54.710 --> 00:05:00.202
+Smallest SSE value is 4618.498.
+
+79
+00:05:00.202 --> 00:05:04.259
+But, if you're going to choose smallest AIC,
+
+80
+00:05:04.259 --> 00:05:06.540
+and we can actually see that there is
+
+81
+00:05:06.540 --> 00:05:11.209
+no significant autocorrelation left in the residuals,
+
+82
+00:05:11.209 --> 00:05:14.779
+so our model is going to be SARIMA zero, one, zero, zero, one,
+
+83
+00:05:14.779 --> 00:05:19.290
+and one with the span of seasonality 12.
+
+84
+00:05:19.290 --> 00:05:27.199
+And if we fit this using SARIMA or ARIMA command or routine in R,
+
+85
+00:05:27.199 --> 00:05:32.995
+we obtain that our coefficient for seasonal moving average term,
+
+86
+00:05:32.995 --> 00:05:34.615
+which is right here,
+
+87
+00:05:34.615 --> 00:05:39.740
+and then p-value is so small that this is very, very significant.
+
+88
+00:05:39.740 --> 00:05:41.254
+If you look at the residuals,
+
+89
+00:05:41.254 --> 00:05:44.625
+we see that this is almost white except maybe one spike here,
+
+90
+00:05:44.625 --> 00:05:48.410
+where we ignored, then thought that maybe this is an outlier,
+
+91
+00:05:48.410 --> 00:05:51.245
+and there is no significant autocorrelation.
+
+92
+00:05:51.245 --> 00:05:54.535
+There is systematic departure from normality,
+
+93
+00:05:54.535 --> 00:05:55.875
+but I don't see any,
+
+94
+00:05:55.875 --> 00:06:00.560
+we don't see any small p-value which will tell us,
+
+95
+00:06:00.560 --> 00:06:05.613
+which tells us that there is no significant autocorrelation left in the residual.
+
+96
+00:06:05.613 --> 00:06:07.970
+So we can assume that actually residuals are,
+
+97
+00:06:07.970 --> 00:06:11.199
+at this point, is a white noise.
+
+98
+00:06:11.199 --> 00:06:16.264
+Now SARIMA(0,1,0,0,1,1)_12 model is basically the following.
+
+99
+00:06:16.264 --> 00:06:20.339
+One, non-seasonal differencing, that's 1-B.
+
+100
+00:06:20.339 --> 00:06:23.595
+One seasonal differencing, that's 1-B^12.
+
+101
+00:06:23.595 --> 00:06:26.089
+12 is the span of the seasonality.
+
+102
+00:06:26.089 --> 00:06:28.430
+There is no autoregressive terms.
+
+103
+00:06:28.430 --> 00:06:34.030
+And there's one seasonal moving average term which will tell me 1+ theta B_to_the_12 Z_t.
+
+104
+00:06:34.030 --> 00:06:35.345
+If we expand it,
+
+105
+00:06:35.345 --> 00:06:36.990
+this becomes our model.
+
+106
+00:06:36.990 --> 00:06:39.165
+Now, according to our estimation,
+
+107
+00:06:39.165 --> 00:06:44.884
+theta_hat, the estimation for the theta is -0.6750,
+
+108
+00:06:44.884 --> 00:06:47.790
+which leads us to the following model,
+
+109
+00:06:47.790 --> 00:06:50.254
+that X_t depends on previous lag,
+
+110
+00:06:50.254 --> 00:06:53.855
+the previous year, the same month,
+
+111
+00:06:53.855 --> 00:06:57.764
+and X_t_minus_13, and then there's noise at this point,
+
+112
+00:06:57.764 --> 00:06:59.850
+but the noise from the last year.
+
+113
+00:06:59.850 --> 00:07:07.084
+And Z_t, we use the normal with variance 34.47.
+
+114
+00:07:07.084 --> 00:07:11.139
+Now, if you forecast using our forecast routine from the forecast package,
+
+115
+00:07:11.139 --> 00:07:14.634
+we get our forecast right here.
+
+116
+00:07:14.634 --> 00:07:20.600
+This piece, this part is 80% confidence interval,
+
+117
+00:07:20.600 --> 00:07:26.225
+and then upper one is 95% confidence interval for our forecast.
+
+118
+00:07:26.225 --> 00:07:28.375
+In fact, if we write forecast(model),
+
+119
+00:07:28.375 --> 00:07:32.300
+we can actually see a point estimation or also confidence interval,
+
+120
+00:07:32.300 --> 00:07:38.824
+80% confidence interval and 95% confidence interval for the next two years, but here,
+
+121
+00:07:38.824 --> 00:07:42.595
+I put only next year but,
+
+122
+00:07:42.595 --> 00:07:46.884
+by default, it gives you next two years.
+
+123
+00:07:46.884 --> 00:07:48.000
+So what have we learned?
+
+124
+00:07:48.000 --> 00:07:49.894
+We have learned how to fit a SARIMA models to
+
+125
+00:07:49.894 --> 00:07:53.162
+a milk production data from Time Series Data Library,
+
+126
+00:07:53.162 --> 00:07:57.189
+and we learned how to forecast the future values of this examined time series.

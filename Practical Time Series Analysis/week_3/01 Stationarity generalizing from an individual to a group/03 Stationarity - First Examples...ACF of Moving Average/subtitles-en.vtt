@@ -1,0 +1,595 @@
+WEBVTT
+
+1
+00:00:01.540 --> 00:00:04.230
+Welcome back to practical
+time series analysis.
+
+2
+00:00:05.350 --> 00:00:12.580
+We're looking at stochastic processes and
+their realizations time series.
+
+3
+00:00:12.580 --> 00:00:16.160
+In trying to gain traction
+on them by developing some
+
+4
+00:00:16.160 --> 00:00:19.160
+properties that'll allow
+us to get work done.
+
+5
+00:00:19.160 --> 00:00:24.550
+One of those properties is
+the concept of weak stationarity.
+
+6
+00:00:24.550 --> 00:00:27.790
+We've seen that noise
+is weakly stationary.
+
+7
+00:00:27.790 --> 00:00:32.330
+We've seen that random walks
+are not weakly stationary.
+
+8
+00:00:32.330 --> 00:00:33.645
+And in this lecture,
+
+9
+00:00:33.645 --> 00:00:38.774
+we try to show in a formal way that moving
+average processes are weakly stationary.
+
+10
+00:00:41.857 --> 00:00:45.348
+In this lecture, we'll look at the ACF.
+
+11
+00:00:45.348 --> 00:00:51.557
+Here we're looking at the autocovariance
+function of a moving average process and
+
+12
+00:00:51.557 --> 00:00:55.295
+then we could get
+the autocorrelation function.
+
+13
+00:00:57.457 --> 00:01:03.630
+Start with some building blocks,
+some IID random variables.
+
+14
+00:01:03.630 --> 00:01:08.391
+We'll start with Z of t as our
+building blocks, iid with mean 0,
+
+15
+00:01:08.391 --> 00:01:13.430
+that'll be important to us and
+constant variance, sigma squared.
+
+16
+00:01:13.430 --> 00:01:17.882
+Recall that we build moving
+average process of order q by
+
+17
+00:01:17.882 --> 00:01:23.200
+starting at Z sub t and
+looking back in time to Z of t- q.
+
+18
+00:01:23.200 --> 00:01:27.170
+And, just taking a sum
+with some weightings.
+
+19
+00:01:27.170 --> 00:01:29.802
+The weightings are given by the betas.
+
+20
+00:01:33.971 --> 00:01:39.490
+In order to develop our result, we'll
+remind you of a basic idea on covariance.
+
+21
+00:01:39.490 --> 00:01:43.464
+We saw this in elementary statistics,
+by looking at summations and
+
+22
+00:01:43.464 --> 00:01:46.540
+coming up with the so-called
+computing formulas.
+
+23
+00:01:46.540 --> 00:01:51.050
+Here, I'm thinking about random
+variables and using operator notation.
+
+24
+00:01:51.050 --> 00:01:55.314
+The covariance of two random variables is
+going to look like the expected value of
+
+25
+00:01:55.314 --> 00:01:58.293
+the product minus the product
+of the expected values.
+
+26
+00:01:59.540 --> 00:02:04.282
+So immediately, perhaps trivially,
+if your random variables have zero mean,
+
+27
+00:02:04.282 --> 00:02:07.001
+you can get their covariance
+just by looking at
+
+28
+00:02:07.001 --> 00:02:11.555
+the expected value of the product,
+that'll really help us moving forward.
+
+29
+00:02:13.556 --> 00:02:18.376
+If we're going get the covariance
+of random variables Xt and
+
+30
+00:02:18.376 --> 00:02:23.685
+Xt + k then we'll be able to use
+this idea to get a very nice result.
+
+31
+00:02:24.765 --> 00:02:26.595
+Let's not make more of
+this than we need to.
+
+32
+00:02:27.835 --> 00:02:34.865
+X of t is built on a bunch of independent
+identically distributed Z sub t's.
+
+33
+00:02:34.865 --> 00:02:37.378
+Same think with the Xt + k.
+
+34
+00:02:37.378 --> 00:02:42.676
+K is just telling you how far away from
+each other random variables X of t and
+
+35
+00:02:42.676 --> 00:02:45.680
+X of tk are along our stochastic process.
+
+36
+00:02:46.760 --> 00:02:52.310
+If k is big, bigger than Q,
+then the random variables Xt and
+
+37
+00:02:52.310 --> 00:02:59.410
+Xt + k are being built from different
+independent underlying random variables.
+
+38
+00:02:59.410 --> 00:03:02.820
+They're not being built by anybody in
+common, any of the random variables in
+
+39
+00:03:02.820 --> 00:03:08.340
+common and so we wouldn't expect them
+to have any relationship to each other.
+
+40
+00:03:08.340 --> 00:03:12.772
+They're each just being built from
+different sets of noise variables.
+
+41
+00:03:14.609 --> 00:03:21.040
+Working a little bit more rigorously,
+the expected value of each of these is 0.
+
+42
+00:03:21.040 --> 00:03:25.120
+So we can obtain the covariance just
+by looking at the expected value of
+
+43
+00:03:25.120 --> 00:03:25.960
+the product.
+
+44
+00:03:27.651 --> 00:03:29.633
+There are more elegant perhaps,
+
+45
+00:03:29.633 --> 00:03:34.520
+more sophisticated ways to do since our
+mathematical preliminaries in our course
+
+46
+00:03:34.520 --> 00:03:39.330
+are trying to be kept as sort of basic as
+possible, though we expect many people on
+
+47
+00:03:39.330 --> 00:03:44.190
+the course have very sophisticated
+mathematical backgrounds.
+
+48
+00:03:44.190 --> 00:03:48.496
+But, just to make sure we keep
+everything as basic as possible,
+
+49
+00:03:48.496 --> 00:03:53.763
+we'll look at the covariance of two
+random variables along our moving average
+
+50
+00:03:53.763 --> 00:03:58.909
+process as the expected value of the
+product that you see in these brackets.
+
+51
+00:04:02.027 --> 00:04:05.954
+Again, if the underlying
+Z of t are independent,
+
+52
+00:04:05.954 --> 00:04:10.909
+we won't get contributions to
+the covariance unless X sub t and
+
+53
+00:04:10.909 --> 00:04:13.637
+Xt + k are close enough together.
+
+54
+00:04:15.669 --> 00:04:20.520
+If we expand the product,
+this looks a little bit tedious but
+
+55
+00:04:20.520 --> 00:04:23.860
+we can just work it term by term.
+
+56
+00:04:23.860 --> 00:04:28.437
+If we expand the product by multiplying
+out in the most simple minded way
+
+57
+00:04:28.437 --> 00:04:33.239
+possible, we see that to get the
+covariance, we need the expected value or
+
+58
+00:04:33.239 --> 00:04:35.316
+this term in a square brackets.
+
+59
+00:04:37.309 --> 00:04:43.138
+Now the Z sub t's are independent and
+since the expected value of the product is
+
+60
+00:04:43.138 --> 00:04:49.231
+the same as the product to the expected
+values for independent random variables,
+
+61
+00:04:49.231 --> 00:04:54.702
+when the subscripts disagree, like t and
+c + k, if k is not equal to zero,
+
+62
+00:04:54.702 --> 00:05:00.060
+when the subscripts disagree,
+you don't get any contribution.
+
+63
+00:05:00.060 --> 00:05:04.520
+This, the term,
+the individual term will evaluate to zero.
+
+64
+00:05:04.520 --> 00:05:05.360
+So what we'll look for
+
+65
+00:05:05.360 --> 00:05:11.630
+in the sum would be terms where the
+subscripts on the Zs actually do agree.
+
+66
+00:05:11.630 --> 00:05:16.142
+That's our basic idea here in coming
+up with the covariance function.
+
+67
+00:05:20.848 --> 00:05:24.382
+For little bit of intuition,
+this is how this works.
+
+68
+00:05:24.382 --> 00:05:31.430
+When k is = to 0, we'll come down to
+basically just the variance of X sub t.
+
+69
+00:05:32.510 --> 00:05:37.777
+When k is = to 0, the only place we're
+going to get contributions to our
+
+70
+00:05:37.777 --> 00:05:44.028
+sum will be along the main diagonal of the
+sort of implied, is not exactly matrix but
+
+71
+00:05:44.028 --> 00:05:48.880
+this sort of implied diagonal here
+in the matrix in our bracket.
+
+72
+00:05:50.200 --> 00:05:55.060
+That means that when k = 0, the expected
+value works out as sigma squared.
+
+73
+00:05:55.060 --> 00:05:59.261
+And then we'll just take the sum of
+the individual coefficients squared.
+
+74
+00:06:02.721 --> 00:06:07.614
+When k is = to 1, again,
+we're going to look for
+
+75
+00:06:07.614 --> 00:06:13.100
+pairs of Zs in our brackets
+where the subscripts agree.
+
+76
+00:06:13.100 --> 00:06:18.929
+When k is = to 1, it isn't along the main
+diagonal where we get agreement now,
+
+77
+00:06:18.929 --> 00:06:20.240
+but we look up 1.
+
+78
+00:06:20.240 --> 00:06:24.140
+So, up 1 in terms of the diagonal and
+
+79
+00:06:24.140 --> 00:06:27.900
+perhaps you could say to the right
+on each one of the terms.
+
+80
+00:06:27.900 --> 00:06:32.440
+So, I'm seeing Z sub t,
+Z sub t agreeing here.
+
+81
+00:06:32.440 --> 00:06:38.251
+Down in this row, we will have
+Zt- 1 Zt- 1 agreeing, continue
+
+82
+00:06:38.251 --> 00:06:44.816
+all the way down until you wind up at
+the very last contribution down here.
+
+83
+00:06:46.677 --> 00:06:51.048
+When you work out what
+the formula look like,
+
+84
+00:06:51.048 --> 00:06:55.075
+you will factor out your sigma squared and
+
+85
+00:06:55.075 --> 00:07:00.154
+come up with the sum i = 0
+to q- 1 beta i beta i + 1.
+
+86
+00:07:00.154 --> 00:07:06.030
+When k is = to 0, we had q terms and
+now, we have one fewer term.
+
+87
+00:07:07.120 --> 00:07:11.000
+Actually, we had q + 1 terms that
+are main diagonal and now we had q terms.
+
+88
+00:07:15.099 --> 00:07:21.588
+When k is = to q, they'll be fewer
+terms still that are involved.
+
+89
+00:07:21.588 --> 00:07:25.590
+Again, we're just looking to see
+where the subscripts might agree.
+
+90
+00:07:25.590 --> 00:07:29.400
+And we're only going to catch that
+up in this, upper right hand corner.
+
+91
+00:07:31.190 --> 00:07:37.194
+Every other term will evaluate as 0,
+giving a sigma squared beta 0 beta q.
+
+92
+00:07:42.257 --> 00:07:44.799
+One last slide and then we're done.
+
+93
+00:07:44.799 --> 00:07:47.458
+When k is less than or equal to q,
+
+94
+00:07:47.458 --> 00:07:51.612
+obviously if k is greater
+than q no contribution.
+
+95
+00:07:51.612 --> 00:07:53.340
+When k is less than or equal to q,
+
+96
+00:07:53.340 --> 00:07:57.570
+this chart here is meant to show you how
+the contributions are going to behave.
+
+97
+00:07:58.680 --> 00:08:04.340
+I have x sub t in my head up here, I have
+
+98
+00:08:04.340 --> 00:08:09.190
+x sub t + k and we move through and
+
+99
+00:08:09.190 --> 00:08:14.680
+we look at the underline Zs and
+the coefficients involve on those Zs.
+
+100
+00:08:14.680 --> 00:08:17.080
+And we do this for both of these.
+
+101
+00:08:17.080 --> 00:08:19.839
+Here's your Zt + k.
+
+102
+00:08:19.839 --> 00:08:22.029
+Beta nought through beta q.
+
+103
+00:08:22.029 --> 00:08:26.228
+The only place where you're going
+to get a contribution is where
+
+104
+00:08:26.228 --> 00:08:29.820
+the subscripts agree and
+that's on these terms here.
+
+105
+00:08:31.120 --> 00:08:36.502
+If you look to see how are we
+going to build the total term then,
+
+106
+00:08:36.502 --> 00:08:40.440
+we'll have beta nought and beta k.
+
+107
+00:08:40.440 --> 00:08:45.362
+Beta 1 beta k + 1 and we'll keep on going
+
+108
+00:08:45.362 --> 00:08:49.591
+until we get at beta q- k and beta q.
+
+109
+00:08:49.591 --> 00:08:54.861
+When you form the sum then,
+sigma squared comes
+
+110
+00:08:54.861 --> 00:09:00.360
+out from Z sub t,
+Z sub t, Z sub t -1, etc.
+
+111
+00:09:00.360 --> 00:09:01.760
+We pulled that out.
+
+112
+00:09:01.760 --> 00:09:05.470
+And we get a sum on our beta terms.
+
+113
+00:09:05.470 --> 00:09:08.790
+The important things to note
+in this very important formula
+
+114
+00:09:08.790 --> 00:09:12.610
+is that there is no t dependence.
+
+115
+00:09:12.610 --> 00:09:16.950
+It doesn't matter where along your
+stochastic process you're looking.
+
+116
+00:09:16.950 --> 00:09:18.460
+The covariance of X sub t and
+
+117
+00:09:18.460 --> 00:09:23.130
+X sub t + k do not depend upon
+location along the random,
+
+118
+00:09:23.130 --> 00:09:29.050
+along the stochastic process but only on
+the separation of the random variables.
+
+119
+00:09:29.050 --> 00:09:31.986
+That's the very idea of weak stationarity.
+
+120
+00:09:35.220 --> 00:09:39.427
+So, in this lecture, we've shown
+that moving average processes or
+
+121
+00:09:39.427 --> 00:09:41.420
+weakly stationary.
+
+122
+00:09:41.420 --> 00:09:46.330
+And we've also come up with an explicit
+formula for the covariance of
+
+123
+00:09:46.330 --> 00:09:51.690
+two different random variable
+along our moving average process.
+
+124
+00:09:51.690 --> 00:09:57.635
+In the next lecture, we'll look at another
+canonical stochastic process or a very,
+
+125
+00:09:57.635 --> 00:10:02.850
+very important basic stochastic process,
+the autoregressive process.

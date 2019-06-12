@@ -1,0 +1,530 @@
+WEBVTT
+
+1
+00:00:00.580 --> 00:00:03.876
+In this lecture we will talk
+about difference equations.
+
+2
+00:00:03.876 --> 00:00:08.032
+This will be again some
+kind of preview for
+
+3
+00:00:08.032 --> 00:00:13.860
+what's coming next which is
+doing all kind of equations.
+
+4
+00:00:13.860 --> 00:00:19.380
+So, objective is to recall and
+solve difference equations.
+
+5
+00:00:19.380 --> 00:00:21.210
+So, let's start with the sequences.
+
+6
+00:00:21.210 --> 00:00:24.260
+The general term of a sequence
+is sometimes given to us.
+
+7
+00:00:24.260 --> 00:00:27.354
+Let's say an is equal to 2n+1.
+
+8
+00:00:27.354 --> 00:00:31.502
+Then we know every single
+term in that sequence, and
+
+9
+00:00:31.502 --> 00:00:36.010
+we have the general term,
+everything is known.
+
+10
+00:00:36.010 --> 00:00:39.290
+Sometimes general term of
+a sequence is not given with
+
+11
+00:00:39.290 --> 00:00:41.940
+some kind of recursive relationship.
+
+12
+00:00:41.940 --> 00:00:43.947
+The recursive relation is given to us.
+
+13
+00:00:43.947 --> 00:00:51.290
+For example, it says an = 5an- 1- 6an- 2.
+
+14
+00:00:51.290 --> 00:00:57.480
+And can we use this relation,
+recursive relation, to obtain an?
+
+15
+00:00:57.480 --> 00:00:59.880
+But it turns out that yes we can do it.
+
+16
+00:00:59.880 --> 00:01:03.740
+This equation is called a difference
+equation, it's a recursive relation.
+
+17
+00:01:05.660 --> 00:01:08.290
+So, how do you solve these
+different equations?
+
+18
+00:01:08.290 --> 00:01:13.190
+We'll look for a solution in the format
+of lambda to the n for some lambda.
+
+19
+00:01:13.190 --> 00:01:13.820
+So, for example,
+
+20
+00:01:13.820 --> 00:01:18.150
+in the previous problem we put n equals
+the lambda n back into the equation.
+
+21
+00:01:18.150 --> 00:01:21.430
+We get lambda to the n, that's a n.
+
+22
+00:01:21.430 --> 00:01:24.100
+This is n- 1, this is n- 2, but
+
+23
+00:01:24.100 --> 00:01:28.510
+if we divide all sides by
+lambda to the n minus 2.
+
+24
+00:01:28.510 --> 00:01:32.330
+We basically obtain a quadratic equation.
+
+25
+00:01:32.330 --> 00:01:35.480
+This equation is called
+auxiliary equation, or
+
+26
+00:01:35.480 --> 00:01:38.130
+characteristic equation of
+the difference equations.
+
+27
+00:01:39.650 --> 00:01:40.575
+You can solve for lambda.
+
+28
+00:01:40.575 --> 00:01:42.985
+Lambda is either 2 or 3.
+
+29
+00:01:42.985 --> 00:01:45.550
+That means we might have
+two different solutions.
+
+30
+00:01:45.550 --> 00:01:50.680
+2 to the n is one type of solution,
+3 to the n is another type of solution,
+
+31
+00:01:50.680 --> 00:01:54.440
+and we can look at their
+linear combination.
+
+32
+00:01:54.440 --> 00:01:59.520
+And an is going to be basically your
+linear combination of these two solutions.
+
+33
+00:01:59.520 --> 00:02:01.640
+The thing is we don't know what c1 c2 is.
+
+34
+00:02:01.640 --> 00:02:06.840
+We have to find c1, c2 depending on
+some constraints like initial data.
+
+35
+00:02:06.840 --> 00:02:12.060
+Let's say a0 was 3 when we started,
+and a1 was 8.
+
+36
+00:02:12.060 --> 00:02:17.685
+Then, we can put 0 into the n to get
+the c1 + c2 which is actually 3.
+
+37
+00:02:17.685 --> 00:02:23.660
+And since a1 is 8, we can put 1
+into the n to get 2c1 + 3c2 = 8.
+
+38
+00:02:23.660 --> 00:02:28.350
+And to solve the system of equation,
+we found that c1 = 1, c2 = 2.
+
+39
+00:02:28.350 --> 00:02:30.740
+Then we can find a solution an,
+
+40
+00:02:30.740 --> 00:02:34.326
+which is basically 1 times 2
+to the n + 2 x 3 to the n.
+
+41
+00:02:34.326 --> 00:02:40.070
+This is the general term of
+the sequence that solves the 2nd
+
+42
+00:02:40.070 --> 00:02:43.710
+order difference equation
+that we started with.
+
+43
+00:02:44.930 --> 00:02:51.170
+It's called 2nd order difference equation,
+because we're going two steps back an-2,
+
+44
+00:02:51.170 --> 00:02:55.659
+and whenever we have -2 this is
+2nd order difference equation.
+
+45
+00:02:55.659 --> 00:03:00.880
+In general k-th order difference
+equations going to have an as a linear
+
+46
+00:03:00.880 --> 00:03:05.562
+combination of the k-th steps back,
+and its characteristic
+
+47
+00:03:05.562 --> 00:03:10.166
+equation would be obtained by
+choosing an as lambda to the n.
+
+48
+00:03:10.166 --> 00:03:14.832
+And if we simplify we get lambda to the k
+minus beta 1 lambda k minus 1 and so
+
+49
+00:03:14.832 --> 00:03:15.660
+forth.
+
+50
+00:03:15.660 --> 00:03:18.599
+This equation is called
+the characteristic equation.
+
+51
+00:03:18.599 --> 00:03:22.830
+Usually this is a k degree polynomial.
+
+52
+00:03:23.970 --> 00:03:29.030
+It has to have a k solution,
+some of them complex, some of them real.
+
+53
+00:03:29.030 --> 00:03:34.230
+If you have all distinct real solutions,
+let's say, and this is one special case.
+
+54
+00:03:34.230 --> 00:03:40.257
+This polynomial has all
+distinct real roads.
+
+55
+00:03:40.257 --> 00:03:44.774
+Then we can write an as the linear
+combination of lambda 1 to the n and
+
+56
+00:03:44.774 --> 00:03:46.850
+2 to the n and so forth.
+
+57
+00:03:46.850 --> 00:03:49.740
+And these coefficients are determined
+using some initial values.
+
+58
+00:03:51.220 --> 00:03:55.236
+Let's look at a famous example
+of Fibonacci sequence.
+
+59
+00:03:55.236 --> 00:03:57.280
+The Fibonacci sequence
+is defined as follows.
+
+60
+00:03:57.280 --> 00:04:01.617
+You start, let's say with one, the next
+guy's one, so first two are known,
+
+61
+00:04:01.617 --> 00:04:02.350
+one and one.
+
+62
+00:04:02.350 --> 00:04:07.664
+Then every next term in the sequence
+is sum of the previous two terms.
+
+63
+00:04:07.664 --> 00:04:11.280
+In other words, one, one,
+add them up, next guy's two.
+
+64
+00:04:11.280 --> 00:04:14.683
+And then look at the last two guys, one,
+and two, add them up and get three.
+
+65
+00:04:14.683 --> 00:04:18.140
+Look at the last two, two and
+three add them up you get five.
+
+66
+00:04:18.140 --> 00:04:20.150
+Three plus five is eight.
+
+67
+00:04:20.150 --> 00:04:21.744
+5 plus 8 is 13.
+
+68
+00:04:21.744 --> 00:04:23.980
+13 plus 8 is 21, and so forth.
+
+69
+00:04:23.980 --> 00:04:27.300
+And every term starting from the third
+term is basically addition of
+
+70
+00:04:27.300 --> 00:04:28.840
+the previous two terms.
+
+71
+00:04:28.840 --> 00:04:31.770
+The question is can be found,
+
+72
+00:04:31.770 --> 00:04:34.940
+can we find the general term
+an of the Fibonacci sequence?
+
+73
+00:04:37.350 --> 00:04:38.630
+Well, let's formulate this.
+
+74
+00:04:38.630 --> 00:04:43.320
+We are looking for a sequence an such
+that an is equal to an-1 + an-2,
+
+75
+00:04:43.320 --> 00:04:45.705
+our previous two terms.
+
+76
+00:04:45.705 --> 00:04:49.170
+Starting from n=2.
+
+77
+00:04:49.170 --> 00:04:52.419
+And let's say a0 is 1 and a1 is 1.
+
+78
+00:04:52.419 --> 00:04:57.255
+So, first two terms in the sequence is 1,
+and
+
+79
+00:04:57.255 --> 00:05:03.466
+you have the and
+as a function of an+1, an-1+an-2.
+
+80
+00:05:03.466 --> 00:05:06.752
+To find a characteristic equation
+it's going to be lambda squared,
+
+81
+00:05:06.752 --> 00:05:09.881
+it's the second altered difference
+equation, lambda square.
+
+82
+00:05:09.881 --> 00:05:13.034
+Minus lambda, we can take this, the left
+hand side minus lambda, minus one, and
+
+83
+00:05:13.034 --> 00:05:14.420
+that comes up with a zero.
+
+84
+00:05:14.420 --> 00:05:19.728
+We solved for the roots of this quadratic
+equation, and we get lambda1 and lambda2.
+
+85
+00:05:19.728 --> 00:05:24.533
+That means that an can be written as the
+linear combination of lambda1 to the n and
+
+86
+00:05:24.533 --> 00:05:25.674
+lambda2 to the n.
+
+87
+00:05:25.674 --> 00:05:27.914
+Then we have to use the initial data.
+
+88
+00:05:27.914 --> 00:05:29.802
+A0 was 1.
+
+89
+00:05:29.802 --> 00:05:33.642
+In other words, if I plug 0 here,
+we get c1 + c2 equal to 1.
+
+90
+00:05:33.642 --> 00:05:34.901
+A1 was 1.
+
+91
+00:05:34.901 --> 00:05:36.661
+I put 1 and 1 here.
+
+92
+00:05:36.661 --> 00:05:38.911
+And then this sum has to be equal to 1.
+
+93
+00:05:38.911 --> 00:05:43.820
+We solve the system of equation, and then
+we find c1 is equal to this expression,
+
+94
+00:05:43.820 --> 00:05:45.823
+c2 is equal to this expression.
+
+95
+00:05:45.823 --> 00:05:47.871
+We write them back into the an.
+
+96
+00:05:47.871 --> 00:05:54.089
+An becomes this expression here,
+which is -1 over radical 5,
+
+97
+00:05:54.089 --> 00:06:00.543
+lambda 1 to the n + 1,
+1 over radical 5 lambda, 2 to the n +1.
+
+98
+00:06:00.543 --> 00:06:05.606
+Okay, so this is how we
+solve a difference equation.
+
+99
+00:06:05.606 --> 00:06:07.957
+And it can actually relate to
+these differential equations.
+
+100
+00:06:07.957 --> 00:06:10.390
+K to the ordinary differential equation.
+
+101
+00:06:11.770 --> 00:06:14.440
+Linear ordinary differential
+equation is in this format.
+
+102
+00:06:14.440 --> 00:06:19.370
+The k derivative is some function
+of linear function of the previous
+
+103
+00:06:19.370 --> 00:06:24.390
+derivatives with some extra
+term here without any function.
+
+104
+00:06:25.560 --> 00:06:27.200
+And the way we solve this.
+
+105
+00:06:27.200 --> 00:06:31.353
+We start with a general format,
+e to the lambda t.
+
+106
+00:06:31.353 --> 00:06:34.052
+And we are trying to find
+the solution like e to the lambda t.
+
+107
+00:06:34.052 --> 00:06:35.658
+If we plugged them in,
+
+108
+00:06:35.658 --> 00:06:41.180
+we obtain exact same characteristic
+equation that we obtained before.
+
+109
+00:06:41.180 --> 00:06:46.930
+So, for lambda, we take the linear
+combination of e to the lambda t.
+
+110
+00:06:49.200 --> 00:06:50.540
+Okay, so what have we learned?
+
+111
+00:06:50.540 --> 00:06:55.364
+We have learned the definition of the
+different equations, which is one term of
+
+112
+00:06:55.364 --> 00:06:59.187
+the linear combination of a few
+other terms, previous terms.
+
+113
+00:06:59.187 --> 00:07:02.276
+And we learned how to solve them by
+looking at the format lambda to the end
+
+114
+00:07:02.276 --> 00:07:04.090
+and finding the characteristic equation

@@ -1,0 +1,379 @@
+WEBVTT
+
+1
+00:00:00.250 --> 00:00:04.210
+In this lecture, we will talk
+about backward shift operator.
+
+2
+00:00:04.210 --> 00:00:05.750
+Objective is the following.
+
+3
+00:00:05.750 --> 00:00:10.690
+We're going to define and
+utilize backward shift operator.
+
+4
+00:00:10.690 --> 00:00:12.046
+So, let's start.
+
+5
+00:00:12.046 --> 00:00:15.260
+We have a stochastic process,
+X1, X2, X3, and so forth.
+
+6
+00:00:16.930 --> 00:00:19.850
+Each one of these guys
+are random variables.
+
+7
+00:00:19.850 --> 00:00:23.748
+And we define backward shift
+operator as a follow up.
+
+8
+00:00:23.748 --> 00:00:27.800
+B is our backward shift operator,
+and we'll take Xt, and
+
+9
+00:00:27.800 --> 00:00:32.390
+we'll take it back one step,
+which will take it back one lambda.
+
+10
+00:00:32.390 --> 00:00:35.622
+So, BXt will go to Xt-1.
+
+11
+00:00:35.622 --> 00:00:40.938
+In other words, if you have B squared Xt,
+B squared is defined
+
+12
+00:00:40.938 --> 00:00:46.155
+B applying backward shift operator twice,
+so we have BBXt,
+
+13
+00:00:46.155 --> 00:00:52.519
+BXt is going to be Xt-1, and if take
+one step back you going to go to Xt-2.
+
+14
+00:00:52.519 --> 00:00:59.686
+In other words B to the k Xt, Im sorry,
+B to the k Xt going to the Xt-k.
+
+15
+00:00:59.686 --> 00:01:05.450
+With the Xt, I would take it
+back k steps and let's use it.
+
+16
+00:01:05.450 --> 00:01:07.850
+So, this is the definition of
+the backward shift operator, so
+
+17
+00:01:07.850 --> 00:01:09.690
+how can we utilize this?
+
+18
+00:01:09.690 --> 00:01:11.260
+We're going to do the following.
+
+19
+00:01:11.260 --> 00:01:15.990
+Think of the random walk right this is one
+of our examples we have talked about it.
+
+20
+00:01:15.990 --> 00:01:17.810
+Basically you start
+from the previous step,
+
+21
+00:01:17.810 --> 00:01:21.130
+and you add some random
+disturbance to it right.
+
+22
+00:01:21.130 --> 00:01:26.087
+Zt is our random disturbance, or
+you know bayesian, or white noise,
+
+23
+00:01:26.087 --> 00:01:31.043
+and then we go to the Xt, in other words
+we can write actually Xt as sum of
+
+24
+00:01:31.043 --> 00:01:35.764
+the equations of the whole past
+innovations, all disturbances.
+
+25
+00:01:35.764 --> 00:01:40.750
+Xt-1 can be expressed as BXt,
+that's backwards shift operator.
+
+26
+00:01:40.750 --> 00:01:44.940
+And we take the Xt to the left-hand side,
+and pull out Xt, so
+
+27
+00:01:44.940 --> 00:01:51.080
+that we get another operator 1-B is
+going to be our polynomial operator.
+
+28
+00:01:51.080 --> 00:01:56.115
+1 is basic identity 1Xt,
+Xt, or 1-B will give you
+
+29
+00:01:56.115 --> 00:02:00.854
+(1-B)Xt will give us Xt-Xt-1.
+
+30
+00:02:00.854 --> 00:02:04.310
+We define (1- B) by phi B.
+
+31
+00:02:04.310 --> 00:02:06.890
+And then phi (B)Xt becomes Zt.
+
+32
+00:02:06.890 --> 00:02:11.830
+So, by using back work shift operator
+we rewrite random walk in this format.
+
+33
+00:02:13.820 --> 00:02:14.980
+This is a MA(2) process.
+
+34
+00:02:14.980 --> 00:02:18.270
+One example of MA(2) process
+is it goes back two steps.
+
+35
+00:02:18.270 --> 00:02:21.956
+You see this is, the basically,
+sum weighted sum,
+
+36
+00:02:21.956 --> 00:02:27.150
+of the three innovations,
+
+37
+00:02:27.150 --> 00:02:31.260
+right, the present random noise,
+the previous random noise, and
+
+38
+00:02:31.260 --> 00:02:37.640
+then the random noise in lack two, and
+they all add it up to give the Xt stack.
+
+39
+00:02:37.640 --> 00:02:39.178
+Today, that's Xt.
+
+40
+00:02:39.178 --> 00:02:42.488
+So, how come you neutralize
+backward chief operator here.
+
+41
+00:02:42.488 --> 00:02:49.109
+Instead of Zt-1, we can write BZt, and
+instead of Zt-2 we can write B squared Zt.
+
+42
+00:02:49.109 --> 00:02:51.090
+Now, everybody has Zt in it.
+
+43
+00:02:51.090 --> 00:02:55.438
+We can kind of pull out Zt,
+and all polynomial operator,
+
+44
+00:02:55.438 --> 00:02:59.069
+which we call beta B
+is going to be 1+0.2B.
+
+45
+00:02:59.069 --> 00:03:01.710
+Plus 0.04B squared.
+
+46
+00:03:01.710 --> 00:03:06.832
+Now, we write this MA(2) process
+in this format, Xt = Beta(B)Zt,
+
+47
+00:03:06.832 --> 00:03:10.562
+where Beta(B) is actually
+a polynomial operator.
+
+48
+00:03:12.682 --> 00:03:18.490
+We can utilize backwards shift
+operator in AR(2) processes.
+
+49
+00:03:18.490 --> 00:03:23.370
+So, this is our Xt,
+a regressed on two previous
+
+50
+00:03:23.370 --> 00:03:28.420
+lags with some random disturbance,
+innovation, or white noise at that step.
+
+51
+00:03:28.420 --> 00:03:31.657
+And instead of Xt minus 1,
+we can write BXt,
+
+52
+00:03:31.657 --> 00:03:36.769
+Xt minus 2 to write B square Xt take
+these two terms to the left outside,
+
+53
+00:03:36.769 --> 00:03:41.477
+pull out Xt, we have polynomial
+operator we call this phi(B).
+
+54
+00:03:41.477 --> 00:03:44.640
+So, we write this as phi(B)Xt = Zt.
+
+55
+00:03:44.640 --> 00:03:45.516
+But what is our phi(B)?
+
+56
+00:03:45.516 --> 00:03:50.271
+Phi(B) is basically polynomial operator
+in terms of the backward shift operator.
+
+57
+00:03:50.271 --> 00:03:54.894
+It is 1- 0.2B- 0.3B squared.
+
+58
+00:03:54.894 --> 00:03:59.496
+In general, if you look at MA(q)
+processes, moving average processes, for
+
+59
+00:03:59.496 --> 00:04:02.370
+their q, assessing there's some drift.
+
+60
+00:04:02.370 --> 00:04:06.670
+Mu is our drift,
+our expectation of Xt, in other words.
+
+61
+00:04:06.670 --> 00:04:10.490
+And Xt is equal to, it's drift plus
+
+62
+00:04:12.100 --> 00:04:16.770
+basically the linear combination
+of the random noises.
+
+63
+00:04:16.770 --> 00:04:23.980
+Q steps back, q lags back instead of Xt,
+I write Zt instead of Zt -1, we write BZt.
+
+64
+00:04:25.090 --> 00:04:28.070
+Instead of Zt minus q,
+we can write this BqZt.
+
+65
+00:04:28.070 --> 00:04:30.650
+We can pull out Zt,
+put the drift to the left-hand side.
+
+66
+00:04:30.650 --> 00:04:35.760
+I have Xt minus mu is equal to
+polynomial operator acting on Zt.
+
+67
+00:04:35.760 --> 00:04:42.410
+And this polynomial operator is
+basically phi 0 + phi 1 B + phi q B q.
+
+68
+00:04:42.410 --> 00:04:45.799
+Okay, so let me just mention that
+these phis are actually not phis,
+
+69
+00:04:45.799 --> 00:04:49.375
+this is a typo, it is our basically
+Beta 0, Beta 1, Beta q to the end.
+
+70
+00:04:51.755 --> 00:04:56.620
+Okay, If you have AR(p) processes,
+basically Xt is
+
+71
+00:04:56.620 --> 00:05:02.430
+regressed on the previous P steps
+of the same stochastic process,
+
+72
+00:05:02.430 --> 00:05:06.465
+plus some random noise,
+we can use, backwards shifht and
+
+73
+00:05:06.465 --> 00:05:12.135
+put all these terms to the left, and come
+up with the format, phi(B)Xt equals Zt.
+
+74
+00:05:12.135 --> 00:05:16.432
+Where phi(B) is the backwards shift, I'm
+sorry, it's a polynomial for each ratio.
+
+75
+00:05:16.432 --> 00:05:19.855
+The back ration is 1-phi 1b and so forth.
+
+76
+00:05:22.020 --> 00:05:23.040
+So, what have we learned?
+
+77
+00:05:23.040 --> 00:05:25.590
+We have learned the definition
+of backward shift operator,
+
+78
+00:05:25.590 --> 00:05:29.130
+which we will use a lot later on as well.
+
+79
+00:05:29.130 --> 00:05:34.009
+And we used how to utilize backward shift
+operator to write MA(q) processes and
+
+80
+00:05:34.009 --> 00:05:35.310
+AR(p) processes.

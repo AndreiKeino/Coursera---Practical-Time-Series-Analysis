@@ -1,0 +1,274 @@
+WEBVTT
+
+1
+00:00:00.260 --> 00:00:06.880
+Hello everyone in this election we will
+talk about the Ljung-Box Q-statistic.
+
+2
+00:00:06.880 --> 00:00:10.536
+So objective is to define
+Ljung-Box Q-statistic.
+
+3
+00:00:10.536 --> 00:00:13.932
+Will learn how their the decision
+rule to test an null
+
+4
+00:00:13.932 --> 00:00:18.577
+hypothesis that the several
+autocorrelation coefficients are zero.
+
+5
+00:00:18.577 --> 00:00:22.875
+And we'll learn how to test the null
+hypothesis that several autocorrelation
+
+6
+00:00:22.875 --> 00:00:24.643
+coefficients are zero using R.
+
+7
+00:00:24.643 --> 00:00:28.221
+Let me tart with Portmanteau
+statistic in 1970,
+
+8
+00:00:28.221 --> 00:00:33.157
+Box and Pierce proposed the following
+statistic which is just Q*(m).
+
+9
+00:00:33.157 --> 00:00:38.425
+It is the time,t he length of
+the time series is multiplied
+
+10
+00:00:38.425 --> 00:00:45.860
+with the sum of the squares of the sample
+of the correlation coefficients until m.
+
+11
+00:00:47.110 --> 00:00:52.210
+And they propose this for testing
+the null hypothesis that more than one.
+
+12
+00:00:52.210 --> 00:00:57.340
+Let's say m many of the correlation
+coefficient zero against the alternative
+
+13
+00:00:57.340 --> 00:01:03.440
+hypothesis that there is some rho i for
+i in between one and m that's not zero.
+
+14
+00:01:03.440 --> 00:01:05.750
+So either all of them are zero or
+
+15
+00:01:05.750 --> 00:01:09.780
+against that there's at least one
+of these guys that's not zero and
+
+16
+00:01:09.780 --> 00:01:16.870
+they used Q*(m) statistic to
+test this null hypothesis.
+
+17
+00:01:16.870 --> 00:01:22.671
+They showed that under some
+conditions Q*(m) has asymptotically
+
+18
+00:01:22.671 --> 00:01:27.710
+Chi-Squared distribution,
+with degrees of freedom m.
+
+19
+00:01:27.710 --> 00:01:31.900
+Then Ljung and Box in 1978,
+they modified this statistics
+
+20
+00:01:31.900 --> 00:01:36.610
+to increase the power of the test for
+a finite samples.
+
+21
+00:01:36.610 --> 00:01:40.090
+And there test is that
+Q(m) is equal to now.
+
+22
+00:01:40.090 --> 00:01:46.340
+The length of the time series*(the
+length of the time series+2)*the sum,
+
+23
+00:01:46.340 --> 00:01:50.130
+this time the sum is
+actually divided by T-l.
+
+24
+00:01:50.130 --> 00:01:51.865
+Decision rule is going
+to be the following.
+
+25
+00:01:51.865 --> 00:01:53.942
+We're going to look at the Q(m) and
+
+26
+00:01:53.942 --> 00:01:58.714
+if Q(m) is large enough then we reject
+the null hypothesis, now how large enough?
+
+27
+00:01:58.714 --> 00:02:03.210
+Well if it is larger than 100(1-
+alpha) quantile in the Chi-Squared
+
+28
+00:02:03.210 --> 00:02:06.170
+distribution with m degrees of freedom.
+
+29
+00:02:06.170 --> 00:02:09.876
+Now most packages actually
+give you the p-value.
+
+30
+00:02:09.876 --> 00:02:12.903
+So we're going to reject
+the null hypothesis if p value is
+
+31
+00:02:12.903 --> 00:02:14.396
+sufficiently small.
+
+32
+00:02:14.396 --> 00:02:18.610
+So if p value is less than some alpha,
+let's say alpha is 0.05, our significance
+
+33
+00:02:18.610 --> 00:02:23.260
+level you're going to reject that the idea
+that there is no auto-correlation.
+
+34
+00:02:23.260 --> 00:02:24.603
+Now how are are we going to use this?
+
+35
+00:02:24.603 --> 00:02:29.121
+Well, when we start with this time
+series's were going to use this q
+
+36
+00:02:29.121 --> 00:02:32.330
+statistic to see if there
+is autocorrelation.
+
+37
+00:02:32.330 --> 00:02:36.980
+Then if there is autocorrelation
+were going to try to fit our models.
+
+38
+00:02:36.980 --> 00:02:42.360
+And once they fit the model then there
+will be residuals hopefully a white nulls.
+
+39
+00:02:42.360 --> 00:02:45.040
+Now then we're going to
+look at the residuals,
+
+40
+00:02:45.040 --> 00:02:47.010
+we shouldn't see n alpha correlation.
+
+41
+00:02:47.010 --> 00:02:48.890
+So we're going to use this test for
+
+42
+00:02:48.890 --> 00:02:52.500
+the residuals to see if there's
+a autocorrelation or not as well.
+
+43
+00:02:54.750 --> 00:02:57.830
+Now the question is what is this m?
+
+44
+00:02:57.830 --> 00:03:01.819
+How large do we take m?
+
+45
+00:03:01.819 --> 00:03:07.200
+It is usually taking as the lower than ln,
+of the length of the time series.
+
+46
+00:03:07.200 --> 00:03:11.290
+And in the R,
+we're going to use this Box.test routine
+
+47
+00:03:11.290 --> 00:03:14.099
+to actually carry out
+all of our calculations.
+
+48
+00:03:15.290 --> 00:03:15.964
+So what have we learned?
+
+49
+00:03:15.964 --> 00:03:20.284
+We have learned the definition
+of the Ljung-Box Q-statistic.
+
+50
+00:03:20.284 --> 00:03:23.781
+We learned the decision rule to
+test the null hypothesis that
+
+51
+00:03:23.781 --> 00:03:27.300
+several auto-correlation
+coefficient are zero.
+
+52
+00:03:27.300 --> 00:03:30.160
+We also learned to test
+the null hypothesis
+
+53
+00:03:30.160 --> 00:03:33.710
+that several auto-correlation
+coefficients are zero using R.
+
+54
+00:03:35.160 --> 00:03:40.340
+In the next lecture we'll actually
+look at the real life time series.
+
+55
+00:03:40.340 --> 00:03:44.690
+And we're going to use all of the tools
+that we have acquired until now.
+
+56
+00:03:44.690 --> 00:03:45.815
+We have a lot of them now.
+
+57
+00:03:45.815 --> 00:03:51.240
+And we're going to try to fit our real
+life model into the real-life data set.

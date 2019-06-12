@@ -1,0 +1,419 @@
+WEBVTT
+
+1
+00:00:00.430 --> 00:00:04.310
+In this lecture, we'll talk about
+autocovariance coefficients.
+
+2
+00:00:04.310 --> 00:00:06.000
+Objectives are the following.
+
+3
+00:00:06.000 --> 00:00:09.710
+We'll recall the covariance
+coefficient for a bivariate data set.
+
+4
+00:00:10.740 --> 00:00:15.520
+We will define autocovariance
+coefficients for a time series.
+
+5
+00:00:15.520 --> 00:00:19.774
+And we'll estimate autocovariance
+coefficients of a time series at
+
+6
+00:00:19.774 --> 00:00:20.884
+different lags.
+
+7
+00:00:22.581 --> 00:00:26.370
+Remember if you have two random
+variables x and y, covariance is
+
+8
+00:00:26.370 --> 00:00:31.350
+basically measuring the linear dependence
+in those two random variables.
+
+9
+00:00:31.350 --> 00:00:35.670
+And we have seen the same definition of
+covariance in the previous video lecture.
+
+10
+00:00:35.670 --> 00:00:40.702
+Covariance of x, y is expectation of x,
+
+11
+00:00:40.702 --> 00:00:43.960
+y minus expectation of y.
+
+12
+00:00:45.550 --> 00:00:52.720
+Now, usually we do not get
+the random variables in real life.
+
+13
+00:00:52.720 --> 00:00:55.400
+We get, let's say, datasets.
+
+14
+00:00:55.400 --> 00:00:59.160
+We have this paired dataset (x1,
+y1) (x2, y2) (xN, y1).
+
+15
+00:00:59.160 --> 00:01:03.510
+And we would like to estimate
+the covariance between these two sets,
+
+16
+00:01:03.510 --> 00:01:07.540
+this is basically sample covariance.
+
+17
+00:01:07.540 --> 00:01:12.142
+We would like to look at the set x1,
+x2, xN, and y1, y2, yN, and
+
+18
+00:01:12.142 --> 00:01:16.363
+somehow measure the linear
+dependence between these two sets.
+
+19
+00:01:16.363 --> 00:01:20.200
+And the estimation
+formula is basically Sxy.
+
+20
+00:01:20.200 --> 00:01:26.099
+We sum xt- xy yt- y bar.
+
+21
+00:01:26.099 --> 00:01:30.140
+X bar and y bar here are the sample
+average of each data set.
+
+22
+00:01:30.140 --> 00:01:33.540
+And we divide by not n, but n-1.
+
+23
+00:01:33.540 --> 00:01:40.223
+Now in R, we don't have to calculate
+this by hand or with any loop.
+
+24
+00:01:40.223 --> 00:01:45.480
+We can just use the covariance
+routine in R with cov.
+
+25
+00:01:45.480 --> 00:01:49.029
+And we can put the dataset one and
+dataset two,
+
+26
+00:01:49.029 --> 00:01:52.311
+it will calculate this covariance for us.
+
+27
+00:01:55.133 --> 00:01:57.910
+Now we going to talk about
+autocovariance coefficient.
+
+28
+00:01:57.910 --> 00:02:02.662
+So autocovariance coefficients at
+different lags defined to be lambda,
+
+29
+00:02:02.662 --> 00:02:03.971
+I'm sorry gamma k.
+
+30
+00:02:03.971 --> 00:02:06.350
+And this is what we
+defined the last lecture.
+
+31
+00:02:06.350 --> 00:02:10.530
+Gamma k's the covariance between xt and
+xt plus k.
+
+32
+00:02:10.530 --> 00:02:15.720
+And since we assume the weak stationarity,
+it doesn't matter what t is.
+
+33
+00:02:15.720 --> 00:02:20.373
+We would have same gamma k as
+long as the distance between
+
+34
+00:02:20.373 --> 00:02:23.147
+these two random variables is k.
+
+35
+00:02:23.147 --> 00:02:26.780
+And ck is going to be an estimation for
+gamma k.
+
+36
+00:02:28.470 --> 00:02:31.430
+And this is how we're going to
+define our estimation.
+
+37
+00:02:31.430 --> 00:02:35.680
+It's very much like what we
+defined to be covariance.
+
+38
+00:02:35.680 --> 00:02:40.010
+In this case, we don't have x's and
+y's, we just have x's.
+
+39
+00:02:40.010 --> 00:02:44.174
+So we look at xt values from 1 to N-k,
+
+40
+00:02:44.174 --> 00:02:48.346
+x values starting from k+1 to the N.
+
+41
+00:02:48.346 --> 00:02:52.551
+And we calculate their
+difference from the x bar,
+
+42
+00:02:52.551 --> 00:02:58.870
+x bar being the sample average, and
+we calculate whole sum and divide by N.
+
+43
+00:02:58.870 --> 00:03:04.105
+This is going to be our estimation for
+our autocovariance coefficients.
+
+44
+00:03:05.428 --> 00:03:08.540
+Now, again in R,
+we will not do it by hand.
+
+45
+00:03:08.540 --> 00:03:12.290
+Although we can write just one
+simple loop to calculate this
+
+46
+00:03:12.290 --> 00:03:16.850
+autovariance coefficients,
+we will use what's called acf routine.
+
+47
+00:03:16.850 --> 00:03:19.810
+Now, acf stands for
+autocorrelation function,
+
+48
+00:03:19.810 --> 00:03:22.636
+which I'm going to talk
+about in my next lecture.
+
+49
+00:03:22.636 --> 00:03:27.820
+But for now, we'll use acf
+routine in the following way.
+
+50
+00:03:27.820 --> 00:03:31.130
+We're going to acf, the time series, and
+
+51
+00:03:31.130 --> 00:03:34.380
+the type,
+we're going to type in covariance.
+
+52
+00:03:34.380 --> 00:03:37.130
+If we type in covariance,
+it will give us all
+
+53
+00:03:38.530 --> 00:03:44.800
+autocovariance coefficients.
+
+54
+00:03:44.800 --> 00:03:48.220
+Now we're going to simulate
+a purely random process.
+
+55
+00:03:48.220 --> 00:03:53.080
+It's a purely random process the time
+series with no special pattern.
+
+56
+00:03:53.080 --> 00:03:55.230
+And we're going to use rnorm routine.
+
+57
+00:03:55.230 --> 00:03:59.397
+We will call our time series
+purely_random_process, and
+
+58
+00:03:59.397 --> 00:04:04.543
+we will use the ts routine, which will
+take the dataset that we generate and
+
+59
+00:04:04.543 --> 00:04:07.440
+put time series structure on it.
+
+60
+00:04:07.440 --> 00:04:11.190
+And inside that ts routine,
+I have rnorm routine.
+
+61
+00:04:11.190 --> 00:04:14.780
+R stands for random, norm stands for
+normal random variables, so
+
+62
+00:04:14.780 --> 00:04:21.360
+we will generate, let's say,
+100 data points from normal distribution.
+
+63
+00:04:21.360 --> 00:04:26.940
+In fact, it's going to generate 100 data
+points from standard normal distribution
+
+64
+00:04:26.940 --> 00:04:29.840
+with a mean 0 and standard deviation 1.
+
+65
+00:04:29.840 --> 00:04:36.400
+When I do that,
+now we have purely random process.
+
+66
+00:04:36.400 --> 00:04:42.628
+Let's just print, purely_random_process.
+
+67
+00:04:45.365 --> 00:04:51.023
+And if I print it, I see that it's a time
+series object that starts at time 1,
+
+68
+00:04:51.023 --> 00:04:52.775
+ends up at time 100.
+
+69
+00:04:52.775 --> 00:05:00.030
+And the frequency is 1, and
+we have our 100th data points.
+
+70
+00:05:00.030 --> 00:05:02.290
+So we will be using acf routine.
+
+71
+00:05:02.290 --> 00:05:04.380
+Acf routine usually gives us a plot.
+
+72
+00:05:04.380 --> 00:05:07.020
+We're going to change
+the type to the covariance
+
+73
+00:05:07.020 --> 00:05:09.270
+because we would like
+to get autocovariance.
+
+74
+00:05:09.270 --> 00:05:12.330
+And I'm going to put parenthesis
+around it so that it will print out
+
+75
+00:05:12.330 --> 00:05:17.090
+the data that it produces,
+and you obtain the plot.
+
+76
+00:05:17.090 --> 00:05:22.400
+Along with the plot it produces
+autocovariance coefficients for
+
+77
+00:05:22.400 --> 00:05:23.938
+every single lag.
+
+78
+00:05:23.938 --> 00:05:28.830
+So when we type in this command,
+it gives us a plot,
+
+79
+00:05:28.830 --> 00:05:30.800
+which I will talk about
+in the next lecture.
+
+80
+00:05:30.800 --> 00:05:35.100
+But what we are concentrating
+on would be these numbers here.
+
+81
+00:05:35.100 --> 00:05:38.327
+Basically, this is autocorrelation
+coefficient estimation for
+
+82
+00:05:38.327 --> 00:05:40.840
+our autocorrelation coefficient at lag 0.
+
+83
+00:05:40.840 --> 00:05:44.270
+This is at lag 1, this is at lag 2,
+and this is at lag 3, and so forth.
+
+84
+00:05:46.008 --> 00:05:50.451
+And this is how we're going to calculate
+our autocovariance coefficients in R.
+
+85
+00:05:50.451 --> 00:05:52.316
+So, what have learned in this lecture?
+
+86
+00:05:52.316 --> 00:05:55.629
+You have learned the definition
+of autocovariance coefficients
+
+87
+00:05:55.629 --> 00:05:56.658
+at different lags.
+
+88
+00:05:56.658 --> 00:06:00.922
+And you have learned how to estimate
+the autocovariance coefficient of a time
+
+89
+00:06:00.922 --> 00:06:02.440
+series using acf routine.

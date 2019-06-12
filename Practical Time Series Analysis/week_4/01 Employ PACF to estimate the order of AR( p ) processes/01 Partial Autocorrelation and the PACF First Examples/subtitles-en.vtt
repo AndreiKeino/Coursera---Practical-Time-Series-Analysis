@@ -1,0 +1,734 @@
+WEBVTT
+
+1
+00:00:01.030 --> 00:00:03.960
+Welcome back to
+Practical Times Series Analysis.
+
+2
+00:00:05.230 --> 00:00:10.911
+We're looking in this lecture at
+the partial autocorrelation function,
+
+3
+00:00:10.911 --> 00:00:11.730
+the PACF.
+
+4
+00:00:11.730 --> 00:00:13.880
+We'll look at some first examples, and
+
+5
+00:00:13.880 --> 00:00:18.270
+we'll see how this function may
+help us in our modeling process.
+
+6
+00:00:18.270 --> 00:00:22.290
+If you think about it, if you're presented
+with the time series that you've observed
+
+7
+00:00:22.290 --> 00:00:26.840
+from some natural process, or
+maybe some data that you've recovered in
+
+8
+00:00:26.840 --> 00:00:32.570
+an experiment in a laboratory, it's not
+really obvious how you might model this.
+
+9
+00:00:32.570 --> 00:00:38.265
+We've certainly seen MAQ processes,
+moving average processes of order Q,
+
+10
+00:00:38.265 --> 00:00:41.338
+we've explored AR processes of order P.
+
+11
+00:00:41.338 --> 00:00:46.448
+Very soon we'll move on to for instance
+modelling that would be seasonal or
+
+12
+00:00:46.448 --> 00:00:49.733
+regressive process even that
+are also integrated and
+
+13
+00:00:49.733 --> 00:00:52.470
+have moving average proponents.
+
+14
+00:00:52.470 --> 00:00:54.180
+It's really complicated affair,
+
+15
+00:00:54.180 --> 00:00:58.210
+modelling a particular time
+series as a stochastic processes.
+
+16
+00:00:58.210 --> 00:01:03.230
+We can use all the help we can get and
+the PACF will help us with that.
+
+17
+00:01:05.290 --> 00:01:09.020
+In this particular video
+lecture we'll be using the acf
+
+18
+00:01:09.020 --> 00:01:13.060
+function in order to
+obtain a piece PACF plot.
+
+19
+00:01:14.120 --> 00:01:18.655
+We'll use that plot to
+determine the likely order of
+
+20
+00:01:18.655 --> 00:01:23.707
+an AR(p) process and
+to help us estimate coefficients,
+
+21
+00:01:23.707 --> 00:01:28.152
+we'll automate the process
+with the ar function.
+
+22
+00:01:28.152 --> 00:01:33.126
+Just to review, if you had a second
+order moving average process
+
+23
+00:01:33.126 --> 00:01:37.544
+as shown in this picture,
+then if we were to plug the ACF,
+
+24
+00:01:37.544 --> 00:01:42.058
+you'd see after the first
+typical spike of height 1, but
+
+25
+00:01:42.058 --> 00:01:48.860
+there is a reference for us, that you
+would see two other significant spikes.
+
+26
+00:01:48.860 --> 00:01:52.030
+So if you know you have
+a moving average process,
+
+27
+00:01:52.030 --> 00:01:54.900
+determining the order isn't
+really all that complicated.
+
+28
+00:01:54.900 --> 00:01:56.862
+We just look at the ACF.
+
+29
+00:01:59.229 --> 00:02:02.860
+What are we going to do for
+an autoregressive process?
+
+30
+00:02:02.860 --> 00:02:06.190
+We've developed formulas, but
+let's see how we're going to move forward.
+
+31
+00:02:07.550 --> 00:02:11.636
+I'm going to do a quick simulation
+of a second order process.
+
+32
+00:02:11.636 --> 00:02:16.365
+There are some commands here for
+instances I'm using the rm command.
+
+33
+00:02:16.365 --> 00:02:20.610
+If you're generating data it's
+nice as you come in to get rid of
+
+34
+00:02:20.610 --> 00:02:22.790
+all the rays you might have stored.
+
+35
+00:02:22.790 --> 00:02:24.480
+So, that you keep yourself nice and
+
+36
+00:02:24.480 --> 00:02:27.920
+organised, it's like
+erasing the blackboard.
+
+37
+00:02:27.920 --> 00:02:31.320
+We'll give ourselves a plot
+with three rows and one column.
+
+38
+00:02:31.320 --> 00:02:36.113
+I'm going to generate data on
+an AR2 process and 0.6 and
+
+39
+00:02:36.113 --> 00:02:40.700
+0.2 as coefficients will give
+us a nice stationary process.
+
+40
+00:02:41.790 --> 00:02:44.660
+Once we've generated our
+data with arima.sim,
+
+41
+00:02:44.660 --> 00:02:47.160
+we'll look at three characteristic plots.
+
+42
+00:02:48.220 --> 00:02:51.850
+It's nice to get into the habit of just
+producing these plots all the time.
+
+43
+00:02:51.850 --> 00:02:56.060
+So we'll produce a plot of the time
+series, we'll produce a plot of the ACF,
+
+44
+00:02:56.060 --> 00:03:01.020
+and we'll also now introduce
+the partial autocorrelation
+
+45
+00:03:01.020 --> 00:03:07.260
+function by giving the ACF routine
+the flag, type equals partial.
+
+46
+00:03:07.260 --> 00:03:08.130
+Let's see what we get.
+
+47
+00:03:10.576 --> 00:03:14.277
+We have a fine looking
+autoregressive process up on top,
+
+48
+00:03:14.277 --> 00:03:16.060
+nice stationary process.
+
+49
+00:03:17.590 --> 00:03:21.370
+It's hard to imagine how you would look at
+this particular autocorrelation function
+
+50
+00:03:21.370 --> 00:03:24.440
+and determine the order of the process.
+
+51
+00:03:24.440 --> 00:03:27.060
+Now, we generated our data so
+we know it's a second order process.
+
+52
+00:03:27.060 --> 00:03:30.210
+Let's take a look at the PACF plot.
+
+53
+00:03:31.380 --> 00:03:35.566
+There is no spike there at time
+zero that you can see, but
+
+54
+00:03:35.566 --> 00:03:40.390
+at lag of 1 and 2,
+we have statistically significant spikes.
+
+55
+00:03:41.650 --> 00:03:44.770
+Now, this is just off of one time series,
+might be a coincidence.
+
+56
+00:03:46.210 --> 00:03:49.575
+So, let's simulate an autoregressive
+process for order of 3.
+
+57
+00:03:50.630 --> 00:03:54.950
+Again, I'm choosing these
+coefficients basically at random.
+
+58
+00:03:54.950 --> 00:03:58.061
+I'm just making sure that we have the
+stationary process that's what's really
+
+59
+00:03:58.061 --> 00:03:59.750
+important for us.
+
+60
+00:03:59.750 --> 00:04:02.610
+We will produce our data and
+at this point,
+
+61
+00:04:02.610 --> 00:04:04.760
+you should be able to produce
+your plots with no problem.
+
+62
+00:04:06.210 --> 00:04:08.080
+And what are we going to see here?
+
+63
+00:04:09.110 --> 00:04:14.020
+There's our process up on top,
+the auto correlation function.
+
+64
+00:04:14.020 --> 00:04:17.790
+Again, I don't really know how I'd
+look at that auto correlation function
+
+65
+00:04:17.790 --> 00:04:19.560
+off set the data like this, and
+
+66
+00:04:19.560 --> 00:04:23.340
+make a real accurate determination
+of the order of the process.
+
+67
+00:04:23.340 --> 00:04:25.380
+But when I look down
+here to the third plot
+
+68
+00:04:26.710 --> 00:04:31.820
+I can see that there are three
+statistically significant spikes.
+
+69
+00:04:31.820 --> 00:04:40.360
+So an AR process of order 3 is producing
+a PACF with the three significant spikes.
+
+70
+00:04:40.360 --> 00:04:42.780
+Again we haven't even
+defined the PACF yet.
+
+71
+00:04:42.780 --> 00:04:47.504
+We're just trying to have a little fun,
+develop some nice visual interpretations
+
+72
+00:04:47.504 --> 00:04:50.413
+and in the next lecture
+we'll be much more formal.
+
+73
+00:04:53.024 --> 00:04:57.396
+It's good to produce your own data and
+I sincerely hope that you're going to
+
+74
+00:04:57.396 --> 00:05:02.192
+produce data sets, 10 or 20 of them,
+and keep changing your coefficients,
+
+75
+00:05:02.192 --> 00:05:07.420
+keep changing the order of the process,
+and seeing what you get in a PACF.
+
+76
+00:05:07.420 --> 00:05:13.010
+It's good to own these things, to really
+feel very comfortable with the process.
+
+77
+00:05:13.010 --> 00:05:17.370
+But it's also good to look
+at some classic data sets.
+
+78
+00:05:17.370 --> 00:05:21.330
+So the beverage wheat price
+data set is fairly famous.
+
+79
+00:05:21.330 --> 00:05:24.860
+You can obtain it as I did from
+the time series data library.
+
+80
+00:05:24.860 --> 00:05:27.680
+I've given you a link here and
+in the reading.
+
+81
+00:05:27.680 --> 00:05:30.228
+Of course,
+when you download from the site,
+
+82
+00:05:30.228 --> 00:05:33.934
+you're going to have a text file
+with a lot of information up on top.
+
+83
+00:05:33.934 --> 00:05:37.550
+That's all very useful, but
+in order to bring the data into R,
+
+84
+00:05:37.550 --> 00:05:40.360
+we're going to have to edit
+that file a little bit.
+
+85
+00:05:41.610 --> 00:05:45.980
+The data we're originally presented in
+a paper by Beveridge called Weather and
+
+86
+00:05:45.980 --> 00:05:46.978
+Harvest Cycles.
+
+87
+00:05:46.978 --> 00:05:48.878
+Subsequent authors,
+
+88
+00:05:48.878 --> 00:05:53.700
+they have had some issues with
+how Beveridge analyzed this data.
+
+89
+00:05:53.700 --> 00:05:56.160
+That's not really
+the topic of this lecture.
+
+90
+00:05:56.160 --> 00:05:59.240
+What we're going to do is
+present the Beveridge data,
+
+91
+00:05:59.240 --> 00:06:03.939
+show you how he analyzed it, and then try
+to determine the order of the process.
+
+92
+00:06:06.710 --> 00:06:12.250
+So, using the read.table command,
+we'll bring the Beveridge data into R.
+
+93
+00:06:12.250 --> 00:06:16.610
+We'll create a time series by
+extracting the second column,
+
+94
+00:06:16.610 --> 00:06:18.770
+telling it we're starting
+at the year 1500.
+
+95
+00:06:18.770 --> 00:06:22.650
+So this really is a fairly
+extensive dataset.
+
+96
+00:06:22.650 --> 00:06:23.578
+We'll do some plotting.
+
+97
+00:06:23.578 --> 00:06:28.460
+And, what Beveridge did is
+he created a moving average.
+
+98
+00:06:29.830 --> 00:06:33.222
+We're going to do this with
+the filter command, and
+
+99
+00:06:33.222 --> 00:06:37.112
+we're going to grab 31 data
+points 15 up and 15 down.
+
+100
+00:06:37.112 --> 00:06:42.932
+So we'll surround our particular data
+point at any time along the representation
+
+101
+00:06:42.932 --> 00:06:47.750
+with 31 data points and
+we're going to put that on the same graph.
+
+102
+00:06:47.750 --> 00:06:52.430
+We'll superimpose in red
+the moving average process.
+
+103
+00:06:54.900 --> 00:06:58.260
+You can see that the MA process here
+
+104
+00:06:58.260 --> 00:07:02.410
+does a very nice job of getting rid
+of some of these fluctuations and
+
+105
+00:07:02.410 --> 00:07:06.200
+it does plot along with the trend
+that seems apparent in the data.
+
+106
+00:07:07.320 --> 00:07:12.180
+Beveridge's idea was to
+take the original data and
+
+107
+00:07:12.180 --> 00:07:16.870
+at each data point do some
+scaling by the filtered data set.
+
+108
+00:07:17.930 --> 00:07:21.420
+He's hoping to create a stationary
+process by doing this.
+
+109
+00:07:24.500 --> 00:07:29.380
+Again, we're not here to critique
+Beveridge, we're here to move along
+
+110
+00:07:29.380 --> 00:07:34.115
+with him, try to obtain the same
+data set that he was analyzing and
+
+111
+00:07:34.115 --> 00:07:37.590
+then look at the PACF
+associated with that data set.
+
+112
+00:07:38.870 --> 00:07:39.770
+So what are we going to do?
+
+113
+00:07:39.770 --> 00:07:42.380
+We're going to take
+the Beveridge time series and
+
+114
+00:07:42.380 --> 00:07:46.150
+we'll scale at each point by
+the moving average process.
+
+115
+00:07:46.150 --> 00:07:49.150
+There's going to be some data
+at the very beginning and
+
+116
+00:07:49.150 --> 00:07:54.530
+at the very end of the process that won't
+have any data points represented in Y.
+
+117
+00:07:54.530 --> 00:07:56.890
+It's going to give us NA.
+
+118
+00:07:56.890 --> 00:07:59.700
+So, we're going to have to deal
+with that in just a moment.
+
+119
+00:08:00.910 --> 00:08:02.192
+We will do a plot.
+
+120
+00:08:02.192 --> 00:08:08.600
+We're going to plot the scale price data,
+we'll produce an acf and
+
+121
+00:08:08.600 --> 00:08:14.170
+we have to tell it to get rid of
+the data points that aren't meaningful.
+
+122
+00:08:14.170 --> 00:08:21.227
+So we'll do that with the command
+na.omit(Y) then we'll plot the acf,
+
+123
+00:08:21.227 --> 00:08:29.121
+we'll also plot
+the PACF What do you think?
+
+124
+00:08:29.121 --> 00:08:33.411
+We've produced the process up here with
+a simple scaling that perhaps we've
+
+125
+00:08:33.411 --> 00:08:37.980
+introduced some seasonality,
+that's sort of a different issue for us.
+
+126
+00:08:37.980 --> 00:08:42.010
+But it looks relatively stationary.
+
+127
+00:08:43.160 --> 00:08:46.840
+When we look at the autocorrelation
+function we something interesting.
+
+128
+00:08:47.890 --> 00:08:52.680
+But it's the PACF that we really
+want to draw your attention to.
+
+129
+00:08:52.680 --> 00:08:56.860
+The PCF seems to have
+two significant spikes.
+
+130
+00:08:58.060 --> 00:09:01.447
+Let's see if we can find other evidence
+that we might have a second order
+
+131
+00:09:01.447 --> 00:09:02.529
+process on our hands.
+
+132
+00:09:04.547 --> 00:09:09.040
+There's a command called AR which
+will generate the coefficients in
+
+133
+00:09:09.040 --> 00:09:11.570
+an auto-regressive process.
+
+134
+00:09:11.570 --> 00:09:16.360
+In other words, given a time series
+it's going to use the time series
+
+135
+00:09:16.360 --> 00:09:20.170
+to estimate the coefficients in
+the corresponding stochastic process.
+
+136
+00:09:22.020 --> 00:09:26.970
+We'll let the order.max be 5,
+so ar is free to look for
+
+137
+00:09:26.970 --> 00:09:33.750
+stochastic processes where the parameter
+for the autoregressive process is up to 5.
+
+138
+00:09:33.750 --> 00:09:38.530
+When we look at the printout,
+we'll see that ar has come up with
+
+139
+00:09:38.530 --> 00:09:43.650
+a second-order model that's consistent
+with the picture we saw just a moment ago.
+
+140
+00:09:43.650 --> 00:09:45.640
+And the coefficients we obtained,
+
+141
+00:09:45.640 --> 00:09:48.930
+are really fairly close to the ones
+Beveridge obtained in his paper.
+
+142
+00:09:50.010 --> 00:09:53.640
+The order that AR has selected then is 2,
+
+143
+00:09:53.640 --> 00:09:57.920
+consistent with our elementary
+analysis of the PACF plan.
+
+144
+00:09:59.950 --> 00:10:02.340
+Not to sate the obvious but,
+
+145
+00:10:02.340 --> 00:10:08.220
+an AR(p) process will have a PACF
+that cuts off after p lags.
+
+146
+00:10:08.220 --> 00:10:13.940
+This can be a tremendous asset to us
+as we look to model time series data.
+
+147
+00:10:16.550 --> 00:10:17.730
+In this lecture,
+
+148
+00:10:17.730 --> 00:10:21.720
+we've used the autocorrelation
+function to obtain a PACF plot.
+
+149
+00:10:22.770 --> 00:10:27.400
+We've used that plot then to determine
+the likely order of an AR(p) process.
+
+150
+00:10:28.580 --> 00:10:34.310
+And we've also learned that the ar()
+function can estimate coefficients for
+
+151
+00:10:34.310 --> 00:10:36.110
+us automatically.
+
+152
+00:10:36.110 --> 00:10:37.080
+In the next lecture,
+
+153
+00:10:37.080 --> 00:10:42.480
+we'll start developing the PACF in a more
+fundamental and a more theoretical way.

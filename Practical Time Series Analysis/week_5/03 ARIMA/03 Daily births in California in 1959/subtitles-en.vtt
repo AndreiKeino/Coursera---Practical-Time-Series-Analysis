@@ -1,0 +1,1025 @@
+WEBVTT
+
+1
+00:00:00.310 --> 00:00:01.280
+Hello everyone.
+
+2
+00:00:01.280 --> 00:00:06.380
+In this lecture, we will use our tools
+that we have acquired until now.
+
+3
+00:00:06.380 --> 00:00:10.890
+And we'll try to fit an ARIMA
+model into a real life dataset.
+
+4
+00:00:10.890 --> 00:00:17.407
+Dataset is called daily female
+births in California in 1959.
+
+5
+00:00:17.407 --> 00:00:20.483
+So we're going to look
+at the time series for
+
+6
+00:00:20.483 --> 00:00:23.740
+whole year and
+the frequencies for every day.
+
+7
+00:00:23.740 --> 00:00:26.030
+It's going to be daily time series.
+
+8
+00:00:26.030 --> 00:00:31.793
+And we'll have a number of female births
+at each day in California in 1959.
+
+9
+00:00:31.793 --> 00:00:36.710
+Objectives are to fit an ARIMA
+model to a real world data set.
+
+10
+00:00:36.710 --> 00:00:43.285
+To judge various fitting tools,
+such as ACF, PACF, and AIC.
+
+11
+00:00:43.285 --> 00:00:47.315
+And to examine Ljung-Box Q-statistics for
+
+12
+00:00:47.315 --> 00:00:52.516
+testing if there's
+an autocorrelation in a time series.
+
+13
+00:00:55.267 --> 00:01:01.620
+As you remember, this is our basically
+guideline for modelling a time series.
+
+14
+00:01:01.620 --> 00:01:05.510
+We're going to look at if
+there's a trend in the data,
+
+15
+00:01:05.510 --> 00:01:09.850
+if there's a difference in the variation,
+if we need transformation or not.
+
+16
+00:01:09.850 --> 00:01:13.900
+And then we're going to look at ACF, PACF.
+
+17
+00:01:13.900 --> 00:01:17.300
+Akaike Information Criterion,
+sum of squared errors, and
+
+18
+00:01:17.300 --> 00:01:21.410
+also Ljung-Box Q-statistics.
+
+19
+00:01:21.410 --> 00:01:22.426
+And at the end of the day,
+
+20
+00:01:22.426 --> 00:01:24.957
+we're going to use R to estimate
+our perimeters in the model.
+
+21
+00:01:28.330 --> 00:01:34.205
+Okay, so this data that is coming from
+Time Series Data Library which is TSDL,
+
+22
+00:01:34.205 --> 00:01:36.432
+it is created by Rob Hyndman,
+
+23
+00:01:36.432 --> 00:01:41.590
+Professor of statistics at
+Monash University, Australia.
+
+24
+00:01:41.590 --> 00:01:47.260
+And there's a link here,
+you can go directly to the library.
+
+25
+00:01:47.260 --> 00:01:50.430
+And the category that I chose
+was demography, so this dataset,
+
+26
+00:01:50.430 --> 00:01:55.819
+daily total female births in California
+is under category Demography.
+
+27
+00:01:55.819 --> 00:01:59.850
+It is a time series from January 1, 1959,
+
+28
+00:01:59.850 --> 00:02:03.730
+to December 31, 1959, for 365 days.
+
+29
+00:02:03.730 --> 00:02:06.110
+It's a daily time series.
+
+30
+00:02:07.430 --> 00:02:12.710
+There's a direct link here that will
+take you directly to the time series.
+
+31
+00:02:12.710 --> 00:02:14.420
+And what we're going to
+do once we are there,
+
+32
+00:02:14.420 --> 00:02:18.330
+we are going to export
+the data as a CSV file.
+
+33
+00:02:18.330 --> 00:02:22.150
+We're going to open the file, clean up the
+bottom row because there might be extra
+
+34
+00:02:23.590 --> 00:02:26.530
+rows in the bottom we don't need.
+
+35
+00:02:26.530 --> 00:02:30.220
+And then, either put this file into
+your working directory in R or
+
+36
+00:02:30.220 --> 00:02:35.730
+directly read it from whatever it is
+downloaded to the R, using its path.
+
+37
+00:02:37.140 --> 00:02:41.040
+If you use that link directly,
+we go to the daily total female births in
+
+38
+00:02:41.040 --> 00:02:45.160
+California 1959,
+there's an export button here, so
+
+39
+00:02:45.160 --> 00:02:49.630
+if I click this export,
+I can export this in the various format.
+
+40
+00:02:49.630 --> 00:02:56.167
+I'm going to use CSV, and
+if I do that it automatically downloads,
+
+41
+00:02:56.167 --> 00:03:01.110
+basically daily total
+female births in 1959.
+
+42
+00:03:01.110 --> 00:03:02.830
+We can open it.
+
+43
+00:03:04.030 --> 00:03:05.630
+Once you open the file,
+
+44
+00:03:05.630 --> 00:03:10.590
+it will have a date and a daily total
+female births in California in 1959.
+
+45
+00:03:10.590 --> 00:03:14.910
+These are the dates and
+these are the number of the births.
+
+46
+00:03:14.910 --> 00:03:19.575
+If you go to the bottom of the file,
+there's extra row that we don't need so
+
+47
+00:03:19.575 --> 00:03:22.106
+we might want to delete this and save it.
+
+48
+00:03:25.797 --> 00:03:30.620
+Now we are ready to use this dataset and
+read it to R.
+
+49
+00:03:30.620 --> 00:03:35.020
+And we'll start modeling this time series.
+
+50
+00:03:35.020 --> 00:03:37.590
+So I have R Studio here up and
+running, and
+
+51
+00:03:37.590 --> 00:03:42.340
+I have written a little code
+called Birth_California_1959.
+
+52
+00:03:42.340 --> 00:03:44.940
+And this code is provided to you.
+
+53
+00:03:46.530 --> 00:03:49.810
+There's the information
+we just talked about, and
+
+54
+00:03:49.810 --> 00:03:54.148
+when we start with the library or some
+of you might need it, so you can run it.
+
+55
+00:03:54.148 --> 00:04:01.760
+And now we're going to read, so read the
+time series we downloaded in the CSV file.
+
+56
+00:04:02.980 --> 00:04:05.700
+And I put that file into
+my working directly, so
+
+57
+00:04:05.700 --> 00:04:11.643
+I'm going to directly read it
+into a variable called birthdata.
+
+58
+00:04:11.643 --> 00:04:16.010
+And from birth data I'm
+going to pull out the column
+
+59
+00:04:16.010 --> 00:04:17.630
+that's actually number of births.
+
+60
+00:04:17.630 --> 00:04:19.370
+And we're going to call
+it number_of_births.
+
+61
+00:04:21.290 --> 00:04:26.960
+And we're going to format
+the date as month, day, and year.
+
+62
+00:04:26.960 --> 00:04:33.925
+And we're going to plot the data on the
+right hand side here plus plot the data.
+
+63
+00:04:33.925 --> 00:04:37.615
+Once we have the birth,
+let's plot our dataset.
+
+64
+00:04:37.615 --> 00:04:38.508
+And when we plot it,
+
+65
+00:04:38.508 --> 00:04:41.465
+you see that we have this Daily
+total female births in California.
+
+66
+00:04:41.465 --> 00:04:42.785
+This is our time series.
+
+67
+00:04:42.785 --> 00:04:45.415
+This is our Date, and
+this is the Number of births.
+
+68
+00:04:45.415 --> 00:04:50.465
+As you can see, this is definitely
+not a stationary time series.
+
+69
+00:04:50.465 --> 00:04:53.500
+There's some kind of trend going on.
+
+70
+00:04:53.500 --> 00:04:57.810
+So maybe we should need to
+remove the trend later on, but
+
+71
+00:04:57.810 --> 00:05:00.280
+lets first check Q-statistic.
+
+72
+00:05:00.280 --> 00:05:04.370
+In other words, is there a correlation or
+
+73
+00:05:04.370 --> 00:05:08.035
+after correlation among different
+lags of this time series?
+
+74
+00:05:08.035 --> 00:05:10.100
+And we're going to use
+box test as we said.
+
+75
+00:05:10.100 --> 00:05:15.095
+Box-test, this is the name of
+the dataset and this is the lag that we
+
+76
+00:05:15.095 --> 00:05:19.392
+said we're going to use the logarithm
+of the length of that time series.
+
+77
+00:05:19.392 --> 00:05:24.379
+If we use this Ljung-Box test,
+we obtain the following
+
+78
+00:05:24.379 --> 00:05:28.516
+p-value and then p-value is actually very,
+
+79
+00:05:28.516 --> 00:05:33.185
+very small,
+which is smaller than any significance
+
+80
+00:05:33.185 --> 00:05:38.206
+level you would choose like 0.005 or
+0.001.
+
+81
+00:05:38.206 --> 00:05:44.005
+So there is definitely after correlations,
+so we can fit somewhere the model, ARIMA
+
+82
+00:05:44.005 --> 00:05:49.458
+model may be here, some linear model,
+and try to pull the linear part of it.
+
+83
+00:05:49.458 --> 00:05:51.808
+And then we're going to look
+again to its residuals,
+
+84
+00:05:51.808 --> 00:05:54.628
+maybe there's other correlation there,
+maybe there's not.
+
+85
+00:05:54.628 --> 00:05:56.698
+So we hope that we will get
+some white noise there.
+
+86
+00:05:57.778 --> 00:06:03.854
+Okay, so, as we can see, there's maybe
+some kind of trend going on here.
+
+87
+00:06:03.854 --> 00:06:05.964
+So, in order to remove a trend,
+
+88
+00:06:05.964 --> 00:06:10.044
+we're going to use a differencing
+operator, which is DIFF.
+
+89
+00:06:10.044 --> 00:06:11.284
+So that's what we are going to do.
+
+90
+00:06:12.410 --> 00:06:14.740
+So let's plot our different time series.
+
+91
+00:06:14.740 --> 00:06:16.450
+This is our difference time series.
+
+92
+00:06:16.450 --> 00:06:22.730
+This is our date and we get some kind
+of maybe a stationary time series.
+
+93
+00:06:22.730 --> 00:06:26.958
+There is a little bit peak
+on September 2nd if you
+
+94
+00:06:26.958 --> 00:06:31.770
+look at the time series there's
+September 2nd which is exactly
+
+95
+00:06:31.770 --> 00:06:36.601
+nine months after December 31st.
+
+96
+00:06:36.601 --> 00:06:40.590
+We can attribute this to randomness,
+so we can say that,
+
+97
+00:06:40.590 --> 00:06:43.000
+okay, maybe we can ignore this outlier.
+
+98
+00:06:43.000 --> 00:06:46.500
+Then we basically have some
+stationery time series.
+
+99
+00:06:46.500 --> 00:06:51.336
+And let's look at the auto correlation
+theories and the auto correlation here
+
+100
+00:06:51.336 --> 00:06:56.660
+we're going to use, again, box test for
+the difference of the time series.
+
+101
+00:06:56.660 --> 00:07:00.100
+And if you run this,
+we obtain, again, very,
+
+102
+00:07:00.100 --> 00:07:08.260
+very small p-value, so
+there's definitely some autocorrelations.
+
+103
+00:07:08.260 --> 00:07:12.420
+Let's look at ACF, I told you
+before that ACF will also suggest
+
+104
+00:07:12.420 --> 00:07:14.755
+that there might be some autocorrelations.
+
+105
+00:07:15.850 --> 00:07:18.530
+This is the ACF of the difference data.
+
+106
+00:07:18.530 --> 00:07:25.100
+If I look at the ACF, we see that
+there's a significant lag at lag 1.
+
+107
+00:07:25.100 --> 00:07:28.290
+And then there's one peak at lag 21 maybe.
+
+108
+00:07:28.290 --> 00:07:33.520
+So maybe we can ignore this and
+we can refer to this randomness.
+
+109
+00:07:33.520 --> 00:07:35.230
+Maybe this is a random peak.
+
+110
+00:07:35.230 --> 00:07:41.090
+And if you can ignore that,
+then maybe we have two significant peaks.
+
+111
+00:07:41.090 --> 00:07:45.800
+This is lag zero, which is always one,
+and we have some lag one here.
+
+112
+00:07:45.800 --> 00:07:50.360
+Autocorrelation functions suggest
+order for the moving average process.
+
+113
+00:07:50.360 --> 00:07:55.220
+If I look at the PACF or
+partial auto-correlation function.
+
+114
+00:07:55.220 --> 00:07:56.470
+We obtain the following.
+
+115
+00:07:56.470 --> 00:08:00.560
+We see a lot of significant peaks
+if even if we ignore lag 21.
+
+116
+00:08:00.560 --> 00:08:06.920
+We can see that there is a lot
+of significant lags until lag 7.
+
+117
+00:08:06.920 --> 00:08:12.000
+Okay, so we have various competing
+model we're going to have to try.
+
+118
+00:08:12.000 --> 00:08:15.840
+So first we're going to
+try to fit ARIMA model,
+
+119
+00:08:15.840 --> 00:08:20.738
+the to number_of _births
+with order 0,1,1 all of them
+
+120
+00:08:20.738 --> 00:08:26.190
+will have to have 1,
+because we have the difference the data.
+
+121
+00:08:26.190 --> 00:08:31.470
+So this time, I'm going to look
+at the model basically MA1 for
+
+122
+00:08:31.470 --> 00:08:32.430
+the difference data.
+
+123
+00:08:33.810 --> 00:08:37.560
+This is model MA2 for the difference data.
+
+124
+00:08:37.560 --> 00:08:40.840
+This is basically ARIMA71 for
+the difference data.
+
+125
+00:08:40.840 --> 00:08:46.054
+So ARIMA711,
+we again look at ARIMA712 because PACF
+
+126
+00:08:46.054 --> 00:08:51.802
+tells us that there might be the order
+of [INAUDIBLE] process is 7.
+
+127
+00:08:51.802 --> 00:08:55.811
+And, ACF actually
+
+128
+00:08:55.811 --> 00:09:00.700
+tells that maybe order of
+MAQ processes is one or two.
+
+129
+00:09:02.530 --> 00:09:07.390
+Okay, so
+this model one is our ARIMA 0,1,1,
+
+130
+00:09:07.390 --> 00:09:10.830
+I'm going to pull out some
+of the squared errors.
+
+131
+00:09:10.830 --> 00:09:13.370
+In other words, I'm going to look
+at the residuals square them and
+
+132
+00:09:13.370 --> 00:09:15.730
+sum them up and
+we're going to call this SSE1.
+
+133
+00:09:15.730 --> 00:09:19.070
+We want this to be as small as possible.
+
+134
+00:09:19.070 --> 00:09:20.980
+We're going to also look at the residual.
+
+135
+00:09:20.980 --> 00:09:26.080
+In other words, once we model our time
+series with Arima(0,1,1) let's say,
+
+136
+00:09:26.080 --> 00:09:28.670
+then we have residual.
+
+137
+00:09:28.670 --> 00:09:31.690
+We hope not to have any
+autocorrelation in the residual.
+
+138
+00:09:31.690 --> 00:09:35.030
+We would like to have some
+white noise in the residual.
+
+139
+00:09:35.030 --> 00:09:37.110
+So we're going to take Model 1 residuals.
+
+140
+00:09:37.110 --> 00:09:42.280
+We're going to look at the box test and
+that's going to be called Model 1 Test.
+
+141
+00:09:42.280 --> 00:09:44.440
+And we're going to look at its p-values.
+
+142
+00:09:44.440 --> 00:09:48.014
+And so we continue this process for
+different models, Arima(0,1,1),
+
+143
+00:09:48.014 --> 00:09:51.520
+Arima(0,1,2), Arima(7,1,1), Arima(7,1,2).
+
+144
+00:09:51.520 --> 00:10:00.180
+And we have some of the squares of
+errors and we also have the R test.
+
+145
+00:10:00.180 --> 00:10:04.578
+I'm going to define a data frame df,
+it's going to have
+
+146
+00:10:04.578 --> 00:10:09.855
+the row names AIC which is
+Akaike information criterion.
+
+147
+00:10:09.855 --> 00:10:13.652
+It's going to have some of squared errors,
+is going to have p-value.
+
+148
+00:10:13.652 --> 00:10:17.412
+And then I'm going to take for
+example model1 AIC value, SSE1,
+
+149
+00:10:17.412 --> 00:10:21.708
+sum of squares errors for the model1,
+and I'm going to take model one test and
+
+150
+00:10:21.708 --> 00:10:23.875
+I'm going to look at the p-value of it.
+
+151
+00:10:23.875 --> 00:10:29.360
+We're going to do this for
+every single model.
+
+152
+00:10:29.360 --> 00:10:31.270
+So, let's do this.
+
+153
+00:10:31.270 --> 00:10:33.300
+Let's go back here and run these commands.
+
+154
+00:10:33.300 --> 00:10:37.137
+Model1, model2, model3,
+
+155
+00:10:37.137 --> 00:10:42.480
+model4, and now we have our data frame.
+
+156
+00:10:42.480 --> 00:10:49.530
+I'm going to call the column names are
+Arima(0,1,1), Arima(0,1,2), and so forth.
+
+157
+00:10:49.530 --> 00:10:54.850
+And then I'm going to format it without
+using these scientific notation and
+
+158
+00:10:54.850 --> 00:10:57.330
+at this point I should get my results.
+
+159
+00:10:58.910 --> 00:11:03.630
+So as you can see here, my data frame
+without the scientific notation basically
+
+160
+00:11:03.630 --> 00:11:08.930
+are, I have AIC values and
+I have sum of squared errors.
+
+161
+00:11:08.930 --> 00:11:10.100
+And I have p-values.
+
+162
+00:11:10.100 --> 00:11:12.123
+Remember what p-values are,
+
+163
+00:11:12.123 --> 00:11:17.400
+p-values are trying to see if there is
+an autocorrelation in the residuals.
+
+164
+00:11:17.400 --> 00:11:23.420
+As you can see from all of the p-values,
+none of the residuals have
+
+165
+00:11:23.420 --> 00:11:28.360
+significant auto correlation, so we can
+assume that there is no autocorrelation.
+
+166
+00:11:28.360 --> 00:11:31.202
+We cannot reject the null hypothesis,
+
+167
+00:11:31.202 --> 00:11:35.320
+there's no autocorrelation
+in the residuals.
+
+168
+00:11:35.320 --> 00:11:36.990
+Let's look at the AIC values.
+
+169
+00:11:36.990 --> 00:11:41.224
+AIC values, as you can see, is 2462,
+
+170
+00:11:41.224 --> 00:11:44.760
+2459, 2464, 2466.
+
+171
+00:11:44.760 --> 00:11:46.370
+The minimum value is 2459.
+
+172
+00:11:46.370 --> 00:11:50.390
+So if you are going with
+the minimum AIC value,
+
+173
+00:11:50.390 --> 00:11:54.098
+our model is going to be
+basically Arima(0,1,2).
+
+174
+00:11:54.098 --> 00:12:00.076
+If we are looking at the smallest SSE
+values, sum of the squared errors,
+
+175
+00:12:00.076 --> 00:12:05.074
+it seems like the smallest
+error is actually 17,574,
+
+176
+00:12:05.074 --> 00:12:09.100
+which will tell us Arima(7,1,2) model.
+
+177
+00:12:09.100 --> 00:12:13.880
+But if you have Arima(7,1,2) model,
+7 plus 1 plus 2,
+
+178
+00:12:13.880 --> 00:12:16.770
+you have 10 parameters in the model.
+
+179
+00:12:16.770 --> 00:12:20.489
+So if you are using, trying to get
+the simplest model as we can, so
+
+180
+00:12:20.489 --> 00:12:23.952
+in this example,
+you're going to use AIC as our criterion.
+
+181
+00:12:23.952 --> 00:12:29.714
+And we're going to go with Arima(0,1,
+2) model.
+
+182
+00:12:29.714 --> 00:12:37.998
+Now that we have decided that we're going
+to fit Arima(0,1,2 model to our dataset,
+
+183
+00:12:37.998 --> 00:12:43.310
+I'm going to use SARIMA
+routine from astsa package.
+
+184
+00:12:43.310 --> 00:12:48.523
+Now that we have loaded astsa package,
+were going to say Sarima S stands for
+
+185
+00:12:48.523 --> 00:12:53.150
+seasonal autoregressive
+integrated moving average models.
+
+186
+00:12:53.150 --> 00:12:56.470
+Which is going to be our
+subject in week five.
+
+187
+00:12:56.470 --> 00:13:00.180
+Sarima, you have number_of_births, and
+
+188
+00:13:00.180 --> 00:13:05.056
+we have this 0, 1,
+2 basically this is p, d, q, and for
+
+189
+00:13:05.056 --> 00:13:10.144
+now lets just ignore this last
+three perimeters 0, 0, 0.
+
+190
+00:13:10.144 --> 00:13:15.790
+If I want this command,
+it gives me a lot of things.
+
+191
+00:13:15.790 --> 00:13:21.205
+For example, it gives me my call and
+
+192
+00:13:21.205 --> 00:13:24.150
+my coefficients.
+
+193
+00:13:24.150 --> 00:13:28.210
+And it actually gives me the coefficients
+here with their standard errors.
+
+194
+00:13:28.210 --> 00:13:32.340
+So ma1 coefficient is negative 0.85,
+11 and
+
+195
+00:13:32.340 --> 00:13:38.210
+this is ma2 coefficient,
+this is our constants.
+
+196
+00:13:38.210 --> 00:13:41.610
+If you look at this p-values
+it means that ma1 and
+
+197
+00:13:41.610 --> 00:13:46.050
+ma2 coefficients are significant
+at the level of 0.05 maybe
+
+198
+00:13:46.050 --> 00:13:50.840
+the constant is not significant but
+we can keep this our model.
+
+199
+00:13:52.100 --> 00:13:58.556
+Now that we have fit ARIMA (0,1,2) model
+to our data set, we have the following.
+
+200
+00:13:58.556 --> 00:14:04.032
+We have (1- B)Xt,
+this 1- B is the differencing,
+
+201
+00:14:04.032 --> 00:14:06.958
+because of order 1, B = 1.
+
+202
+00:14:06.958 --> 00:14:13.545
+And we have 2 moving average terms, which
+are right here, Zt -1 and Zt- 2 terms.
+
+203
+00:14:13.545 --> 00:14:16.996
+We have no autoregressive terms,
+
+204
+00:14:16.996 --> 00:14:22.114
+this is the constant, and
+Zt is the current noise.
+
+205
+00:14:22.114 --> 00:14:27.016
+The numbers in the indices are shown
+here as the standard errors of
+
+206
+00:14:27.016 --> 00:14:29.460
+these coefficients.
+
+207
+00:14:29.460 --> 00:14:32.548
+Thus, if I put (Xt- 1)
+to the right hand side,
+
+208
+00:14:32.548 --> 00:14:35.800
+we have the following Arima (0,1,2) model.
+
+209
+00:14:35.800 --> 00:14:40.015
+Xt = Xt- 1, this is because of
+differencing, we have a constant,
+
+210
+00:14:40.015 --> 00:14:42.650
+we have a noise right now for
+current time.
+
+211
+00:14:42.650 --> 00:14:49.030
+And we have dependence on the previous
+two noises, Zt -1 and Zt-1.
+
+212
+00:14:49.030 --> 00:14:54.202
+Now from Sarima routine we have
+seen that Zt which is assumed to
+
+213
+00:14:54.202 --> 00:15:00.479
+be normally distributed,
+has expectation 0 and a variance 49.08.
+
+214
+00:15:00.479 --> 00:15:03.710
+So what have we learned?
+
+215
+00:15:03.710 --> 00:15:08.670
+We have learned how to fit an ARIMA
+model to a real world dataset using
+
+216
+00:15:08.670 --> 00:15:12.790
+various fitting tools such as ACF,
+PACF and AIC.
+
+217
+00:15:13.870 --> 00:15:19.040
+And we have learned
+examining Ljung-Box test for
+
+218
+00:15:19.040 --> 00:15:23.499
+resting correlation or
+autoorrelation actually in a time series.

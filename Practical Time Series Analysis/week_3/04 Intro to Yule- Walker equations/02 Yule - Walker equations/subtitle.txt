@@ -1,0 +1,69 @@
+In this lecture we'll talk
+about Yule-Walker equations. Our objective is to introduce Yule-Walker
+equations and obtain the correlation function of autoregressive processes
+using Yule-Walker equations. So here is the procedure for finding out
+the correlation function of an AR process. We're going to first assume,
+a priori assumption is that we're going to assume that the process,
+AR process, is actually stationary. Then we're going to take the product
+of the model with Xn minus k, or Xt minus k and
+take expectation of both sides. And then those [INAUDIBLE] expectations
+will give us an equation for gamma k. But if you divide it by gamma 0, you're going to get a difference
+equation for rho k. The rho being
+the autocorrelation function. And then we obtain these difference
+equations, which we call Yule-Walker equations, and we're going
+to solve those difference equations. Let's look at an example. Let's say we have an AR(2)
+process as following. And if I look at its polynomial operator,
+phi B, it is 1 minus 1 over 3 B
+minus 1 over 2 B squared. And if I look at the solutions of this
+polynomial, as B is a complex number, we obtain real roots here, both of
+which has magnitude greater than 1. So both roots are actually
+outside of the unit circle in R2. So this AR(2) process is exactly
+stationary, so what are we going to do? You're going to look at
+the expectation of it. If I take the expectation of Xt, then expectation of Xt is one-third
+of expectation of X t minus 1, expectation of X t minus 2,
+expectation of Z0, this is a random noise. We obtain that mu,
+the expectation is actually 0. Now we multiply both
+sides of the equations, the model star, with X t minus k. So Xt is multiplied by Xt minus k,
+and then you take the expectation. Every term is multiplied by Xt minus k,
+and we take the expectation. This left-hand side is going to
+be basically gamma k, all right? This is the autocovariance function gamma
+k, this is gamma k-1, and so forth. So assume that, this is mu 0 and assume
+the expectation Zt and Xt minus k is 0. There is no correlation between the Zt and
+Xt minus k in the previous steps. Then gamma minus k, this is minus k,
+one-third gamma negative k plus 1, 1 over 2 gamma negative k plus
+2 has to equal to each other. Since gamma k is even function for
+any k, we can rewrite this difference equation as gamma k,
+gamma k minus 1, and gamma k minus 2. We divide by gamma 0,
+which is sigma squared. And we obtain the set of equations,
+difference equations for rho k, which is called Yule-Walker equations. Now we know how to, we're going to
+review the difference equation. We know how to solve these
+Yule-Walker equations. We're going to look at the solution,
+the format of lambda k. We'll write the characteristic equation. Lambda squared minus one-third
+lambda minus 1 over 2 equal to 0 is the characteristic equation of
+the Yule-Walker equations in this case. The roots are the following. And if I put them back into the lambda, rho k is the linear combination of
+lambda 1 to the k, lambda 2 to the k. The thing is, we have to find c1 and
+c2, using some constraints, right. The first constraint is at rho 0,
+the first, the autocorrelation with itself is always 1, which would tell me
+that c1 plus c2 is actually 1. But also we know that for
+k equal to p minus 1, p is 2 in this case. k equal to 1, rho 1 has to
+equal to rho negative 1, right. This is also true when rho
+2 equal to rho negative, rho 3 equal to rho negative 3./ But we're
+only going to use it in this case for rho 1 equal to rho negative 1, right? Let's put k equal to 1. So rho 1 is one-third rho 0
+plus 1 over 2 rho negative 1. This is the Yule-Walker
+equation at k equal to 1. But since rho negative 1 and rho 1
+are equal to each other and rho 0 is 1, we obtain that rho 1 is actually 2 over 3. And this is going to give
+us another constraint. So if I put 1 into the k, in my solution, c1 times lambda 1 plus c2 times
+lambda 2 has to equal to 2 over 3. In order words, we have this system
+of equations c1 plus c2 equal to 1, some other constraint,
+which will tell me that c1 and c2 are specific numbers,
+these numbers here. Okay, then for any k, we found rho k, autocorrelation function of AR(2) process. And it is the following expression. And for native guys, of course,
+rho k has to equal to rho negative k. Now, I have done some simulations in r. So what we did here is the following. This first graph is obtained
+using ACF function in R. So we simulated AR(2) model,
+according to this specific AR(2) model, and we found ACF. And ACF is basically, slowly decreasing. And eventually,
+you have no significant correlations. But then we also obtained rho(k), right. This green plot is basically,
+literally the plot of rho(k). And I put autocorrelation because
+this is rho(k) and we obtain a very, very similar picture. So what have we learned? We have learned that Yule-Walker equations
+is set of difference equations that governs autocorrelation function of
+underlying stationary autoregressive process. And we also learned how to find
+autocorrelation function of stationary autoregressive process
+using Yule-Walker equations, which is basically a difference equations.

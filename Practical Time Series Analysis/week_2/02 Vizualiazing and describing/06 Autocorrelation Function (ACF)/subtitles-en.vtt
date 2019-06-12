@@ -1,0 +1,326 @@
+WEBVTT
+
+1
+00:00:00.190 --> 00:00:04.117
+In this lecture, we will be talking
+about the autocorrelation function.
+
+2
+00:00:05.740 --> 00:00:07.940
+Objectives are the following.
+
+3
+00:00:07.940 --> 00:00:10.180
+We will define
+the autocorrelation function.
+
+4
+00:00:10.180 --> 00:00:15.415
+We will obtain so-called correlograms
+using acf() routine in R,
+
+5
+00:00:15.415 --> 00:00:20.922
+and we will estimate autocorrelation
+coefficients at different lags,
+
+6
+00:00:20.922 --> 00:00:24.480
+again, using acf() routine in R.
+
+7
+00:00:24.480 --> 00:00:29.320
+Before we define autocorrelation function,
+we assume the weak stationarity.
+
+8
+00:00:29.320 --> 00:00:34.026
+Remember weak stationarity,
+no systematic change in mean,
+
+9
+00:00:34.026 --> 00:00:39.005
+no systematic change in variation,
+no periodic fluctuations.
+
+10
+00:00:39.005 --> 00:00:45.305
+Okay, so autocorrelation coefficient
+between Xt and Xt+k, remember, the most
+
+11
+00:00:45.305 --> 00:00:51.428
+important part here is the time difference
+between these two random variables.
+
+12
+00:00:51.428 --> 00:00:57.968
+Which is k, is going to be defined rho k,
+which is gamma k over gamma 0,
+
+13
+00:00:57.968 --> 00:01:02.766
+gamma k being auto covariance
+coefficient of lag k,
+
+14
+00:01:02.766 --> 00:01:07.467
+gamma 0 is auto covariance
+coefficient at lag 0.
+
+15
+00:01:07.467 --> 00:01:12.184
+Which is the first auto covariance
+coefficient, and this rho k,
+
+16
+00:01:12.184 --> 00:01:17.440
+which is autocorrelation coefficient,
+is always between -1 and 1.
+
+17
+00:01:17.440 --> 00:01:21.817
+But of course, you can estimate it because
+we do not have a statistic process, you
+
+18
+00:01:21.817 --> 00:01:26.770
+always have a time series, which is just
+one realization of the statistic process.
+
+19
+00:01:26.770 --> 00:01:32.770
+You're going to estimate it with rk,
+which is ck/c0, remember, ck,
+
+20
+00:01:32.770 --> 00:01:39.250
+it was our estimation for
+auto covariance coefficient at lag k, and
+
+21
+00:01:39.250 --> 00:01:45.110
+c0 is alpha covariance estimation for
+auto covariance coefficient at lag 0.
+
+22
+00:01:45.110 --> 00:01:51.500
+There's another way of writing rk,
+if we write the formula for ck and c0,
+
+23
+00:01:51.500 --> 00:01:56.470
+you obtain that rk is basically
+the division of these two sums.
+
+24
+00:01:56.470 --> 00:02:02.139
+Here, x bar is basically
+the sample average.
+
+25
+00:02:05.323 --> 00:02:09.857
+So, we're going to use acf()
+routine when we calculate
+
+26
+00:02:09.857 --> 00:02:15.050
+autocorrelation coefficients and
+to obtain also correlograms.
+
+27
+00:02:16.660 --> 00:02:21.289
+We have already used acf() routine by
+using type b in covariance to get the auto
+
+28
+00:02:21.289 --> 00:02:23.170
+covariance coefficiency.
+
+29
+00:02:23.170 --> 00:02:26.931
+This time,
+we're not going to specify the types, or
+
+30
+00:02:26.931 --> 00:02:30.351
+we will get exact
+autocorrelation function.
+
+31
+00:02:30.351 --> 00:02:35.221
+The plot that it gives us are basically
+autocorrelation coefficients
+
+32
+00:02:35.221 --> 00:02:37.350
+at different lags.
+
+33
+00:02:37.350 --> 00:02:42.266
+And using as a height graph, and the graph
+is going to be called correlogram.
+
+34
+00:02:42.266 --> 00:02:49.440
+And it always starts at 1 because
+r0 is basically c0/c0, which is 1.
+
+35
+00:02:49.440 --> 00:02:54.846
+Let's look at the purely random process
+we generated in the last video lecture.
+
+36
+00:02:54.846 --> 00:02:59.211
+Remember, purely random process was
+only basically generated from normal
+
+37
+00:02:59.211 --> 00:03:02.360
+distribution and
+put some transient structure on it.
+
+38
+00:03:02.360 --> 00:03:06.300
+There is no special pattern
+in that time series.
+
+39
+00:03:06.300 --> 00:03:08.574
+That's why we call it purely rhyme and
+process.
+
+40
+00:03:08.574 --> 00:03:13.207
+And I'm going to use acf() routine,
+which will give me
+
+41
+00:03:13.207 --> 00:03:19.010
+autocorrelation coefficient at
+every lag for a few lag, 20 or 30.
+
+42
+00:03:19.010 --> 00:03:24.043
+And it will give me a plot,
+which is going to be called correlogram.
+
+43
+00:03:24.043 --> 00:03:28.990
+And I give a title to it, it's called
+correlogram of a purely random process.
+
+44
+00:03:28.990 --> 00:03:32.060
+If I run this routine,
+I get the following plot.
+
+45
+00:03:33.460 --> 00:03:38.807
+Here, you see, I have R0,
+which is 1, it always will start 1.
+
+46
+00:03:38.807 --> 00:03:39.973
+Then later on,
+
+47
+00:03:39.973 --> 00:03:44.760
+I do not have much correlation
+between all the different lags.
+
+48
+00:03:44.760 --> 00:03:49.520
+Just because we generated this
+data as a purely random process,
+
+49
+00:03:49.520 --> 00:03:54.725
+that you do not expect to see
+the correlation within different lags.
+
+50
+00:03:54.725 --> 00:03:58.800
+These dash lines are basically
+showing the significance level.
+
+51
+00:03:58.800 --> 00:04:01.680
+So this plot tells us
+that there are not much
+
+52
+00:04:01.680 --> 00:04:05.050
+significant lags in the previous steps.
+
+53
+00:04:05.050 --> 00:04:11.724
+And there are two of them, and maybe these
+two can be attributed directly to a chas.
+
+54
+00:04:11.724 --> 00:04:16.929
+And I have a correlogram until lag 20.
+
+55
+00:04:16.929 --> 00:04:21.673
+We can actually change this and
+make it until lag 40 and so forth.
+
+56
+00:04:21.673 --> 00:04:28.153
+If we go back and put this on the
+parentheses, then we'll not only get plot,
+
+57
+00:04:28.153 --> 00:04:32.440
+we'll also get
+autocorrelation coefficients.
+
+58
+00:04:32.440 --> 00:04:35.020
+And here we have,
+we have autocorrelation coefficient.
+
+59
+00:04:35.020 --> 00:04:38.095
+This is R0, remember, R0 is always 1.
+
+60
+00:04:38.095 --> 00:04:43.267
+And then we have R1,
+which is 0.18, this is 0.04.
+
+61
+00:04:43.267 --> 00:04:48.850
+And then basically, we have nonsignificant
+autocorrelations until lag 20.
+
+62
+00:04:48.850 --> 00:04:50.320
+So what have you learned in this lecture?
+
+63
+00:04:50.320 --> 00:04:53.995
+You have learned the definition
+of autocorrelation function,
+
+64
+00:04:53.995 --> 00:04:55.634
+which we abbreviate as acf.
+
+65
+00:04:55.634 --> 00:04:59.770
+You have learned how to produce
+correlograms using acf() routine.
+
+66
+00:04:59.770 --> 00:05:03.827
+And also, by using acf() routine,
+you learned how to estimate
+
+67
+00:05:03.827 --> 00:05:08.045
+autocorrelation coefficients at
+different lags of a time series.

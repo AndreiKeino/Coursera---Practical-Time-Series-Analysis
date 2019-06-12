@@ -1,0 +1,517 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.410
+Welcome back to a practical time series analysis.
+
+2
+00:00:04.410 --> 00:00:07.620
+In these lectures, we're looking at forecasting.
+
+3
+00:00:07.620 --> 00:00:09.870
+We're trying to say interesting and important things
+
+4
+00:00:09.870 --> 00:00:12.855
+about how we think our system is going to behave in the future,
+
+5
+00:00:12.855 --> 00:00:15.890
+based upon how it's been behaving in the past.
+
+6
+00:00:15.890 --> 00:00:21.788
+We're moving our methodology now to incorporate trend rising or falling,
+
+7
+00:00:21.788 --> 00:00:23.720
+and also now seasonality.
+
+8
+00:00:23.720 --> 00:00:31.235
+We expect that there's some sort of persistent pattern that has a cycle to it.
+
+9
+00:00:31.235 --> 00:00:36.166
+After this lecture, you'll be able to use the Holtwinters methodology.
+
+10
+00:00:36.166 --> 00:00:40.890
+Not just routine calls but actually understand that methodology fairly deeply to
+
+11
+00:00:40.890 --> 00:00:46.168
+produce a forecast when your data of course has trend seasonality,
+
+12
+00:00:46.168 --> 00:00:48.315
+like this data set here.
+
+13
+00:00:48.315 --> 00:00:50.985
+We're looking at a classic data set,
+
+14
+00:00:50.985 --> 00:00:55.755
+and you can see that there is a yearly cycle.
+
+15
+00:00:55.755 --> 00:01:02.715
+Some people reserve the word cycle for a more technical term or technical application.
+
+16
+00:01:02.715 --> 00:01:04.690
+We'll use a little more loosely and say,
+
+17
+00:01:04.690 --> 00:01:07.520
+look we've got a cycle going on here.
+
+18
+00:01:07.520 --> 00:01:12.675
+There's a length of time over which a certain pattern is repeating itself.
+
+19
+00:01:12.675 --> 00:01:16.269
+We have an annual cycle going on so let little m,
+
+20
+00:01:16.269 --> 00:01:22.525
+that's the notation we're developing to talk about how many seasons are in a cycle.
+
+21
+00:01:22.525 --> 00:01:24.765
+We'll let Little em equal 12.
+
+22
+00:01:24.765 --> 00:01:30.120
+The top here is exhibiting multiplicative seasonality,
+
+23
+00:01:30.120 --> 00:01:34.190
+and the bottom additive after we'd take Logs as we discussed in the last lecture.
+
+24
+00:01:34.190 --> 00:01:39.395
+The methodology asks you to smooth the level,
+
+25
+00:01:39.395 --> 00:01:42.255
+smooth the trend, smooth the season,
+
+26
+00:01:42.255 --> 00:01:44.880
+and use that to update your forecast.
+
+27
+00:01:44.880 --> 00:01:49.800
+The updating process is rather simple especially in the additive case where you'll
+
+28
+00:01:49.800 --> 00:01:54.530
+take your forecast h steps into the future as level,
+
+29
+00:01:54.530 --> 00:01:57.000
+this is let's say the last available level
+
+30
+00:01:57.000 --> 00:01:59.580
+we're going to go h steps into the future and we have
+
+31
+00:01:59.580 --> 00:02:06.180
+a trend smoothed trend so take h times that smooth trend, h times the number.
+
+32
+00:02:06.180 --> 00:02:07.650
+H is the number steps,
+
+33
+00:02:07.650 --> 00:02:09.950
+trend is basically your step size.
+
+34
+00:02:09.950 --> 00:02:18.345
+The seasonal term has this sub-script here that says come to time period or time n,
+
+35
+00:02:18.345 --> 00:02:20.190
+look h into the future.
+
+36
+00:02:20.190 --> 00:02:22.135
+That's what we want to do with our prediction,
+
+37
+00:02:22.135 --> 00:02:25.470
+but now accommodate the fact that your time series is
+
+38
+00:02:25.470 --> 00:02:29.190
+seasonal by looking at the seasonal coefficient that
+
+39
+00:02:29.190 --> 00:02:37.980
+we have seen how to develop by n + h - m. If you're looking in 1961,
+
+40
+00:02:37.980 --> 00:02:40.875
+for instance march of 1961,
+
+41
+00:02:40.875 --> 00:02:43.645
+would have n + h,
+
+42
+00:02:43.645 --> 00:02:46.740
+h in that case would be 15.
+
+43
+00:02:46.740 --> 00:02:51.000
+We'll pull it back by m. We'll take 15 and subtract off
+
+44
+00:02:51.000 --> 00:02:56.805
+12 to give us the seasonal coefficient for the generic Match.
+
+45
+00:02:56.805 --> 00:03:02.530
+Multiplicative seasonality is much the same.
+
+46
+00:03:02.530 --> 00:03:05.290
+Remember additive seasonality essentially says
+
+47
+00:03:05.290 --> 00:03:09.595
+that to get your new data you're going to add a certain amount.
+
+48
+00:03:09.595 --> 00:03:15.970
+If you know your January sales of canoes and you'd like the June sales of canoe's,
+
+49
+00:03:15.970 --> 00:03:20.215
+you'll add 10,000 or whatever the appropriate number is in your factory.
+
+50
+00:03:20.215 --> 00:03:22.832
+If you're dealing with multiplicative seasonality.
+
+51
+00:03:22.832 --> 00:03:28.135
+Maybe you feel that June sales are triple or quadruple the January sales,
+
+52
+00:03:28.135 --> 00:03:31.625
+so you have a multiplier of Three or four.
+
+53
+00:03:31.625 --> 00:03:34.820
+The call couldn't be more simple.
+
+54
+00:03:34.820 --> 00:03:40.170
+We'll use Holtwinters as our command and we'll take logs of our dataset.
+
+55
+00:03:40.170 --> 00:03:43.650
+Inside here, Airpassengers is your basic data set.
+
+56
+00:03:43.650 --> 00:03:48.380
+We'll take logs and then we'll apply the Holtwinter's routine.
+
+57
+00:03:48.380 --> 00:03:52.160
+We store this in Airpassengers that h_w,
+
+58
+00:03:52.160 --> 00:03:56.525
+and the results if you start interrogating your data structure look like.
+
+59
+00:03:56.525 --> 00:04:02.285
+We've got Alpha Beta and Gamma talking about level, trend, and seasonality.
+
+60
+00:04:02.285 --> 00:04:06.620
+We can see the numbers that the routine is calculating as what is
+
+61
+00:04:06.620 --> 00:04:11.795
+optimal in our current dataset.
+
+62
+00:04:11.795 --> 00:04:13.640
+We also need our coefficients.
+
+63
+00:04:13.640 --> 00:04:16.470
+We need the last smoothed level,
+
+64
+00:04:16.470 --> 00:04:19.160
+the last smoothed trend,
+
+65
+00:04:19.160 --> 00:04:22.705
+and we need our seasonality terms.
+
+66
+00:04:22.705 --> 00:04:26.520
+I don't know if it's intuitive to you but
+
+67
+00:04:26.520 --> 00:04:30.715
+which month of the year do you think would have the greatest ridership,
+
+68
+00:04:30.715 --> 00:04:34.470
+and where do you see the greatest seasonality coefficient.
+
+69
+00:04:34.470 --> 00:04:38.575
+Again which month of the year do you think would have the smallest ridership.
+
+70
+00:04:38.575 --> 00:04:40.140
+These may be intuitive to you,
+
+71
+00:04:40.140 --> 00:04:42.960
+these numbers right here.
+
+72
+00:04:42.960 --> 00:04:48.535
+Let's see if we can make a prediction for January 1961.
+
+73
+00:04:48.535 --> 00:04:52.455
+Remember our data set goes up to December 1960.
+
+74
+00:04:52.455 --> 00:04:56.215
+This is asking us to look one month into the future.
+
+75
+00:04:56.215 --> 00:04:59.005
+This is our generic formula up here.
+
+76
+00:04:59.005 --> 00:05:01.780
+This is our roadmap for proceeding.
+
+77
+00:05:01.780 --> 00:05:05.275
+There are 12 years worth of data,
+
+78
+00:05:05.275 --> 00:05:07.203
+12 months in a year,
+
+79
+00:05:07.203 --> 00:05:12.235
+so our basic dataset has 144 elements.
+
+80
+00:05:12.235 --> 00:05:17.750
+We're looking for the 145th element in our time series.
+
+81
+00:05:17.750 --> 00:05:20.255
+We'll take the less smooth level.
+
+82
+00:05:20.255 --> 00:05:23.885
+We're looking onetime step into the future so h = 1,
+
+83
+00:05:23.885 --> 00:05:28.100
+and we'll multiply that by the trend and then we go get
+
+84
+00:05:28.100 --> 00:05:33.505
+the seasonal coefficient for January.
+
+85
+00:05:33.505 --> 00:05:40.625
+This was last computed if you look at the time series and this location right here,
+
+86
+00:05:40.625 --> 00:05:47.430
+145 minus 12 is 133.
+
+87
+00:05:47.430 --> 00:05:54.365
+We just go back and read the numbers and we can pull out these values rather easily.
+
+88
+00:05:54.365 --> 00:06:00.859
+This is your generic January right here and we make this forecast for our future.
+
+89
+00:06:00.859 --> 00:06:03.180
+How about August?
+
+90
+00:06:03.180 --> 00:06:05.485
+August is the eighth month of the year.
+
+91
+00:06:05.485 --> 00:06:07.205
+We'll take our level,
+
+92
+00:06:07.205 --> 00:06:09.953
+get eight times the trend going,
+
+93
+00:06:09.953 --> 00:06:13.620
+and now we look back in our seasonality coefficients and grab
+
+94
+00:06:13.620 --> 00:06:18.415
+out the August coefficient and we wind up with this.
+
+95
+00:06:18.415 --> 00:06:23.420
+Again, remember that these are log data.
+
+96
+00:06:23.420 --> 00:06:28.075
+Suppose you'd like to look even further into the future.
+
+97
+00:06:28.075 --> 00:06:31.240
+You keep doing these computations yourself if you like
+
+98
+00:06:31.240 --> 00:06:36.670
+these calculationsm but I find it easy to pull out the forecast library.
+
+99
+00:06:36.670 --> 00:06:38.425
+You may have to download this,
+
+100
+00:06:38.425 --> 00:06:43.600
+but we will produce Airpassengers.hw just as we did before.
+
+101
+00:06:43.600 --> 00:06:45.625
+This is just a reminder right here,
+
+102
+00:06:45.625 --> 00:06:50.740
+and we make the very simple call forecast.holtwinters.
+
+103
+00:06:50.740 --> 00:06:55.285
+We'll do it on the output of the Holtwinter's routine,
+
+104
+00:06:55.285 --> 00:07:00.520
+and it'll give us a multitude of information here.
+
+105
+00:07:00.520 --> 00:07:04.945
+In particular it's going to give us point forecasts and you can see that
+
+106
+00:07:04.945 --> 00:07:09.795
+our January and our August 1961 forecasts were just fine.
+
+107
+00:07:09.795 --> 00:07:13.625
+In the readings, we'll actually get into 1962 as well.
+
+108
+00:07:13.625 --> 00:07:16.260
+We'll get a little further into the future.
+
+109
+00:07:16.260 --> 00:07:20.535
+The forecasts are given as point forecasts.
+
+110
+00:07:20.535 --> 00:07:23.730
+We also have interval estimates.
+
+111
+00:07:23.730 --> 00:07:27.450
+If you're comfortable with an 80 percent level of confidence,
+
+112
+00:07:27.450 --> 00:07:34.285
+you can say that your forecast is the actual future result.
+
+113
+00:07:34.285 --> 00:07:37.910
+We have 80 percent confidence it will be in this band right here.
+
+114
+00:07:37.910 --> 00:07:41.385
+If you need to be 95 percent confident,
+
+115
+00:07:41.385 --> 00:07:45.017
+of course you're going to have to look a little further up and down,
+
+116
+00:07:45.017 --> 00:07:50.285
+but we can get a 95 percent confidence interval from the routine as well.
+
+117
+00:07:50.285 --> 00:07:55.690
+If you plot your Holtwinter's forecast structure,
+
+118
+00:07:55.690 --> 00:08:00.106
+and do the most obvious thing just invoke the plot command on it.
+
+119
+00:08:00.106 --> 00:08:03.505
+Then you'll see that we have a time series looking like this.
+
+120
+00:08:03.505 --> 00:08:06.085
+This is the log data.
+
+121
+00:08:06.085 --> 00:08:11.455
+If you notice over here we've got a dark line.
+
+122
+00:08:11.455 --> 00:08:13.400
+It's a rather thick line well there it is.
+
+123
+00:08:13.400 --> 00:08:17.350
+A dark line which is our point forecasts.
+
+124
+00:08:17.350 --> 00:08:21.890
+Those shadows around, they're actually two different shades of gray there.
+
+125
+00:08:21.890 --> 00:08:28.980
+We get an 80 percent and a 95 percent confidence interval around each point forecast.
+
+126
+00:08:28.980 --> 00:08:32.030
+That's going to give you this gray cloud
+
+127
+00:08:32.030 --> 00:08:36.615
+here around your point forecasts for your interval estimates.
+
+128
+00:08:36.615 --> 00:08:41.620
+At this point you should feel rather comfortable invoking Holtwinters to
+
+129
+00:08:41.620 --> 00:08:47.180
+do a forecast for a dataset that's exhibiting seasonality and trend.

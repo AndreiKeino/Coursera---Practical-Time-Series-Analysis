@@ -1,0 +1,318 @@
+WEBVTT
+
+1
+00:00:01.240 --> 00:00:04.175
+In this video,
+we begin to work with packages in R.
+
+2
+00:00:04.175 --> 00:00:06.788
+We can think of a package as data sets,
+
+3
+00:00:06.788 --> 00:00:11.130
+together with ways to operate
+on those data sets' functions.
+
+4
+00:00:13.220 --> 00:00:17.540
+In this particular video, we'll try
+to understand what a package is, and
+
+5
+00:00:17.540 --> 00:00:19.879
+begin being productive and
+useful with packages.
+
+6
+00:00:20.890 --> 00:00:23.580
+We'd like to be able to
+download a package and
+
+7
+00:00:23.580 --> 00:00:26.580
+start accessing the data
+via the functions.
+
+8
+00:00:27.700 --> 00:00:29.520
+I'm going to take a moment and pull up R.
+
+9
+00:00:35.718 --> 00:00:40.020
+And you can see that packages
+are integral to using R.
+
+10
+00:00:40.020 --> 00:00:41.940
+It has a button right there.
+
+11
+00:00:41.940 --> 00:00:43.820
+We're going to install a package.
+
+12
+00:00:48.880 --> 00:00:49.960
+I'm selecting a mirror.
+
+13
+00:00:51.640 --> 00:00:55.020
+I'm parked in the US, so
+I'll grab one of our mirrors.
+
+14
+00:00:58.636 --> 00:01:02.955
+And in just a moment,
+a set of packages presents itself.
+
+15
+00:01:02.955 --> 00:01:08.426
+[SOUND] So as you can see, there
+are very many packages available to us,
+
+16
+00:01:08.426 --> 00:01:12.619
+greatly extending the functionality and
+reach of R.
+
+17
+00:01:12.619 --> 00:01:14.178
+I'm looking for faraway right now.
+
+18
+00:01:14.178 --> 00:01:18.765
+I'll select it, say OK, and
+
+19
+00:01:18.765 --> 00:01:24.636
+now R is taking a moment to download and
+
+20
+00:01:24.636 --> 00:01:29.420
+install the faraway package.
+
+21
+00:01:34.642 --> 00:01:38.395
+For some very simple ways to access
+data in this particular package,
+
+22
+00:01:38.395 --> 00:01:40.430
+we'll look at a couple commands.
+
+23
+00:01:40.430 --> 00:01:41.780
+First, we'll look at the data command.
+
+24
+00:01:45.753 --> 00:01:47.070
+I'll take a moment and clear the screen.
+
+25
+00:01:49.320 --> 00:01:53.580
+If you type data just by itself,
+and you spell it correctly,
+
+26
+00:01:55.900 --> 00:02:01.093
+you can see that the base R installation
+has a number of data sets available.
+
+27
+00:02:03.470 --> 00:02:05.610
+If we're particular, now, to our package,
+
+28
+00:02:11.224 --> 00:02:13.700
+And I'd like single quotes
+around the name of the package,
+
+29
+00:02:20.802 --> 00:02:23.494
+And evidently, one parenthesis,
+
+30
+00:02:23.494 --> 00:02:28.808
+you can see that faraway has made
+a number of data sets available to us.
+
+31
+00:02:28.808 --> 00:02:33.920
+The data set that we'll be dealing
+with in this particular lecture is
+
+32
+00:02:33.920 --> 00:02:38.800
+coagulation, looking at blood
+coagulation time, in seconds, for
+
+33
+00:02:38.800 --> 00:02:40.709
+animals fed a variety of diets.
+
+34
+00:02:44.987 --> 00:02:53.420
+If I type
+data:coagulation.package='far away',
+
+35
+00:02:56.250 --> 00:03:01.540
+We bring this particular
+data set available to us.
+
+36
+00:03:01.540 --> 00:03:04.600
+The ls command shows you that
+coagulation is right there.
+
+37
+00:03:05.930 --> 00:03:12.930
+If we look at coagulation, just by typing
+the name of the data set on the screen,
+
+38
+00:03:15.110 --> 00:03:22.610
+you can see that it's stored as 24 cases,
+where for each case, each animal,
+
+39
+00:03:22.610 --> 00:03:26.610
+in this case, we look at coagulation
+time together with diet listed.
+
+40
+00:03:28.470 --> 00:03:32.240
+If we would like to get a quick
+numerical summary of our data,
+
+41
+00:03:32.240 --> 00:03:34.725
+we could type summary(coagulation).
+
+42
+00:03:38.630 --> 00:03:42.382
+And that gives the popular
+five number summary,
+
+43
+00:03:42.382 --> 00:03:47.741
+minimum through maximum,
+with each of the quartiles represented.
+
+44
+00:03:47.741 --> 00:03:53.760
+This is for all 24 data points,
+or 24 cases, listed together.
+
+45
+00:03:53.760 --> 00:03:57.594
+You can see that there
+are 24 animals here.
+
+46
+00:03:57.594 --> 00:04:01.906
+And they're disaggregated by diet,
+or rather, the frequencies for
+
+47
+00:04:01.906 --> 00:04:04.180
+diet are available to us right here.
+
+48
+00:04:05.740 --> 00:04:09.360
+If I were to just naively
+plot coagulation,
+
+49
+00:04:12.195 --> 00:04:17.550
+I would obtain a plot which
+I don't find very useful.
+
+50
+00:04:17.550 --> 00:04:22.790
+I do see the coagulation times
+separated out with diet here, but
+
+51
+00:04:22.790 --> 00:04:25.150
+diet isn't really a numerical variable.
+
+52
+00:04:25.150 --> 00:04:27.480
+It's more of a qualitative variable.
+
+53
+00:04:27.480 --> 00:04:36.205
+So instead of plotting like that,
+I'm going to plot coagulation on diet.
+
+54
+00:04:40.318 --> 00:04:43.550
+This is probably a more intuitive plot for
+us.
+
+55
+00:04:43.550 --> 00:04:48.390
+It shows you a box plot, not for
+all that data aggregated together, but
+
+56
+00:04:48.390 --> 00:04:50.680
+rather, spread out by diet.
+
+57
+00:04:50.680 --> 00:04:56.100
+There are four diets in play, so
+we have four of these box plots.
+
+58
+00:04:56.100 --> 00:04:58.180
+And one would, naively,
+
+59
+00:04:58.180 --> 00:05:02.850
+quickly make an assumption that diets
+A and D are operating, somehow,
+
+60
+00:05:02.850 --> 00:05:08.540
+similarly, with B and C, perhaps,
+increasing coagulation time.
+
+61
+00:05:08.540 --> 00:05:11.840
+But that's just a quick
+intuition based on the picture.
+
+62
+00:05:11.840 --> 00:05:16.280
+We would never draw any conclusions
+without doing a formal statistical
+
+63
+00:05:16.280 --> 00:05:17.060
+test first.
+
+64
+00:05:27.734 --> 00:05:31.915
+In this video,
+we've learned that R has environments,
+
+65
+00:05:31.915 --> 00:05:36.600
+called packages, data,
+together with methods.
+
+66
+00:05:36.600 --> 00:05:39.597
+And we've been able to download
+at least one of the packages.
+
+67
+00:05:39.597 --> 00:05:42.006
+And you'll develop some facility for
+
+68
+00:05:42.006 --> 00:05:46.530
+downloading other packages through
+some of the quizzes and readings.

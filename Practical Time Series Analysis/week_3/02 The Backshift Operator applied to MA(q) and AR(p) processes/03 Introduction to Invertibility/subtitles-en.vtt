@@ -1,0 +1,954 @@
+WEBVTT
+
+1
+00:00:00.190 --> 00:00:04.052
+In this lecture, we will take about
+invertibility of stochastic processes.
+
+2
+00:00:04.052 --> 00:00:08.063
+It's going to be Introduction
+to Invertibility.
+
+3
+00:00:08.063 --> 00:00:13.385
+So objective is to learn invertibility
+of a stochastic process.
+
+4
+00:00:13.385 --> 00:00:17.963
+So let's look at these Two MA(1),
+Moving Average of all through one models.
+
+5
+00:00:17.963 --> 00:00:20.825
+Model 1 is Xt = Zt + 2Zt-1,
+
+6
+00:00:20.825 --> 00:00:25.918
+Model 2 will have instead of
+2 will have half of Zt-1.
+
+7
+00:00:25.918 --> 00:00:27.931
+So what we want to do first,
+
+8
+00:00:27.931 --> 00:00:32.495
+we'd like to point out the covariance
+function of model one.
+
+9
+00:00:33.550 --> 00:00:37.603
+What is the definition of
+auto covariance function?
+
+10
+00:00:37.603 --> 00:00:43.080
+Gamma (k) is basically covariance,
+with an Xt plus k and Xt, right?
+
+11
+00:00:43.080 --> 00:00:47.820
+So, basically the gamma (k) depends
+on the difference between the steps,
+
+12
+00:00:47.820 --> 00:00:49.470
+not Xt, not Xt + k.
+
+13
+00:00:49.470 --> 00:00:54.660
+But k, the number of the lags in
+between those two random variables.
+
+14
+00:00:54.660 --> 00:01:00.365
+And we put the definition of Xt + k
+into it for model 1 and xt and three
+
+15
+00:01:00.365 --> 00:01:05.455
+which ez plus 2 zt minus 1 and then we try
+to use the covariance, we expand this.
+
+16
+00:01:05.455 --> 00:01:08.665
+Now the recipe takes the covariance
+of zt plus k with the zt,
+
+17
+00:01:08.665 --> 00:01:11.765
+zt plus k with zt minus 1.
+
+18
+00:01:11.765 --> 00:01:16.555
+This term, with zt and
+the same term with 2 zt minus 1.
+
+19
+00:01:16.555 --> 00:01:18.985
+Now realize the full level,
+if k is greater than 1,
+
+20
+00:01:18.985 --> 00:01:23.300
+which would mean that t plus k minus
+1 is greater than t, in other words,
+
+21
+00:01:23.300 --> 00:01:25.510
+these guys are actually uncorrelated.
+
+22
+00:01:25.510 --> 00:01:28.190
+There is no covary that
+correlates the 0 between them.
+
+23
+00:01:28.190 --> 00:01:32.360
+In other words, if k is greater than 1,
+our gamma k is 0.
+
+24
+00:01:32.360 --> 00:01:36.990
+This is
+Theoretical Auto Covariance Function.
+
+25
+00:01:36.990 --> 00:01:42.380
+Now if k is 0, exactly 0, that would
+mean we are looking at gamma 0, right.
+
+26
+00:01:42.380 --> 00:01:49.000
+And gamma 0 is basically the variance,
+the variance of this expression.
+
+27
+00:01:49.000 --> 00:01:51.840
+And we can see that this is
+basically covariance Zt Zt,
+
+28
+00:01:51.840 --> 00:01:55.880
+and covariance Zt Z2- 1 is going to
+be 0 because they are uncorrelated.
+
+29
+00:01:55.880 --> 00:02:02.460
+Zt- 1, Zt will be 0, but that Zt-
+1 will have another variance here.
+
+30
+00:02:02.460 --> 00:02:06.130
+The first Covariant will be most Gamma.
+
+31
+00:02:06.130 --> 00:02:08.120
+I'm sorry Sigma squared and
+
+32
+00:02:08.120 --> 00:02:12.080
+this one another Sigma squared and
+then we'll get five Sigma squared.
+
+33
+00:02:12.080 --> 00:02:17.270
+The Sigma is standard deviation
+of the disturbance for
+
+34
+00:02:17.270 --> 00:02:22.590
+k = 1, we write the definition of xt + 1,
+
+35
+00:02:22.590 --> 00:02:26.300
+which is Zt+1 + 2Zt, we expand it,
+
+36
+00:02:26.300 --> 00:02:32.290
+there's only correlated guys are 2Zt and
+Zt, and that will give us 2 sigma square.
+
+37
+00:02:32.290 --> 00:02:34.340
+If k is negative of course, gamma k,
+
+38
+00:02:34.340 --> 00:02:39.350
+this is the covariance,
+it's even function of K, so
+
+39
+00:02:39.350 --> 00:02:44.770
+gamma K is same thing as gamma negative K
+.So if i write auto covariance function.
+
+40
+00:02:44.770 --> 00:02:49.810
+Auto covariance function looks like
+this starting problem from lag two so
+
+41
+00:02:49.810 --> 00:02:50.850
+great than lag one.
+
+42
+00:02:50.850 --> 00:02:52.210
+Starting with Lag 2.
+
+43
+00:02:52.210 --> 00:02:56.748
+We have n covariance, no auto covariance.
+
+44
+00:02:56.748 --> 00:03:01.380
+K1, in other words, the conveyors
+would like one and two sigmas squared.
+
+45
+00:03:01.380 --> 00:03:04.840
+And then the covariance with
+itself is five sigma squared.
+
+46
+00:03:04.840 --> 00:03:07.240
+And then for negative one,
+we just the symmetric.
+
+47
+00:03:07.240 --> 00:03:09.090
+This is gamma negative K.
+
+48
+00:03:09.090 --> 00:03:13.580
+And if I want to find out the correlation
+fun, function, in other words, A,
+
+49
+00:03:13.580 --> 00:03:16.425
+C, F,
+all I have to do is basically divide.
+
+50
+00:03:16.425 --> 00:03:21.620
+Gamma (k) to gamma (0), that's the
+definition of auto correlation function.
+
+51
+00:03:21.620 --> 00:03:25.040
+And the gamma (k) is basically,
+I divided everything by 5 sigma squared.
+
+52
+00:03:25.040 --> 00:03:26.270
+This becomes 0.
+
+53
+00:03:26.270 --> 00:03:31.670
+This becomes 2 / 5, 1 and
+this is auto correlation for -k.
+
+54
+00:03:31.670 --> 00:03:34.900
+So this is our auto correlation function.
+
+55
+00:03:34.900 --> 00:03:40.360
+So if I graph this we have autocorrelation
+always at lag 0 which is self
+
+56
+00:03:43.434 --> 00:03:47.760
+the XT has a correlation 1 with itself,
+of course.
+
+57
+00:03:47.760 --> 00:03:51.730
+And then we have some
+autocorrelation in lag 1, then it.
+
+58
+00:03:51.730 --> 00:03:55.670
+Right?
+This is basically a famous picture for
+
+59
+00:03:55.670 --> 00:03:58.150
+An ACF of an MA model.
+
+60
+00:03:58.150 --> 00:04:03.660
+If you have MA1 model, then ACF has
+to cut off starting from one on.
+
+61
+00:04:03.660 --> 00:04:08.260
+Okay, now if I look at all
+the correlation part of model 2, so
+
+62
+00:04:08.260 --> 00:04:09.890
+I'm going to skip a few steps here.
+
+63
+00:04:09.890 --> 00:04:13.800
+If we are concentrated on rho 1,
+
+64
+00:04:13.800 --> 00:04:16.580
+the correlation with other
+correlation with lag one.
+
+65
+00:04:16.580 --> 00:04:18.280
+This is gamma 1 over gamma 0.
+
+66
+00:04:18.280 --> 00:04:20.660
+This is all gamma 1, this is gamma 0.
+
+67
+00:04:20.660 --> 00:04:22.360
+instead of 2s now we have halves.
+
+68
+00:04:22.360 --> 00:04:24.610
+If we calculate this, it becomes 2 over 5.
+
+69
+00:04:24.610 --> 00:04:31.680
+So if you write ACF of the model 2,
+we get exactly the same ACF of model 1.
+
+70
+00:04:31.680 --> 00:04:36.180
+So if we have now two different models
+Model 1, Model 2, they only differ with
+
+71
+00:04:36.180 --> 00:04:42.020
+this coefficient 2 and a half, but both of
+them has an ACF which is exactly the same.
+
+72
+00:04:42.020 --> 00:04:46.010
+Now, if you are trying to
+model a time series, and
+
+73
+00:04:46.010 --> 00:04:48.880
+if you believe that ACF
+[INAUDIBLE] at some point,
+
+74
+00:04:48.880 --> 00:04:53.690
+then you try to model it with MAQ models,
+right, MA 1, MA 2.
+
+75
+00:04:53.690 --> 00:04:57.490
+But, if ACF, a few more and
+
+76
+00:04:57.490 --> 00:05:01.970
+make queue process would have the same
+ACF that would be problematic to model.
+
+77
+00:05:01.970 --> 00:05:06.920
+So we would like to somehow eliminate
+one of these models in some way.
+
+78
+00:05:06.920 --> 00:05:10.670
+So ACFs are same, there's exactly
+the same ACF, Model 1 and Model 2.
+
+79
+00:05:10.670 --> 00:05:11.430
+Okay.
+
+80
+00:05:11.430 --> 00:05:14.010
+So let's pause that thought a little bit.
+
+81
+00:05:14.010 --> 00:05:17.860
+So we're going to come back and
+eliminate one of those models.
+
+82
+00:05:17.860 --> 00:05:18.930
+But how you're going to eliminate.
+
+83
+00:05:18.930 --> 00:05:21.750
+So let's talk about this invertibility,
+inverting.
+
+84
+00:05:22.750 --> 00:05:26.680
+So what are we going to do,
+we going to take general MA1 process now
+
+85
+00:05:26.680 --> 00:05:30.910
+that we have Xt which is equal
+to Zt plus some beta and
+
+86
+00:05:30.910 --> 00:05:34.670
+our models beta was either half or
+two, okay.
+
+87
+00:05:34.670 --> 00:05:35.290
+What we're going to do.
+
+88
+00:05:35.290 --> 00:05:40.150
+We're going to find Zt from here, so
+Zt is going to basically Xt- beta Z- 1.
+
+89
+00:05:40.150 --> 00:05:44.310
+All right, but then instead of Zt- 1,
+
+90
+00:05:44.310 --> 00:05:47.930
+we will use the same relation,
+this precursor relation.
+
+91
+00:05:47.930 --> 00:05:49.870
+Instead of Zt- 1, if we use this.
+
+92
+00:05:50.900 --> 00:05:52.410
+Put t instead of t minus.
+
+93
+00:05:52.410 --> 00:05:56.942
+Instead of t put t-1,
+this is going to be Xt-1, beta Zt-2, and
+
+94
+00:05:56.942 --> 00:05:59.520
+replace Zt-1 with that expression.
+
+95
+00:05:59.520 --> 00:06:00.470
+And expand it.
+
+96
+00:06:00.470 --> 00:06:05.028
+We get Xt minus beta Xt-1,
+plus beta squared Zt-2.
+
+97
+00:06:05.028 --> 00:06:10.136
+In other words,
+Zt now is expressed as Xt and
+
+98
+00:06:10.136 --> 00:06:13.760
+Xt-1, plus some In step 2.
+
+99
+00:06:13.760 --> 00:06:15.290
+And then we can continue.
+
+100
+00:06:15.290 --> 00:06:16.220
+Instead of zt2.
+
+101
+00:06:16.220 --> 00:06:19.540
+We can put again, xt minus 2 minus beta.
+
+102
+00:06:19.540 --> 00:06:22.050
+Xz t minus 3, and so forth.
+
+103
+00:06:22.050 --> 00:06:27.680
+We can continue with this,
+in theory, until infinity.
+
+104
+00:06:27.680 --> 00:06:29.120
+Then we'll, sorry.
+
+105
+00:06:29.120 --> 00:06:30.780
+So we can continue this until infinity.
+
+106
+00:06:30.780 --> 00:06:31.530
+What do we obtain?
+
+107
+00:06:31.530 --> 00:06:40.260
+We obtain Zt is equal to Xt- Bxt- 1
++ B squared xt- 2- B cubed xt- 3.
+
+108
+00:06:40.260 --> 00:06:42.430
+And it goes on and on and on.
+
+109
+00:06:43.910 --> 00:06:45.350
+Right?
+So what does this mean?
+
+110
+00:06:45.350 --> 00:06:50.366
+Now the rest if you find xt here, xt = zt
+
+111
+00:06:50.366 --> 00:06:55.820
++ linear combination, but this is series,
+it's not a linear combination anymore.
+
+112
+00:06:55.820 --> 00:07:03.910
+Infinite series, and xt is on every
+exterior value in the past, right.
+
+113
+00:07:03.910 --> 00:07:08.030
+So you can think of this AR processes
+are the regressive process.
+
+114
+00:07:08.030 --> 00:07:13.690
+But the order, well it doesn't matter, the
+order is infinity, this is AR infinity.
+
+115
+00:07:13.690 --> 00:07:14.420
+Process.
+
+116
+00:07:14.420 --> 00:07:15.930
+So what did we do?
+
+117
+00:07:15.930 --> 00:07:23.130
+Well, we kind of inverted MA(1) process
+into other with order infinity.
+
+118
+00:07:23.130 --> 00:07:26.320
+Here's the one thing you have to
+keep in mind, this is a series here,
+
+119
+00:07:26.320 --> 00:07:27.870
+there's an infinite series here.
+
+120
+00:07:27.870 --> 00:07:29.980
+And whenever we see an infinite series,
+
+121
+00:07:29.980 --> 00:07:36.000
+we have to Keep in mind that it might be
+convergent or divergent,you have to make
+
+122
+00:07:36.000 --> 00:07:41.192
+sure that is actually
+convergent in some sense.
+
+123
+00:07:41.192 --> 00:07:45.610
+Okay, now I'm going repeat the same
+thing using Backward shift operator,
+
+124
+00:07:45.610 --> 00:07:47.730
+let's utilize Backward shift operator.
+
+125
+00:07:47.730 --> 00:07:53.209
+For Ma1 process, Xt can be written as
+Beta(B)Zt, and where is my Beta(B)?
+
+126
+00:07:53.209 --> 00:07:55.940
+Beta(B) is basically 1 + Beta B.
+
+127
+00:07:55.940 --> 00:08:01.660
+That's our polynomial operator acting on
+Zt, and that will give us Ma1 process.
+
+128
+00:08:02.760 --> 00:08:06.590
+Now, I would like to somehow
+write Zt in terms of Xt.
+
+129
+00:08:06.590 --> 00:08:07.830
+So what am I going to do?
+
+130
+00:08:07.830 --> 00:08:11.620
+I'm going to find inverse operator So
+
+131
+00:08:11.620 --> 00:08:17.270
+if the Beta B is our polynomial operator,
+somehow if I can find inverse operator,
+
+132
+00:08:17.270 --> 00:08:20.470
+and put in the inverse operator
+into the left-hand side,
+
+133
+00:08:20.470 --> 00:08:25.360
+then Zt is expressed some
+inverse operator, acting on Xt.
+
+134
+00:08:25.360 --> 00:08:28.840
+In other words,
+Zt will be expressed in terms of Xts.
+
+135
+00:08:30.290 --> 00:08:30.950
+Okay.
+
+136
+00:08:30.950 --> 00:08:32.870
+So what is a Beta B inverse?
+
+137
+00:08:32.870 --> 00:08:35.510
+Well, Beta B is 1 plus Beta B.
+
+138
+00:08:35.510 --> 00:08:38.140
+And we can write this as
+1 over 1 plus Beta B.
+
+139
+00:08:38.140 --> 00:08:40.000
+This is not fraction.
+
+140
+00:08:40.000 --> 00:08:43.350
+This is basically inverse
+operator of 1 plus Beta B.
+
+141
+00:08:43.350 --> 00:08:44.990
+And what we're going to
+do is the following.
+
+142
+00:08:44.990 --> 00:08:51.850
+We're going to act like this Beta B Is
+a complex number for a minute.
+
+143
+00:08:51.850 --> 00:08:54.160
+Assume that it's not actually an operator.
+
+144
+00:08:54.160 --> 00:08:55.640
+It's a complex number.
+
+145
+00:08:55.640 --> 00:08:58.790
+Think of z, and then expand this.
+
+146
+00:08:58.790 --> 00:09:01.260
+This is the usual geometric expansion.
+
+147
+00:09:01.260 --> 00:09:02.490
+This is geometric series.
+
+148
+00:09:02.490 --> 00:09:05.645
+1 minus r plus r squared minus, I'm sorry.
+
+149
+00:09:05.645 --> 00:09:08.950
+1 R, R is negative beta B.
+
+150
+00:09:08.950 --> 00:09:11.790
+So it's going to be 1 plus R
+plus R square plus R cubed but
+
+151
+00:09:11.790 --> 00:09:16.750
+then since I have 1 minus negative
+beta B here sign will alternate.
+
+152
+00:09:16.750 --> 00:09:19.360
+So this is our inverse operator and
+
+153
+00:09:19.360 --> 00:09:24.720
+if we act this operator this
+Z inverse operator on our X,
+
+154
+00:09:24.720 --> 00:09:29.150
+T then we will obtain well one Well,
+this is not really one.
+
+155
+00:09:29.150 --> 00:09:32.140
+This is Xt, so this is a typo here.
+
+156
+00:09:32.140 --> 00:09:35.562
+This operator is acting on Xt,
+1 acting on Xt.
+
+157
+00:09:35.562 --> 00:09:41.500
+The Xt, and then this is going to
+give us Xt minus 1 and so forth.
+
+158
+00:09:41.500 --> 00:09:47.140
+In either way we invert that
+Ma1 process into ar infinity.
+
+159
+00:09:47.140 --> 00:09:55.480
+And we express Zt as infinite sum of Xts
+with some weight in front of them, right?
+
+160
+00:09:55.480 --> 00:10:01.687
+So how do we make sure that this
+series is actually convergent series?
+
+161
+00:10:03.528 --> 00:10:07.621
+Well it turns out That that series
+is convergent in some sense,
+
+162
+00:10:07.621 --> 00:10:09.398
+this is random variables,
+
+163
+00:10:09.398 --> 00:10:14.280
+adding them up, so we have to talk
+about convergence of random variables.
+
+164
+00:10:14.280 --> 00:10:17.630
+This is not usual sequence, series.
+
+165
+00:10:17.630 --> 00:10:19.310
+It is random variables involved here.
+
+166
+00:10:19.310 --> 00:10:24.630
+There's this notion called mean-square
+convergence Which is an option that
+
+167
+00:10:24.630 --> 00:10:27.620
+medial will be there about
+this mean square root is.
+
+168
+00:10:27.620 --> 00:10:29.790
+But we actually proved this resolved.
+
+169
+00:10:29.790 --> 00:10:32.500
+But for now let's use this as a black box.
+
+170
+00:10:32.500 --> 00:10:34.830
+This series is convergent.
+
+171
+00:10:34.830 --> 00:10:36.960
+It means squared tens.
+
+172
+00:10:36.960 --> 00:10:42.400
+If and only if absolute value of beta,
+
+173
+00:10:42.400 --> 00:10:49.130
+absolute value of beta is less than Okay
+let's get a definition of invertibility.
+
+174
+00:10:49.130 --> 00:10:52.540
+In general,
+it make t as a stochastic process.
+
+175
+00:10:52.540 --> 00:10:55.520
+It doesn't have to be [INAUDIBLE].
+
+176
+00:10:55.520 --> 00:10:59.750
+Xt is a stochastic process and
+think of Z is a notation right?
+
+177
+00:10:59.750 --> 00:11:01.600
+It's random disperse of
+white noise [INAUDIBLE].
+
+178
+00:11:01.600 --> 00:11:05.630
+They say Xt is invertible.
+
+179
+00:11:05.630 --> 00:11:10.090
+If Zt can be expressed as infinite series.
+
+180
+00:11:11.290 --> 00:11:12.330
+Pie K, Xt minus k.
+
+181
+00:11:12.330 --> 00:11:15.080
+K goes from zero to infinity.
+
+182
+00:11:15.080 --> 00:11:19.800
+This is like AR infinity process,
+
+183
+00:11:19.800 --> 00:11:25.950
+where This pk is the sum of the absolute
+value of pk's is convergent.
+
+184
+00:11:25.950 --> 00:11:29.790
+Now there was a series just of
+pk's are absolutely convergent.
+
+185
+00:11:29.790 --> 00:11:34.820
+This is the definition of
+invertibility of a stochastic process.
+
+186
+00:11:34.820 --> 00:11:38.360
+Now in our model one,
+let's go back to our model one, model two.
+
+187
+00:11:38.360 --> 00:11:41.240
+Remember those are the two models we have.
+
+188
+00:11:41.240 --> 00:11:44.990
+It's tame ACF who wants
+to eliminate one of them.
+
+189
+00:11:44.990 --> 00:11:50.650
+If you look at model one our pi
+k going to be since beta is 2,
+
+190
+00:11:50.650 --> 00:11:53.640
+it's going to be sum of 2 the k.
+
+191
+00:11:53.640 --> 00:11:56.280
+And this series really diverges here.
+
+192
+00:11:56.280 --> 00:11:59.110
+But if you look at Model 2,
+the [INAUDIBLE] case is 1 over 2.
+
+193
+00:11:59.110 --> 00:12:02.810
+If you look at some of the 1 over
+2 to the k, we talked about this,
+
+194
+00:12:02.810 --> 00:12:06.140
+this is a geometric series, and
+it is a convergence series.
+
+195
+00:12:06.140 --> 00:12:06.850
+So what are we going to do?
+
+196
+00:12:06.850 --> 00:12:10.110
+We're going to eliminate Model 1 and
+go with Model 2.
+
+197
+00:12:10.110 --> 00:12:13.280
+Somehow we will assume
+that we would like to
+
+198
+00:12:13.280 --> 00:12:15.330
+have our model to have
+something worth splitting.
+
+199
+00:12:16.990 --> 00:12:18.680
+Okay, so model choice.
+
+200
+00:12:18.680 --> 00:12:20.160
+For invertibility to hold,
+
+201
+00:12:20.160 --> 00:12:24.840
+we choose Model 2 since the absolute
+value 1 over 2 is less than 1.
+
+202
+00:12:24.840 --> 00:12:25.480
+In this way,
+
+203
+00:12:25.480 --> 00:12:28.610
+our ACF uniquely determines the MA
+process that we've been looking for.
+
+204
+00:12:28.610 --> 00:12:31.140
+So what have you learn?
+
+205
+00:12:31.140 --> 00:12:36.600
+You have learned that definition of
+invertibility of a stochastic process.
+
+206
+00:12:36.600 --> 00:12:41.310
+And then we learned the invertibility
+condition Guarantees that
+
+207
+00:12:41.310 --> 00:12:46.390
+unique MA process corresponding to
+the observed Author Correlation Function,
+
+208
+00:12:46.390 --> 00:12:47.330
+in other words, ACF.

@@ -1,0 +1,727 @@
+WEBVTT
+
+1
+00:00:01.210 --> 00:00:04.190
+Welcome back to practical
+time series analysis.
+
+2
+00:00:05.650 --> 00:00:10.720
+In this lecture, we look at
+the Akaike Information Criterion.
+
+3
+00:00:10.720 --> 00:00:13.700
+As a way of figuring out the quality of
+a model, assessing the quality of a model,
+
+4
+00:00:16.160 --> 00:00:19.760
+there's an interesting issue
+that comes and supply for us.
+
+5
+00:00:19.760 --> 00:00:23.770
+At this point, you know that if you
+have an autoregressive model or
+
+6
+00:00:23.770 --> 00:00:24.810
+moving average model,
+
+7
+00:00:24.810 --> 00:00:30.530
+we have techniques available to us to
+estimate the coefficients of those models.
+
+8
+00:00:30.530 --> 00:00:34.170
+We'll, of course, usually do that with
+software rather than write the code
+
+9
+00:00:34.170 --> 00:00:37.790
+by ourselves,
+rather than code it by hand, but
+
+10
+00:00:37.790 --> 00:00:42.040
+if I told you that you had a third
+order autoregressive model,
+
+11
+00:00:42.040 --> 00:00:46.430
+pretty trivially you could tell me what
+good estimates are for those coefficients.
+
+12
+00:00:47.620 --> 00:00:54.570
+A more fundamental question, perhaps,
+is what is the order of the model?
+
+13
+00:00:54.570 --> 00:00:56.350
+In general, you won't know.
+
+14
+00:00:56.350 --> 00:00:59.590
+You don't usually have the kind of
+intimate process knowledge that
+
+15
+00:00:59.590 --> 00:01:01.588
+will tell you the order of the model.
+
+16
+00:01:01.588 --> 00:01:04.960
+And you're going to try to infer
+the order from the data set that you have
+
+17
+00:01:04.960 --> 00:01:05.480
+in front of you.
+
+18
+00:01:07.250 --> 00:01:11.910
+So as we look here in this lecture,
+we'll try to measure
+
+19
+00:01:11.910 --> 00:01:17.430
+the quality of the model with
+the Akaike Information Criterion.
+
+20
+00:01:17.430 --> 00:01:19.540
+I suppose I could keep apologizing for
+
+21
+00:01:19.540 --> 00:01:21.910
+my pronunciation,
+I'm just doing the best I can.
+
+22
+00:01:23.090 --> 00:01:27.000
+We'll try to measure the quality
+of model with the AIC and the SSE,
+
+23
+00:01:27.000 --> 00:01:29.510
+the sum of the squares of the Earth.
+
+24
+00:01:29.510 --> 00:01:30.970
+And you should be able to do that for
+
+25
+00:01:30.970 --> 00:01:34.190
+a time series that you find
+interesting after this lecture.
+
+26
+00:01:34.190 --> 00:01:36.909
+You should also be able
+to explain to a friend or
+
+27
+00:01:36.909 --> 00:01:40.769
+a colleague in fairly simple terms
+what it is that you're doing.
+
+28
+00:01:42.950 --> 00:01:45.700
+So here's our first example we'll look at.
+
+29
+00:01:45.700 --> 00:01:49.910
+The Loblolly data set is one
+that we enjoy working with.
+
+30
+00:01:49.910 --> 00:01:55.240
+And if you look at these tree
+heights as a function of age here,
+
+31
+00:01:55.240 --> 00:01:58.140
+a couple things I think
+are immediately apparent.
+
+32
+00:01:58.140 --> 00:02:01.420
+One is, there is certainly
+a trend in this data set.
+
+33
+00:02:01.420 --> 00:02:04.060
+As time goes on,
+the trees get taller and taller.
+
+34
+00:02:04.060 --> 00:02:05.610
+That's probably not very surprising.
+
+35
+00:02:06.740 --> 00:02:12.420
+As I look through here, too, I do see that
+there is heteroscedasticity in the sense
+
+36
+00:02:12.420 --> 00:02:17.910
+that the variability is increasing as
+I move from the left to the right.
+
+37
+00:02:19.440 --> 00:02:22.440
+We won't worry about that
+in this particular example.
+
+38
+00:02:22.440 --> 00:02:26.160
+Right now, we're just going
+to do a very simple thing.
+
+39
+00:02:26.160 --> 00:02:28.980
+Given these data,
+we'll fit a straight line to the data.
+
+40
+00:02:30.530 --> 00:02:36.260
+Now, the green line here, you can see,
+is doing an okay job capturing the trend.
+
+41
+00:02:36.260 --> 00:02:37.720
+But I think we could do better.
+
+42
+00:02:39.220 --> 00:02:43.120
+If you fit, instead of a first
+order polynomial, a straight line.
+
+43
+00:02:43.120 --> 00:02:47.910
+If you fit a second order polynomial,
+here we've got a concave down parabola,
+
+44
+00:02:47.910 --> 00:02:51.340
+then we're doing a much better
+job of capturing the centers
+
+45
+00:02:51.340 --> 00:02:55.760
+of each of these little parts of the data
+set as we move from left to right.
+
+46
+00:02:57.350 --> 00:03:02.166
+It's a little surprising though if you
+look at our numerical measures of quality.
+
+47
+00:03:02.166 --> 00:03:06.420
+Multiple R-squared coefficient
+determination, you'll remember,
+
+48
+00:03:06.420 --> 00:03:11.410
+is described by many people
+is the amount of variability
+
+49
+00:03:11.410 --> 00:03:13.920
+that we can explain through our model.
+
+50
+00:03:13.920 --> 00:03:17.094
+It's up on the straight
+line at around 98%.
+
+51
+00:03:18.220 --> 00:03:18.780
+It's true.
+
+52
+00:03:18.780 --> 00:03:23.112
+So we were from a straight
+line to a parabola.
+
+53
+00:03:23.112 --> 00:03:28.501
+Multiplying our square
+does increase up to 99.3%.
+
+54
+00:03:28.501 --> 00:03:32.449
+But still, that different is probably
+not as profound as you might think,
+
+55
+00:03:32.449 --> 00:03:35.659
+given the visual evidence that
+we have over here on the left.
+
+56
+00:03:37.590 --> 00:03:40.710
+We talked previously about
+Adjusted R-squared values, as well.
+
+57
+00:03:43.020 --> 00:03:49.460
+Those curves are analogous to the AIC,
+in the sense that the Adjusted R-squared
+
+58
+00:03:49.460 --> 00:03:54.540
+makes you pay a penalty as you bring
+higher order terms into your model.
+
+59
+00:03:54.540 --> 00:04:00.400
+As I move from a first to second order
+model, I can definitely justify that.
+
+60
+00:04:00.400 --> 00:04:03.916
+As I move from a second
+to third order model,
+
+61
+00:04:03.916 --> 00:04:08.954
+you should take the data set Loblolly and
+see if you believe that
+
+62
+00:04:08.954 --> 00:04:14.868
+the enhancement in variability explained
+is worth the third order term.
+
+63
+00:04:17.448 --> 00:04:22.191
+Now, the data sets that we find in nature
+tend to be rather messy and complicated.
+
+64
+00:04:22.191 --> 00:04:26.755
+What we're going to do in this
+lecture is a simulation, and so
+
+65
+00:04:26.755 --> 00:04:31.748
+we will simulate a second
+order aggressive process.
+
+66
+00:04:31.748 --> 00:04:34.850
+We'll have 2,000 data points so
+we have a fairly
+
+67
+00:04:34.850 --> 00:04:37.880
+large number of data points we should be
+able to do our estimation pretty well.
+
+68
+00:04:39.120 --> 00:04:43.102
+We'll do the usual things,
+we'll take a look at our data set,
+
+69
+00:04:43.102 --> 00:04:46.119
+we'll also look at the ACF and
+the partial ACF.
+
+70
+00:04:50.160 --> 00:04:56.551
+So in our simulated data,
+the ACF seems to trail off,
+
+71
+00:04:56.551 --> 00:05:04.157
+the PACF seems to exhibit
+two significant terms there.
+
+72
+00:05:04.157 --> 00:05:06.647
+This seems rather consistent
+with the second order,
+
+73
+00:05:06.647 --> 00:05:08.535
+order regressive process that we have.
+
+74
+00:05:12.078 --> 00:05:16.629
+But the ACF and the PACF are probably
+really not enough by themselves to really
+
+75
+00:05:16.629 --> 00:05:18.950
+establish what sort of model you have.
+
+76
+00:05:20.010 --> 00:05:24.550
+We're going to look for less objective
+numerical measures of quality.
+
+77
+00:05:26.230 --> 00:05:31.780
+So just to review, if you want to
+estimate the coefficients on a model and
+
+78
+00:05:31.780 --> 00:05:35.470
+you know the order, then you can
+make a call to the arima command.
+
+79
+00:05:36.720 --> 00:05:41.396
+It's going to give us an ar1 and
+ar2 coefficient set as 0.7 and
+
+80
+00:05:41.396 --> 00:05:44.620
+a little bit and negative 0.2 over here.
+
+81
+00:05:44.620 --> 00:05:47.430
+We're doing a pretty good
+job at our estimation.
+
+82
+00:05:48.540 --> 00:05:52.590
+But again, that's just because we knew,
+because we generated the data,
+
+83
+00:05:52.590 --> 00:05:55.180
+that it was a second order data set.
+
+84
+00:05:55.180 --> 00:05:58.643
+In general, you won't know what
+the order of your data set is, and so
+
+85
+00:05:58.643 --> 00:06:01.596
+you'll have to make a guess over here,
+as to your P value.
+
+86
+00:06:01.596 --> 00:06:05.800
+What we'll try to do with the AAC
+is make that an educated guess.
+
+87
+00:06:07.120 --> 00:06:11.726
+Down here, you can see that arima,
+which is a pretty generic
+
+88
+00:06:11.726 --> 00:06:15.690
+call is going to give you somethings that
+it thinks are just mission critical,
+
+89
+00:06:15.690 --> 00:06:17.560
+things that you should know.
+
+90
+00:06:17.560 --> 00:06:20.265
+One of those, right there is the aic.
+
+91
+00:06:20.265 --> 00:06:23.004
+So this is a fairly standard measure
+
+92
+00:06:23.004 --> 00:06:27.305
+the people use when they're
+comparing model quality.
+
+93
+00:06:29.108 --> 00:06:31.572
+What I've done in this table
+is nothing complicated,
+
+94
+00:06:31.572 --> 00:06:33.840
+you could reproduce this yourself.
+
+95
+00:06:33.840 --> 00:06:38.450
+I've gone through and let p equal 1,
+first order regressive model.
+
+96
+00:06:38.450 --> 00:06:41.370
+Let p equal 2, ,4 and 5,
+all the way up through fifth order.
+
+97
+00:06:43.085 --> 00:06:46.610
+And with each of these
+increasingly complex models,
+
+98
+00:06:46.610 --> 00:06:48.630
+we have estimated our coefficients.
+
+99
+00:06:50.180 --> 00:06:56.860
+No huge surprises as we look at those and
+we've also given in the table the AIC
+
+100
+00:06:56.860 --> 00:07:01.370
+and the more prosaic SSC
+some squares of the areas.
+
+101
+00:07:02.450 --> 00:07:06.080
+It looks like as I move from the first
+order to the second order model,
+
+102
+00:07:06.080 --> 00:07:10.090
+I get a pretty good drop in these terms.
+
+103
+00:07:10.090 --> 00:07:11.750
+As I move from a second to a third,
+
+104
+00:07:11.750 --> 00:07:14.570
+third to a fourth,
+I'm not seeing as much difference.
+
+105
+00:07:15.890 --> 00:07:18.931
+What I'll do on the next
+slide is give you a picture.
+
+106
+00:07:21.479 --> 00:07:27.154
+So as I look here, the SSE which is pretty
+obvious and well understood by us at this
+
+107
+00:07:27.154 --> 00:07:33.230
+point, takes a good drop as they go from
+a first order to a second order model.
+
+108
+00:07:33.230 --> 00:07:35.820
+And then, it pretty much stays the same.
+
+109
+00:07:35.820 --> 00:07:38.300
+There's a little bit of
+variability there but
+
+110
+00:07:38.300 --> 00:07:41.910
+the big payoff is as you move from
+a first to a second order model.
+
+111
+00:07:43.870 --> 00:07:47.890
+The AIC picture is telling us
+pretty much the same story.
+
+112
+00:07:47.890 --> 00:07:52.370
+As we move from a first to a second order
+model we get a pretty good drop off.
+
+113
+00:07:52.370 --> 00:07:54.830
+As we move out to a fifth order model,
+
+114
+00:07:54.830 --> 00:08:01.210
+it's true that the AIC here is
+somewhat less than on these others.
+
+115
+00:08:01.210 --> 00:08:06.450
+But you have to ask yourself whether you
+think that that very small diminution
+
+116
+00:08:06.450 --> 00:08:12.190
+in AIC is really worth the added
+complexity of the higher order model.
+
+117
+00:08:13.250 --> 00:08:17.905
+Based upon these scree plots here, I would
+definitely go with a second order model.
+
+118
+00:08:21.025 --> 00:08:22.965
+So what does the AIC try to do?
+
+119
+00:08:24.315 --> 00:08:30.207
+It's rather common as you're getting
+the feeling at this point for sure, to
+
+120
+00:08:30.207 --> 00:08:36.337
+give credit for models that are going to
+reduce some sort of aggregate error.
+
+121
+00:08:36.337 --> 00:08:41.157
+And we'll use the error sums of squared
+as the handiest, most common example.
+
+122
+00:08:41.157 --> 00:08:44.161
+But we'd also like to build in
+some kind of penalty when out
+
+123
+00:08:44.161 --> 00:08:46.616
+models start bringing in more and
+more terms.
+
+124
+00:08:49.973 --> 00:08:54.717
+Formal definition of the AIC is
+going to have two terms in it.
+
+125
+00:08:56.263 --> 00:08:58.004
+In a course in probability,
+
+126
+00:08:58.004 --> 00:09:01.640
+you may have talked about
+maximum likelihood estimation.
+
+127
+00:09:02.730 --> 00:09:07.100
+In this lecture, we're not going to
+dive to deep into this first term.
+
+128
+00:09:07.100 --> 00:09:12.270
+But just keep, as people say, as you're
+flying at 30,000 feet, keep the basic
+
+129
+00:09:12.270 --> 00:09:16.710
+idea in your head that you want something
+which is going to give you credit for
+
+130
+00:09:16.710 --> 00:09:21.110
+reducing some sort of aggregate error, but
+
+131
+00:09:21.110 --> 00:09:25.160
+make you pay some kind of penalty for
+the number of parameters in the model.
+
+132
+00:09:27.250 --> 00:09:29.880
+So you’ll see different versions
+in different textbooks,
+
+133
+00:09:29.880 --> 00:09:34.590
+software has different implementations,
+the AIC, a very simple version is,
+
+134
+00:09:34.590 --> 00:09:39.850
+let's go take the log of
+the estimated variability.
+
+135
+00:09:39.850 --> 00:09:45.450
+That'll be a term that for
+a good model with low SSE will be low and
+
+136
+00:09:45.450 --> 00:09:51.260
+then we'll delve in another term
+here where n is your sample size,
+
+137
+00:09:51.260 --> 00:09:56.763
+that's unchanging but
+as your number parameters increases,
+
+138
+00:09:56.763 --> 00:09:59.911
+you pay penalty through this term.
+
+139
+00:10:05.352 --> 00:10:11.380
+The SSE, just to review, is very similar,
+but it doesn't make you pay a penalty.
+
+140
+00:10:12.550 --> 00:10:16.310
+Pick a potential value of your order,
+figure model, and
+
+141
+00:10:16.310 --> 00:10:17.400
+look at the aggregated error.
+
+142
+00:10:18.480 --> 00:10:20.440
+So we've done that here.
+
+143
+00:10:20.440 --> 00:10:25.490
+For our arima model,
+we've explored with various values of p.
+
+144
+00:10:25.490 --> 00:10:29.414
+We will produce the output Here in m.
+
+145
+00:10:29.414 --> 00:10:35.330
+And then, we'll interrogate our model
+here through the command resid.
+
+146
+00:10:35.330 --> 00:10:38.876
+So we'll pull off the errors here
+with resid(m), we'll square them and
+
+147
+00:10:38.876 --> 00:10:40.630
+then aggregate them by adding them.
+
+148
+00:10:43.821 --> 00:10:48.830
+At this point, you should be able to use
+the AIC to measure the quality of a model.
+
+149
+00:10:50.000 --> 00:10:53.704
+Especially when you have
+several competing models, and
+
+150
+00:10:53.704 --> 00:10:57.883
+you're trying to establish
+the order of your process.
+
+151
+00:10:57.883 --> 00:11:01.448
+And you should be able to describe in
+fairly causal terms to a friend or
+
+152
+00:11:01.448 --> 00:11:03.610
+colleague what it is that you're doing.

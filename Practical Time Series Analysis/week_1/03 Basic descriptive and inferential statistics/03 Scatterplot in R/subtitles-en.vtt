@@ -1,0 +1,246 @@
+WEBVTT
+
+1
+00:00:00.631 --> 00:00:03.307
+Hello everyone, this is Trol Satigas.
+
+2
+00:00:03.307 --> 00:00:08.244
+Objective of this video lecture
+is to obtain scatterplot for
+
+3
+00:00:08.244 --> 00:00:10.096
+a bivariate data in R.
+
+4
+00:00:10.096 --> 00:00:15.278
+In R, I'm going to generate
+some data set which simulates
+
+5
+00:00:15.278 --> 00:00:20.589
+some test scores in order you and
+me to get the same data set.
+
+6
+00:00:20.589 --> 00:00:24.954
+From these random generators,
+in other words random generators.
+
+7
+00:00:24.954 --> 00:00:32.523
+I'm going to set.seed=2016.
+
+8
+00:00:32.523 --> 00:00:36.323
+In that way, you and
+I both would get the same, quote unquote,
+
+9
+00:00:36.323 --> 00:00:38.999
+random data from these random generators.
+
+10
+00:00:38.999 --> 00:00:44.197
+And I'm going to call Test_1_scores.
+
+11
+00:00:44.197 --> 00:00:45.357
+And I will say rnorm,
+
+12
+00:00:45.357 --> 00:00:49.107
+let's say I'm going to generate
+some data from normal distribution.
+
+13
+00:00:49.107 --> 00:00:54.491
+Let's say 50 data points
+
+14
+00:00:54.491 --> 00:00:58.945
+with average of 78.
+
+15
+00:00:58.945 --> 00:01:02.140
+And with the standard deviation being 10.
+
+16
+00:01:02.140 --> 00:01:08.748
+And I am going to round them so
+that I would get whole integers.
+
+17
+00:01:08.748 --> 00:01:13.514
+And then I will go back and generate
+some simulates and test scores for
+
+18
+00:01:13.514 --> 00:01:16.239
+the second test for the same students.
+
+19
+00:01:16.239 --> 00:01:22.325
+Again, I have 50 students let's say
+this time the average was 70, right?
+
+20
+00:01:22.325 --> 00:01:25.777
+So there was some decrease in the average.
+
+21
+00:01:25.777 --> 00:01:29.499
+But the standard deviation,
+let's say was 14 this time.
+
+22
+00:01:29.499 --> 00:01:34.563
+Okay, for example,
+if I just look at test 1 scores,
+
+23
+00:01:34.563 --> 00:01:37.949
+let's say this is my test 1 score.
+
+24
+00:01:37.949 --> 00:01:39.233
+Somebody got a 101.
+
+25
+00:01:39.233 --> 00:01:42.304
+Let's say there was some extra
+credit problem and he or
+
+26
+00:01:42.304 --> 00:01:45.395
+she get at some point out of
+some extra credit problem.
+
+27
+00:01:45.395 --> 00:01:51.799
+And if I do test 2 scores, and
+I would have this data set, all right.
+
+28
+00:01:51.799 --> 00:01:55.404
+So I am assuming that this is paired data,
+or bivariate data.
+
+29
+00:01:55.404 --> 00:02:00.154
+In other words,
+student 1 got 66 in test 1, but he or
+
+30
+00:02:00.154 --> 00:02:04.819
+she got 72 in the second exam,
+and so forth, right.
+
+31
+00:02:04.819 --> 00:02:08.329
+So what I would like to do,
+is basically obtain a scatter plot.
+
+32
+00:02:08.329 --> 00:02:09.159
+How do I do it?
+
+33
+00:02:09.159 --> 00:02:14.929
+I just do plot, and
+I do my y axis, x axis.
+
+34
+00:02:14.929 --> 00:02:18.859
+So if I plot now, I will get
+a scatter plot like the following.
+
+35
+00:02:22.719 --> 00:02:27.243
+So here you see, we have x label by
+default is the name of the data set,
+
+36
+00:02:27.243 --> 00:02:30.060
+the name of the data
+set without any title.
+
+37
+00:02:30.060 --> 00:02:34.030
+So this is very bad,
+we would like to have some title,
+
+38
+00:02:34.030 --> 00:02:38.820
+and we would like to have some nicer
+some nice x label and y label.
+
+39
+00:02:38.820 --> 00:02:43.117
+So now, to do that, I will go back and
+
+40
+00:02:43.117 --> 00:02:47.972
+say that my title should be, let's say,
+
+41
+00:02:47.972 --> 00:02:51.468
+my test scores for two exams.
+
+42
+00:02:51.468 --> 00:02:56.847
+And I will just write 50
+students in parentheses.
+
+43
+00:02:56.847 --> 00:03:05.305
+And the x label, let's say I'm
+going to write Test 1 scores.
+
+44
+00:03:05.305 --> 00:03:11.382
+In the y label we'll write Test 2 scores.
+
+45
+00:03:11.382 --> 00:03:15.791
+If I do that I will get my title here,
+Test 2 scores,
+
+46
+00:03:15.791 --> 00:03:20.920
+Test 1 scores, and
+this is basically the scatter plot in R.
+
+47
+00:03:20.920 --> 00:03:24.630
+We could play with the colors
+of this point as well.
+
+48
+00:03:24.630 --> 00:03:29.509
+For example,
+if I just write color = blue here,
+
+49
+00:03:29.509 --> 00:03:34.748
+I might get a scatter plot
+with blue dot points on it.
+
+50
+00:03:34.748 --> 00:03:36.139
+What have you learned in this lecture?
+
+51
+00:03:36.139 --> 00:03:39.183
+You have learned how to
+plot bivariate data.
+
+52
+00:03:39.183 --> 00:03:43.407
+Which is called scatterplotting,
+you learn how to add titles and labels and
+
+53
+00:03:43.407 --> 00:03:45.060
+colors to that scatterplot.

@@ -1,0 +1,635 @@
+WEBVTT
+
+1
+00:00:01.340 --> 00:00:04.240
+Welcome back to
+Practical Time Series Analysis.
+
+2
+00:00:05.370 --> 00:00:09.260
+This is the last of our gentle review
+videos, where we're going over some of
+
+3
+00:00:09.260 --> 00:00:14.110
+the concepts you would have studied in
+your introductory statistics classes.
+
+4
+00:00:14.110 --> 00:00:17.750
+This one particular
+deals with correlation.
+
+5
+00:00:17.750 --> 00:00:21.520
+Correlation is a really critical topic for
+us.
+
+6
+00:00:21.520 --> 00:00:26.700
+As we study time series, very often
+we use perhaps the most important
+
+7
+00:00:26.700 --> 00:00:31.600
+graphical tool that we have,
+the ACF or auto correlation function.
+
+8
+00:00:32.640 --> 00:00:35.720
+In order to meaningfully
+interact with that,
+
+9
+00:00:35.720 --> 00:00:38.879
+we have to have a good understanding
+of what correlation is all about.
+
+10
+00:00:40.850 --> 00:00:44.350
+There are many ways to measure
+linear association, or
+
+11
+00:00:44.350 --> 00:00:47.130
+rather the association
+between two variables.
+
+12
+00:00:47.130 --> 00:00:51.600
+Linear association is very common and
+perhaps the most common of all
+
+13
+00:00:51.600 --> 00:00:55.260
+is Pearson's product moment
+correlation coefficient.
+
+14
+00:00:55.260 --> 00:00:56.780
+That's what we talk about in this video.
+
+15
+00:00:58.760 --> 00:01:02.710
+Specifically we'll review how to plot data
+
+16
+00:01:02.710 --> 00:01:07.460
+In such way as to make a quick visual
+interpretation about whether we think
+
+17
+00:01:07.460 --> 00:01:10.765
+there's a linear association
+between the underlying variables.
+
+18
+00:01:10.765 --> 00:01:14.220
+We'll look at the formula for
+co-variance and for
+
+19
+00:01:14.220 --> 00:01:19.290
+correlation and we'll try to understand
+where the definition comes from.
+
+20
+00:01:19.290 --> 00:01:22.061
+And I'll try to convince you that
+this is really the definition
+
+21
+00:01:22.061 --> 00:01:24.739
+you would come up with if you
+took some time to think about it.
+
+22
+00:01:27.478 --> 00:01:30.820
+It's nice to have an example
+to guide our thinking.
+
+23
+00:01:30.820 --> 00:01:32.910
+We'll look at the trees example,
+
+24
+00:01:32.910 --> 00:01:35.470
+which should be available
+to you just by opening R.
+
+25
+00:01:36.670 --> 00:01:41.410
+If you do the help command on trees,
+You'll see that we're looking at
+
+26
+00:01:41.410 --> 00:01:47.050
+a relationship between girth, height,
+and volume for these black cherry trees.
+
+27
+00:01:47.050 --> 00:01:53.470
+I think of this as volume speaking to the
+commercial utility of a particular tree.
+
+28
+00:01:53.470 --> 00:01:55.500
+How much lumber are we
+going to get out of the tree?
+
+29
+00:01:56.540 --> 00:01:58.730
+That's an interesting thing and
+
+30
+00:01:58.730 --> 00:02:02.850
+when you're out in the middle of
+the woods, it's hard to predict except
+
+31
+00:02:02.850 --> 00:02:07.330
+we could measure some variables
+like girth and height.
+
+32
+00:02:07.330 --> 00:02:10.910
+Those are things that you could get
+through with a tape measure or perhaps
+
+33
+00:02:10.910 --> 00:02:15.320
+a Biltmore stick, as I remember from my
+Earth Science class in middle school.
+
+34
+00:02:15.320 --> 00:02:18.023
+Those are very, very, easy to obtain and
+
+35
+00:02:18.023 --> 00:02:22.438
+the question is, can we use them
+to make predictions about volume?
+
+36
+00:02:25.142 --> 00:02:29.820
+The pairs plot that I've got here off
+of this data set with a couple plotting
+
+37
+00:02:29.820 --> 00:02:34.880
+commands, in particular you can see that
+I'm using red dots, tells the story.
+
+38
+00:02:36.150 --> 00:02:40.650
+Girth is very strongly
+associated with volume.
+
+39
+00:02:40.650 --> 00:02:44.260
+Girth is a really great predictor
+of volume in these trees.
+
+40
+00:02:45.680 --> 00:02:48.840
+The height of a tree is
+also a decent predictor.
+
+41
+00:02:50.350 --> 00:02:53.200
+Not surprisingly,
+as the height increases so
+
+42
+00:02:53.200 --> 00:02:55.610
+does the volume that
+you're going to obtain.
+
+43
+00:02:55.610 --> 00:02:57.860
+But really girth is the strong predictor.
+
+44
+00:02:59.120 --> 00:03:00.467
+Let's calculate the covariance.
+
+45
+00:03:04.475 --> 00:03:05.990
+This might be a little surprising.
+
+46
+00:03:07.600 --> 00:03:14.850
+The covariance between girth and
+volume is just a little under 50.
+
+47
+00:03:14.850 --> 00:03:17.970
+The covariance between height and
+volume is actually more.
+
+48
+00:03:19.130 --> 00:03:22.400
+That's not consistent with
+the pictures that we just saw
+
+49
+00:03:23.700 --> 00:03:26.210
+unless you start thinking about
+the units that are involved.
+
+50
+00:03:28.410 --> 00:03:30.730
+When we take a correlation
+
+51
+00:03:30.730 --> 00:03:35.750
+we try to look at the relationship
+without worry about the units.
+
+52
+00:03:35.750 --> 00:03:40.970
+As we switch from yards to
+feet to miles to kilometers,
+
+53
+00:03:40.970 --> 00:03:45.960
+we're going to change the covariance, but
+the correlation should remain the same.
+
+54
+00:03:45.960 --> 00:03:50.072
+And reassuringly here, we see that
+the correlation between girth and
+
+55
+00:03:50.072 --> 00:03:51.821
+volume is really quite high.
+
+56
+00:03:55.445 --> 00:03:59.985
+In these pictures, we try to understand
+where a formula measuring strength of
+
+57
+00:03:59.985 --> 00:04:02.200
+linear association might come from.
+
+58
+00:04:04.630 --> 00:04:08.180
+You'd probably agree that on
+the left we have a set of
+
+59
+00:04:08.180 --> 00:04:12.920
+data points which fall very
+close to a straight line.
+
+60
+00:04:12.920 --> 00:04:13.537
+Not so on the right.
+
+61
+00:04:15.780 --> 00:04:22.420
+I've created a sort of local set of
+axes here based upon the averages.
+
+62
+00:04:22.420 --> 00:04:26.820
+So if you take the average y value,
+you can put a horizontal line.
+
+63
+00:04:26.820 --> 00:04:29.610
+The average x value,
+you can put a vertical line.
+
+64
+00:04:30.630 --> 00:04:36.260
+And you see that the data is falling
+really predominately in the first and
+
+65
+00:04:36.260 --> 00:04:37.070
+third quadrant.
+
+66
+00:04:38.510 --> 00:04:41.900
+So think about what
+a deviation might look like.
+
+67
+00:04:41.900 --> 00:04:46.190
+This is an ordered pair,
+there's deviation from the x,
+
+68
+00:04:46.190 --> 00:04:49.700
+there's a deviation in terms of the y.
+
+69
+00:04:49.700 --> 00:04:54.732
+This data point is above average in x and
+it's above average in y as well.
+
+70
+00:04:54.732 --> 00:04:57.970
+So we'll look at the deviations,
+we'll have positive quantities for
+
+71
+00:04:57.970 --> 00:05:00.460
+the x deviation and the y deviation.
+
+72
+00:05:00.460 --> 00:05:04.670
+If we're going to multiply those together,
+positive times the positive is positive,
+
+73
+00:05:04.670 --> 00:05:07.630
+we would still get something positive.
+
+74
+00:05:07.630 --> 00:05:09.020
+We'll do that for every data point.
+
+75
+00:05:10.450 --> 00:05:11.180
+Down here,
+
+76
+00:05:11.180 --> 00:05:16.040
+where we also have quite a few data
+points, the x values are below average.
+
+77
+00:05:16.040 --> 00:05:18.160
+The y values are below average.
+
+78
+00:05:18.160 --> 00:05:21.810
+Your deviations in x and
+in y are both negative.
+
+79
+00:05:21.810 --> 00:05:24.300
+Negative times a negative is a positive.
+
+80
+00:05:24.300 --> 00:05:28.070
+So if we take some sort
+of cumulative measure
+
+81
+00:05:28.070 --> 00:05:32.030
+by say adding up all of
+the products of the deviations,
+
+82
+00:05:32.030 --> 00:05:35.250
+we're going to get something
+that's contributing coherently.
+
+83
+00:05:36.690 --> 00:05:39.957
+Look at the second quadrant and
+the fourth quadrant.
+
+84
+00:05:39.957 --> 00:05:43.443
+Here x values are below average,
+y values are above average,
+
+85
+00:05:43.443 --> 00:05:46.750
+negative times a positive is a negative.
+
+86
+00:05:46.750 --> 00:05:52.002
+Look in the fourth quadrant, the x values
+are above average, the y value is below.
+
+87
+00:05:52.002 --> 00:05:56.390
+And again, we would have when we
+take the product of the deviations,
+
+88
+00:05:56.390 --> 00:05:59.880
+we'll have something that
+gives us a negative value.
+
+89
+00:06:00.930 --> 00:06:04.580
+The positives clearly out
+number the negatives and
+
+90
+00:06:04.580 --> 00:06:07.640
+we would get strong contributions
+towards covariance.
+
+91
+00:06:09.120 --> 00:06:12.010
+In the figure on the right,
+
+92
+00:06:12.010 --> 00:06:17.120
+each of the quadrants seems pretty well
+equally stocked with the data points.
+
+93
+00:06:17.120 --> 00:06:22.083
+Positive contributions in quadrants one
+and four, negative contributions in
+
+94
+00:06:22.083 --> 00:06:27.470
+quadrants two, I'm sorry with one and
+three will get positive contributions.
+
+95
+00:06:27.470 --> 00:06:32.070
+In two and four we'll get negative
+contributions and they kind of cancel out.
+
+96
+00:06:32.070 --> 00:06:35.510
+We would expect a strong
+
+97
+00:06:35.510 --> 00:06:39.940
+covariance in the first picture and
+a weak covariance in the second.
+
+98
+00:06:42.490 --> 00:06:45.720
+The formulas that we typically use
+reflect the conversations we just had.
+
+99
+00:06:46.870 --> 00:06:54.080
+When you look at data, your covariance
+will be a sum of deviations in x and
+
+100
+00:06:54.080 --> 00:06:59.080
+y and
+we can even take an averaged quantity.
+
+101
+00:06:59.080 --> 00:07:02.574
+Instead of dividing by 1 over n,
+the number of data points,
+
+102
+00:07:02.574 --> 00:07:06.837
+we'll come up with an unbiased
+estimator by dividing by 1 / (n- 1).
+
+103
+00:07:08.890 --> 00:07:12.979
+The corresponding formula,
+a little bit more theoretically or
+
+104
+00:07:12.979 --> 00:07:18.128
+when considering random variables, is to
+look at the covariance as an average,
+
+105
+00:07:18.128 --> 00:07:21.630
+and expected value of
+the centered random variables.
+
+106
+00:07:24.681 --> 00:07:28.880
+The correlation moves
+the same sort of way.
+
+107
+00:07:28.880 --> 00:07:30.680
+For the correlation for random variables,
+
+108
+00:07:30.680 --> 00:07:33.660
+we look at an expected value and
+averaged quantity.
+
+109
+00:07:33.660 --> 00:07:37.650
+And here we do some centering and
+some scaling to get rid of those units.
+
+110
+00:07:38.950 --> 00:07:42.880
+You'll recall on your elementary stats
+course, that if you have a data point
+
+111
+00:07:42.880 --> 00:07:47.240
+minus a mean over a standard deviation,
+we're talking about standard units.
+
+112
+00:07:47.240 --> 00:07:49.670
+Very often,
+people use the letter z to represent that.
+
+113
+00:07:50.970 --> 00:07:53.250
+For data sets, no surprise here.
+
+114
+00:07:53.250 --> 00:07:57.903
+We'll estimate the standard deviation and
+we'll do our centering and scaling.
+
+115
+00:08:00.864 --> 00:08:05.540
+There are more compact formulas
+that we can come up with if we
+
+116
+00:08:05.540 --> 00:08:08.473
+introduce sum of squares notation.
+
+117
+00:08:08.473 --> 00:08:10.650
+We've seen this before.
+
+118
+00:08:10.650 --> 00:08:16.140
+There's a definitional formula,
+(x- x bar)(x- x bar).
+
+119
+00:08:16.140 --> 00:08:19.511
+But there's also a corresponding
+computational formula that you get
+
+120
+00:08:19.511 --> 00:08:21.349
+just by doing a little bit of algebra.
+
+121
+00:08:25.166 --> 00:08:31.270
+This allows us to write our covariance and
+our correlation much more compactly.
+
+122
+00:08:31.270 --> 00:08:34.110
+What we're doing here is
+substituting in the formula for
+
+123
+00:08:34.110 --> 00:08:36.899
+the standard deviation in
+terms of the sums of squares.
+
+124
+00:08:40.864 --> 00:08:48.250
+And then just noting that we can see a
+sums of squares up in the numerator here.
+
+125
+00:08:48.250 --> 00:08:50.162
+There's sums of squares in the bottoms.
+
+126
+00:08:50.162 --> 00:08:54.240
+We cancel all of the n – 1 terms
+to get rid of some clutter.
+
+127
+00:08:54.240 --> 00:08:55.820
+And at the end of the day,
+
+128
+00:08:55.820 --> 00:09:00.646
+the correlation can be expressed rather
+simply in terms of sums of squares.
+
+129
+00:09:04.711 --> 00:09:09.050
+In this video, we took some time
+to recall pairwise plotting.
+
+130
+00:09:09.050 --> 00:09:13.690
+That gave us a nice visual way of trying
+to assess strength of linear association.
+
+131
+00:09:15.030 --> 00:09:19.750
+We looked at the motivation behind
+the calculations for covariance and
+
+132
+00:09:19.750 --> 00:09:21.088
+correlation.
+
+133
+00:09:21.088 --> 00:09:24.208
+And I tried to convince you that
+the formulas really do make sense.

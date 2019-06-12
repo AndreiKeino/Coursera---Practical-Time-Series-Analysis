@@ -1,0 +1,625 @@
+WEBVTT
+
+1
+00:00:01.010 --> 00:00:04.010
+Welcome back to
+Practical Time Series Analysis.
+
+2
+00:00:05.180 --> 00:00:09.410
+In this lecture, we review the partial
+autocorrelation concepts, in effect,
+
+3
+00:00:09.410 --> 00:00:12.480
+we try to understand it
+just how it's calculated.
+
+4
+00:00:12.480 --> 00:00:15.220
+We've seen that for an ERP process,
+
+5
+00:00:15.220 --> 00:00:20.670
+the PACF can be a really good tool
+to tell us the order of the process.
+
+6
+00:00:20.670 --> 00:00:22.760
+We look at the PACF and
+
+7
+00:00:22.760 --> 00:00:26.550
+we determine when the spikes
+essentially die down into noise.
+
+8
+00:00:27.600 --> 00:00:30.264
+We'd like to know just what
+is being measured, however.
+
+9
+00:00:32.199 --> 00:00:36.004
+After this lecture, you'll be able to,
+in a regression sense, and
+
+10
+00:00:36.004 --> 00:00:40.465
+we'll apply that to time series, you'll
+be able to partial out a variable, and
+
+11
+00:00:40.465 --> 00:00:44.687
+you'll be able to describe to a friend or
+colleague what the PACF measures.
+
+12
+00:00:46.295 --> 00:00:50.531
+This very nice example available
+in several text books and
+
+13
+00:00:50.531 --> 00:00:54.790
+also some of the our packages,
+having to do with body fat.
+
+14
+00:00:54.790 --> 00:00:59.038
+To measure body fat is a pretty expensive
+and laborious process involving
+
+15
+00:00:59.038 --> 00:01:04.740
+people getting into big vast of water,
+etc., and looking at their displacement.
+
+16
+00:01:04.740 --> 00:01:07.820
+It would be nice if there was a simple,
+fast,
+
+17
+00:01:07.820 --> 00:01:13.120
+cheap, way, non-invasive way,
+to get the same kind of measurement.
+
+18
+00:01:13.120 --> 00:01:16.490
+And so, what this data set explores is,
+
+19
+00:01:16.490 --> 00:01:21.630
+why is it measuring somethings with
+essentially a caliper and a tape measure.
+
+20
+00:01:21.630 --> 00:01:25.403
+Triceps skinfold thickness,
+thigh circumference, and
+
+21
+00:01:25.403 --> 00:01:29.484
+mid-arm circumference to see if
+those would be good proxies,
+
+22
+00:01:29.484 --> 00:01:32.487
+if we could build the good
+regression model for
+
+23
+00:01:32.487 --> 00:01:36.575
+body fat based upon these simple,
+easy to measure variables.
+
+24
+00:01:38.132 --> 00:01:41.530
+If you look at the data set,
+the results look rather promising.
+
+25
+00:01:42.530 --> 00:01:47.020
+If you want, you may have access to
+these data sets somewhere else but
+
+26
+00:01:47.020 --> 00:01:51.200
+I'm going to show you that you can
+get it through the isdals library.
+
+27
+00:01:51.200 --> 00:01:54.270
+We'll just bring the body
+fat data set into play.
+
+28
+00:01:54.270 --> 00:01:58.440
+I like to always attach, so
+I can just call the variables directly.
+
+29
+00:01:58.440 --> 00:02:03.185
+And, in order to run the pairs command,
+in order to look at graphs of one on one
+
+30
+00:02:03.185 --> 00:02:09.040
+plots, we'll put the variables into
+a matrix and then we were in pairs.
+
+31
+00:02:10.340 --> 00:02:15.920
+You can see the triceps, its really
+a decent predictor of fat, so is thigh.
+
+32
+00:02:15.920 --> 00:02:17.418
+Thigh is a good predictor of fat.
+
+33
+00:02:17.418 --> 00:02:22.966
+The thing that's interesting or annoying
+from our aggression point of view is that,
+
+34
+00:02:22.966 --> 00:02:26.988
+triceps and thigh are themselves
+very strongly correlated.
+
+35
+00:02:26.988 --> 00:02:30.470
+And so, that can produce
+problems in a regression model.
+
+36
+00:02:30.470 --> 00:02:33.516
+Your coefficients maybe hard to estimate,
+
+37
+00:02:33.516 --> 00:02:38.795
+interval estimates may become wider
+rather elusive to statistical power.
+
+38
+00:02:38.795 --> 00:02:42.674
+There are reasons why we would like to
+not have too many correlated variables in
+
+39
+00:02:42.674 --> 00:02:43.861
+one regression model.
+
+40
+00:02:46.368 --> 00:02:49.971
+So, we're not really going to explore
+a multicollinearity in any kind of
+
+41
+00:02:49.971 --> 00:02:50.905
+systematic way.
+
+42
+00:02:50.905 --> 00:02:54.607
+What we are going to do is,
+confirm numerically that,
+
+43
+00:02:54.607 --> 00:02:59.317
+yes, the correlations between fat and
+triceps and thigh and fat,
+
+44
+00:02:59.317 --> 00:03:03.798
+they're both pretty high and
+also between thigh and triceps.
+
+45
+00:03:06.834 --> 00:03:11.168
+Our job right now is to try to measure
+the correlation of thighs and triceps for
+
+46
+00:03:11.168 --> 00:03:11.844
+instance.
+
+47
+00:03:11.844 --> 00:03:16.462
+After we control for,
+we'll hear people say, partialing out and
+
+48
+00:03:16.462 --> 00:03:22.290
+after we partial out on thigh, what
+we're going to do is look at residuals.
+
+49
+00:03:22.290 --> 00:03:27.270
+So if that seems unmotivated, think about
+it like this, we'll try to take fat and
+
+50
+00:03:27.270 --> 00:03:29.880
+predict it using thigh.
+
+51
+00:03:29.880 --> 00:03:33.360
+So we're trying to find the linear
+component of thigh in fat,
+
+52
+00:03:33.360 --> 00:03:35.130
+speaking loosely.
+
+53
+00:03:35.130 --> 00:03:36.770
+If we look at the residuals,
+
+54
+00:03:36.770 --> 00:03:41.070
+we're extracting the linear
+predictive power of thigh on fat.
+
+55
+00:03:41.070 --> 00:03:43.460
+We'll do the same thing with thigh and
+triceps.
+
+56
+00:03:43.460 --> 00:03:47.740
+We're essentially subtracting
+at the linear relationship here.
+
+57
+00:03:48.900 --> 00:03:53.173
+After that's removed, we then see
+how fat and triceps are correlated.
+
+58
+00:03:53.173 --> 00:03:56.740
+And we'll call that a partial
+correlation of fat and triceps.
+
+59
+00:03:58.820 --> 00:04:01.980
+To operationalize,
+this is really quite simple.
+
+60
+00:04:01.980 --> 00:04:05.350
+Lm is the command that'll
+give us the linear model.
+
+61
+00:04:05.350 --> 00:04:06.500
+And if you're comfortable with R,
+
+62
+00:04:06.500 --> 00:04:09.340
+you're probably comfortable
+nesting commands like this.
+
+63
+00:04:09.340 --> 00:04:12.590
+We'll do a linear regression of fat and
+thigh.
+
+64
+00:04:12.590 --> 00:04:15.750
+We'll interrogate that model
+with the predict command
+
+65
+00:04:15.750 --> 00:04:18.710
+in order to give us our hat values.
+
+66
+00:04:18.710 --> 00:04:21.915
+Things with a hat on them
+are things being estimated, so
+
+67
+00:04:21.915 --> 00:04:27.410
+fat.hat is how fat is estimated in
+the model used in thigh, linear model.
+
+68
+00:04:27.410 --> 00:04:30.010
+Same thing,
+corresponding thing with triceps.hat.
+
+69
+00:04:31.329 --> 00:04:34.772
+Once we're done with that,
+we'll subtract off,
+
+70
+00:04:34.772 --> 00:04:40.380
+we'll essentially look at the residuals,
+and we see that the partial correlation
+
+71
+00:04:40.380 --> 00:04:45.211
+of fat in triceps after thigh's
+been partialled out is around 17%.
+
+72
+00:04:47.571 --> 00:04:50.440
+If you're lazy or
+I'd like to say efficient,
+
+73
+00:04:50.440 --> 00:04:53.540
+then there's a library
+that will do this for you.
+
+74
+00:04:53.540 --> 00:04:55.730
+It's a very popular thing to do.
+
+75
+00:04:55.730 --> 00:05:01.550
+If you run ppcor as a library,
+then there's a command there called pcor.
+
+76
+00:05:01.550 --> 00:05:05.000
+Again, put your variables in a matrix and
+run pcor and
+
+77
+00:05:05.000 --> 00:05:07.170
+you'll get the customary table.
+
+78
+00:05:07.170 --> 00:05:10.180
+And you can see that,
+that's many significant digits.
+
+79
+00:05:10.180 --> 00:05:12.183
+We've calculated the exact same quantity.
+
+80
+00:05:15.819 --> 00:05:19.445
+Now from a time series point of view,
+when you have an ARp model,
+
+81
+00:05:19.445 --> 00:05:24.120
+you'd probably like to partial
+out more variables than just one.
+
+82
+00:05:24.120 --> 00:05:27.270
+In this example,
+we stay with our body fat model and
+
+83
+00:05:27.270 --> 00:05:30.050
+show how to partial out
+a couple variables.
+
+84
+00:05:30.050 --> 00:05:32.120
+It's really the same process.
+
+85
+00:05:32.120 --> 00:05:35.861
+Build a model of fat on thigh and
+mid-arm, for instance.
+
+86
+00:05:35.861 --> 00:05:38.550
+So we're going to partial out thigh and
+mid arm.
+
+87
+00:05:38.550 --> 00:05:42.380
+Build a model predicting fat off
+of thigh and mid-arm, and then,
+
+88
+00:05:42.380 --> 00:05:44.650
+subtract the linear component.
+
+89
+00:05:44.650 --> 00:05:47.010
+Do the same thing with triceps.
+
+90
+00:05:47.010 --> 00:05:52.154
+We're taking the linear
+predictor of fat on thigh and
+
+91
+00:05:52.154 --> 00:05:56.670
+mid-arm, and essentially,
+getting rid of that linear contribution.
+
+92
+00:05:57.760 --> 00:05:59.480
+We'll take a correlation.
+
+93
+00:05:59.480 --> 00:06:02.609
+Does it surprise you that the partial
+correlation, in this case, is higher?
+
+94
+00:06:05.979 --> 00:06:08.840
+Now, how does this work when we're
+dealing with the time series?
+
+95
+00:06:09.890 --> 00:06:16.172
+We have, let's say stochastic
+variables apart from X theta, Xt+h.
+
+96
+00:06:16.172 --> 00:06:22.100
+We'll try to find the effect of X of t
+on X of t + h, all the way to the right,
+
+97
+00:06:22.100 --> 00:06:28.800
+after we control for or partial out
+the intervening random variables.
+
+98
+00:06:28.800 --> 00:06:33.328
+So, we're going to use I think
+a very natural notation,
+
+99
+00:06:33.328 --> 00:06:37.855
+x hat t + h will be the value
+predicted at the position,
+
+100
+00:06:37.855 --> 00:06:42.694
+t + h, by using the several
+random variables preceding.
+
+101
+00:06:42.694 --> 00:06:47.192
+We won't include Xt in the model,
+but we'll go from Xt + 1,
+
+102
+00:06:47.192 --> 00:06:49.799
+all the way through X sub t + h- 1.
+
+103
+00:06:49.799 --> 00:06:52.709
+In other words,
+the variables in the middle.
+
+104
+00:06:52.709 --> 00:06:56.405
+The subscripts that we're using
+on our coefficients for the betas
+
+105
+00:06:56.405 --> 00:07:01.700
+are really just telling you how far away
+you are from the thing you're predicting.
+
+106
+00:07:01.700 --> 00:07:05.952
+So beta1 is just one step
+away from x hat t + h,
+
+107
+00:07:05.952 --> 00:07:10.876
+beta2 is the coefficient,
+two steps away and so on.
+
+108
+00:07:12.996 --> 00:07:16.396
+Interestingly, due to stationarity,
+
+109
+00:07:16.396 --> 00:07:22.770
+we can find a relationship for
+X hat t using the very same variables.
+
+110
+00:07:22.770 --> 00:07:24.880
+We're going to use the same coefficients,
+but
+
+111
+00:07:24.880 --> 00:07:29.260
+look which coefficients
+are with which variables now?
+
+112
+00:07:29.260 --> 00:07:32.100
+Again, the subscript from the data
+tells you how far away you
+
+113
+00:07:32.100 --> 00:07:34.130
+are from the thing you're
+trying to predict.
+
+114
+00:07:34.130 --> 00:07:38.100
+So, beta1 is one way,
+beta2 is two way and so on.
+
+115
+00:07:39.700 --> 00:07:44.530
+Now we're going to suppress some
+details on just how this is done
+
+116
+00:07:44.530 --> 00:07:49.180
+in a time series rather than,
+as you see here for stochastic process.
+
+117
+00:07:49.180 --> 00:07:52.390
+So we won't worry about how
+the estimation is done.
+
+118
+00:07:52.390 --> 00:07:55.500
+But at this point, I think you
+can see what we're about to do.
+
+119
+00:07:55.500 --> 00:07:59.250
+We've got a predictor for X hat t + h.
+
+120
+00:07:59.250 --> 00:08:02.033
+We got a predictor for X hat t.
+
+121
+00:08:02.033 --> 00:08:06.403
+And what we'll do is partial out
+the intervening the random variables in
+
+122
+00:08:06.403 --> 00:08:07.197
+the middle.
+
+123
+00:08:09.168 --> 00:08:14.330
+We'll do that by looking at the residuals,
+and then finding a correlation.
+
+124
+00:08:14.330 --> 00:08:17.760
+So we're going to remove the linear
+effects of all terms in between.
+
+125
+00:08:17.760 --> 00:08:21.470
+That's how your partial
+autocorrelation plot is obtained.
+
+126
+00:08:21.470 --> 00:08:25.918
+By getting rid of the linear effects of
+terms between two random variables at
+
+127
+00:08:25.918 --> 00:08:28.497
+a certain lag, or a certain distance away.
+
+128
+00:08:32.427 --> 00:08:37.233
+At this point, especially in a simple
+linear regression context, you should feel
+
+129
+00:08:37.233 --> 00:08:41.355
+very comfortable partialling out
+a variable and you should know now and
+
+130
+00:08:41.355 --> 00:08:44.741
+be able to a friend,
+just what it is the PACF is measuring.

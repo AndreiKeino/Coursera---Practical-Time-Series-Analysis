@@ -1,0 +1,910 @@
+WEBVTT
+
+1
+00:00:01.270 --> 00:00:04.090
+Welcome back to practical
+time series analysis.
+
+2
+00:00:05.500 --> 00:00:09.035
+In this lecture, we discuss
+the important concept of stationarity.
+
+3
+00:00:09.035 --> 00:00:13.350
+We'll give you intuition into
+why stationarity is so important
+
+4
+00:00:13.350 --> 00:00:19.160
+when we try to infer the properties
+of a process off of observed data.
+
+5
+00:00:19.160 --> 00:00:23.805
+And also give a mathematical definition so
+we can move forward in a structured way.
+
+6
+00:00:26.355 --> 00:00:31.055
+When you're done with this lecture, you
+should be able to explain to a friend or
+
+7
+00:00:31.055 --> 00:00:33.090
+a colleague why stationarity is so
+
+8
+00:00:33.090 --> 00:00:36.737
+important when we try to predict
+the properties of a process or
+
+9
+00:00:36.737 --> 00:00:41.180
+infer the properties of a process from
+a time series that we've acquired.
+
+10
+00:00:41.180 --> 00:00:45.293
+You should also be able to calculate
+the mean, the variance and
+
+11
+00:00:45.293 --> 00:00:48.718
+the covariance function in
+a few very simple cases.
+
+12
+00:00:51.971 --> 00:00:55.645
+Now before looking at the formal
+definition of a stochastic process,
+
+13
+00:00:55.645 --> 00:00:59.639
+let's just think about a very common,
+easy-to-understand situation.
+
+14
+00:01:00.990 --> 00:01:05.950
+I could toss a coin four times, and write
+the outcomes down on a piece of paper.
+
+15
+00:01:05.950 --> 00:01:10.240
+Perhaps I would get h, t, t,
+t, heads, tails, tails, tails.
+
+16
+00:01:11.390 --> 00:01:12.800
+That's a time series.
+
+17
+00:01:12.800 --> 00:01:15.070
+It's a set of observations.
+
+18
+00:01:15.070 --> 00:01:18.640
+You could also try to model
+that situation mathematically
+
+19
+00:01:18.640 --> 00:01:22.350
+by lining up four
+Bernoulli random variables.
+
+20
+00:01:22.350 --> 00:01:28.120
+Remember a Bernoulli random variable as
+a success or a failure and a probability.
+
+21
+00:01:29.640 --> 00:01:31.780
+So we've got these four random variables.
+
+22
+00:01:31.780 --> 00:01:35.970
+We could also talk about how
+they're related to each other.
+
+23
+00:01:35.970 --> 00:01:39.020
+For the coin toss example
+we are discussing,
+
+24
+00:01:39.020 --> 00:01:42.510
+I would imagine that
+they are all independent.
+
+25
+00:01:42.510 --> 00:01:45.770
+So we're making a statement
+about the structure as well.
+
+26
+00:01:45.770 --> 00:01:48.590
+How the random variables
+are related to each other.
+
+27
+00:01:48.590 --> 00:01:51.510
+In addition to how they're
+individually characterized.
+
+28
+00:01:52.510 --> 00:01:54.590
+Stochastic process will do the same thing.
+
+29
+00:01:55.720 --> 00:01:59.770
+We'll look at a set of random variables,
+maybe there are four of them, maybe there
+
+30
+00:01:59.770 --> 00:02:04.970
+are a million, maybe there's a countable
+infinity, maybe an uncountable infinity.
+
+31
+00:02:04.970 --> 00:02:07.090
+It could really be quite complicated.
+
+32
+00:02:07.090 --> 00:02:10.690
+But for each one of the random
+variables along our process,
+
+33
+00:02:10.690 --> 00:02:12.920
+we've indexed let's say with time.
+
+34
+00:02:12.920 --> 00:02:16.140
+For each of the random
+variables along our process,
+
+35
+00:02:16.140 --> 00:02:18.870
+we understand the nature
+of the random variable but
+
+36
+00:02:18.870 --> 00:02:22.580
+we also understand how the random
+variables are related to one another.
+
+37
+00:02:24.200 --> 00:02:28.680
+Now discrete process could be used to
+model something like high temperatures,
+
+38
+00:02:28.680 --> 00:02:30.690
+daily high temperatures in Australia.
+
+39
+00:02:32.260 --> 00:02:35.690
+You could also have a continuous process.
+
+40
+00:02:35.690 --> 00:02:38.620
+So we're looking at the index now and
+
+41
+00:02:38.620 --> 00:02:41.600
+discussing the index is either discrete or
+continuous.
+
+42
+00:02:42.720 --> 00:02:47.437
+Commonly encountered continuous process
+would be the Wiener Process and
+
+43
+00:02:47.437 --> 00:02:50.184
+people use that to study Brownian Motion.
+
+44
+00:02:54.007 --> 00:02:59.010
+The graph on the left
+looks like a total mess.
+
+45
+00:02:59.010 --> 00:03:00.500
+Don't worry about that one for the moment.
+
+46
+00:03:01.780 --> 00:03:04.890
+Even though the situation is easier
+look at the graph on the right,
+
+47
+00:03:06.210 --> 00:03:07.490
+let me pull that back.
+
+48
+00:03:07.490 --> 00:03:10.740
+We have random walks
+with Gaussian increments.
+
+49
+00:03:10.740 --> 00:03:13.540
+We've discussed random walks before.
+
+50
+00:03:13.540 --> 00:03:17.640
+The idea here is that we park ourselves
+at some initial position, and
+
+51
+00:03:17.640 --> 00:03:21.980
+then we'll move to the left or
+the right randomly.
+
+52
+00:03:21.980 --> 00:03:26.130
+And the random variable guiding
+our motion, in this case,
+
+53
+00:03:26.130 --> 00:03:28.110
+is a Gaussian random variable.
+
+54
+00:03:28.110 --> 00:03:32.110
+But I could just as easily have had
+a coin toss and moved to the right or
+
+55
+00:03:32.110 --> 00:03:37.170
+the left by one step depending
+upon whether I got heads or tails.
+
+56
+00:03:37.170 --> 00:03:41.290
+This is just a little bit more
+complicated in that our times or
+
+57
+00:03:41.290 --> 00:03:44.930
+that our step size is determined
+off a Gaussian distribution.
+
+58
+00:03:46.690 --> 00:03:49.970
+I obtained these four
+different realizations.
+
+59
+00:03:49.970 --> 00:03:53.950
+I'm thinking of these as
+four different time series.
+
+60
+00:03:53.950 --> 00:03:58.150
+But those four time series all come
+from the same stochastic process.
+
+61
+00:04:00.010 --> 00:04:03.030
+The reason the graph on
+the left looks like such a mess
+
+62
+00:04:03.030 --> 00:04:05.870
+is that there's no real
+structure going on at all.
+
+63
+00:04:05.870 --> 00:04:08.080
+I'm thinking about a simple random sample.
+
+64
+00:04:08.080 --> 00:04:12.100
+The kind of situation you would have dealt
+with in elementary statistics class,
+
+65
+00:04:12.100 --> 00:04:16.610
+where the random variables
+are independent of one another.
+
+66
+00:04:16.610 --> 00:04:20.180
+So let's say you
+are measuring temperatures.
+
+67
+00:04:20.180 --> 00:04:24.160
+So the temperature you get from the fifth
+person is totally independent of
+
+68
+00:04:24.160 --> 00:04:28.570
+the temperature that you'd get from the
+60th or up to the 1,000th in this case.
+
+69
+00:04:28.570 --> 00:04:30.840
+The inner variables are independent,
+
+70
+00:04:30.840 --> 00:04:35.460
+they are identically distributed and
+so no real structure.
+
+71
+00:04:36.560 --> 00:04:40.853
+And so when I graph the four,
+this is just four realizations,
+
+72
+00:04:40.853 --> 00:04:45.743
+four time series on the same axis
+there's just as we said a total mess.
+
+73
+00:04:48.910 --> 00:04:53.610
+Now stochastic process really is
+a very complicated mathematical thing.
+
+74
+00:04:54.630 --> 00:04:55.250
+In your elements or
+
+75
+00:04:55.250 --> 00:04:59.680
+stats course you might have dealt
+with bivariate normal distributions.
+
+76
+00:04:59.680 --> 00:05:04.540
+And I could, perhaps, do the integrations
+by hand in some very simple cases.
+
+77
+00:05:04.540 --> 00:05:09.490
+But a stochastic process isn't necessarily
+two or three or 20 random variables.
+
+78
+00:05:09.490 --> 00:05:12.260
+You might have an infinite
+number of random variables.
+
+79
+00:05:12.260 --> 00:05:14.530
+To fully specify the structure there,
+
+80
+00:05:14.530 --> 00:05:19.080
+you need the joint distribution of
+the full set of random variables.
+
+81
+00:05:19.080 --> 00:05:20.730
+That could be very difficult to work with.
+
+82
+00:05:22.470 --> 00:05:27.350
+We also usually just have a set of data,
+a time series.
+
+83
+00:05:27.350 --> 00:05:30.020
+Some data that we have gone out and
+acquired.
+
+84
+00:05:30.020 --> 00:05:35.140
+And we'll try to understand
+the properties of the stochastic process
+
+85
+00:05:35.140 --> 00:05:38.340
+off of this particular time series.
+
+86
+00:05:38.340 --> 00:05:40.578
+How can we do that sort of inference?
+
+87
+00:05:42.691 --> 00:05:46.597
+As we get started, and we'll introduce
+stationarity in just a moment,
+
+88
+00:05:46.597 --> 00:05:50.450
+we should review the concepts of
+mean function and variance function.
+
+89
+00:05:51.920 --> 00:05:55.750
+Now since your time series is
+an indexed set of, I'm sorry,
+
+90
+00:05:55.750 --> 00:06:00.530
+your stochastic process is an indexed set
+of random variables, let's assume for
+
+91
+00:06:00.530 --> 00:06:03.890
+the moment each one of those random
+variables has a mean and a variance.
+
+92
+00:06:05.040 --> 00:06:11.080
+We can use that to create a mean function
+so as I move along the stochastic process
+
+93
+00:06:11.080 --> 00:06:16.000
+I observe what the average is for the
+random variable at any individual time.
+
+94
+00:06:17.200 --> 00:06:19.760
+The mean function we'll write as mu of t
+
+95
+00:06:19.760 --> 00:06:22.850
+the variance function we'll
+write as sigma squared of t.
+
+96
+00:06:22.850 --> 00:06:27.690
+In this little table I'm implicitly
+assuming I have a discrete stochastic
+
+97
+00:06:27.690 --> 00:06:31.050
+process, and
+we're writing out the expected value and
+
+98
+00:06:31.050 --> 00:06:35.450
+the variance as we move through for
+each of our random variables.
+
+99
+00:06:35.450 --> 00:06:39.920
+And you can do a graph or
+plot of mean as a function of index, or
+
+100
+00:06:39.920 --> 00:06:41.230
+variant as a function of index.
+
+101
+00:06:43.920 --> 00:06:46.200
+We can also talk about the relationship.
+
+102
+00:06:47.600 --> 00:06:50.460
+Let's look at a very simple
+case of white noise.
+
+103
+00:06:51.470 --> 00:06:54.139
+The mean function there mu of t,
+
+104
+00:06:54.139 --> 00:06:58.270
+I think you can see if that
+would be a constant function.
+
+105
+00:06:58.270 --> 00:06:59.750
+So when we have white noise,
+
+106
+00:06:59.750 --> 00:07:03.610
+we have independent identically
+distributed random variables.
+
+107
+00:07:04.680 --> 00:07:08.240
+If they're identically distributed,
+then the mean function,
+
+108
+00:07:08.240 --> 00:07:10.180
+which is be constant as we move along.
+
+109
+00:07:10.180 --> 00:07:14.690
+We're trying to summarize the random
+variables at different time locations
+
+110
+00:07:14.690 --> 00:07:16.420
+with same mean and variance.
+
+111
+00:07:17.940 --> 00:07:22.251
+If you have Independent identically
+distributed random variables the other
+
+112
+00:07:22.251 --> 00:07:25.780
+covariance function will
+look like a delta function.
+
+113
+00:07:25.780 --> 00:07:30.894
+Our autocovariance function when the
+random variables, the separation is zero,
+
+114
+00:07:30.894 --> 00:07:34.557
+we're going to be just look at
+the variance we'll get a head.
+
+115
+00:07:34.557 --> 00:07:40.027
+But as soon as we separate the two random
+variables and look at two different times,
+
+116
+00:07:40.027 --> 00:07:43.719
+since we're independent
+the covariance will be zero.
+
+117
+00:07:47.297 --> 00:07:49.770
+Now an important question comes up.
+
+118
+00:07:50.850 --> 00:07:55.530
+Since you don't have typically
+many realizations in front of you.
+
+119
+00:07:55.530 --> 00:07:57.520
+You just have one realization.
+
+120
+00:07:57.520 --> 00:08:00.830
+Think about one of the trajectories
+with that random walk.
+
+121
+00:08:00.830 --> 00:08:03.400
+Since you only have one
+realization in front of you,
+
+122
+00:08:03.400 --> 00:08:07.770
+how are you going to infer
+the properties of the process?
+
+123
+00:08:07.770 --> 00:08:10.450
+Each one of the random variables
+along your time series
+
+124
+00:08:10.450 --> 00:08:13.100
+is only giving you an individual point.
+
+125
+00:08:14.130 --> 00:08:19.350
+So if I have a population and I just have
+a sample size n equals one, I really can't
+
+126
+00:08:19.350 --> 00:08:24.500
+say anything about the variance and I can
+say very meager things about the mean.
+
+127
+00:08:25.660 --> 00:08:28.681
+So the question is,
+if you have a time series,
+
+128
+00:08:28.681 --> 00:08:32.243
+in other words a realization
+of a stochastic process,
+
+129
+00:08:32.243 --> 00:08:37.135
+how can you infer properties of
+the process from that single realization?
+
+130
+00:08:38.989 --> 00:08:42.760
+If we introduce some structure,
+we can get some traction.
+
+131
+00:08:42.760 --> 00:08:47.350
+So let's talk about a process and
+say that it's strictly stationary,
+
+132
+00:08:47.350 --> 00:08:50.350
+if the joint distribution of
+a set of random variables.
+
+133
+00:08:50.350 --> 00:08:52.130
+Here I have k of them,
+
+134
+00:08:52.130 --> 00:08:57.710
+will be the same no matter where you look
+along the time series as long as each
+
+135
+00:08:57.710 --> 00:09:03.230
+one of the new random variables is just a
+shifted copy of the old random variables.
+
+136
+00:09:03.230 --> 00:09:07.040
+So park your self anywhere you'd
+like along the time series and
+
+137
+00:09:07.040 --> 00:09:09.530
+look at the set of random variables.
+
+138
+00:09:09.530 --> 00:09:13.250
+Preserve the spacing between them,
+but now look far to the left or
+
+139
+00:09:13.250 --> 00:09:17.270
+far to the right along
+the stochastic process.
+
+140
+00:09:17.270 --> 00:09:23.597
+You'll get the same joint distribution
+if your process is strictly stationary.
+
+141
+00:09:23.597 --> 00:09:26.504
+It's a very restrictive thing to say.
+
+142
+00:09:29.388 --> 00:09:31.690
+But it has some implications
+that work well for us.
+
+143
+00:09:32.920 --> 00:09:37.570
+If you are strictly stationary then
+if we only look at one of them,
+
+144
+00:09:37.570 --> 00:09:39.000
+let's let k equal one.
+
+145
+00:09:39.000 --> 00:09:44.210
+The distribution of any random variable
+along our stochastic process is
+
+146
+00:09:44.210 --> 00:09:47.900
+the same as the distribution
+shifted by whatever amount we like.
+
+147
+00:09:49.120 --> 00:09:55.060
+What that means is the random
+variables are identically distributed.
+
+148
+00:09:55.060 --> 00:10:00.950
+They might not be independent and in fact
+if they're identically distributed and
+
+149
+00:10:00.950 --> 00:10:05.330
+independent then we don't have
+a very interesting process at all.
+
+150
+00:10:06.760 --> 00:10:11.440
+The mean function though, since we get
+identically distributed random variables
+
+151
+00:10:11.440 --> 00:10:16.280
+the mean function will be a constant and
+the variance function will be a constant.
+
+152
+00:10:16.280 --> 00:10:18.600
+That has implications for estimation.
+
+153
+00:10:18.600 --> 00:10:23.820
+We can use each one of the data points we
+have available to us in the times series
+
+154
+00:10:23.820 --> 00:10:26.850
+to try to estimate
+the mean of the process.
+
+155
+00:10:26.850 --> 00:10:28.257
+Same thing with the variance.
+
+156
+00:10:31.714 --> 00:10:34.030
+What are the implications for
+the autocovariance?
+
+157
+00:10:35.370 --> 00:10:40.110
+If we look at joint distribution
+of two rated variables, t1 and t2,
+
+158
+00:10:41.210 --> 00:10:45.720
+that'll be the same as the joint
+distribution if I look up or
+
+159
+00:10:45.720 --> 00:10:48.380
+down on the stochastic process.
+
+160
+00:10:48.380 --> 00:10:51.720
+So if I shift to the left or
+the right by distance tau.
+
+161
+00:10:53.060 --> 00:10:56.790
+What that's telling us is that the joint
+distribution of two random variables
+
+162
+00:10:56.790 --> 00:11:02.550
+depends only on the lag spacing and
+not where you are on the random process.
+
+163
+00:11:02.550 --> 00:11:05.860
+So your autocovariance
+function isn't constant.
+
+164
+00:11:05.860 --> 00:11:09.590
+But the autocovariance just depends upon
+
+165
+00:11:09.590 --> 00:11:13.020
+there's a separation between
+the two random variables.
+
+166
+00:11:13.020 --> 00:11:17.263
+No matter where you look, to the left or
+the right on the distribution,
+
+167
+00:11:17.263 --> 00:11:20.177
+autocovariance only
+depends upon separation.
+
+168
+00:11:22.748 --> 00:11:25.918
+Now strict stationarity does
+a lot of work for us but
+
+169
+00:11:25.918 --> 00:11:28.289
+it's a pretty restrictive concept.
+
+170
+00:11:29.440 --> 00:11:32.340
+We can get the same
+sort of things done for
+
+171
+00:11:32.340 --> 00:11:36.100
+us if we relax a little bit,
+and view weak stationarity.
+
+172
+00:11:37.250 --> 00:11:41.900
+So process is weakly stationary if
+we keep all of the things that we
+
+173
+00:11:41.900 --> 00:11:45.460
+really care about from
+a strictly stationary process.
+
+174
+00:11:45.460 --> 00:11:48.900
+What I'm saying is,
+a process is weakly stationary.
+
+175
+00:11:48.900 --> 00:11:54.800
+If the mean function depends not on
+where you look along the process but
+
+176
+00:11:54.800 --> 00:11:57.080
+rather is constant.
+
+177
+00:11:57.080 --> 00:12:00.210
+So we have constant average up and
+down the process.
+
+178
+00:12:01.390 --> 00:12:04.009
+We'll also say weakly stationary if
+
+179
+00:12:04.009 --> 00:12:08.410
+the autocovariance function
+just depends upon lag spacing.
+
+180
+00:12:09.600 --> 00:12:14.640
+So implications from strict stationarity
+we're using within the definition of
+
+181
+00:12:14.640 --> 00:12:16.960
+weak stationarity, keeping what we want.
+
+182
+00:12:18.200 --> 00:12:23.480
+Of course, if your autocovariance
+function just depends upon lag spacing,
+
+183
+00:12:23.480 --> 00:12:25.790
+then length of lag equals zero, and
+
+184
+00:12:25.790 --> 00:12:28.720
+get immediately that it's a constant
+variance function as well.
+
+185
+00:12:30.290 --> 00:12:35.270
+Much easier to think about, much easier
+to state but still very useful for us.
+
+186
+00:12:37.690 --> 00:12:40.980
+In this lecture,
+we have learned why stationary is so
+
+187
+00:12:40.980 --> 00:12:43.870
+crucial in forming a model from data.
+
+188
+00:12:43.870 --> 00:12:48.340
+It helps us to infer
+properties of the process,
+
+189
+00:12:48.340 --> 00:12:52.910
+often individual realization or
+an individual time series.
+
+190
+00:12:52.910 --> 00:12:57.040
+We also learned the definition of the mean
+variance and covariance functions.
+
+191
+00:12:57.040 --> 00:13:01.390
+And you should now be able to calculate
+that in a few simple situations.

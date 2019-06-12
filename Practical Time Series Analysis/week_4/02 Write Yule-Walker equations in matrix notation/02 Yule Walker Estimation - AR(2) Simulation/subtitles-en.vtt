@@ -1,0 +1,1269 @@
+WEBVTT
+
+1
+00:00:00.280 --> 00:00:01.330
+Hello, everyone.
+
+2
+00:00:01.330 --> 00:00:06.950
+In this lecture, we will try to
+estimate model parameters of
+
+3
+00:00:06.950 --> 00:00:11.650
+autoregressive processes of
+order 2 doing some simulations.
+
+4
+00:00:11.650 --> 00:00:14.748
+In others words,
+we are going to simulate an AR(2) process.
+
+5
+00:00:14.748 --> 00:00:17.809
+So, the objective is to
+estimate the variance
+
+6
+00:00:17.809 --> 00:00:20.721
+of the white noise in the AR(2) process.
+
+7
+00:00:20.721 --> 00:00:25.708
+And estimate the coefficient
+of the simulated AR(2)
+
+8
+00:00:25.708 --> 00:00:31.128
+process using the Yule-Walker
+equations in a matrix form.
+
+9
+00:00:31.128 --> 00:00:36.524
+AR(2) process with mean zero would be
+in this format without any constant,
+
+10
+00:00:36.524 --> 00:00:40.200
+and the Zt's are innovations,
+the white noise.
+
+11
+00:00:40.200 --> 00:00:43.400
+And we tried to simulate this process for
+phi 1,
+
+12
+00:00:43.400 --> 00:00:45.845
+the first coefficient being 1 over 3.
+
+13
+00:00:45.845 --> 00:00:48.670
+Phi2, the second coefficient is 1 over 2.
+
+14
+00:00:48.670 --> 00:00:50.420
+And sigma is 4.
+
+15
+00:00:50.420 --> 00:00:57.030
+In other words,
+this AR(2) model has three parameters.
+
+16
+00:00:57.030 --> 00:00:59.570
+So we're going to use
+the Yule-Walker equations.
+
+17
+00:00:59.570 --> 00:01:04.355
+And eventually Yule-Walker estimators
+to actually estimate each of
+
+18
+00:01:04.355 --> 00:01:09.393
+these coefficients, the phi1 and
+phi2 and also sigma in this problem.
+
+19
+00:01:12.438 --> 00:01:17.520
+So we estimate the coefficients of
+the model by first finding r1, r2.
+
+20
+00:01:17.520 --> 00:01:21.470
+Remember r1,
+r2 are sample auto correlation function.
+
+21
+00:01:21.470 --> 00:01:25.120
+We're going to use acf routine in r.
+
+22
+00:01:25.120 --> 00:01:30.940
+And we're going to solve
+the system using the following
+
+23
+00:01:30.940 --> 00:01:34.460
+matrix form of the Yule-Walker equations.
+
+24
+00:01:34.460 --> 00:01:37.880
+This is our r matrix which is symmetric,
+it has an inverse.
+
+25
+00:01:37.880 --> 00:01:40.064
+And then we're going to
+find the inverse of it and
+
+26
+00:01:40.064 --> 00:01:42.207
+multiply it to the left side which is r1,
+r2.
+
+27
+00:01:42.207 --> 00:01:46.256
+And we will get phi1.hat, phi2.hat.
+
+28
+00:01:46.256 --> 00:01:51.165
+But before we start the estimation,
+let me mention something about the sigma.
+
+29
+00:01:51.165 --> 00:01:57.165
+So, we know how to estimate
+the coefficient in the AR(2) model but
+
+30
+00:01:57.165 --> 00:01:59.032
+how about the sigma?
+
+31
+00:01:59.032 --> 00:02:01.013
+That's also another
+parameter of the system so
+
+32
+00:02:01.013 --> 00:02:03.360
+we should be able to
+estimate that as well.
+
+33
+00:02:03.360 --> 00:02:04.640
+So let me note the following.
+
+34
+00:02:04.640 --> 00:02:08.978
+If you look at this system, we assume
+that before we start with the Yule-Walker
+
+35
+00:02:08.978 --> 00:02:12.942
+equation, we already assume that
+it is a stationary AR(2) process.
+
+36
+00:02:12.942 --> 00:02:17.780
+So this is a stationary AR(2) model,
+AR(2) process.
+
+37
+00:02:17.780 --> 00:02:19.990
+We take the variants from both sides.
+
+38
+00:02:19.990 --> 00:02:23.640
+We get the variants of Xt, variants of
+Xt minus 1, variants of Xt minus 2.
+
+39
+00:02:23.640 --> 00:02:27.050
+Which all of them are the same
+because we have weak stationary or
+
+40
+00:02:27.050 --> 00:02:29.220
+covariant stationary process.
+
+41
+00:02:29.220 --> 00:02:34.386
+But since Xt minus 1, Xt minus 2
+have some correlation, we also have
+
+42
+00:02:34.386 --> 00:02:40.354
+this covariance Xt minu 1, Xt minus2 term
+here and the variance of Zt is sigma.
+
+43
+00:02:40.354 --> 00:02:43.710
+So we're going to use this
+equation to get the sigma.
+
+44
+00:02:43.710 --> 00:02:48.535
+So sigma will be equal to
+the variance of this process
+
+45
+00:02:48.535 --> 00:02:52.720
+is actually gamma 0 autocovariance at lag.
+
+46
+00:02:52.720 --> 00:02:56.270
+And then we have 1 minus
+phi1 squared phi2 squared.
+
+47
+00:02:56.270 --> 00:03:00.740
+But if I pull out variance
+from here this covariance,
+
+48
+00:03:00.740 --> 00:03:04.046
+this is of the autocovariance at lag1,
+this is gamma 1.
+
+49
+00:03:04.046 --> 00:03:10.810
+If you plot variance you will get gamma
+1 over gamma 0 which is actually rho 1.
+
+50
+00:03:10.810 --> 00:03:14.410
+So this is basically how
+we can estimate sigma.
+
+51
+00:03:14.410 --> 00:03:17.510
+But we can actually simplify
+this a little bit more.
+
+52
+00:03:17.510 --> 00:03:22.358
+Realize the following, from the
+Yule-Walker equations in the matrix form,
+
+53
+00:03:22.358 --> 00:03:27.134
+we realized that rho 1 is actually from
+the matrix multiplication is equal to
+
+54
+00:03:27.134 --> 00:03:28.833
+phi1 plus rho1, phi 2.
+
+55
+00:03:28.833 --> 00:03:34.244
+In a similar way, rho2,
+is the same as phi1, rho1 plus phi2.
+
+56
+00:03:34.244 --> 00:03:38.140
+This comes from the Yule-Walker equations.
+
+57
+00:03:38.140 --> 00:03:44.260
+Then, I take this expression which
+is inside this sigma expression.
+
+58
+00:03:44.260 --> 00:03:47.690
+Sigma is equal to gamma 0 times that.
+
+59
+00:03:47.690 --> 00:03:53.230
+Now here, we can separate this 2, phi1
+phi2, rho1 expression into two of itself.
+
+60
+00:03:53.230 --> 00:03:56.720
+Of phi1 phi2 rho1, phi1 phi2 rho1.
+
+61
+00:03:56.720 --> 00:03:58.976
+In these two terms, we pull out phi1.
+
+62
+00:03:58.976 --> 00:04:01.366
+In these two terms we pull up phi2 and
+
+63
+00:04:01.366 --> 00:04:05.390
+we realize that the parenthesis
+is actually rho1 and rho 2.
+
+64
+00:04:05.390 --> 00:04:10.510
+In other words, we actually get sigma.
+
+65
+00:04:10.510 --> 00:04:13.200
+We get a formula for sigma square.
+
+66
+00:04:13.200 --> 00:04:17.380
+Which is gamma 0 autocovariance
+of the system at lag0.
+
+67
+00:04:17.380 --> 00:04:22.640
+The variance of Xt times 1
+minus phi1 rho minus phi2 rho2.
+
+68
+00:04:22.640 --> 00:04:26.540
+Now, we can estimate sigma from here.
+
+69
+00:04:26.540 --> 00:04:30.756
+And this is going to be called the
+Yule-Walker estimator, instead of gamma 0,
+
+70
+00:04:30.756 --> 00:04:32.065
+we're going to get C0.
+
+71
+00:04:32.065 --> 00:04:35.500
+This is a sample of
+autocovariances at lag0.
+
+72
+00:04:35.500 --> 00:04:38.780
+We are going to use ACF
+routine to get this.
+
+73
+00:04:40.232 --> 00:04:45.099
+And we'll find phi1 and phi2,
+these are our coefficients which will come
+
+74
+00:04:45.099 --> 00:04:48.458
+from the Yule-Walker
+equation in the matrix form.
+
+75
+00:04:48.458 --> 00:04:51.408
+And we're going to multiply
+them with r1 or r2,
+
+76
+00:04:51.408 --> 00:04:54.620
+which are sample of
+the correlation function.
+
+77
+00:04:54.620 --> 00:04:58.830
+And this will give us an estimate for
+sigma squared.
+
+78
+00:05:00.880 --> 00:05:03.290
+So let me mention the following.
+
+79
+00:05:03.290 --> 00:05:06.440
+Now I'm going into the details
+of the simulation.
+
+80
+00:05:06.440 --> 00:05:08.860
+And I'm going to open up the code.
+
+81
+00:05:08.860 --> 00:05:12.070
+Code is written in Notebook.
+
+82
+00:05:12.070 --> 00:05:15.890
+So at this point,
+if you haven't all ready, stop the video.
+
+83
+00:05:15.890 --> 00:05:19.190
+Go and open up the Notebook.
+
+84
+00:05:19.190 --> 00:05:21.800
+Which is called AR (2) simulation.
+
+85
+00:05:21.800 --> 00:05:24.870
+And we're going to carry out every
+step that I'm talking about in this
+
+86
+00:05:24.870 --> 00:05:25.720
+presentation.
+
+87
+00:05:25.720 --> 00:05:28.357
+Actually it's written
+already in that notebook.
+
+88
+00:05:28.357 --> 00:05:34.780
+And try to run every
+code block in Notebook.
+
+89
+00:05:34.780 --> 00:05:38.240
+So, let me first go over this and
+then I'll open it up as well.
+
+90
+00:05:38.240 --> 00:05:42.060
+Number of data points,
+we're going to choose 10,000 data points.
+
+91
+00:05:42.060 --> 00:05:46.650
+And we're going to use a few routines
+here arima.sim, this is the simulation.
+
+92
+00:05:46.650 --> 00:05:52.215
+So arima.sim simulates data
+from the arima models.
+
+93
+00:05:52.215 --> 00:05:53.855
+Well, what is arima?
+
+94
+00:05:53.855 --> 00:05:58.415
+This is auto regressive
+integrated moving average models.
+
+95
+00:05:58.415 --> 00:06:00.105
+We have about moving average models.
+
+96
+00:06:00.105 --> 00:06:02.015
+We have talked about
+auto regressive models.
+
+97
+00:06:02.015 --> 00:06:05.304
+But we haven't connected them yet but
+
+98
+00:06:05.304 --> 00:06:09.632
+we will still use this model
+to get to the AR model.
+
+99
+00:06:09.632 --> 00:06:11.870
+We're going to use plot routine for
+plotting.
+
+100
+00:06:11.870 --> 00:06:15.430
+We're going to use acf() to find
+out the correlation function.
+
+101
+00:06:15.430 --> 00:06:19.200
+We will also use that to find
+the autocovariance function.
+
+102
+00:06:19.200 --> 00:06:20.840
+And we have done this before.
+
+103
+00:06:20.840 --> 00:06:25.460
+Matrix, this basically defines
+the matrix with dimension m and n.
+
+104
+00:06:25.460 --> 00:06:27.300
+And we're going to use solve(R,b).
+
+105
+00:06:27.300 --> 00:06:30.136
+Where R is a matrix, b is a vector.
+
+106
+00:06:30.136 --> 00:06:34.198
+And this routine solves Rx=b and
+gives a solution.
+
+107
+00:06:37.882 --> 00:06:41.124
+Sigma, we're going to choose 4.
+
+108
+00:06:41.124 --> 00:06:44.168
+And phi[1:2], this is phi1 and phi2.
+
+109
+00:06:44.168 --> 00:06:47.315
+It is defined with this array,
+1 over 3, 1 over 2.
+
+110
+00:06:47.315 --> 00:06:48.531
+N is 10,000.
+
+111
+00:06:48.531 --> 00:06:52.099
+We will set.seed(2017),
+
+112
+00:06:52.099 --> 00:06:56.408
+so that we will both get the same dataset.
+
+113
+00:06:56.408 --> 00:07:01.230
+So you can reproduce exactly what
+I'm reproducing in this lecture.
+
+114
+00:07:01.230 --> 00:07:04.485
+And ar.process,
+we are going to use arima simulation.
+
+115
+00:07:04.485 --> 00:07:07.388
+This is the model, model takes the list.
+
+116
+00:07:07.388 --> 00:07:12.556
+And then if you write ar, this specifies
+the coefficients of the ar model.
+
+117
+00:07:12.556 --> 00:07:15.096
+And standard deviation is equal to 4.
+
+118
+00:07:15.096 --> 00:07:19.569
+Basically specifies standard deviation
+of the innovations, the random noise.
+
+119
+00:07:19.569 --> 00:07:23.911
+And if you do that,
+since you have set the seed(2017),
+
+120
+00:07:23.911 --> 00:07:27.040
+you should get the exact same ar.process.
+
+121
+00:07:27.040 --> 00:07:30.990
+And if you, for example,
+look at the first five elements
+
+122
+00:07:30.990 --> 00:07:35.510
+out of 10,000 points in this time series,
+you should get the following numbers.
+
+123
+00:07:37.830 --> 00:07:38.890
+Then, what do I need?
+
+124
+00:07:38.890 --> 00:07:41.980
+I need r's in my Yule-Walker equations.
+
+125
+00:07:41.980 --> 00:07:46.150
+I'm going to get my r's [1,2] or
+R1 and R2.
+
+126
+00:07:46.150 --> 00:07:52.220
+ACF gives you sample auto
+correlation function for a few lags.
+
+127
+00:07:52.220 --> 00:07:57.290
+If I take this $acf which means
+I'm going to the acf part only.
+
+128
+00:07:57.290 --> 00:08:01.760
+And I'm going to look at acf2 and acf3,
+
+129
+00:08:01.760 --> 00:08:07.773
+because the first element in
+this array is actually 1.
+
+130
+00:08:07.773 --> 00:08:09.600
+That's actually row 0.
+
+131
+00:08:09.600 --> 00:08:10.430
+Okay.
+
+132
+00:08:10.430 --> 00:08:14.690
+So if you look at this, r[1] and
+r[2] are going to be following numbers.
+
+133
+00:08:14.690 --> 00:08:17.777
+I'm going to define R as a matrix,
+[1,2,2].
+
+134
+00:08:17.777 --> 00:08:18.712
+What does it mean?
+
+135
+00:08:18.712 --> 00:08:22.298
+We want to have a 2 by 2 matrix,
+with all elements 1.
+
+136
+00:08:22.298 --> 00:08:24.185
+So we get this R.
+
+137
+00:08:24.185 --> 00:08:27.730
+But, how do I do that so
+that I can actually edit this?
+
+138
+00:08:27.730 --> 00:08:33.100
+So I'm going to edit 1, 2,
+this term and this term, by r1.
+
+139
+00:08:33.100 --> 00:08:38.560
+This is the matrix R in AR(2) process.
+
+140
+00:08:38.560 --> 00:08:42.260
+Let's define matrix b, which is
+the right hand side which is r1 and r2.
+
+141
+00:08:42.260 --> 00:08:43.680
+So we put them side by side.
+
+142
+00:08:44.830 --> 00:08:46.370
+And we try to solve (R,b).
+
+143
+00:08:46.370 --> 00:08:48.974
+Because R now we have it,
+b now that we have it.
+
+144
+00:08:48.974 --> 00:08:50.120
+We can solve it.
+
+145
+00:08:50.120 --> 00:08:54.050
+Once we solve it in R,
+R gives us the following answers.
+
+146
+00:08:54.050 --> 00:08:57.610
+The first one is an estimate for phi1.
+
+147
+00:08:57.610 --> 00:08:59.570
+The second one is an estimate for phi2.
+
+148
+00:08:59.570 --> 00:09:01.940
+So we called them phi1.hat and phi2.hat.
+
+149
+00:09:01.940 --> 00:09:04.130
+And we can actually put
+them together here.
+
+150
+00:09:04.130 --> 00:09:09.271
+This is an array to see phi1 and phi2.hat.
+
+151
+00:09:09.271 --> 00:09:12.111
+And I define this as a matrix,
+2 by 1 matrix.
+
+152
+00:09:12.111 --> 00:09:14.645
+And then phi1.hat becomes that matrix.
+
+153
+00:09:18.435 --> 00:09:24.225
+Just define c0 as
+an autocovariance at lag0.
+
+154
+00:09:24.225 --> 00:09:29.444
+That's acf1,
+because the index of R always starts at 1.
+
+155
+00:09:29.444 --> 00:09:31.565
+So we have to do acf1 here.
+
+156
+00:09:31.565 --> 00:09:37.165
+And then type to do covariance so that it
+doesn't find out the correlation function,
+
+157
+00:09:37.165 --> 00:09:39.753
+it finds out the covariance function.
+
+158
+00:09:39.753 --> 00:09:41.590
+And we calculate the var.hat.
+
+159
+00:09:41.590 --> 00:09:46.550
+Var is for variance, so
+we are trying to estimate the variance.
+
+160
+00:09:46.550 --> 00:09:47.470
+Well, we just did it.
+
+161
+00:09:47.470 --> 00:09:53.050
+This is c0 times 1 minus phi1 r1, phi2 r2.
+
+162
+00:09:53.050 --> 00:09:57.070
+Basically the product of phi1.hat with r.
+
+163
+00:09:57.070 --> 00:10:00.160
+And then we're going to
+partition our screen,
+
+164
+00:10:00.160 --> 00:10:04.790
+our output device,
+into three rows and one column.
+
+165
+00:10:04.790 --> 00:10:09.730
+In the first row we plot
+the process with this title.
+
+166
+00:10:09.730 --> 00:10:13.920
+In the second row, we're going to
+have acf, autocorrelation function.
+
+167
+00:10:13.920 --> 00:10:18.160
+And in the third row, we're going to
+have a partial autocorrelation function.
+
+168
+00:10:18.160 --> 00:10:20.090
+Okay, so this is the Notebook.
+
+169
+00:10:21.220 --> 00:10:26.310
+We have the name, which is
+Yule-Walker Estimation- AR(2) Simulation.
+
+170
+00:10:26.310 --> 00:10:28.750
+This is the name of the file
+Simulation of AR(2) process.
+
+171
+00:10:28.750 --> 00:10:30.700
+We are simulating AR(2) process.
+
+172
+00:10:30.700 --> 00:10:34.690
+Let's set seed the common number, so
+that we can produce the same dataset.
+
+173
+00:10:34.690 --> 00:10:37.330
+So let me run this cell, okay?
+
+174
+00:10:37.330 --> 00:10:43.106
+Now, let's look at the model parameters,
+we're going to say sigma is 4.
+
+175
+00:10:43.106 --> 00:10:44.429
+And this is phi equal to null.
+
+176
+00:10:44.429 --> 00:10:49.960
+Now let's define phi, phi is basically
+1 over 3 1 over 2, phi1 and phi2.
+
+177
+00:10:49.960 --> 00:10:54.262
+Let's just print it and just to make sure
+to check that we have the right phi.
+
+178
+00:10:54.262 --> 00:10:57.026
+Exactly this is 1 over 3,
+this is 1 over 2.
+
+179
+00:10:57.026 --> 00:10:59.202
+Okay, let's run.
+
+180
+00:10:59.202 --> 00:11:00.932
+And n equals 10,000.
+
+181
+00:11:00.932 --> 00:11:04.655
+All right and we come to a simulation.
+
+182
+00:11:04.655 --> 00:11:07.100
+We simulate using arima simulation.
+
+183
+00:11:07.100 --> 00:11:12.403
+First entry in this function is n,
+which is 10,000, right?
+
+184
+00:11:12.403 --> 00:11:18.120
+So we are simulating a time series
+with 10,000 points, what is the model?
+
+185
+00:11:18.120 --> 00:11:20.800
+Model has to be a list.
+
+186
+00:11:20.800 --> 00:11:22.377
+We have to give the AR,
+
+187
+00:11:22.377 --> 00:11:26.950
+in author arrays of coefficients
+which is 1 over 3, 1 over 2.
+
+188
+00:11:26.950 --> 00:11:29.690
+We can actually write here phi1,
+phi2 if you like.
+
+189
+00:11:29.690 --> 00:11:33.777
+And we have to make sure that the standard
+deviation of the innovations,
+
+190
+00:11:33.777 --> 00:11:35.121
+the random noise is 4.
+
+191
+00:11:35.121 --> 00:11:37.623
+And the standard deviation is equals to 4.
+
+192
+00:11:37.623 --> 00:11:42.220
+And let's make sure we have
+that right AR process.
+
+193
+00:11:42.220 --> 00:11:49.250
+Let's run this and we get the first
+five entries in the time series.
+
+194
+00:11:49.250 --> 00:11:50.610
+The first five data points.
+
+195
+00:11:53.160 --> 00:11:55.610
+Here we are trying to find a name,
+the 2nd and
+
+196
+00:11:55.610 --> 00:11:58.120
+3rd sample autocorrelation function,
+right.
+
+197
+00:11:59.690 --> 00:12:02.985
+In other words, R is null, we define R.
+
+198
+00:12:02.985 --> 00:12:05.143
+R1,2 is going to be ACF.
+
+199
+00:12:05.143 --> 00:12:08.540
+We do not want to plot so
+we say plot is false.
+
+200
+00:12:08.540 --> 00:12:13.600
+But we have to take second and third term
+because the first term is actually rho0.
+
+201
+00:12:13.600 --> 00:12:15.400
+So first term is always 1.
+
+202
+00:12:15.400 --> 00:12:16.130
+We want to get r1 to r2,
+
+203
+00:12:16.130 --> 00:12:20.190
+we have to look at the second and
+third entries in the ACF.
+
+204
+00:12:20.190 --> 00:12:25.190
+Okay, if we do that,
+we get r1 here, this is r1.
+
+205
+00:12:25.190 --> 00:12:30.380
+Autocorrelation coefficient in lag1,
+autocorrelation coefficient at lag2.
+
+206
+00:12:30.380 --> 00:12:32.850
+And let's define matrix R.
+
+207
+00:12:37.240 --> 00:12:43.380
+So matrix R is going to be a two
+by two matrix, every element is 1.
+
+208
+00:12:43.380 --> 00:12:43.980
+Here we go.
+
+209
+00:12:43.980 --> 00:12:46.427
+This is our r, every element is 1.
+
+210
+00:12:46.427 --> 00:12:50.123
+And if I look at this cell,
+I am editing first row,
+
+211
+00:12:50.123 --> 00:12:53.890
+second column and
+second row, first column.
+
+212
+00:12:53.890 --> 00:12:58.230
+This other not the main diagonal but
+other diagonal by r1.
+
+213
+00:12:58.230 --> 00:13:00.831
+So if you do that, run the cell.
+
+214
+00:13:00.831 --> 00:13:02.230
+We will update the following R.
+
+215
+00:13:02.230 --> 00:13:04.040
+This is exactly what we were looking for.
+
+216
+00:13:04.040 --> 00:13:08.413
+This is the R that's coming
+from the Yule-Walker equation.
+
+217
+00:13:08.413 --> 00:13:13.500
+Let's define R matrix b which
+is on the left-hand side.
+
+218
+00:13:13.500 --> 00:13:15.640
+And that's basically r1 and r2.
+
+219
+00:13:15.640 --> 00:13:20.480
+Okay, now its time to find
+the coefficients, phi1.hat phi2.hat.
+
+220
+00:13:20.480 --> 00:13:24.730
+All we have to do, we have to
+solve Rx=b and how do we do this?
+
+221
+00:13:24.730 --> 00:13:27.118
+We say, solve(R, b), right?
+
+222
+00:13:27.118 --> 00:13:34.340
+Solve(R, b) will give us a phi1 and
+phi2 together.
+
+223
+00:13:34.340 --> 00:13:36.974
+But if I look at the first element,
+that's phi1.
+
+224
+00:13:36.974 --> 00:13:40.950
+If I look at the second element
+of that matrix, that is phi2.
+
+225
+00:13:40.950 --> 00:13:45.721
+And I take this phi1 and phi2 and
+put it into the matrix, phi1.hat.
+
+226
+00:13:45.721 --> 00:13:51.610
+This is matrix with two rows and
+one column.
+
+227
+00:13:51.610 --> 00:13:54.532
+And if we do that we get the following.
+
+228
+00:13:54.532 --> 00:13:57.946
+So the first estimate here is for
+phi1.hat.
+
+229
+00:13:57.946 --> 00:13:59.623
+This is phi2.hat.
+
+230
+00:13:59.623 --> 00:14:01.645
+Okay.
+
+231
+00:14:01.645 --> 00:14:03.144
+So we're almost done, right?
+
+232
+00:14:03.144 --> 00:14:04.740
+We have the AR(2) process.
+
+233
+00:14:04.740 --> 00:14:06.645
+We have phi1 and phi2.
+
+234
+00:14:06.645 --> 00:14:12.877
+Note the following,
+the original phi1 was 0.333.
+
+235
+00:14:12.877 --> 00:14:17.046
+This is 0.34 close, but not really close.
+
+236
+00:14:17.046 --> 00:14:18.406
+And here we have phi2.
+
+237
+00:14:18.406 --> 00:14:21.002
+The original phi2 is 0.5.
+
+238
+00:14:21.002 --> 00:14:24.756
+Estimation gives us 0.48, not bad.
+
+239
+00:14:24.756 --> 00:14:27.860
+We can get a better estimate by
+increasing the number of data points.
+
+240
+00:14:30.180 --> 00:14:33.760
+Let's look at the variance because this
+is the only thing that's remaining,
+
+241
+00:14:33.760 --> 00:14:37.090
+is to estimate the variance
+of the innovations.
+
+242
+00:14:37.090 --> 00:14:42.761
+So we take the autocorrelation function,
+but we say type covariance, right?
+
+243
+00:14:42.761 --> 00:14:45.898
+We will get autocovariance at lag0, and
+
+244
+00:14:45.898 --> 00:14:50.710
+we have to start from 1 because
+of the indexing in the r.
+
+245
+00:14:50.710 --> 00:14:55.930
+And then rho.hat is defined to be
+autocovariance, this is gamma 0,
+
+246
+00:14:55.930 --> 00:15:01.944
+estimation of the gamma 0 c0 times 1 minus
+that product of our coefficients and
+
+247
+00:15:01.944 --> 00:15:05.380
+our autocorrelation coefficients.
+
+248
+00:15:05.380 --> 00:15:10.580
+And then we estimate this we get
+var.hat which is the variance,
+
+249
+00:15:10.580 --> 00:15:14.925
+the estimation of
+the variance which is 16.37.
+
+250
+00:15:14.925 --> 00:15:22.050
+Remember the original variance was 16, the
+square of 4, What we get here is 16.37.
+
+251
+00:15:22.050 --> 00:15:28.372
+And if we plot, so if we partition
+the output into three rows,
+
+252
+00:15:28.372 --> 00:15:33.613
+one column and
+we plot the time series acf and pacf.
+
+253
+00:15:33.613 --> 00:15:38.542
+And if we do that we
+obtain the following plot.
+
+254
+00:15:38.542 --> 00:15:39.778
+This is our time series.
+
+255
+00:15:39.778 --> 00:15:42.510
+This is the ACF and this is a PACF.
+
+256
+00:15:42.510 --> 00:15:46.336
+Just note the following, this abuses
+the time plot, but if you look at the ACF.
+
+257
+00:15:46.336 --> 00:15:51.071
+The ACF is decaying, eventually, right?
+
+258
+00:15:51.071 --> 00:15:54.490
+This is very much like
+the typical AR process.
+
+259
+00:15:54.490 --> 00:15:59.341
+And if you look at the partial ACF,
+partial autocorrelation function,
+
+260
+00:15:59.341 --> 00:16:04.752
+there are only two significant partial
+autocorrelation coeffitents at lag1,
+
+261
+00:16:04.752 --> 00:16:05.710
+at lag2.
+
+262
+00:16:05.710 --> 00:16:10.090
+And then as if there's no autocorrelation,
+that is very typical.
+
+263
+00:16:10.090 --> 00:16:15.800
+Because, PACF of ARP process
+has to cut from lagP.
+
+264
+00:16:15.800 --> 00:16:18.660
+Here we are looking at the AR(2) process.
+
+265
+00:16:18.660 --> 00:16:22.440
+So we shouldn't expect to
+see anything after lag2.
+
+266
+00:16:22.440 --> 00:16:23.390
+So what are the results?
+
+267
+00:16:23.390 --> 00:16:27.138
+Result is that phi1 is estimated by 0.34,
+
+268
+00:16:27.138 --> 00:16:32.610
+phi2 is estimated by 0.48,
+sigma is estimated by 16.37.
+
+269
+00:16:32.610 --> 00:16:34.440
+This was the actual model.
+
+270
+00:16:34.440 --> 00:16:35.929
+And this is the fitted model.
+
+271
+00:16:37.470 --> 00:16:42.790
+And this is basically what we just talked
+about, the time plot, ACF and PACF.
+
+272
+00:16:44.410 --> 00:16:45.280
+So what have we learned?
+
+273
+00:16:45.280 --> 00:16:48.360
+We have learned estimating
+model parameters,
+
+274
+00:16:48.360 --> 00:16:52.980
+in other words coefficients and
+standard deviation or the variance of
+
+275
+00:16:52.980 --> 00:16:58.800
+the innovations of a simulated
+autoregressive processes of order 2.
+
+276
+00:16:58.800 --> 00:17:03.540
+And we did this by using Yule-Walker
+equations in a matrix form.
